@@ -15,8 +15,6 @@ body {
   }
   
   
-  
-  
   /*NAVBAR*/
   
   .right-side-button a {
@@ -1715,6 +1713,12 @@ body {
   width:100%;
   top:38%;
 }
+
+
+.popup {
+  min-height: 50px;
+}
+
 
   
   /*MEDIA QUERIES for SM*/

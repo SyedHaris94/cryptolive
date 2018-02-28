@@ -10,29 +10,72 @@ import MiddleWare from '../../store//middleware/middleware'
 import NumberFormat from 'react-number-format';
 
 // react charts
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
+// import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
+
+// import moment
+import moment from 'moment';
 
 
-// import images
+// import tooltip
+import ToolTip from '../tooltip/tooltip';
+
+// import line chart
+import LineChart from '../linechart/linechart';
+
+
+// import images0
 import BTC from '../../icons/BTC.png'
 
 
-
-
-
-const data = [
-      {name: 'Page A', uv: 4000, pv: 2400, amt: 2400},
-      {name: 'Page B', uv: 3000, pv: 1398, amt: 2210},
-      {name: 'Page C', uv: 2000, pv: 9800, amt: 2290},
-      {name: 'Page D', uv: 2780, pv: 3908, amt: 2000},
-      {name: 'Page E', uv: 1890, pv: 4800, amt: 2181},
-      {name: 'Page F', uv: 2390, pv: 3800, amt: 2500},
-      {name: 'Page G', uv: 3490, pv: 4300, amt: 2100},
-];
 class Bitcoin extends React.Component{
     
-    componentDidMount(){
+    constructor(props) {
+        super(props);
+        this.state = {
+          fetchingData: true,
+          data: null,
+          hoverLoc: null,
+          activePoint: null
+        }
+      }
+    
+    handleChartHover(hoverLoc, activePoint){
+    this.setState({
+        hoverLoc: hoverLoc,
+        activePoint: activePoint
+    })
+    }
 
+    componentDidMount(){
+        const getData = () => {
+
+            const pageID = this.props.match.params.symbol;
+            const url = 'https://min-api.cryptocompare.com/data/histoday?fsym='+pageID+'&tsym=USD&limit=30&aggregate=1&e=CCCAGG';
+      
+            fetch(url).then( r => r.json())
+              .then((bitcoinData) => {
+                const sortedData = [];
+                let count = 0;
+                
+                for (let date in bitcoinData.Data){
+                  sortedData.push({
+                    d: moment.unix(bitcoinData.Data[date].time).format('MMM DD'),
+                    p: bitcoinData.Data[date].close.toLocaleString('us-EN',{ style: 'currency', currency: 'USD' }),
+                    x: count, //previous days
+                    y: bitcoinData.Data[date].close // numerical price
+                  });
+                  count++;
+                }
+                this.setState({
+                  data: sortedData,
+                  fetchingData: false
+                })
+              })
+              .catch((e) => {
+                console.log(e);
+              });
+          }
+          getData();
         this.props.getdataa();
 
     }
@@ -40,14 +83,15 @@ class Bitcoin extends React.Component{
     render(){
         // for catching the API array
         let m = this.props.resdata;
-        let urlParam = this.props.match.params.id;
+        let urlParam = this.props.match.params.symbol;
 
+        {console.log('parameters',this.props.match.params.symbol)}
         function gotoUrl(api, url) {
             let test = {};
 
             api.map((m, v) => {    
                 
-                if (url == m.id) {
+                if (url == m.symbol) {
                     test.name = m.name;
                     test.id = m.id;
                     test.symbol = m.symbol;
@@ -83,6 +127,7 @@ class Bitcoin extends React.Component{
 
                     <div className="container">
                         <div className="row">
+                        {console.log('asdasd', this.state.data)}
 
                             <div className="col-md-8 col-xs-8">
 
@@ -177,19 +222,19 @@ class Bitcoin extends React.Component{
                         <div className="row">
 
                             <div className="col-md-10 " id="graph-imag">
-                            <LineChart width={900} height={400} data={data}
-                                    margin={{top: 5, right: 30, left: 20, bottom: 5}}>
-                            <XAxis dataKey="name"/>
-                            <YAxis/>
-                            <CartesianGrid strokeDasharray="3 3"/>
-                            <Tooltip/>
-                            <Legend />
-                            <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{r: 8}}/>
-                            <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-                            </LineChart>                                
-                                {/* <!-- <img style="margin: 0 0 0 -17px;" className="img-responsive" src="icons/bitcoin-page/Overview.png" alt="bitcoin-chart"> --> */}
+                                <div className='row'>
+                                    <div className='popup'>
+                                        {this.state.hoverLoc ? <ToolTip hoverLoc={this.state.hoverLoc} activePoint={this.state.activePoint}/> : null}
+                                    </div>
+                                </div>
+                                <div className='row'>
+                                    <div className='chart'>
+                                        { !this.state.fetchingData ?
+                                        <LineChart data={this.state.data} onChartHover={ (a,b) => this.handleChartHover(a,b) }/>
+                                        : null }
+                                    </div>
+                                </div>
                             </div>
-
                             <div className="col-md-2 cp-right-panel">
                                 <div className="row">
 

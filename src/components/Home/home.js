@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Navbar, Jumbo, FiveFeature, Middle, GraphTable, HomePagination, BottomCards, Footer } from '../index'
+import {Navbar, Jumbo, FiveFeature, Middle, GraphTable, HomePagination, BottomCards, Table2, Footer } from '../index'
 
 
 class Home extends Component {
