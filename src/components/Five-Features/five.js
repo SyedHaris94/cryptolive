@@ -1,9 +1,12 @@
 import React , {Component} from 'react'
 // import '../../css/style-main.css'
 
+// react-router
+import { Link } from "react-router-dom";
+
 // importing images & icons
 
-import currencies from '../../icons/money-bill-alt-selected.png'
+import currencies from '../../icons/money-bill-alt.png'
 import exchange from '../../icons/exchange-alt.png'
 import markets from '../../icons/dollar-sign-selected.png'
 import watchlist from '../../icons/binoculars.png'
@@ -18,16 +21,23 @@ class FiveFeature extends React.Component{
                         <div className="row" align="center">
 
                             <div className=" col-md-offset-1 col-md-2 col-xs-offset-1 col-xs-2 fv-item">
-                                <img src={currencies} alt="currency-icon"/>
+                                <Link to= "/" style={{textDecoration: 'none'}}>
+                                    <img src={currencies} alt="currency-icon"/>
                                         <p className="currency-heading">CURRENCIES</p>
+                                </Link>
                             </div>
                             <div className="col-md-2 col-xs-2 fv-item">
+                                 <Link to="exchanges" style={{textDecoration: 'none'}}>
                                     <img src={exchange} alt="exchange-icon"/>
                                     <p className="exchange-heading">EXCHANGES</p>
+                                </Link>
                             </div>
+                            
                             <div className="col-md-2 col-xs-2 fv-item">
-                                <img src={markets}   alt="dollar-icon"/>
-                                <p className="markets-heading selected">MARKETS</p>
+                                <Link to="market" style={{textDecoration: 'none'}}>
+                                    <img src={markets}   alt="dollar-icon"/>
+                                    <p className="markets-heading selected">MARKETS</p>
+                                </Link>
                             </div>
                             <div className="col-md-2 col-xs-2 fv-item">
                                     <img src={watchlist} alt="binocular-icon"/>

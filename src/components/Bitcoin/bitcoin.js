@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Navbar, GraphTable,HomePagination, BottomCards, Footer} from '../index'
+import {Navbar,TableData, HomePagination, BottomCards, Footer} from '../index'
 
 
 import { connect } from 'react-redux';
@@ -9,8 +9,6 @@ import MiddleWare from '../../store//middleware/middleware'
 // import number format
 import NumberFormat from 'react-number-format';
 
-// react charts
-// import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
 
 // import moment
 import moment from 'moment';
@@ -121,19 +119,16 @@ class Bitcoin extends React.Component{
     return(
             <div>
                 <Navbar/>
-                {/* {console.log('dataaa', m)} */}
                  {/* <!--TOP HEADING--> */}
                 <section id="cp-heading">
-
                     <div className="container">
                         <div className="row">
                         {console.log('asdasd', this.state.data)}
-
                             <div className="col-md-8 col-xs-8">
-
-                                <img className="pull-left img-responsive currency-icon" src={BTC} alt="BTC-icon" />
+                            {console.log('logo', this.props.imageParam)}
+                            <img src={"https://chasing-coins.com/api/v1/std/logo/"+this.props.match.params.symbol+""} className="pull-left img-responsive currency-icon" style={{width: '10%', height: '10%'}}/>
+                                {/* <img className="pull-left img-responsive currency-icon" src={BTC} alt="BTC-icon" /> */}
                                 <h2>{pageParam.name} <span>{pageParam.symbol}</span></h2>
-
                                 <div className="anchors">
                                     <a href="#">Website</a>
                                     <a href="#">Explorer</a>
@@ -141,92 +136,69 @@ class Bitcoin extends React.Component{
                                     <span className="label label-default">#coin</span>
                                     <span className="label label-default">#mineable</span>
                                 </div>
-
                             </div>
-
-         
-
                             <div className="col-md-4 col-xs-4 price-info" align="right">
                                 <div className="row">
-
                                     <div className="col-md-8 col-xs-8">
-                                   {/* <NumberFormat value={pageParam.price_usd} displayType={'text'} thousandSeparator={true} prefix={'$'} /> */}
-
-                                        <h3>${pageParam.price_usd} <br /> <span>{pageParam.price_btc} {pageParam.symbol}</span></h3>
+                                       <h3>${pageParam.price_usd} <br /> <span>{pageParam.price_btc} {pageParam.symbol}</span></h3>
                                     </div>
-
                                     <div className="col-md-4 col-xs-4 ">
                                         <h4 className="in-green-zone">{pageParam.percent_change_1h}% <i className="fa fa-caret-up" aria-hidden="true"></i></h4>
                                         <h4 className="in-red-zone">{pageParam.percent_change_1h}% <i className="fa fa-caret-down" aria-hidden="true"></i></h4>
                                     </div>
-
                                 </div>
                             </div>
-                        
-
                         </div>
                     </div>
-
                 </section>
                 {/* //  <!--TOP HEADING END--> */}
 
                 {/* <!--TOP-CARDS-PANEL--> */}
                 <section id="top-cards-panel">
-
                     <div className="container">
                         <div className="row">
                            <div className="detail-cards" align="center">
-                            <div className="col-md-2 market-content">
-                        <h4>MARKET CAP</h4>
-                        <p><NumberFormat value={pageParam.market_cap_usd} displayType={'text'} thousandSeparator={true} prefix={'$'} /></p>
-                    </div>
-                    <div className="col-md-2 volume-content">
-                    <h4>VOLUME (24h)</h4>
-                    <p><NumberFormat value={pageParam["24h_volume_usd"]} displayType={'text'} thousandSeparator={true} prefix={'$'} /></p>
-                    </div>
-                    <div className="col-md-3 cal-content">
-                        <h4>CALCULATING SUPPLY</h4>
-                        <p><NumberFormat value={pageParam.total_supply} displayType={'text'} thousandSeparator={true} prefix={'$'} /></p>
-                        
-                        {/* <p>${pageParam.total_supply}</p> */}
-                    </div>
-                    <div className="col-md-2 max-content">
-                        <h4>MAX SUPPLY</h4>
-                        {/* <p><NumberFormat value={pageParam.max_supply ? pageParam.max_supply : "N/A"} displayType={'text'} thousandSeparator={true} prefix={'$'} /></p> */}
-
-                        <p>{pageParam.max_supply ? pageParam.max_supply : "N/A"}</p>
-                    </div>
-                    <div className="col-md-2 vol-content">
-                        <h4>VOL/MCAP</h4>
-                        <p>{pageParam.percent_change_1h}%</p>
-                    </div>
-                        </div>
-                            
-                            
-                                        
-                                
-
-                            
-
+                                <div className="col-md-2 market-content">
+                                    <h4>MARKET CAP</h4>
+                                    <p><NumberFormat value={pageParam.market_cap_usd} displayType={'text'} thousandSeparator={true} prefix={'$'} /></p>
+                                </div>
+                                <div className="col-md-2 volume-content">
+                                    <h4>VOLUME (24h)</h4>
+                                    <p><NumberFormat value={pageParam["24h_volume_usd"]} displayType={'text'} thousandSeparator={true} prefix={'$'} /></p>
+                                </div>
+                                <div className="col-md-3 cal-content">
+                                    <h4>CALCULATING SUPPLY</h4>
+                                    <p><NumberFormat value={pageParam.total_supply} displayType={'text'} thousandSeparator={true} prefix={'$'} /></p>                      
+                                </div>
+                                <div className="col-md-2 max-content">
+                                    <h4>MAX SUPPLY</h4>
+                                    <p>{pageParam.max_supply ? pageParam.max_supply : "N/A"}</p>
+                                </div>
+                                <div className="col-md-2 vol-content">
+                                    <h4>VOL/MCAP</h4>
+                                    <p>{pageParam.percent_change_1h}%</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
                 </section>
                 {/* <!--TOP-CARDS-PANEL-END--> */}
 
 
                 {/* <!--CURRENCY CHART STARTS--> */}
                 <section id="currency-chart-cp">
-
                     <div className="container">
+                        
                         <div className="row">
 
                             <div className="col-md-10 " id="graph-imag">
+                            
                                 <div className='row'>
                                     <div className='popup'>
                                         {this.state.hoverLoc ? <ToolTip hoverLoc={this.state.hoverLoc} activePoint={this.state.activePoint}/> : null}
                                     </div>
                                 </div>
+
                                 <div className='row'>
                                     <div className='chart'>
                                         { !this.state.fetchingData ?
@@ -234,10 +206,11 @@ class Bitcoin extends React.Component{
                                         : null }
                                     </div>
                                 </div>
+
                             </div>
+
                             <div className="col-md-2 cp-right-panel">
                                 <div className="row">
-
                                     <div className="col-md-12 cp-right-card">
                                         <h4>1 Hr</h4>
                                         <p className="in-green-zone">{pageParam.percent_change_1h}%<i className="fa fa-caret-up " aria-hidden="true"></i></p>
@@ -254,18 +227,13 @@ class Bitcoin extends React.Component{
                                         <h4>30 DAYS</h4>
                                         <p className="in-red-zone">-12.20% <i className="fa fa-caret-down" aria-hidden="true"></i></p>
                                     </div> */}
-
                                 </div>
                             </div>
-
                         </div>
                     </div>
-
                 </section>
                 {/* <!--CURRENCY CHART ENDS--> */}
-              
-                <GraphTable/>
-                <HomePagination/>
+                <TableData/>
                 <BottomCards/>
                 <Footer/>
             </div>

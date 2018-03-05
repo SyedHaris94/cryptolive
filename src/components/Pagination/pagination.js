@@ -14,8 +14,9 @@ class HomePagination extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-          activePage: 15
+          activePage: 1
         };
+        this.handlePageChange = this.handlePageChange.bind(this)
       }
 
     handlePageChange(pageNumber) {
@@ -35,7 +36,10 @@ class HomePagination extends React.Component{
                 {/* <!-- HOME PAGINATION --> */}
                 <section id="homepage-pagination">
 
-                    {/* <Pagination
+               
+                     <div className="col-md-12" align="center">
+
+                         {/* <Pagination
                         activePage={this.state.activePage}
                         itemsCountPerPage={10}
                         totalItemsCount={450}
@@ -43,8 +47,7 @@ class HomePagination extends React.Component{
                         onChange={this.handlePageChange}
                     /> */}
 
-                    <div className="col-md-12" align="center">
-                        <ul className="pagination">
+                       <ul className="pagination">
                             <li>
                             <Link to='/' onClick={window.scrollTo(0, 0)} style={{ textDecoration: "none" }}>
                                 {'<'} Prev   
@@ -89,7 +92,7 @@ class HomePagination extends React.Component{
                                 </Link></li>
 
                             {/* <li><a href="#">Next {'>'}</a></li> */}
-                        </ul>
+                         </ul>
                     </div>
 
                 </section>

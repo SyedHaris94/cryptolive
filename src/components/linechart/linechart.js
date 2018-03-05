@@ -180,7 +180,7 @@ class LineChart extends Component {
           {this.makeArea()}
           {this.makeLabels()}
           {this.state.hoverLoc ? this.createLine() : null}
-          {this.state.hoverLoc ? this.makeActivePoint() : null}
+          
         </g>
       </svg>
     );

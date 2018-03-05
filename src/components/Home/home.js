@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Navbar, Jumbo, FiveFeature, Middle, GraphTable, HomePagination, BottomCards, Table2, Footer } from '../index'
+import {Navbar, Jumbo, FiveFeature, Middle, TableData, HomePagination, BottomCards, Table2, Footer } from '../index'
 
 
 class Home extends Component {
@@ -10,7 +10,7 @@ class Home extends Component {
             <Jumbo/>  
             <FiveFeature/>
             <Middle/>
-            <GraphTable/>
+            <TableData/>
             <HomePagination/>
             <BottomCards/>
             <Footer/>

@@ -3,6 +3,13 @@ body {
     /* background-color: lightgrey */
     font-family: 'Nunito Sans', sans-serif;
   }
+
+  .chart {
+    background: white;
+    width: 150px;
+    height: 60px;
+    padding: 20px 20px 20px 0;
+  }
   
   .btn-green {
     border: none;
@@ -14,6 +21,14 @@ body {
     /* align-items: center */
   }
   
+
+  
+.loader-hidden {
+  display: none;
+}
+.loader-active {
+  display: block;
+}
   
   /*NAVBAR*/
   
@@ -409,6 +424,14 @@ body {
     color: #1DA0B4;
     border: none;
   }
+
+  .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    z-index: 3;
+    color: #fff;
+    cursor: default;
+    background-color: lightgray;
+    border-color: #337ab7;
+}
   /*HOMEPAGE PAGINATION END*/
   
   /* FONT AWESOME CUSTOMIZATION START */
@@ -558,15 +581,18 @@ body {
     margin-top: 40px;
   }
   
-  /* #graph-imag{
-    background-image: url("../icons/bitcoin-page/Overview.png");
+  #graph-imag{
+    box-shadow: 0 0 20px rgba(0,0,0,.06);
+    height: 400px;
+    /* width: 500px */
+    /* background-image: url("../icons/bitcoin-page/Overview.png");
     background-repeat: no-repeat;
     margin: 0 0 0 -17px;
     height: 400px;
     margin-right: 10px
-    width: 500px
+    width: 500px */
   
-  /* } */
+  }
   #currency-chart-cp .cp-right-panel .row{
     /* margin-top: 50px */
     padding-top: 40px;
@@ -2152,5 +2178,10 @@ body {
 
      #description .content{
          padding-bottom: 65px;
+     }
+
+     .linechart {
+       width: 95%;
+       height: 95%;
      }
   }

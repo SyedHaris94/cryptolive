@@ -25,10 +25,12 @@ import VideoTable from './VideoTable/videotable'
 import Suscribe from './Suscribe//suscribe'
 import Description from './Description/description'
 
+import Market from './Market/market'
+import Exchange from './Exchanges/exchanges'
 
 
 // graph tables
-import GraphTable from './GraphTable/graphtable'
+import TableData from './GraphTable/graphtable'
 import Table2 from './GraphTable/table2'
 import Table3 from './GraphTable/table3'
 import Table4 from './GraphTable/table4'
@@ -51,7 +53,7 @@ export{
     Jumbo,
     FiveFeature,
     Middle,
-    GraphTable,
+    TableData,
     HomePagination, 
     BottomCards, 
     Footer,
@@ -66,6 +68,8 @@ export{
     VideoTable, 
     Suscribe, 
     Description,
+    Exchange,
+    Market,
     Table2, Table3, Table4, Table5, Table6, Table7, Table8, Table9, Table10
 
 }
