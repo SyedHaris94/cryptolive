@@ -3,10 +3,6 @@ import React, {Component} from 'react'
 // react-router
 import { Link } from "react-router-dom";
 
-// Import images & Icons
-import Bitmap from '../../icons/Bitmap.png'
-import medicalchain from '../../icons/medicalchain_logo_dark_cropped_og.png'
-
 class TwoTable extends React.Component{
     render(){
         return(
@@ -23,9 +19,9 @@ class TwoTable extends React.Component{
                                     <table className="table" >
                                         <thead className="table-head">
                                             <tr >
-                                                <th>Name</th>
+                                                <th> Name</th>
                                                 <th>ETA</th>
-                                                <th>TEAM</th>
+                                                 <th>TEAM</th>
                                                 <th>TECH</th>
                                                 <th>STRUCT</th>
                                                 <th>COMM</th>
@@ -37,157 +33,7 @@ class TwoTable extends React.Component{
                                                 <th>SOCIAL</th>
                                             </tr>
                                         </thead>
-                                        <tbody align="center">
-                                            <tr className="table-row">
-                                                <td>
-                                                        <div className="pull-left" style={{paddingTop: '2px'}}>
-                                                            <img src={Bitmap} style={{width: '25px'}} alt="logo"/>
-                                                        </div>
-                                                        
-                                                        <div className="pull-left" style={{width: '2%',paddingTop: '5px',paddingLeft: '10px'}}>
-                                                            <p>WEPOWER</p>
-                                                            </div>
-
-                                                    {/* <!-- <img src="icons/Bitmap.png" alt="logo" className=" image-responsive table-img" >
-                                                    <p className="col-md-offset-3 " style="padding-left: 10px;">WEPOWER</p> --> */}
-                                                </td>
-                                                <td className="red">8h</td>
-                                                <td>8</td>
-                                                <td>6</td>
-                                                <td>8</td>
-                                                <td>7</td>
-                                                <td>6</td>
-                                                <td>54</td>
-                                                <td>32</td>
-                                                <td>62</td>
-                                                <td className="green">4.3</td>
-                                                <td>
-                                                    <i className="fa fa-facebook favicon-icons" aria-hidden="true"></i>
-                                                    <i className="fa fa-twitter favicon-icons" aria-hidden="true"></i>
-                                                    
-                                                </td>
-                                            </tr>
-                    
-                                            <tr className="table-row">
-                                                <td style={{width: '15%'}}>
-                                                        <div className="pull-left" style={{paddingTop: '2px'}}>
-                                                            <img src={medicalchain} style={{width: '25px'}} alt="logo"/>
-                                                        </div>
-                                                        
-                                                        <div className="pull-left" style={{width: '2%',paddingTop: '5px',paddingLeft: '5px'}}>
-                                                            <p>MEDICALCHA</p>
-                                                        </div>
-                                                    
-                                                    {/* <!-- <img src="icons/medicalchain_logo_dark_cropped_og.png" className="pull-left image-responsive table-img" alt="logo">
-                                                    <p className="col-md-offset-3" style="padding-left: 5px">Medicalchain</p> --> */}
-                                                </td>
-                                                <td className="yellow">12d</td>
-                                                <td>8</td>
-                                                <td>6</td>
-                                                <td>8</td>
-                                                <td>7</td>
-                                                <td>6</td>
-                                                <td>54</td>
-                                                <td>32</td>
-                                                <td>62</td>
-                                                <td className="green">4.4</td>
-                                                <td>
-                                                    <i className="fa fa-facebook favicon-icons" aria-hidden="true"></i>
-                                                    <i className="fa fa-twitter favicon-icons" aria-hidden="true"></i>
-                                                    
-                                                </td>
-                                            </tr>
-                    
-                                            <tr className="table-row">
-                                                <td>
-                                                    <div className="pull-left " style={{paddingTop: '2px'}}>
-                                                        <img src={Bitmap} style={{width: '25px'}} alt="logo"/>
-                                                    </div>
-                                                    
-                                                    <div className="pull-left" style={{width: '2%',paddingTop: '5px',paddingLeft: '10px'}}>
-                                                        <p>POCKETINN</p>
-                                                    </div>
-                                                    {/* <!-- <img src="icons/Bitmap.png" className="pull-left image-responsive table-img" alt="logo"> -->
-                                                    <!-- <p className="col-md-offset-3" style="padding-left: 5px">POCKETINN</p> --> */}
-                                                </td>
-                                                <td className="green">8h</td>
-                                                <td>8</td>
-                                                <td>6</td>
-                                                <td>8</td>
-                                                <td>7</td>
-                                                <td>6</td>
-                                                <td>54</td>
-                                                <td>32</td>
-                                                <td>62</td>
-                                                <td className="yellow">4.0</td>
-                                                <td>
-                                                    <i className="fa fa-facebook favicon-icons" aria-hidden="true">
-                                                    </i>
-                                                    <i className="fa fa-twitter favicon-icons" aria-hidden="true"></i>
-                                                </td>
-                                            </tr>
-                    
-                                             <tr className="table-row">
-                                                <td>
-                                                    <div className="pull-left" style={{paddingTop: '2px'}}>
-                                                        <img src={medicalchain} style={{width: '25px'}} alt="logo"/>
-                                                    </div>
-                                                    
-                                                    <div className="pull-left" style={{width: '2%', paddingTop: '5px',paddingLeft: '10px'}}>
-                                                        <p>GENIELICO</p>
-                                                    </div>
-                                                    {/* <!-- <img src="icons/medicalchain_logo_dark_cropped_og.png" className="pull-left image-responsive table-img" alt="logo">
-                                                    <p className="col-md-offset-3" style="padding-left: 5px">GENIELICO</p> --> */}
-                                                </td>
-                                                <td className="green">8h</td>
-                                                <td>8</td>
-                                                <td>6</td>
-                                                <td>8</td>
-                                                <td>7</td>
-                                                <td>6</td>
-                                                <td>54</td>
-                                                <td>32</td>
-                                                <td>62</td>
-                                                <td className="yellow">4.0</td>
-                                                <td>
-                                                    <i className="fa fa-facebook favicon-icons" aria-hidden="true">
-                                                    </i>
-                                                    <i className="fa fa-twitter favicon-icons" aria-hidden="true"></i>
-                    
-                                                </td>
-                                            </tr>
-                    
-                                            <tr className="table-row">
-                                                <td>
-                                                    <div className="pull-left " style={{paddingTop: '2px'}}>
-                                                        <img src={Bitmap} style={{width: '25px'}} alt="logo"/>
-                                                    </div>
-                                                    
-                                                    <div className="pull-left" style={{width: '2%',paddingTop: '5px',paddingLeft: '10px'}}>
-                                                        <p>BUBBLE</p>
-                                                    </div>
-                                                    {/* <!-- <img src="icons/Bitmap.png" className="pull-left image-responsive table-img" alt="logo">
-                                                    <p className="col-md-offset-3" style="padding-left: 5px">BUBBLE</p> --> */}
-                                                </td>
-                                                <td className="green">8h</td>
-                                                <td>8</td>
-                                                <td>6</td>
-                                                <td>8</td>
-                                                <td>7</td>
-                                                <td>6</td>
-                                                <td>54</td>
-                                                <td>32</td>
-                                                <td>62</td>
-                                                <td className="red">2.3</td>
-                                                <td>
-                                                    <i className="fa fa-facebook favicon-icons" aria-hidden="true">
-                                                    </i>
-                                                    <i className="fa fa-twitter favicon-icons" aria-hidden="true"></i>
-                                                </td>
-                                            </tr>
-                    
-                    
-                                        </tbody>
+                                        <RowData1/>
                                     </table>
                                 </Link>
                                 <div className="row">
@@ -196,7 +42,7 @@ class TwoTable extends React.Component{
                                                 <button type="button" className="btn btn-default btn-block table-button">VIEW ALL</button>
                                             </Link>
                                         </div>
-                                    </div>
+                                </div>
 
                                
                             </div>
@@ -205,7 +51,7 @@ class TwoTable extends React.Component{
                                     <h4 className="grey-color">LAST MINUTE</h4>
                                     <Link to="/icoview"style={{ textDecoration: "none" }} >
                                         <table className="table">
-                                            <thead align="center">
+                                            <thead>
                                                 <tr>
                                                     <th className="col-md-3">Name</th>
                                                     <th className="col-md-3">ETA</th>
@@ -213,109 +59,7 @@ class TwoTable extends React.Component{
                                                     <th className="col-md-3">SOCIAL</th>
                                                 </tr>
                                             </thead>
-                                            <tbody align="center">
-                                                <tr className="table-row">
-                                                    <td>
-                                                        <div className="pull-left " style={{paddingTop: '2px'}}>
-                                                            <img src={Bitmap} style={{width: '25px'}} alt="logo"/>
-                                                        </div>
-                                                        
-                                                        <div className="pull-left" style={{width: '2%', paddingTop: '5px', paddingLeft: '5px'}}>
-                                                            <p>REMME</p>
-                                                        </div>
-                                                        {/* <!-- <img src="icons/Bitmap.png" className="pull-left image-responsive table-img" alt="logo">
-                                                        <p className="col-md-offset-3" style="padding-left: 5px">REMME</p> --> */}
-                                                    </td>
-                                                    <td className="table-red">10m</td>
-                                                    <td className="table-yellow">3.4</td>
-                                                    <td>
-
-                                                        <i className="fa fa-facebook favicon-icons" aria-hidden="true">
-                                                        </i>
-                                                        <i className="fa fa-twitter favicon-icons" aria-hidden="true"></i>                                
-                                                    </td>
-                                                </tr>
-                                                <tr className="table-row">
-                                                    <td>
-                                                        <div className="pull-left " style={{paddingTop: '2px'}}>
-                                                            <img src={medicalchain} style={{width: '25px'}} alt="logo"/>
-                                                        </div>
-                                                        
-                                                        <div className="pull-left" style={{width: '2%',paddingTop: '5px',paddingLeft: '5px'}}>
-                                                            <p>NPER</p>
-                                                        </div>
-                                                        {/* <!-- <img src="icons/Bitmap.png" className="pull-left image-responsive table-img" alt="logo">
-                                                        <p className="col-md-offset-3" style="padding-left: 5px">NPER</p> --> */}
-                                                    </td>
-                                                    <td className="table-red">25m</td>
-                                                    <td className="table-blue">4.6</td>
-                                                    <td>
-                                                        <i className="fa fa-facebook favicon-icons" aria-hidden="true">
-                                                        </i>
-                                                        <i className="fa fa-twitter favicon-icons" aria-hidden="true"></i>
-                                                    </td>
-                                                </tr>
-                                                <tr className="table-row">
-                                                    <td>
-                                                        <div className="pull-left " style={{paddingTop: '2px'}}>
-                                                            <img src={medicalchain} style={{width: '25px'}} alt="logo"/>
-                                                        </div>
-                                                        
-                                                        <div className="pull-left" style={{width: '2%',paddingTop:' 5px',paddingLeft: '5px'}}>
-                                                            <p>GIZER</p>
-                                                        </div>
-                                                        {/* <!-- <img src="icons/medicalchain_logo_dark_cropped_og.png" className="pull-left image-responsive table-img" alt="logo">
-                                                        <p className="col-md-offset-3" style="padding-left: 5px">GIZER</p> --> */}
-                                                    </td>
-                                                    <td className="table-red">1h</td>
-                                                    <td className="table-blue">4.9</td>
-                                                    <td>
-                                                        <i className="fa fa-facebook favicon-icons" aria-hidden="true">
-                                                        </i>
-                                                        <i className="fa fa-twitter favicon-icons" aria-hidden="true"></i>
-                                                    </td>
-                                                </tr>
-                                                <tr className="table-row">
-                                                    <td>
-                                                        <div className="pull-left " style={{paddingTop: '2px'}}>
-                                                            <img src={Bitmap} style={{width: '25px'}} alt="logo"/>
-                                                        </div>
-                                                        
-                                                        <div className="pull-left" style={{width: '2%',paddingTop: '5px',paddingLeft: '2px'}}>
-                                                            <p>SCORUM</p>
-                                                        </div>
-                                                        {/* <!-- <img src="icons/Bitmap.png" className="pull-left image-responsive table-img" alt="logo">
-                                                        <p className="col-md-offset-3" style="padding-left: 5px">SCORUM</p> --> */}
-                                                    </td>
-                                                    <td className="table-red">2h</td>
-                                                    <td className="table-red">2.8</td>
-                                                    <td>
-                                                        <i className="fa fa-facebook favicon-icons" aria-hidden="true">
-                                                        </i>
-                                                        <i className="fa fa-twitter favicon-icons" aria-hidden="true"></i>
-                                                    </td>
-                                                </tr>
-                                                <tr className="table-row">
-                                                    <td>
-                                                        <div className="pull-left " style={{paddingTop: '2px'}}>
-                                                            <img src={medicalchain} style={{width: '25px'}} alt="logo"/>
-                                                        </div>
-                                                        
-                                                        <div className="pull-left" style={{width: '2%',paddingTop: '5px',paddingLeft: '5px'}}>
-                                                            <p>SAPIEN</p>
-                                                        </div>
-                                                        {/* <!-- <img src="icons/medicalchain_logo_dark_cropped_og.png" className="pull-left image-responsive table-img" alt="logo">
-                                                        <p className="col-md-offset-3" style="padding-left: 5px">SAPIEN</p> --> */}
-                                                    </td>
-                                                    <td className="table-red">4h</td>
-                                                    <td className="table-red">2.1</td>
-                                                    <td>
-                                                        <i className="fa fa-facebook favicon-icons" aria-hidden="true">
-                                                        </i>
-                                                        <i className="fa fa-twitter favicon-icons" aria-hidden="true"></i>
-                                                    </td>
-                                                </tr> 
-                                            </tbody>
+                                            <RowData2/>
                                         </table>
                                     </Link>
                                 <div className="row">
@@ -339,3 +83,198 @@ class TwoTable extends React.Component{
 
 
 export default TwoTable;
+
+
+class RowData1 extends React.Component{
+    constructor(props) {
+            
+        super(props);
+        
+        this.state = {
+          tableData1: []
+        };
+    
+      }
+
+      rateData = () => {
+
+        // const pageID = this.props.match.params.symbol;
+        const url = 'https://api.icowatchlist.com/public/v1/live';
+        let count = 0;
+
+        fetch(url).then( r => r.json())
+          .then((marketData) => {
+            const tabledata1 = [];
+      
+            for (let index in marketData.ico.live){
+              tabledata1.push({
+                  name: marketData.ico.live[index].name,
+                  image: marketData.ico.live[index].image,
+                  count: count
+                });
+                count++
+            }
+            
+            this.setState({
+              tableData1: tabledata1,
+            })
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+      }
+      
+      
+      componentDidMount() {
+          console.log('did mount run')
+        this.rateData();
+      }
+      
+    
+    render(){
+        const x = [];
+        let count = 0;
+        return(
+            <tbody>
+            {console.log('dsdsd',this.state.tableData1)}
+            {this.state.tableData1.map ? this.state.tableData1.map(
+                            (m, v) => {
+                          const pageSym = m.symbol
+                          const img = m.name.toLowerCase();
+                          if (m.count <= 51){
+                              return <tr key={m.count}>
+                                  <td style={{width: '20%' , textAlign: 'left'}} >
+                                           <img src={m.image}
+                                             imageParam= {pageSym} 
+                                              style={{width: '50%', height: '30%'}} className="pull-left"/>
+                                          <div style={{textAlign: 'left', marginLeft: '2px'}} class="pull-left"> {m.name}</div>
+                                  </td>
+                                  <td >
+                                      3.5
+                                  </td>
+                                  <td>
+                                      23
+                                  </td>
+                                  <td >
+                                      3.5
+                                  </td>
+                                  <td>
+                                      23
+                                  </td>
+                                  <td >
+                                      3.5
+                                  </td>
+                                  <td>
+                                      23
+                                  </td>
+                                  <td >
+                                      3.5
+                                  </td>
+                                  <td>
+                                      23
+                                  </td>
+                                  <td >
+                                      3.5
+                                  </td>
+                                  <td>
+                                      23
+                                  </td>
+                                  <td>
+                                  <i className="fa fa-facebook favicon-icons" aria-hidden="true">
+                                  </i>
+                                  <i className="fa fa-twitter favicon-icons" aria-hidden="true"></i> 
+                                  </td>
+                                  
+                                </tr>;
+                          }
+                            }
+                          ) : <div />}
+            </tbody>
+        );
+    }
+
+}
+
+
+class RowData2 extends React.Component{
+    constructor(props) {
+            
+        super(props);
+        
+        this.state = {
+          tableData1: []
+        };
+    
+      }
+
+      rateData = () => {
+
+        // const pageID = this.props.match.params.symbol;
+        const url = 'https://api.icowatchlist.com/public/v1/upcoming';
+      
+        fetch(url).then( r => r.json())
+          .then((marketData) => {
+            const tabledata1 = [];
+      
+            for (let index in marketData.ico.upcoming){
+              tabledata1.push({
+                  name: marketData.ico.upcoming[index].name,
+                  image: marketData.ico.upcoming[index].image
+                   });
+            }
+            
+            this.setState({
+              tableData1: tabledata1,
+            })
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+      }
+      
+      
+      componentDidMount() {
+          console.log('did mount run')
+        this.rateData();
+      }
+      
+    
+    render(){
+        const x = [];
+        let count = 0;
+        return(
+            <tbody>
+            {console.log('dsdsd',this.state.tableData1)}
+            {this.state.tableData1.map ? this.state.tableData1.map(
+                            (m, v) => {
+                          const pageSym = m.symbol
+                          const img = m.name.toLowerCase();
+                              return <tr key={v}>
+                                    {/* <Link to={gotoUrl(pageSym)} style={{ textDecoration: "none" }}> */}
+                                    <td style={{width: '10%'}} >
+                                           <img src={m.image}
+                                             imageParam= {pageSym} 
+                                              style={{width: '50%', height: '30%'}}/>
+                                          <div class="pull-right"> {m.name}</div>
+                                    </td>
+                                    {/* </Link> */}
+                                  <td >
+                                      3.5
+                                  </td>
+                                  <td>
+                                      23
+                                  </td>
+                                  <td>
+                                  <i className="fa fa-facebook favicon-icons" aria-hidden="true">
+                                  </i>
+                                  <i className="fa fa-twitter favicon-icons" aria-hidden="true"></i> 
+                                  </td>
+                                  
+                                </tr>;
+                            }
+                          ) : <div />}
+            </tbody>
+        );
+    }
+
+}

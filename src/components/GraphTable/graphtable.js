@@ -2,19 +2,6 @@ import React, {Component} from 'react'
 
 import {HomePagination} from '../index'
 
-// importing images & icons
-// import BTC from '../../icons/BTC.png'
-// import ETH from '../../icons/ETH.png'
-// import BCH from '../../icons/BCH.png'
-// import uparrow from '../../icons/up-arrow.png'
-// import uplite from '../../icons/up-lite.png'
-// import downarrow from '../../icons/down-arrow.png'
-// import downlite from '../../icons/down-lite.png'
-// import lineage from '../../icons/Lineage.png'
-// import linelite from '../../icons/line-lite.png'
-// import chartgreen from '../../icons/chart-green.png'
-// import chartlite from '../../icons/chart-lite-green.png'
-
 // import number format
 import NumberFormat from 'react-number-format';
 
@@ -27,9 +14,8 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 import MiddleWare from '../../store//middleware/middleware'
 
-import Pagination from "react-js-pagination";
-// import CircularProgress from 'material-ui/CircularProgress';
 
+import Pagination from "react-js-pagination";
 
 // TableData > TableRow > CrptoDetail > ImageChart > ClickableTable
 
@@ -159,7 +145,6 @@ componentDidMount() {
         return <tbody>
              {console.log('page data ',pageData )}
               {/* <!-- GRAPH TABLE STARTS--> */}
-                        {/* {console.log("data from apis graphtable page", this.props.resdata)} */}
                         {this.state.tableData.map ? this.state.tableData.map(
                             (m, v) => {
                           const pageSym = m.symbol
@@ -169,36 +154,31 @@ componentDidMount() {
                                   </td>
                                   <td style={{ width: "15%" }}>
                                     <Link to={gotoUrl(pageSym)} style={{ textDecoration: "none" }}>
-                                      <div className="" style={{ paddingTop: "2px" }} align= "center">
-                                         <img src={"https://chasing-coins.com/api/v1/std/logo/"+pageSym+"" }
-                                         imageParam= {pageSym} 
-                                              style={{width: '20%', height: '10%'}}/>
-                                            <div className= "pull-right">
-                                                {m.name}
-                                                <p>
-                                                  {m.symbol}  
-                                                </p>
-                                            </div>
-                                      </div>
+                                    <td style={{width: '20%' , textAlign: 'left'}} >
+                                           <img src={"https://chasing-coins.com/api/v1/std/logo/"+pageSym+""} className="pull-left"
+                                              style={{width: '20%', }}/>
+                                          <div style={{textAlign: 'left', paddingTop: '5px', marginLeft: '10px'}} class="pull-left"> {m.name} {m.symbol}  </div>
+                                    </td>
+                                   
                                     </Link>
                                   </td>
                                   <td className="graph-td-green">
-                                    ${m.price_usd}
+                                    ${m.price_usd.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                                     <i className="fa fa-caret-up" aria-hidden="true" style={{ paddingLeft: "5px" }} />
                                   </td>
                                   <td>
                                     ${
-                                      m.market_cap_usd
+                                      m.market_cap_usd.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                                     }
                                   </td>
                                   <td>
                                     ${
-                                     m.volume_usd
+                                     m.volume_usd.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                                     }
                                   </td>
                                   <td>
                                     {
-                                      m.available_supply
+                                      m.available_supply.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                                     }
                                   </td>
                                   <td className="graph-td-red-1">
@@ -284,6 +264,7 @@ class ImageChart extends React.Component{
                   const x = [];
                   return(
                     <div>
+                      {console.log('dfdsdsawrerf',this.state.mainCurData)}
                       {this.state.mainCurData.map((item) => {
                         x.push(
                           Math.round(item.high , item.low)

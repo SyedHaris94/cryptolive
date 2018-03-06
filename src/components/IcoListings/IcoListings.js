@@ -1,62 +1,81 @@
 import React, {Component} from 'react'
 
-// import icons
-import Bitmap from '../../icons/Bitmap.png'
-import medicalchain from '../../icons/medicalchain_logo_dark_cropped_og.png'
-import gilgamesh from '../../icons/1_UoqEfkuFu5JbiHTxwNhqVw.png'
-import nper from '../../icons/nper_token.png'
-import coinloan from '../../icons/favicon.png'
-
+// react-router
+import { Link } from "react-router-dom";
 
 class IcoListingItem extends React.Component{
+    
+    constructor(props) {      
+        super(props);
+        
+        this.state = {
+            icoData: []
+        };
+    
+      }
+
+      rateData = () => {
+
+        // const pageID = this.props.match.params.symbol;
+        const url = 'https://api.icowatchlist.com/public/v1/';
+      
+        fetch(url).then( r => r.json())
+          .then((marketData) => {
+            const icodata = [];
+            let count = 0;
+      
+            for (let index in marketData.ico.live){
+                icodata.push({
+                  name: marketData.ico.live[index].name,
+                  image: marketData.ico.live[index].image,
+                  description: marketData.ico.live[index].description,
+                  count: count
+                   });
+                   count++
+            }
+            
+            this.setState({
+                icoData: icodata,
+            })
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+      }
+      
+      
+      componentDidMount() {
+          console.log('did mount run')
+        this.rateData();
+      }
+      
+
+
     render(){
         return(
             <div>
+                {console.log('abcd',this.state.icoData)}
                 {/* ICO LISTING ITEMS STARTS */}
                 <section id="ico-listing-item">
-
-                    <a href="icoview.html">
-
-                        <div className="col-md-9 ico-card">
+                   
+                <Link to="icoview">
+                  {this.state.icoData.map(
+                        (m, v) => {
+                    {console.log('sds',this.state.icoData.length)}
+                    const img = m.name.toLowerCase();
+                    if (m.count <= 5){
+                        return <div className="col-md-9 ico-card" key={m.count}>
                             <div className="row">
-
                                 <div className="col-md-2 col-xs-3">
-                                    <img src={Bitmap} alt="ico-icon"/>
+                                    <img src={m.image}
+                                    //  imageParam= {pageSym} 
+                                      style={{marginTop: '20px',width: '80%', height: '30%'}}/>
                                 </div>
-
                                 <div className="col-md-10 col-xs-9">
-                                    <h3>WePower <span className="trending-icon">TRENDING</span> <span className="premium-icon">PRIMARY</span></h3>
-                                    <p className="rating-feedback">
-                                        <i className="fa fa-star" aria-hidden="true"></i>
-                                        <i className="fa fa-star" aria-hidden="true"></i>
-                                        <i className="fa fa-star" aria-hidden="true"></i>
-                                        <i className="fa fa-star" aria-hidden="true"></i>
-                                        <i className="fa fa-star-half-empty" aria-hidden="true"></i>
-                                        4.5 average based on 67 experts rating
-                                    </p>
-                                    <p className="last-cont">Blockchain and smart contracts powered green energy trading platforms where everyone can trade and a live happy
-                                        live forever,this coin,will change the world.</p>
-
-                                </div>
-
-
-                            </div>
-
-
-                        </div>
-                    </a>
-
-                    <a href="icoview.html">
-
-                        <div className="col-md-9 ico-card">
-                            <div className="row">
-
-                                <div className="col-md-2 col-xs-3">
-                                    <img src={medicalchain} alt="ico-logo"/>
-                                </div>
-
-                                <div className="col-md-10 col-xs-9">
-                                    <h3>Medicalchain <span className="trending-icon">TRENDING</span> <span className="premium-icon">PRIMARY</span></h3>
+                                    <h3>
+                                        {m.name}        
+                                        {/* <span className="trending-icon">TRENDING</span> <span className="premium-icon">PRIMARY</span> */}
+                                        </h3>
                                     <p className="rating-feedback">
                                         <i className="fa fa-star" aria-hidden="true"></i>
                                         <i className="fa fa-star" aria-hidden="true"></i>
@@ -65,19 +84,20 @@ class IcoListingItem extends React.Component{
                                         <i className="fa fa-star-o" aria-hidden="true"></i>
                                         2.7 average based on 82 experts rating
                                     </p>
-                                    <p className="last-cont">Medicalchain is a decentralized platform that enables secure, fast and transparent exchange.Medicalchain is a decentralized
-                                        platform that enables secure, fast and transparent exchange.</p>
-
+                                    <p className="last-cont">
+                                        {m.description}
+                                    </p>
                                 </div>
 
-
                             </div>
+                        </div>;
+                         }                     
+                        })
+            
+                    }
+                    </Link>
 
-
-                        </div>
-                    </a>
-
-                    <a href="icoview.html">
+                     {/*<a href="icoview.html">
 
                         <div className="col-md-9 ico-card">
                             <div className="row">
@@ -168,14 +188,14 @@ class IcoListingItem extends React.Component{
 
 
                         </div>
-                    </a>
+                    </a> */}
 
-                    <div className="col-md-9">
-                        <a href="browseICO.html">
+                    <div className="col-md-9" style={{marginTop: '10px', marginBottom:'10px'}}>
+                        <Link to="icoview">
                             <div className="row">
-                                <button id="btn-block" type="button" className="btn btn-default btn-block">VIEW ALL</button>
+                                <button type="button" className="btn btn-default btn-block"style={{borderRadius:'1px'}} >VIEW ALL</button>
                             </div>
-                        </a>
+                        </Link>
 
                     </div>
 
