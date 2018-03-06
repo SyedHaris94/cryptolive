@@ -192,21 +192,20 @@ class Bitcoin extends React.Component{
                         <div className="row">
 
                             <div className="col-md-10 " id="graph-imag">
-                            
-                                <div className='row'>
-                                    <div className='popup'>
-                                        {this.state.hoverLoc ? <ToolTip hoverLoc={this.state.hoverLoc} activePoint={this.state.activePoint}/> : null}
+                                {/* <div className= "container"> */}
+                                    <div className='row'>
+                                        <div className='popup'>
+                                            {this.state.hoverLoc ? <ToolTip hoverLoc={this.state.hoverLoc} activePoint={this.state.activePoint}/> : null}
+                                        </div>
                                     </div>
-                                </div>
-
-                                <div className='row'>
-                                    <div className='chart'>
-                                        { !this.state.fetchingData ?
-                                        <LineChart data={this.state.data} onChartHover={ (a,b) => this.handleChartHover(a,b) }/>
-                                        : null }
+                                    <div className='row'>
+                                        <div className='chart'>
+                                            { !this.state.fetchingData ?
+                                            <LineChart data={this.state.data} onChartHover={ (a,b) => this.handleChartHover(a,b) }/>
+                                            : null }
+                                        </div>
                                     </div>
-                                </div>
-
+                                {/* </div> */}
                             </div>
 
                             <div className="col-md-2 cp-right-panel">

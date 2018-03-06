@@ -286,9 +286,26 @@ class ImageChart extends React.Component{
                     <div>
                       {this.state.mainCurData.map((item) => {
                         x.push(
-                          Math.round(item.high)
+                          Math.round(item.high , item.low)
                         );
                       })}
+                    {/* <svg viewBox="0 0 500 100" class="chart">
+                      <polyline
+                        fill="none"
+                        stroke="#0074d9"
+                        stroke-width="2"
+                        points="
+                        108,101
+                        110,103
+                        110,102
+                        111,108
+                        115,110
+                        115,110
+                        116,114
+                      "
+                      />
+                    </svg> */}
+                   
                     <img src={"https://chart.googleapis.com/chart?&cht=ls&chd=t:"+x[0]+","+x[1]+","+x[2]+","+x[3]+","+x[4]+","+x[5]+","+x[6]+"&chco=ff0000&chs=180x50&chds=0,"+Math.max(...x)+""} />
                     </div>
                   );
@@ -315,7 +332,7 @@ class ImageChart extends React.Component{
       return(
         <div>
           {/* <!-- HOME PAGINATION --> */}
-          <section id="homepage-pagination">
+          {/* <section id="homepage-pagination">
               <div className="col-md-12" align="center">
                   <Pagination
                   activePage={this.state.activePage}
@@ -325,7 +342,7 @@ class ImageChart extends React.Component{
                   onChange={this.handlePageChange}
                    />
               </div>
-            </section>
+            </section> */}
             {/* <!-- HOME PAGINATION ENDS --> */}
         </div>
       );

@@ -486,6 +486,7 @@ body {
   
   #cp-heading .price-info h3 {
     font-size: 2em;
+    padding-top: 10px;
     color: #1DA0B4;
   }
   
@@ -574,7 +575,7 @@ body {
   }
   
   #top-cards-panel .detail-cards div:nth-child(5) {
-    margin-right:0;
+    /* margin-right:0; */
   }
   
   #currency-chart-cp {
@@ -1740,9 +1741,13 @@ body {
   top:38%;
 }
 
-
 .popup {
   min-height: 50px;
+}
+
+.linechart {
+  padding: 8px;
+  width: 1000px;
 }
 
 
@@ -1848,6 +1853,11 @@ body {
         padding-right: 50px
         /* justify-content: center; */
     }
+    
+    .linechart {
+      width: 778px;
+      padding-left: 30px;
+  }
        
     
   }
@@ -1927,11 +1937,58 @@ body {
     }
   
   
-  
-  
-  
     /*HOMEPAGE TABLE END*/
   
+
+/*STATS AND CONFIG SECTION STARTS*/
+#top-cards-panel .detail-cards .market-content{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-left: 50px;
+  margin-right: 50px; 
+  margin-top: 20px; 
+  margin-bottom: 20px
+}
+
+#top-cards-panel .detail-cards .volume-content{
+  padding-top: 5px;
+  padding-bottom: 5px; 
+  margin-left: 50px;
+  margin-right: 50px; 
+  margin-top: 20px; 
+  margin-bottom: 20px
+}
+
+#top-cards-panel .detail-cards .cal-content{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-left: 50px;
+  margin-right: 50px;  
+  margin-top: 20px; 
+  margin-bottom: 20px
+}
+
+#top-cards-panel .detail-cards .max-content{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-left: 50px;
+  margin-right: 50px;  
+  margin-top: 20px; 
+  margin-bottom: 20px
+}
+
+
+#top-cards-panel .detail-cards .vol-content{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-left: 50px;
+  margin-right: 50px;  
+  margin-top: 20px; 
+  margin-bottom: 20px;
+  padding-right: -30px
+  /* padding-right: 50px */
+}
+
     /*TABLE BOTTOM CARDS START*/
   
   
@@ -1940,15 +1997,14 @@ body {
     }
   
     #table-bottom-stats-cards .card-item {
-        margin-right: 0;
+        margin-right: 50px;
         margin-bottom: 20px;
         padding: 2px 0 2px 0;
-        /* padding-left: -40px; */
-        /* padding-left: 10px */
+        margin-left: 50px;
     }
   
     #table-bottom-stats-cards .card-item:nth-child(3) {
-        margin-right: 0;
+      margin-right: 50px;
     }
   
     #ico-top-panel {
@@ -1967,6 +2023,13 @@ body {
   
     #two-tables .left-table .table tbody > tr > td {
         font-size: 0.9em;
+    }
+    #currency-chart-cp .cp-right-panel .cp-right-card{
+      margin-left: 40px;
+      margin-right: 20px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+
     }
   
     .disclaimer-form{
@@ -1988,10 +2051,15 @@ body {
         display: none
     }
   
-    
-  
+    .linechart {
+      /* display: none  */
+      padding-left: 40px;
+       width: 700px;
+       /* height: 95%; */ 
+     }
   
   }
+
   /*MEDIA QUERIES for XS*/
   @media(max-width: 800px) {
     .jumbotron {
@@ -2060,7 +2128,11 @@ body {
     #graph-table .table {
         margin-top: -40px;
     }
-  
+    
+    
+    #graph-table .table {
+     display: none
+    }
     #graph-table .stacktable .st-head-row-main {
         display: none;
     }
@@ -2153,35 +2225,51 @@ body {
         font-size: 0.6em;
         
     }
+
+    #cp-heading .col-xs-8 {
+      width: 66.66666667%;
+      font-size: 10px;
+    }
   
     #cp-heading .price-info h3{
-        font-size: 0.9em;
+        font-size: 1.6em;
+        padding-top: 10px
   
     }
   
     #cp-heading .anchors a{
         font-size: 0.9em;
     }
+
+    .linechart {
+      /* margin-left: 40px; */
+      vertical-align: center;
+      padding-top: -20px;
+      margin-top: -120px;
+      margin-left: -25px;
+      /* height: 100px; */
+      width: 300px;
+     }
+
+     #description .right{
+      float: right;
+      margin-top: -100px;
+  }
+
+   #description .nav-tabs{
+       font-size: xx-small;
+   }
+
+   #description .content{
+       padding-bottom: 65px;
+   }
+   #graph-imag{
+     padding-top: -20px;
+      margin-top: -15px;
+      height: 200px;
+      margin-left: 50px;
+      margin-right: 50px;
+   }
   
   }
 
-
-  @media(max-width: 800px) {
-    #description .right{
-        float: right;
-        margin-top: -100px;
-    }
-
-     #description .nav-tabs{
-         font-size: xx-small;
-     }
-
-     #description .content{
-         padding-bottom: 65px;
-     }
-
-     .linechart {
-       width: 95%;
-       height: 95%;
-     }
-  }
