@@ -95,7 +95,6 @@ class GraphTable extends React.Component{
 
 rateData = (start, end) => {
 
-  // const pageID = this.props.match.params.symbol;
   const url = 'https://api.coinmarketcap.com/v1/ticker/?start='+start+'&limit='+end+'';
 
   fetch(url).then( r => r.json())

@@ -24,7 +24,7 @@ class Routes extends React.Component{
           <Route path="/browseico" component={BrowseICO} />
           <Route path="/about" component={About} />
           <Route path="/publish" component={Publish} />
-          <Route path="/icoview" component={IcoView} />
+          <Route path="/icoview/:name/:live" component={IcoView} />
           <Route path="/market" component={Market} />
           <Route path="/exchanges" component={Exchange}/>
 

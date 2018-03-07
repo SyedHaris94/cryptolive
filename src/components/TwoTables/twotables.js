@@ -5,17 +5,16 @@ import { Link } from "react-router-dom";
 
 class TwoTable extends React.Component{
     render(){
+        
         return(
             <div>
                  {/* <!-- two-table section start --> */}
                 <section id="two-tables">
                     <div className="container">
                         <div className="row">
-
                             <div className="col-md-9 left-table table-responsive">
                                 <h4>TRENDING</h4>
-
-                                <Link to="/icoview"style={{ textDecoration: "none" }} >
+                                {/* <Link to="/icoview"style={{ textDecoration: "none" }} > */}
                                     <table className="table" >
                                         <thead className="table-head">
                                             <tr >
@@ -35,7 +34,7 @@ class TwoTable extends React.Component{
                                         </thead>
                                         <RowData1/>
                                     </table>
-                                </Link>
+                                {/* </Link> */}
                                 <div className="row">
                                         <div className="col-md-12">
                                             <Link to="/browseico"style={{ textDecoration: "none" }} >
@@ -64,9 +63,9 @@ class TwoTable extends React.Component{
                                     </Link>
                                 <div className="row">
                                     <div className="col-md-12">
-                                    <Link to="/browseico"style={{ textDecoration: "none" }} >
-                                                <button type="button" className="btn btn-default btn-block table-button">VIEW ALL</button>
-                                    </Link>
+                                        <Link to="/browseico"style={{ textDecoration: "none" }} >
+                                            <button type="button" className="btn btn-default btn-block table-button">VIEW ALL</button>
+                                        </Link>
                                     </div>
                                 </div>
                 
@@ -110,7 +109,8 @@ class RowData1 extends React.Component{
               tabledata1.push({
                   name: marketData.ico.live[index].name,
                   image: marketData.ico.live[index].image,
-                  count: count
+                  count: count,
+                  live: 1
                 });
                 count++
             }
@@ -132,58 +132,65 @@ class RowData1 extends React.Component{
       
     
     render(){
-        const x = [];
-        let count = 0;
+        function gotoUrl(sym,live) {
+            return {
+              pathname: `/icoview/${sym}/${live}`
+            }
+          }
         return(
             <tbody>
             {console.log('dsdsd',this.state.tableData1)}
             {this.state.tableData1.map ? this.state.tableData1.map(
                             (m, v) => {
-                          const pageSym = m.symbol
+                          const pageSym = m.name
+                          const live = m.live
                           const img = m.name.toLowerCase();
-                          if (m.count <= 51){
+                          if (m.count <= 6){
                               return <tr key={m.count}>
-                                  <td style={{width: '20%' , textAlign: 'left'}} >
-                                           <img src={m.image}
-                                             imageParam= {pageSym} 
-                                              style={{width: '50%', height: '30%'}} className="pull-left"/>
-                                          <div style={{textAlign: 'left', marginLeft: '2px'}} class="pull-left"> {m.name}</div>
-                                  </td>
-                                  <td >
-                                      3.5
-                                  </td>
-                                  <td>
-                                      23
-                                  </td>
-                                  <td >
-                                      3.5
-                                  </td>
-                                  <td>
-                                      23
-                                  </td>
-                                  <td >
-                                      3.5
-                                  </td>
-                                  <td>
-                                      23
-                                  </td>
-                                  <td >
-                                      3.5
-                                  </td>
-                                  <td>
-                                      23
-                                  </td>
-                                  <td >
-                                      3.5
-                                  </td>
-                                  <td>
-                                      23
-                                  </td>
-                                  <td>
-                                  <i className="fa fa-facebook favicon-icons" aria-hidden="true">
-                                  </i>
-                                  <i className="fa fa-twitter favicon-icons" aria-hidden="true"></i> 
-                                  </td>
+                                <Link to={gotoUrl(pageSym, live)} style={{ textDecoration: "none" }}>
+                                    <td style={{width: '10%' , textAlign: 'left'}} >
+                                        <img src={m.image}
+                                            imageParam= {pageSym} 
+                                            style={{width: '50%', height: '30%'}} className="pull-left"/>
+                                        <div style={{textAlign: 'left', marginLeft: '15px'}} class="pull-left"> {m.name}</div>
+                                    </td>
+                                </Link>
+                                    <td >
+                                        3.5
+                                    </td>
+                                    <td>
+                                        23
+                                    </td>
+                                    <td >
+                                        3.5
+                                    </td>
+                                    <td>
+                                        23
+                                    </td>
+                                    <td >
+                                        3.5
+                                    </td>
+                                    <td>
+                                        23
+                                    </td>
+                                    <td >
+                                        3.5
+                                    </td>
+                                    <td>
+                                        23
+                                    </td>
+                                    <td >
+                                        3.5
+                                    </td>
+                                    <td>
+                                        23
+                                    </td>
+                                    <td>
+                                    <i className="fa fa-facebook favicon-icons" aria-hidden="true">
+                                    </i>
+                                    <i className="fa fa-twitter favicon-icons" aria-hidden="true">
+                                    </i> 
+                                    </td>
                                   
                                 </tr>;
                           }
@@ -202,7 +209,7 @@ class RowData2 extends React.Component{
         super(props);
         
         this.state = {
-          tableData1: []
+          tableData2: []
         };
     
       }
@@ -211,20 +218,24 @@ class RowData2 extends React.Component{
 
         // const pageID = this.props.match.params.symbol;
         const url = 'https://api.icowatchlist.com/public/v1/upcoming';
-      
+        let count = 0;
+
         fetch(url).then( r => r.json())
           .then((marketData) => {
-            const tabledata1 = [];
+            const tabledata2 = [];
       
             for (let index in marketData.ico.upcoming){
-              tabledata1.push({
+              tabledata2.push({
                   name: marketData.ico.upcoming[index].name,
-                  image: marketData.ico.upcoming[index].image
+                  image: marketData.ico.upcoming[index].image,
+                  count: count,
+                  live: 0
                    });
+                   count++
             }
             
             this.setState({
-              tableData1: tabledata1,
+              tableData2: tabledata2,
             })
           })
           .catch((e) => {
@@ -239,30 +250,36 @@ class RowData2 extends React.Component{
       }
       
     
-    render(){
-        const x = [];
-        let count = 0;
+    render(){ 
+        function gotoUrl(sym, live) {
+            return {
+              pathname: `/icoview/${sym}/${live}`
+            }
+          }
         return(
             <tbody>
-            {console.log('dsdsd',this.state.tableData1)}
-            {this.state.tableData1.map ? this.state.tableData1.map(
+            {console.log('dsdsd',this.state.tableData2)}
+            {this.state.tableData2.map ? this.state.tableData2.map(
                             (m, v) => {
-                          const pageSym = m.symbol
+                          const pageSym = m.name
+                          const live = m.live
                           const img = m.name.toLowerCase();
+                          if (m.count <= 5){
                               return <tr key={v}>
-                                    {/* <Link to={gotoUrl(pageSym)} style={{ textDecoration: "none" }}> */}
-                                    <td style={{width: '10%'}} >
-                                           <img src={m.image}
-                                             imageParam= {pageSym} 
-                                              style={{width: '50%', height: '30%'}}/>
-                                          <div class="pull-right"> {m.name}</div>
+                                <Link to={gotoUrl(pageSym, live)} style={{ textDecoration: "none" }}>
+                                    <td style={{width: '20%' , textAlign: 'left'}} >
+                                        <img src={m.image}
+                                            imageParam= {pageSym} 
+                                            style={{width: '50%', height: '30%'}} 
+                                            className="pull-left"/>
+                                        <div style={{textAlign: 'left', marginLeft: '2px'}} > {m.name}</div>
                                     </td>
-                                    {/* </Link> */}
+                                </Link>
                                   <td >
-                                      3.5
+                                    3.5
                                   </td>
                                   <td>
-                                      23
+                                    23
                                   </td>
                                   <td>
                                   <i className="fa fa-facebook favicon-icons" aria-hidden="true">
@@ -271,6 +288,7 @@ class RowData2 extends React.Component{
                                   </td>
                                   
                                 </tr>;
+                          }
                             }
                           ) : <div />}
             </tbody>

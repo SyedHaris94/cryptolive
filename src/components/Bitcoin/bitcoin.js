@@ -82,7 +82,7 @@ class Bitcoin extends React.Component{
         // for catching the API array
         let m = this.props.resdata;
         let urlParam = this.props.match.params.symbol;
-
+        // {console.log('parameters',this.props.resdata)}
         {console.log('parameters',this.props.match.params.symbol)}
         function gotoUrl(api, url) {
             let test = {};
