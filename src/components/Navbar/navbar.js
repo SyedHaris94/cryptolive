@@ -28,8 +28,8 @@ class Navbar extends React.Component{
                               <a id="dark-theme" className="style-changer" href="#">
                                   <i className="fa fa-2x fa-moon-o" aria-hidden="true"></i>
                               </a>
-                              <a href="login.html">LOGIN</a>
-                                  <a href="login.html">SIGN UP</a>
+                              <Link to='auth' style={{textDecoration: 'none'}}>LOGIN</Link>
+                                  <Link to='auth' style={{textDecoration: 'none'}}>SIGN UP</Link>
                         </div>
                       </div>
                   </div>

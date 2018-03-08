@@ -28,6 +28,9 @@ import energy from '../../img/energy.png'
 
 class RightIcoPanel extends React.Component{
     render(){
+        // const nameParam = this.props.match.params.name;
+        // const liveParam = this.props.match.params.live;
+
         return(
             <div>
                 {/* <!-- RIGHT ICO PANELS START --> */}

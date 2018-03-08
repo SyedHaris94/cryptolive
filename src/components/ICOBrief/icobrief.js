@@ -8,22 +8,18 @@ import medicalblck from '../../icons/Screen Shot 2018-02-15 at 7.29.17 PM.png'
 class IcoBrief extends React.Component{
 
     constructor(props) {
-            
         super(props);
-        
         this.state = {
-          icoData: [],
-          days: 0,
-          hours: 0,
-          minutes: 0,
-          seconds: 0,
-        //   deadline: this.props.deadline,
-        deadline: ''
+            icoData: [],
+            days: 0,
+            hours: 0,
+            minutes: 0,
+            seconds: 0,
+            deadline: ''
         };
-    
       }
 
-      handleDeadline = (deadlineValue) => {
+    handleDeadline = (deadlineValue) => {
         this.setState({deadline: deadlineValue});
     }
 
@@ -63,24 +59,20 @@ class IcoBrief extends React.Component{
       }
 
 
-      componentWillMount() {
+    componentWillMount() {
         this.getTimeUntil(this.state.deadline);
     }
      
       
-      componentDidMount() {
-        console.log('sdasdfsgf',this.handleDeadline)
-
-        console.log('did mount run', this.props.time)
+    componentDidMount() {
         this.rateData();
-
         setInterval(() => this.getTimeUntil(this.state.deadline), 1000);
         {console.log('deadline',this.state.deadline)}
 
         }
         leading0(num) {
             return num < 10 ? '0' + num : num;
-        }
+        }                                                                                                                                                                             
         
         getTimeUntil(deadline) {
             const time = Date.parse(deadline) - Date.parse(new Date());
@@ -97,11 +89,13 @@ class IcoBrief extends React.Component{
                 this.setState({ days, hours, minutes, seconds });
             }
 
+            let m = this.state.icoData;
+            const nameParam = this.props.namePram;
+            const liveParam = this.props.livePram;      
+
             const gotoUrl = (api, url) => {
                 let test = {};
-    
-    
-                
+              
                 m.map((m, v) => {    
                     
                     if (nameParam == m.name) {
@@ -125,7 +119,7 @@ class IcoBrief extends React.Component{
                 deadline: pageParam.end_time
             })
             
-        }
+    }
 
     render(){
         let m = this.state.icoData;
@@ -134,11 +128,7 @@ class IcoBrief extends React.Component{
 
         function gotoUrl(api, url) {
             let test = {};
-
-
-            
-            m.map((m, v) => {    
-                
+            m.map((m, v) => {                  
                 if (nameParam == m.name) {
                     test.name = m.name;
                     test.image = m.image;
@@ -149,58 +139,38 @@ class IcoBrief extends React.Component{
                     test.end_time = m.end_time;
                     test.timezone = m.timezone;
                 }
-
             });
-
             return test;
         }
 
         let pageParam = gotoUrl(m, nameParam);
-
-        // var a = new Date(pageParam.end_time);
-        // var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-        // var year = a.getFullYear();
-        // var month = months[a.getMonth()];
-        // var date = a.getDate();
-        // var hour = a.getHours();
-        // var min = a.getMinutes();
-        // var sec = a.getSeconds();
-        // var time = date + ' ' + month + ' ' + year ;
-
-
         let date = pageParam.end_time
         console.log('time',date)
         
-        // console.log('avc',a)
         return(
             <div>
                 {/* <!-- MEDICAL STARTS --> */}
-                {/* {console.log('sdsda',pageParam)} */}
                 <section id="ico-stats-brief">
                     <div className="container" >
                         <div className="row">
                             <div className="col-md-6">
                                 <div className="row" style={{marginBottom: '50px'}}>
                                     <div className="col-md-3 col-xs-3" style={{paddingTop: '25px'}}>
-                                    <img src={pageParam.image}
-                                    style={{width: '100%', height: '40%'}} className="pull-left"/>
-                                    {/* <img src={medicalchain} className="img-responsive" alt="ico-logo"/> */}
-
+                                        <img src={pageParam.image}
+                                        style={{width: '100%', height: '40%'}} className="pull-left"/>
                                     </div>
                                     <div className="col-md-9 col-xs-9 medicalchain">
                                         <h3>{pageParam.name} <span className="premium-icon" style={{letterSpacing: '3px'}}>PREMIUM</span></h3>
                                         <p>{pageParam.description}</p>
                                     </div>
                                 </div>
-
                                 <div className="row">
-                                    <div className="col-md-3 launch-card" ><h3>{this.leading0(this.state.days)} <br /><span>Days</span></h3></div>
-                                    <div className="col-md-3 launch-card"><h3>{this.leading0(this.state.hours)} <br /><span>Hours</span></h3></div>
-                                    <div className="col-md-3 launch-card"><h3>{this.leading0(this.state.minutes)} <br /><span>Minutes</span></h3></div>
-                                    <div className="col-md-2 launch-card"><h3>{this.leading0(this.state.seconds)}  <br /><span>Seconds</span></h3></div>
+                                    <div className="col-md-3 launch-card" ><h3>{this.leading0(this.state.days)} <br/><span>Days</span></h3></div>
+                                    <div className="col-md-3 launch-card"><h3>{this.leading0(this.state.hours)} <br/><span>Hours</span></h3></div>
+                                    <div className="col-md-3 launch-card"><h3>{this.leading0(this.state.minutes)} <br/><span>Minutes</span></h3></div>
+                                    <div className="col-md-2 launch-card"><h3>{this.leading0(this.state.seconds)}  <br/><span>Seconds</span></h3></div>
                                 </div>
                             </div>
-
                             <div className="col-md-6">
                                 <img className="img-responsive medical-img-wh" src={medicalwhite} alt="logo"/>
                                 <img className="img-responsive medical-img-blck" src={medicalblck} alt="logo"/>

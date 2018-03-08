@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 
-import {Home, IcoPage, Bitcoin, BrowseICO, Exchange, Market, IcoView, About, Publish,} from '../components';
+import {Home, IcoPage, Bitcoin, BrowseICO, Exchange, Market, IcoView, About, Publish,Auth} from '../components';
 
 // for tables temporary
 import {GraphTable, Table2, Table3, Table4, Table5, Table6, Table7,Table8, Table9, Table10} from '../components';
@@ -27,6 +27,7 @@ class Routes extends React.Component{
           <Route path="/icoview/:name/:live" component={IcoView} />
           <Route path="/market" component={Market} />
           <Route path="/exchanges" component={Exchange}/>
+          <Route path="/auth" component={Auth}/>
 
 
           {/* tables routes */}
