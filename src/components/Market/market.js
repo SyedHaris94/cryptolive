@@ -2,8 +2,6 @@ import React, {Component} from 'react'
 
 import {Navbar, Jumbo, FiveFeature, Middle,BottomCards, Footer } from '../index'
 
-
-
 class Market extends React.Component{
 
   
@@ -29,6 +27,7 @@ class MarketTable extends React.Component{
         super();
         this.state = {
             table : [],
+            isLoading: true
         }
     }
 
@@ -51,6 +50,7 @@ class MarketTable extends React.Component{
           
           this.setState({
             table: tabledata,
+            isLoading: false
           })
         })
         .catch((e) => {
@@ -70,6 +70,7 @@ class MarketTable extends React.Component{
     render(){
         return(
             <section id="graph-table">
+            
             <div className="container">
               <div className="row">
                 <table className="table">
@@ -81,15 +82,19 @@ class MarketTable extends React.Component{
                       <th>VOLUME</th>
                     </tr>
                   </thead>
+                  {this.state.isLoading ? <h1 style={{ marginLeft: '400px',textAlign: 'center', color: 'pink' }}>loading ...</h1> : 
+
                   <tbody>
                     {this.state.table.map(item => 
-                          <PriceVol
+                        
+                        <PriceVol
                             exId={item.id} 
                             exName={item.exchangeName}
                             exPair={item.pair}
                           />
                     )}
                   </tbody>
+                  }
                 </table>
               </div>
             </div>

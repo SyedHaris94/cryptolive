@@ -1,7 +1,25 @@
 import axios from 'axios';
-
 import { handleAction } from '../actions/handleaction';
+import * as DB from "../../firebase/firebase";
+
 export default class MiddleWare{
+
+
+    static LoginRequest(data) {
+        console.log("daadaa", data);
+        return dispatch => {
+          return DB.auth()
+            .signInWithEmailAndPassword(data.email, data.password)
+            .then(sent => {
+                           dispatch(handleAction.login(data));
+                            alert("successfully Login");
+              })
+            .catch(error => {
+              var errorMessage ="The email address or password you entered is not valid";
+              alert(errorMessage);
+            });
+        };
+    }
     
     static GetData = () => {
             return dispatch => {

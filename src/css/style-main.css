@@ -1750,8 +1750,49 @@ body {
   width: 1000px;
 }
 
+.fileInput
+  {
+  width: 250px;
+  border-bottom: 4px solid lightgray;
+  border-right: 4px solid lightgray;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  padding: 10px;
+  margin-left: 10px;
+  margin-top: 20px;
+  cursor: pointer;
+  }
 
-  
+  .submitButton
+{  padding: 12px;
+  margin-top: 10px;
+  margin-left: 10px;
+  background: white;
+  border: 4px solid lightgray;
+  border-radius: 15px;
+  font-weight: 700;
+  font-size: 10pt;
+  cursor: pointer; 
+  background: #efefef;
+}
+
+.previewText
+  {
+  width: 100%;
+  margin-top: 10px;
+  margin-left: 5px
+  }
+
+.centerText
+{
+  text-align: center;
+  width: 500px;
+}  
+.img-circle{
+  padding-top: 15px
+}
+
+
   /*MEDIA QUERIES for SM*/
   @media(max-width: 1200px) {
   

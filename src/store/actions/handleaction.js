@@ -14,65 +14,77 @@ export class handleAction {
     static TABLEGRAPH = 'TABLEGRAPH';
 
 
-
-static getData1 = (payload) => ({
-    type: handleAction.GETDATA_1,
-    payload
-})
-
-static getData2 = (payload) => ({
-    type: handleAction.GETDATA_2,
-    payload
-})
-static getData3 = (payload) => ({
-    type: handleAction.GETDATA_3,
-    payload
-})
-static getData4 = (payload) => ({
-    type: handleAction.GETDATA_4,
-    payload
-})
-static getData5 = (payload) => ({
-    type: handleAction.GETDATA_5,
-    payload
-})
-static getData6 = (payload) => ({
-    type: handleAction.GETDATA_6,
-    payload
-})
-static getData7 = (payload) => ({
-    type: handleAction.GETDATA_7,
-    payload
-})
-static getData8 = (payload) => ({
-    type: handleAction.GETDATA_8,
-    payload
-})
-static getData9 = (payload) => ({
-    type: handleAction.GETDATA_9,
-    payload
-})
-static getData10 = (payload) => ({
-    type: handleAction.GETDATA_10,
-    payload
-})
+    static LOGIN = "LOGIN";
 
 
 
-static getGlobal = (payload) => ({
-    type: handleAction.GETGLOBAL,
-    payload
-})
+    static login = (payload) => ({
+        type: handleAction.LOGIN,
+        payload
+    })
+
+    // static login_success = (payload) => ({
+    //     type: handleAction.LOGIN_SUCCESS,
+    //     payload
+    // })
+
+    static getData1 = (payload) => ({
+        type: handleAction.GETDATA_1,
+        payload
+    })
+
+    static getData2 = (payload) => ({
+        type: handleAction.GETDATA_2,
+        payload
+    })
+    static getData3 = (payload) => ({
+        type: handleAction.GETDATA_3,
+        payload
+    })
+    static getData4 = (payload) => ({
+        type: handleAction.GETDATA_4,
+        payload
+    })
+    static getData5 = (payload) => ({
+        type: handleAction.GETDATA_5,
+        payload
+    })
+    static getData6 = (payload) => ({
+        type: handleAction.GETDATA_6,
+        payload
+    })
+    static getData7 = (payload) => ({
+        type: handleAction.GETDATA_7,
+        payload
+    })
+    static getData8 = (payload) => ({
+        type: handleAction.GETDATA_8,
+        payload
+    })
+    static getData9 = (payload) => ({
+        type: handleAction.GETDATA_9,
+        payload
+    })
+    static getData10 = (payload) => ({
+        type: handleAction.GETDATA_10,
+        payload
+    })
 
 
-static getCryptoDetail = (payload) => ({
-    type: handleAction.GETCRYPTODETAIL,
-    payload
-})
+    static getGlobal = (payload) => ({
+        type: handleAction.GETGLOBAL,
+        payload
+    })
 
-static getBitcoin = (payload) => ({
-    type: handleAction.GETBITCOIN,
-    payload
-})
+
+    static getCryptoDetail = (payload) => ({
+        type: handleAction.GETCRYPTODETAIL,
+        payload
+    })
+
+    static getBitcoin = (payload) => ({
+        type: handleAction.GETBITCOIN,
+        payload
+    })
 
 }

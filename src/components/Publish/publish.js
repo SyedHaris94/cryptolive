@@ -1,11 +1,24 @@
 import React, {Component} from 'react'
 import {Navbar, Footer} from '../index'
 
+import ImageUpload from './imageupload'
+import ProfilePage from './profile'
 // import images
 import needhelp from '../../icons/need-help-icon.png'
 import ganja from '../../icons/ganja.png'
 
 class Publish extends React.Component{
+    constructor(props){
+        super(props);
+        this.state={
+            firstName: '',
+            lastName: '',
+            password: '',
+            email: '',
+            contact: 0
+        }
+    }
+
     render(){
         return(
             <div>
@@ -21,12 +34,14 @@ class Publish extends React.Component{
 
                                     <div className="col-md-12 left-sidebar-logo">
                                         <h5>LOGO FOR ICO</h5>
-                                        <img src={ganja} style={{width: '80px'}} className="img-responsive img-circle center-block" alt="" />
+                                        <ImageUpload/>
+
+                                        {/* <img src={ganja} style={{width: '80px'}} className="img-responsive img-circle center-block" alt="" /> */}
                                         <label>ICO Name</label>
                                         <input type="name" className="form-control input"/>
 
                                     </div>
-
+                                    {/* <ProfilePage/> */}
                                     <div className="col-md-12 left-sidebar-need-help" align="center" >
                                         <div className="col-md-12">
                                             <img src={needhelp} style={{width: '30%', height:'100%'}} alt="" />
