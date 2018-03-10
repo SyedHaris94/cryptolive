@@ -28,6 +28,7 @@ import Description from './Description/description'
 import Market from './Market/market'
 import Exchange from './Exchanges/exchanges'
 import Auth from './auth/auth'
+import Rating from './Rating/rating'
 
 // graph tables
 import TableData from './GraphTable/graphtable'
@@ -71,6 +72,7 @@ export{
     Exchange,
     Market,
     Auth,
+    Rating,
     Table2, Table3, Table4, Table5, Table6, Table7, Table8, Table9, Table10
 
 }

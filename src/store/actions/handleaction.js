@@ -15,18 +15,35 @@ export class handleAction {
 
 
     static LOGIN = "LOGIN";
+    static SIGNUP = "SIGNUP";
 
-
+    static SENDRATING = "SENDRATING";
+    static GETRATING = "GETRATING"
 
     static login = (payload) => ({
         type: handleAction.LOGIN,
         payload
     })
 
-    // static login_success = (payload) => ({
-    //     type: handleAction.LOGIN_SUCCESS,
-    //     payload
-    // })
+    static signup = (payload) => ({
+        type: handleAction.SIGNUP,
+        payload
+    })
+
+
+    static sendRating = (payload) => ({
+        type: handleAction.SENDRATING,
+        payload
+    })
+
+    
+    static getRating = (payload) => ({
+        type: handleAction.GETRATING,
+        payload
+    })
+
+
+
 
     static getData1 = (payload) => ({
         type: handleAction.GETDATA_1,

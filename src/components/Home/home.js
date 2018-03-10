@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Navbar, Jumbo, FiveFeature, Middle, TableData, HomePagination, BottomCards, Table2, Footer } from '../index'
+import {Navbar, Jumbo,Auth, FiveFeature, Middle, TableData, HomePagination, BottomCards, Table2, Footer } from '../index'
 
 
 class Home extends Component {
@@ -8,6 +8,7 @@ class Home extends Component {
       <div className="App">
             <Navbar/>   
             <Jumbo/>  
+            <Modal/>
             <FiveFeature/>
             <Middle/>
             <TableData/>
@@ -21,3 +22,21 @@ class Home extends Component {
 }
 
 export default Home;
+
+
+class Modal extends React.Component{
+  render(){
+    return(
+      <div>
+        {/* <!-- Modal --> */}
+        <div class="modal fade" id="myModal" role="dialog">
+          
+            {/* <!-- Modal content--> */}
+              <div class="modal-body">
+                <Auth/>
+              </div>
+            </div>
+        </div>
+    );
+  }
+}

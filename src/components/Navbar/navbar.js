@@ -6,6 +6,8 @@ import round from '../../icons/round.png'
 import logo from '../../img/logo.png'
 
 
+import Auth from '../auth/auth'
+
 // react-router
 import { Link } from "react-router-dom";
 
@@ -28,8 +30,9 @@ class Navbar extends React.Component{
                               <a id="dark-theme" className="style-changer" href="#">
                                   <i className="fa fa-2x fa-moon-o" aria-hidden="true"></i>
                               </a>
-                              <Link to='auth' style={{textDecoration: 'none'}}>LOGIN</Link>
-                                  <Link to='auth' style={{textDecoration: 'none'}}>SIGN UP</Link>
+                              <a data-toggle="modal" data-target="#myModal">LOGIN</a>
+                              {/* <Link to='auth' style={{textDecoration: 'none'}}>LOGIN</Link> */}
+                                  {/* <Link to='auth' style={{textDecoration: 'none'}}>SIGN UP</Link> */}
                         </div>
                       </div>
                   </div>
@@ -81,8 +84,7 @@ class Navbar extends React.Component{
                           
                       </ul>
                   </div>
-          
-              </div>
+            </div>
           </div>
       </section>
 

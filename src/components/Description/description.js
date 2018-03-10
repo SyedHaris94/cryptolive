@@ -5,7 +5,23 @@ import star from '../../icons/star.png'
 import ganja from '../../icons/ganja.png'
 import jasmine from '../../icons//jasmine.png'
 import arrowupblue from '../../icons/arrow-up-blue.png'
+
+
+import MiddleWare from "../../store//middleware/middleware";
+import { connect } from "react-redux";
+
+import {Rating} from '../index'
+
+
+
 class Description extends React.Component{
+  
+    componentDidMount() {
+        console.log("wilmount running",this.listState);
+        this.props.getList();
+      
+      }
+
     render(){
         return(
             <div>
@@ -97,12 +113,11 @@ class Description extends React.Component{
                                 </div>
                                 <div className="col-md-4">
                                     <div className="row col-md-12 steve" align="center" >
-                                    <h5 style={{paddingTop: '5px'}}><img src={star} alt="logo"/>
+                                        <h5 style={{paddingTop: '5px'}}><img src={star} alt="logo"/>
                                         FAVOURITE</h5>
                                     </div>
                                     <div  className="col-md-12 content" align="center">
                                         <img src={ganja} alt="logo"/>
-
                                         <p className="john">John Smith</p>
                                         <p className="enterpreneur">Enterpreneur, Blockchain business expert</p>
                                         <div  className="col-md-12 card-social " style={{color: 'grey'}}>
@@ -122,83 +137,115 @@ class Description extends React.Component{
                                         </div>
                                     </div>
                                     <div className="col-md-12 content">
-                                            <div>
-                        
-                                                {/* <!-- Nav tabs --> */}
-                                                <ul className="nav nav-tabs" role="tablist">
-                                                    <li role="presentation" className="active">
-                                                        <a href="#home" aria-controls="home" role="tab" data-toggle="tab">POSITIVE <span className="label label-default" style={{backgroundColor: '#35A0B3'}}>4</span></a>
-                                                    </li>
-                                                    <li role="presentation">
-                                                        <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">NEUTRAL <span className="label label-default" style={{backgroundColor: '#FAC728'}}>2</span></a>
-                                                    </li>
-                                                    <li role="presentation">
-                                                        <a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">NEGATIVE <span className="label label-default" style={{backgroundColor: '#d50026'}}>6</span></a>
-                                                    </li>
-                                                </ul>
-                        
-                                                {/* <!-- Tab panes --> */}
-                                                {/* <!-- <div className="tab-content">
-                                                    <div role="tabpanel" className="tab-pane active" id="home">...</div>
-                                                    <div role="tabpanel" className="tab-pane" id="profile">...</div>
-                                                    <div role="tabpanel" className="tab-pane" id="messages">...</div>
-                                                    <div role="tabpanel" className="tab-pane" id="settings">...</div>
-                                                </div> --> */}
-                        
-                                                <div className="col-lg-12 jasmine-content">
-                        
-                                                    <div style={{paddingTop: '10px'}} className="col-md-2 col-sm-2" >
-                                                        <img src={jasmine} alt="logo" />
-                                                    </div>
-                                                    <div className="col-md-8 col-sm-8 jasmine-color">
-                                                        <p>Jasmine Jones</p>
-                                                        <p> WePower provides access to  investments in the field of renewable energy.This project already
-                                                            has a working beta.
-                                                        </p>
-                                                    </div>
-                                                    <div  className="col-md-2 col-sm-2 right"><span className="label label-default" style={{marginLeft: '-14px'}}>4</span> <img src={arrowupblue} alt="logo"/></div>
-                                                </div>
-                                                
-                                                <div className="col-lg-12 jasmine-content">
-                                                    <div style={{paddingTop: '10px'}} className="col-md-2 col-sm-2" >
-                                                        <img src={jasmine} alt="logo" />
-                                                    </div>
-                                                    <div className="col-md-8 col-sm-8 jasmine-color">
-                                                        <p>Jasmine Jones</p>
-                                                        <p> WePower provides access to  investments in the field of renewable energy.This project already
-                                                            has a working beta.
-                                                        </p>
-                                                    </div>
-                                                    <div  className="col-md-2 col-sm-2 right"><span className="label label-default" style={{marginLeft: '-14px'}}>4</span> <img src={arrowupblue} alt="logo"/></div>
-                                                </div>
-                                                <div className="col-lg-12 jasmine-content">
-                        
-                                                    <div style={{paddingTop: '10px'}} className="col-md-2 col-sm-2" >
-                                                        <img src={jasmine} alt="logo" />
-                                                    </div>
-                                                    <div className="col-md-8 col-sm-8 jasmine-color">
-                                                        <p>Jasmine Jones</p>
-                                                        <p> WePower provides access to  investments in the field of renewable energy.This project already
-                                                            has a working beta.
-                                                        </p>
-                                                    </div>
-                                                             <div  className="col-md-2 col-sm-2 right"><span className="label label-default" style={{marginLeft: '-14px'}}>4</span> <img src={arrowupblue} alt="logo"/></div>
-                                                    </div>
+                                        {/* <!-- Nav tabs --> */}
+                                        <ul className="nav nav-tabs" role="tablist">
+                                            <li role="presentation" className="active">
+                                                <a href="#home" aria-controls="home" role="tab" data-toggle="tab">POSITIVE <span className="label label-default" style={{backgroundColor: '#35A0B3'}}>4</span></a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">NEUTRAL <span className="label label-default" style={{backgroundColor: '#FAC728'}}>2</span></a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">NEGATIVE <span className="label label-default" style={{backgroundColor: '#d50026'}}>6</span></a>
+                                            </li>
+                                        </ul>
+                
+                                        <div className="col-lg-12 jasmine-content">
+                
+                                            <div style={{paddingTop: '10px'}} className="col-md-2 col-sm-2" >
+                                                <img src={jasmine} alt="logo" />
+                                            </div>
+                                            <div className="col-md-8 col-sm-8 jasmine-color">
+                                                <p>Jasmine Jones</p>
+                                                <p> WePower provides access to  investments in the field of renewable energy.This project already
+                                                    has a working beta.
+                                                </p>
+                                            </div>
+                                            <div  className="col-md-2 col-sm-2 right"><span className="label label-default" style={{marginLeft: '-14px'}}>4</span> <img src={arrowupblue} alt="logo"/></div>
+                                        </div>
                                         
-                                                            </div>
-                                                    </div>
-                                                </div>
-                                                
-                                                
-                                                
-                            
+                                        <div className="col-lg-12 jasmine-content">
+                                            <div style={{paddingTop: '10px'}} className="col-md-2 col-sm-2" >
+                                                <img src={jasmine} alt="logo" />
+                                            </div>
+                                            <div className="col-md-8 col-sm-8 jasmine-color">
+                                                <p>Jasmine Jones</p>
+                                                <p> WePower provides access to  investments in the field of renewable energy.This project already
+                                                    has a working beta.
+                                                </p>
+                                            </div>
+                                            <div  className="col-md-2 col-sm-2 right"><span className="label label-default" style={{marginLeft: '-14px'}}>4</span> <img src={arrowupblue} alt="logo"/></div>
+                                        </div>
+                                        <div className="col-lg-12 jasmine-content">
+                
+                                        <div style={{paddingTop: '10px'}} className="col-md-2 col-sm-2" >
+                                            <img src={jasmine} alt="logo" />
+                                        </div>
+                                        <div className="col-md-8 col-sm-8 jasmine-color">
+                                            <p>Jasmine Jones</p>
+                                            <p> WePower provides access to  investments in the field of renewable energy.This project already
+                                                has a working beta.
+                                            </p>
+                                        </div>
+                                        <div  className="col-md-2 col-sm-2 right"><span className="label label-default" style={{marginLeft: '-14px'}}>4</span> <img src={arrowupblue} alt="logo"/></div>
+                                    </div>
+                                    <div className="col-md-12 col-sm-12 col-xs-12">
+                                            <button id="singlebutton" name="singlebutton" className="btn btn-order" data-toggle="modal" data-target="#myModal">Rate Here..</button>
+                                    </div>
+                                    <Modal/>
                             </div>
-                            </div>
-                    </section>
+                            </div>                     
+                        </div>
+                    </div>
+                      </section>
                 {/* <!-- DESCRIPTION ENDS --> */}
             </div>
         );
     }
 }
 
-export default Description;
+function mapStateToProps(state) {
+    return {
+    listState: state.getrating
+        // ambulanceState: state.AMBULANCE_LIST
+      };
+    }
+
+function mapDispatchToProps(dispatch) {
+    return {
+       getList: () => {
+            dispatch(MiddleWare.GetRating());
+          }
+      }
+    };
+
+export default connect(null,mapDispatchToProps) ( Description)
+
+
+class Modal extends React.Component{
+    render(){
+      return(
+        // <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      {/* <!-- Modal content--> */}
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title">Rating & Feedback</h3>
+        </div>
+        <div class="modal-body">
+            <Rating/>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+      );
+    }
+  }
+  

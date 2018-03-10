@@ -147,7 +147,7 @@ class IcoListingItem extends React.Component{
                             })
                         }
                     <div className="col-md-9" style={{marginTop: '10px', marginBottom:'10px'}}>
-                        <Link to="icoview">
+                        <Link to="browseico">
                             <div className="row">
                                 <button type="button" className="btn btn-default btn-block"style={{borderRadius:'1px'}} >VIEW ALL</button>
                             </div>
