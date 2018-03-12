@@ -19,10 +19,6 @@ class IcoBrief extends React.Component{
         };
       }
 
-    handleDeadline = (deadlineValue) => {
-        this.setState({deadline: deadlineValue});
-    }
-
       rateData = () => {
 
         // const pageID = this.props.match.params.name;
@@ -67,7 +63,7 @@ class IcoBrief extends React.Component{
     componentDidMount() {
         this.rateData();
         setInterval(() => this.getTimeUntil(this.state.deadline), 1000);
-        {console.log('deadline',this.state.deadline)}
+        // {console.log('deadline',this.state.deadline)}
 
         }
         leading0(num) {
@@ -92,7 +88,7 @@ class IcoBrief extends React.Component{
             let m = this.state.icoData;
             const nameParam = this.props.namePram;
             const liveParam = this.props.livePram;      
-
+            // {console.log('name icobrief', nameParam)}
             const gotoUrl = (api, url) => {
                 let test = {};
               
@@ -145,7 +141,7 @@ class IcoBrief extends React.Component{
 
         let pageParam = gotoUrl(m, nameParam);
         let date = pageParam.end_time
-        console.log('time',date)
+        // console.log('time',date)
         
         return(
             <div>

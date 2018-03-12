@@ -4,13 +4,15 @@ import { connect } from "react-redux";
 
 
 class Rating extends React.Component{
+
     constructor(){
         super();
         this.state = {
             selectedOption1: '1',
             selectedOption2: '1',
             selectedOption3: '1',
-            comment: ''
+            comment: '',
+            icoName: ''
         }
         this.handleTeamChange = this.handleTeamChange.bind(this);
         this.handleConceptChange = this.handleConceptChange.bind(this);
@@ -23,7 +25,16 @@ class Rating extends React.Component{
 
     }
 
-   
+   componentWillMount(){
+    // let rateICo = this.props.rateIcoName
+    // console.log('rate', rateICo)
+    // this.setState({
+    //     // icoName: this.props.rateIcoName,
+    //     icoName: rateICo
+    // })
+    // console.log('ico-Name', this.state.icoName)
+       
+   }
 
     
     handleTeamChange (changeEvent) {
@@ -51,11 +62,14 @@ class Rating extends React.Component{
 
     handleFormSubmit (ev) {
         ev.preventDefault();
+        let rateICo = this.props.rateIcoName
+        console.log('rate', rateICo)
         let rating = {
             comment : this.state.comment,
             Team: this.state.selectedOption1,
             Concept: this.state.selectedOption2,
-            Whitepaper: this.state.selectedOption3
+            Whitepaper: this.state.selectedOption3,
+            icoName: rateICo
 
         }
         console.log("rating info", rating);
@@ -68,8 +82,11 @@ class Rating extends React.Component{
     }
 
     render(){
+        // let rateICo = this.props.rateIcoName
+        // console.log('rateico', rateICo)
         return(
             <div>
+                
                    
                     <div class="form-group">
                         <h4>Team</h4>
@@ -90,7 +107,6 @@ class Rating extends React.Component{
                                 <input type="radio" value="5" checked={this.state.selectedOption1 === '5'} onChange={this.handleTeamChange} />  5
                             </label>
                     
-
                         <h4>Concept</h4>
                       
                         <label class="radio-inline">
@@ -145,7 +161,7 @@ class Rating extends React.Component{
 function mapDispatchToProps(dispatch) {
     return {
       sendingData: rate => {
-        dispatch(MiddleWare.sendRating(rate));
+        dispatch(MiddleWare.SendRating(rate));
         },
       }
     };

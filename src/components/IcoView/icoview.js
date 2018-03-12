@@ -4,8 +4,8 @@ import {Navbar, IcoBrief, SocailIcon, VideoTable, Suscribe, Description, Footer}
 
 class IcoView extends React.Component{
     render(){
-        const nameParam = this.props.match.params.name;
-        const liveParam = this.props.match.params.live;
+        let nameParam = this.props.match.params.name;
+        let liveParam = this.props.match.params.live;
 
         return(
             <div>
@@ -17,7 +17,10 @@ class IcoView extends React.Component{
                 <SocailIcon/>
                 <VideoTable/>
                 <Suscribe/>
-                <Description/>            
+                <Description 
+                    icoNameParam = {nameParam}
+                    // livePram = {liveParam}
+                />            
                 <Footer/>
             </div>
         );

@@ -17,12 +17,14 @@ import {Rating} from '../index'
 class Description extends React.Component{
   
     componentDidMount() {
-        console.log("wilmount running",this.listState);
-        this.props.getList();
+      // console.log("wilmount running",this.listState);
+        // this.props.getList();
       
       }
 
     render(){
+        let icoparam = this.props.icoNameParam
+        {console.log('asdasdger',icoparam)}        
         return(
             <div>
                 {/* <!-- DESCRIPTION STARTS --> */}
@@ -192,7 +194,7 @@ class Description extends React.Component{
                                     <div className="col-md-12 col-sm-12 col-xs-12">
                                             <button id="singlebutton" name="singlebutton" className="btn btn-order" data-toggle="modal" data-target="#myModal">Rate Here..</button>
                                     </div>
-                                    <Modal/>
+                                    <Modal modalParam = {icoparam}/>
                             </div>
                             </div>                     
                         </div>
@@ -204,26 +206,29 @@ class Description extends React.Component{
     }
 }
 
-function mapStateToProps(state) {
-    return {
-    listState: state.getrating
-        // ambulanceState: state.AMBULANCE_LIST
-      };
-    }
+// function mapStateToProps(state) {
+//     return {
+//     listState: state.getrating
+//         // ambulanceState: state.AMBULANCE_LIST
+//       };
+//     }
 
-function mapDispatchToProps(dispatch) {
-    return {
-       getList: () => {
-            dispatch(MiddleWare.GetRating());
-          }
-      }
-    };
+// function mapDispatchToProps(dispatch) {
+//     return {
+//        getList: () => {
+//             dispatch(MiddleWare.GetRating());
+//           }
+//       }
+//     };
 
-export default connect(null,mapDispatchToProps) ( Description)
+export default ( Description)
 
 
 class Modal extends React.Component{
+    
     render(){
+        let modal = this.props.modalParam
+        {console.log('modal',modal)}
       return(
         // <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
@@ -236,7 +241,7 @@ class Modal extends React.Component{
           <h3 class="modal-title">Rating & Feedback</h3>
         </div>
         <div class="modal-body">
-            <Rating/>
+            <Rating rateIcoName = {modal}/>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

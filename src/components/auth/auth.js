@@ -78,7 +78,7 @@ class Auth extends React.Component{
     signupUser = e => {
         e.preventDefault();
         let obj = {
-          name: this.state.user.firstName + this.state.user.lastName,
+          name: this.state.firstName + this.state.lastName,
         // name: this.state.name,
           email: this.state.email,
           password: this.state.password,

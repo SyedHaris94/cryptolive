@@ -33,15 +33,15 @@ export default class MiddleWare{
                        const ref = DB.database.ref("User/" + send.uid);
                                ref.set(
                                  {
-                                   uid:
+                                    uid:
                                      send.uid,
-                                   name:
+                                    name:
                                      data.name,
-                                   email:
+                                    email:
                                      data.email,
-                                   role:
-                                     "User"
-                                   // contactNum: data.contactNum,
+                                    role:
+                                     "User",
+                                     contactNum: data.contactNum,
                                  },
                                  success => {
                                    dispatch(
@@ -51,7 +51,7 @@ export default class MiddleWare{
                                            data.name,
                                          email:
                                            data.email,
-                                         // contactNum: data.contactNum,
+                                           contactNum: data.contactNum,
                                          role:
                                            "User"
                                        }
@@ -60,9 +60,9 @@ export default class MiddleWare{
                                      alert(
                                        "successfully signup"
                                      );
-                                   route.push(
-                                     "/auth"
-                                   );
+                                //    route.push(
+                                //      "/auth"
+                                //    );
                                  }
                                );
                       })
@@ -73,10 +73,42 @@ export default class MiddleWare{
 
       static SendRating(data) {
         console.log("send data", data);
+       
         return dispatch => {
+          let user = DB.auth.currentUser;
           let database = DB.database.ref("User/Rating")
-          database.push(data);
-          dispatch(handleAction.sendRating(data));
+          database.push(
+            {
+                uid:
+                user.uid,
+                comment:
+                data.comment,
+                Team:
+                data.Team,
+                Concept: data.Concept,
+                Whitepaper:data.Whitepaper,
+                icoName: data.icoName
+            },
+            success => {
+              dispatch(
+                handleAction.sendRating(
+                  {
+                    comment:
+                      data.comment,
+                      Team:
+                      data.Team,
+                      Concept: data.Concept,
+                      Whitepaper:data.Whitepaper,
+                      icoName: data.icoName
+                  }
+                )
+              ),
+                alert(
+                  "successfully rated"
+                );
+           
+            }
+          );
         };
       }
 
