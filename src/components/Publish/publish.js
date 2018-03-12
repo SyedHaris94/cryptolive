@@ -8,17 +8,7 @@ import needhelp from '../../icons/need-help-icon.png'
 import ganja from '../../icons/ganja.png'
 
 class Publish extends React.Component{
-    constructor(props){
-        super(props);
-        this.state={
-            firstName: '',
-            lastName: '',
-            password: '',
-            email: '',
-            contact: 0
-        }
-    }
-
+  
     render(){
         return(
             <div>

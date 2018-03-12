@@ -8,7 +8,7 @@ class Home extends Component {
       <div className="App">
             <Navbar/>   
             <Jumbo/>  
-            <Modal/>
+            <Auth/>
             <FiveFeature/>
             <Middle/>
             <TableData/>
@@ -24,19 +24,3 @@ class Home extends Component {
 export default Home;
 
 
-class Modal extends React.Component{
-  render(){
-    return(
-      <div>
-        {/* <!-- Modal --> */}
-        <div class="modal fade" id="myModal" role="dialog">
-          
-            {/* <!-- Modal content--> */}
-              <div class="modal-body">
-                <Auth/>
-              </div>
-            </div>
-        </div>
-    );
-  }
-}

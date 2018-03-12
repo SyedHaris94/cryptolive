@@ -5,7 +5,7 @@ import * as DB from "../../firebase/firebase";
 export default class MiddleWare{
 
 
-    static LoginRequest(data) {
+    static LoginRequest(data, route) {
         console.log("daadaa", data);
         return dispatch => {
           return DB.auth
@@ -13,7 +13,11 @@ export default class MiddleWare{
             .then(sent => {
                            dispatch(handleAction.login(data));
                             alert("successfully Login");
-              })
+                            // route.push(
+                            //     // "/icopage"
+                            //   )
+              }
+            )
             .catch(error => {
               var errorMessage ="The email address or password you entered is not valid";
               alert(errorMessage);
@@ -60,9 +64,9 @@ export default class MiddleWare{
                                      alert(
                                        "successfully signup"
                                      );
-                                //    route.push(
-                                //      "/auth"
-                                //    );
+                                   route.push(
+                                     "/"
+                                   );
                                  }
                                );
                       })
@@ -79,26 +83,21 @@ export default class MiddleWare{
           let database = DB.database.ref("User/Rating")
           database.push(
             {
-                uid:
-                user.uid,
-                comment:
-                data.comment,
-                Team:
-                data.Team,
+                uid: user.uid,
+                comment: data.comment,
+                Team: data.Team,
                 Concept: data.Concept,
-                Whitepaper:data.Whitepaper,
+                Whitepaper: data.Whitepaper,
                 icoName: data.icoName
             },
             success => {
               dispatch(
                 handleAction.sendRating(
                   {
-                    comment:
-                      data.comment,
-                      Team:
-                      data.Team,
+                    comment: data.comment,
+                      Team: data.Team,
                       Concept: data.Concept,
-                      Whitepaper:data.Whitepaper,
+                      Whitepaper: data.Whitepaper,
                       icoName: data.icoName
                   }
                 )

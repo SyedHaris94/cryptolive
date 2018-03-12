@@ -9,9 +9,9 @@ const initialState = {
 export default function (state= initialState, action) {
     switch(action.type){
         case handleAction.LOGIN:
-            return{... state, loggedIn: 'true', login: action.data}
-        case handleAction.SIGNUP:
-            return{... state, isregistered: 'true', signup: action.data}
+            return{... state, loggedIn: 'true' , login: action.payload}
+        // case handleAction.SIGNUP:
+        //     return{... state, isregistered: 'true', signup: action.payload}
         default: 
             return state
     }
