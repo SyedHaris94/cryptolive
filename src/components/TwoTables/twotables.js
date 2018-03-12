@@ -48,7 +48,7 @@ class TwoTable extends React.Component{
                 
                             <div className="col-md-3 right-table">
                                     <h4 className="grey-color">LAST MINUTE</h4>
-                                    <Link to="/icoview"style={{ textDecoration: "none" }} >
+                                    {/* <Link to="/icoview"style={{ textDecoration: "none" }} > */}
                                         <table className="table">
                                             <thead>
                                                 <tr>
@@ -60,7 +60,7 @@ class TwoTable extends React.Component{
                                             </thead>
                                             <RowData2/>
                                         </table>
-                                    </Link>
+                                    {/* </Link> */}
                                 <div className="row">
                                     <div className="col-md-12">
                                         <Link to="/browseico"style={{ textDecoration: "none" }} >
@@ -148,17 +148,17 @@ class RowData1 extends React.Component{
                           if (m.count <= 6){
                               return <tr key={m.count}>
                                 <Link to={gotoUrl(pageSym, live)} style={{ textDecoration: "none" }}>
-                                    <td style={{width: '10%' , textAlign: 'left'}} >
+                                    <td style={{width: '25%' , textAlign: 'left'}} >
                                         <img src={m.image}
                                             imageParam= {pageSym} 
-                                            style={{width: '50%', height: '30%'}} className="pull-left"/>
+                                            style={{width: '45%', height: '30%'}} className="pull-left"/>
                                         <div style={{textAlign: 'left', marginLeft: '15px'}} class="pull-left"> {m.name}</div>
                                     </td>
                                 </Link>
-                                    <td >
+                                    <td style={{width: '10%' , }} >
                                         3.5
                                     </td>
-                                    <td>
+                                    <td style={{width: '10%' , }} >
                                         23
                                     </td>
                                     <td >
@@ -267,7 +267,7 @@ class RowData2 extends React.Component{
                           if (m.count <= 5){
                               return <tr key={v}>
                                 <Link to={gotoUrl(pageSym, live)} style={{ textDecoration: "none" }}>
-                                    <td style={{width: '20%' , textAlign: 'left'}} >
+                                    <td style={{width: '30%' , textAlign: 'left'}} >
                                         <img src={m.image}
                                             imageParam= {pageSym} 
                                             style={{width: '50%', height: '30%'}} 
