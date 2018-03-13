@@ -45,92 +45,154 @@ class RightIcoPanel extends React.Component{
                                 <table className="table table-responsive">
 
                                     <tbody>
-                                        <tr>
+                                        <tr> 
                                             <td className="browse-td-bold">
-                                                <i style={{paddingRight: '15px',marginLeft: '-20px',color: '#1DA0B4'}} className="fa fa-ellipsis-v" aria-hidden="true"></i> <i style={{paddingRight: '15px'}} className="fa fa-desktop" aria-hidden="true"></i> Platform(814)
+                                                <a href="#">
+                                                    <i style={{paddingRight: '15px',marginLeft: '-20px',color: '#1DA0B4'}} className="fa fa-ellipsis-v" aria-hidden="true"></i> <i style={{paddingRight: '15px'}} className="fa fa-desktop" aria-hidden="true"></i> Platform(814)
+                                                </a>
                                             </td>
                                         </tr>
 
                                         <tr>
                                             <td>
-                                                <img src={crypto} alt="" /> Cryptocurrency(544)
+                                                <a href="#">
+                                                    <img src={crypto} alt="" /> Cryptocurrency(544)
+                                                </a>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <img src={business} alt="" /> Business Services(370)</td>
+                                                <a href="#">
+                                                    <img src={business} alt="" /> Business Services(370)
+                                                </a>
+                                            </td>
+                                                
                                         </tr>
                                         <tr>
                                             <td>
-                                                <img src={invest} alt="" /> Invesment(261)</td>
+                                                <a href="#">
+                                                    <img src={invest} alt="" /> Invesment(261)
+                                                </a>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <img src={software} alt="" /> Software(202)</td>
+                                                <a href="#">
+                                                    <img src={software} alt="" /> Software(202)
+                                                </a>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <img src={entertainment} alt="" /> Enternainment(117)</td>
+                                                <a href="#">
+                                                    <img src={entertainment} alt="" /> Enternainment(117)
+                                                </a>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <img src={internet}alt="" /> Internet(137)</td>
+                                                <a href="#">
+                                                    <img src={internet}alt="" /> Internet(137)
+                                                </a>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <img src={bank} alt="" /> Banking(132)</td>
+                                                <a href="#">
+                                                    <img src={bank} alt="" /> Banking(132)
+                                                </a>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <img src={infra} alt="" /> Infrastructure(104)</td>
+                                                <a href="#">
+                                                    <img src={infra} alt="" /> Infrastructure(104)
+                                                </a>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <img src={comm} alt="" /> Communication(88)</td>
+                                                <a href="#">
+                                                   <img src={comm} alt="" /> Communication(88) 
+                                                </a>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <img src={retail} alt="" /> Retail(88)</td>
+                                                <a href="#">
+                                                    <img src={retail} alt="" /> Retail(88)
+                                                </a>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <img src={media} alt="" /> Media(63)</td>
+                                                <a href="#">
+                                                    <img src={media} alt="" /> Media(63)
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td> 
+                                                <a href="#">
+                                                    <img src={casino} alt="" /> Casino & Gambling(63)
+                                                </a>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <img src={casino} alt="" /> Casino & Gambling(63)</td>
+                                                <a href="#">
+                                                    <img src={realstate} alt="" /> Real EState(57)
+                                                </a>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <img src={realstate} alt="" /> Real EState(57)</td>
+                                                <a href="#">
+                                                    <img src={health} alt="" /> Health(54)
+                                                </a>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <img src={health} alt="" /> Health(54)</td>
+                                                <a>
+                                                    <img src={manufac} alt="" /> Manufacturing(40)
+                                                </a>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <img src={manufac} alt="" /> Manufacturing(40)</td>
+                                                <a href="#">
+                                                    <img src={tour} alt="" /> Tourism(37)
+                                                </a>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <img src={tour} alt="" /> Tourism(37)</td>
+                                                <a href="#">
+                                                    <img src={sports} alt="" /> Sport(35)
+                                                </a>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <img src={sports} alt="" /> Sport(35)</td>
+                                                <a href="#">
+                                                    <img src={education} alt="" /> Education(29)
+                                                </a>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <img src={education} alt="" /> Education(29)</td>
+                                                <a href="#">
+                                                    <img src={energy} alt="" /> Energy(24)
+                                                </a>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <img src={energy} alt="" /> Energy(24)</td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <img src={comm} alt="" /> Other</td>
+                                                <a href="#">
+                                                    <img src={comm} alt="" /> Other
+                                                </a>
+                                            </td>
                                         </tr>
                                     </tbody>
 

@@ -17,6 +17,8 @@ export class handleAction {
     static LOGIN = "LOGIN";
     static SIGNUP = "SIGNUP";
 
+    static USERPROFILE = "USER PROFILE";
+
     static SENDRATING = "SENDRATING";
     static GETRATING = "GETRATING"
 
@@ -27,6 +29,11 @@ export class handleAction {
 
     static signup = (payload) => ({
         type: handleAction.SIGNUP,
+        payload
+    })
+
+    static userprofile = (payload) => ({
+        type: handleAction.USERPROFILE,
         payload
     })
 

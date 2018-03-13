@@ -47,7 +47,7 @@ class Middle extends React.Component{
                                 
                                 <div className="col-md-2 col-xs-2 global-market">        
                                     <h4>GLOBAL MARKET</h4>
-                                    <p><NumberFormat value={m.total_market_cap_usd} displayType={'text'} thousandSeparator={true} prefix={'$'} /></p>
+                                   <p><NumberFormat value={m.total_market_cap_usd} displayType={'text'} thousandSeparator={true} prefix={'$'} /></p>
                                 </div>
                                 
                                 <div className="col-md-1 col-xs-2 bitcoin-dominance-card">

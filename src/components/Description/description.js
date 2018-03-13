@@ -16,20 +16,20 @@ import {Rating} from '../index'
 
 class Description extends React.Component{
   
-    componentDidMount() {
-      // console.log("wilmount running",this.listState);
-        // this.props.getList();
-      
-      }
-
+    componentWillMount() {
+        console.log("wilmount running");
+        this.props.getList();
+        this.props.getUserList();
+    }
+         
     render(){
         let icoparam = this.props.icoNameParam
         {console.log('asdasdger',icoparam)}        
         return(
             <div>
                 {/* <!-- DESCRIPTION STARTS --> */}
-                    <section id="description">
-                        <div className="container">
+                    <section id="description" > 
+                        <div className="container" >
                             <div className="row">
                                 <div className="col-md-8 desc-card" >
                                     <div className="nav-border">
@@ -70,7 +70,6 @@ class Description extends React.Component{
                                         </div>
 
                                     </div>
-
                                     <div className="desc-border col-md-12">
                                         <div className="row">
                                                 <h3>About Medicalchain</h3>
@@ -88,7 +87,6 @@ class Description extends React.Component{
                                                     desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
 
                                                 </p>
-
                                                 <h3>Project Description</h3>
                                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
                                                     text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
@@ -138,7 +136,7 @@ class Description extends React.Component{
                                             <button id="singlebutton" name="singlebutton" className="btn btn-order">ORDER FULL LEGAL REVIEW</button>
                                         </div>
                                     </div>
-                                    <div className="col-md-12 content">
+                                    <div className="col-md-12 content" >
                                         {/* <!-- Nav tabs --> */}
                                         <ul className="nav nav-tabs" role="tablist">
                                             <li role="presentation" className="active">
@@ -151,22 +149,29 @@ class Description extends React.Component{
                                                 <a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">NEGATIVE <span className="label label-default" style={{backgroundColor: '#d50026'}}>6</span></a>
                                             </li>
                                         </ul>
-                
-                                        <div className="col-lg-12 jasmine-content">
-                
-                                            <div style={{paddingTop: '10px'}} className="col-md-2 col-sm-2" >
-                                                <img src={jasmine} alt="logo" />
-                                            </div>
-                                            <div className="col-md-8 col-sm-8 jasmine-color">
-                                                <p>Jasmine Jones</p>
-                                                <p> WePower provides access to  investments in the field of renewable energy.This project already
-                                                    has a working beta.
-                                                </p>
-                                            </div>
-                                            <div  className="col-md-2 col-sm-2 right"><span className="label label-default" style={{marginLeft: '-14px'}}>4</span> <img src={arrowupblue} alt="logo"/></div>
-                                        </div>
                                         
-                                        <div className="col-lg-12 jasmine-content">
+                                        {console.log("list", this.props.listState)}
+                                        {console.log("user list", this.props.userState)}
+                                        {/* {this.props.listState.map ? this.props.listState.map((m, v) => {
+                                                    return <div className="col-lg-12 jasmine-content" key={v}>
+                                                    {console.log('name', m.icoName)}
+                                                      <div style={{paddingTop: '10px'}} className="col-md-2 col-sm-2" >
+                                                          <img src={jasmine} alt="logo" />
+                                                      </div>
+                                                      <div className="col-md-8 col-sm-8 jasmine-color">
+                                                          <p>Jasmine Jones</p>
+                                                          <p> WePower provides access to  investments in the field of renewable energy.This project already
+                                                              has a working beta.
+                                                          </p>
+                                                      </div>
+                                                      <div  className="col-md-2 col-sm-2 right"><span className="label label-default" style={{marginLeft: '-14px'}}>4</span> <img src={arrowupblue} alt="logo"/></div>
+                                                  </div>;
+                                                }): 
+                                                <div className="alert alert-danger searchNoResult">
+                                                            Type the text and press <b>"Enter"</b> to add item.
+                                                </div>
+                                        } */}
+                                         <div className="col-lg-12 jasmine-content">
                                             <div style={{paddingTop: '10px'}} className="col-md-2 col-sm-2" >
                                                 <img src={jasmine} alt="logo" />
                                             </div>
@@ -178,50 +183,55 @@ class Description extends React.Component{
                                             </div>
                                             <div  className="col-md-2 col-sm-2 right"><span className="label label-default" style={{marginLeft: '-14px'}}>4</span> <img src={arrowupblue} alt="logo"/></div>
                                         </div>
-                                        <div className="col-lg-12 jasmine-content">
-                
-                                        <div style={{paddingTop: '10px'}} className="col-md-2 col-sm-2" >
-                                            <img src={jasmine} alt="logo" />
+                                        {/*<div className="col-lg-12 jasmine-content">
+                                            <div style={{paddingTop: '10px'}} className="col-md-2 col-sm-2" >
+                                                <img src={jasmine} alt="logo" />
+                                            </div>
+                                            <div className="col-md-8 col-sm-8 jasmine-color">
+                                                <p>Jasmine Jones</p>
+                                                <p> WePower provides access to  investments in the field of renewable energy.This project already
+                                                    has a working beta.
+                                                </p>
+                                            </div>
+                                            <div  className="col-md-2 col-sm-2 right"><span className="label label-default" style={{marginLeft: '-14px'}}>4</span> <img src={arrowupblue} alt="logo"/></div>
+                                        </div> */}
+                                        <div className="col-md-12 col-sm-12 col-xs-12">
+                                                <button id="singlebutton" name="singlebutton" className="btn btn-order" data-toggle="modal" data-target="#myModal">Rate Here..</button>
                                         </div>
-                                        <div className="col-md-8 col-sm-8 jasmine-color">
-                                            <p>Jasmine Jones</p>
-                                            <p> WePower provides access to  investments in the field of renewable energy.This project already
-                                                has a working beta.
-                                            </p>
-                                        </div>
-                                        <div  className="col-md-2 col-sm-2 right"><span className="label label-default" style={{marginLeft: '-14px'}}>4</span> <img src={arrowupblue} alt="logo"/></div>
+                                          <Modal modalParam = {icoparam}/>
                                     </div>
-                                    <div className="col-md-12 col-sm-12 col-xs-12">
-                                            <button id="singlebutton" name="singlebutton" className="btn btn-order" data-toggle="modal" data-target="#myModal">Rate Here..</button>
-                                    </div>
-                                    <Modal modalParam = {icoparam}/>
+                                </div>                     
                             </div>
-                            </div>                     
                         </div>
-                    </div>
-                      </section>
+                    </section>
                 {/* <!-- DESCRIPTION ENDS --> */}
             </div>
         );
     }
 }
 
-// function mapStateToProps(state) {
-//     return {
-//     listState: state.getrating
-//         // ambulanceState: state.AMBULANCE_LIST
-//       };
-//     }
+function mapStateToProps(state) {
+    return {
+    listState: state.RateReducer.getrate,
+    userState: state.AuthReducer.profile,
 
-// function mapDispatchToProps(dispatch) {
-//     return {
-//        getList: () => {
-//             dispatch(MiddleWare.GetRating());
-//           }
-//       }
-//     };
+      };
+    }
+  
+    
+function mapDispatchToProps(dispatch) {
+    return {
+        getList: () => {
+        dispatch(MiddleWare.GetRating());
+        },
+        getUserList: () => {
+            dispatch(MiddleWare.UserProfile());
+        }
+    }
+};
+    
 
-export default ( Description)
+export default connect(mapStateToProps,mapDispatchToProps)( Description)
 
 
 class Modal extends React.Component{

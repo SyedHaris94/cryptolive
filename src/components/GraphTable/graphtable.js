@@ -25,23 +25,15 @@ constructor(props){
   this.state = {
   }
 }
-
-  // componentDidMount() {
-  //   setTimeout(function() { this.setState({isLoading: false}); }.bind(this), 10000);
-  // }
   
   render(){
-    // let pageLoading = this.state.isLoading;
     
     const pageData = this.props.tableData
-   return(
+    return(
     
     <div>
 
-        <section id="graph-table" >
-{console.log('pagy',pageData)
-} 
-      
+        <section id="graph-table" >    
           <div className="container">
                   <div className="row">
                     <table className="table">
@@ -146,7 +138,7 @@ componentDidMount() {
         return (
             
             <tbody>
-                {console.log('page data ',pageData )}
+                {/* {console.log('page data ',pageData )} */}
                   {/* <!-- GRAPH TABLE STARTS--> */}
                   {this.state.isLoading ? <h1 style={{ marginLeft: '400px',textAlign: 'center', color: 'pink' }}>loading ...</h1> : 
                            this.state.tableData.map(
@@ -264,7 +256,7 @@ class ImageChart extends React.Component{
           const p = this.props.page
           this.ImageApi(imgProp)
           // console.log(imgProp)
-          console.log('table data', p);
+          // console.log('table data', p);
         }
           
       
@@ -272,7 +264,7 @@ class ImageChart extends React.Component{
                   const x = [];
                   return(
                     <div>
-                      {console.log('dfdsdsawrerf',this.state.mainCurData)}
+                      {/* {console.log('dfdsdsawrerf',this.state.mainCurData)} */}
                       {this.state.mainCurData.map((item) => {
                         x.push(
                           Math.round(item.high , item.low)
@@ -302,41 +294,41 @@ class ImageChart extends React.Component{
   }
 
 
-  class TablePagination extends React.Component{
-    constructor(props) {
-      super(props);
-      this.state = {
-        activePage: 1
-      };
-      this.handlePageChange = this.handlePageChange.bind(this)
-    }
+  // class TablePagination extends React.Component{
+  //   constructor(props) {
+  //     super(props);
+  //     this.state = {
+  //       activePage: 1
+  //     };
+  //     this.handlePageChange = this.handlePageChange.bind(this)
+  //   }
 
-  handlePageChange(pageNumber) {
-  console.log(`active page is ${pageNumber}`);
-  this.setState({activePage: pageNumber});
-  }
+  // handlePageChange(pageNumber) {
+  // console.log(`active page is ${pageNumber}`);
+  // this.setState({activePage: pageNumber});
+  // }
 
 
-    render(){
-      return(
-        <div>
-          {/* <!-- HOME PAGINATION --> */}
-          {/* <section id="homepage-pagination">
-              <div className="col-md-12" align="center">
-                  <Pagination
-                  activePage={this.state.activePage}
-                  itemsCountPerPage={50}
-                  totalItemsCount={450}
-                  pageRangeDisplayed={5}
-                  onChange={this.handlePageChange}
-                   />
-              </div>
-            </section> */}
-            {/* <!-- HOME PAGINATION ENDS --> */}
-        </div>
-      );
-    }
-  }
+  //   render(){
+  //     return(
+  //       <div>
+  //         {/* <!-- HOME PAGINATION --> */}
+  //         {/* <section id="homepage-pagination">
+  //             <div className="col-md-12" align="center">
+  //                 <Pagination
+  //                 activePage={this.state.activePage}
+  //                 itemsCountPerPage={50}
+  //                 totalItemsCount={450}
+  //                 pageRangeDisplayed={5}
+  //                 onChange={this.handlePageChange}
+  //                  />
+  //             </div>
+  //           </section> */}
+  //           {/* <!-- HOME PAGINATION ENDS --> */}
+  //       </div>
+  //     );
+  //   }
+  // }
   
 
 

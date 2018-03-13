@@ -61,12 +61,13 @@ export default class MiddleWare{
                                        }
                                      )
                                    ),
+                                   route.push(
+                                    "/"
+                                  );
                                      alert(
                                        "successfully signup"
                                      );
-                                   route.push(
-                                     "/"
-                                   );
+                                   
                                  }
                                );
                       })
@@ -75,6 +76,21 @@ export default class MiddleWare{
       }
     
 
+      static UserProfile() {
+        console.log("fetching user");
+        return dispatch => {
+        //   let user = DB.auth.currentUser;
+          let arrdata = [];
+          let dataabase = DB.database.ref("/User");
+          dataabase.on("value", object => {
+            let data = object.val();
+            for (var a in data) arrdata.push(data[a]);
+                dispatch(handleAction.userprofile(arrdata));   
+                console.log("fetched user profile", arrdata);
+            });
+        };
+      }
+    
       static SendRating(data) {
         console.log("send data", data);
        
@@ -118,14 +134,10 @@ export default class MiddleWare{
           let dataabase = DB.database.ref("/User/Rating/");
           dataabase.on("value", object => {
             let data = object.val();
-            // arrdata.push(data[a].ambulanceInfo);
             for (var a in data) arrdata.push(data[a]);
-    
-            dispatch(handleAction.getRating(arrdata));
-            // console.log("data", data)
-    
-            console.log("fetched data", arrdata);
-          });
+                dispatch(handleAction.getRating(arrdata));   
+                console.log("fetched data", arrdata);
+            });
         };
       }
     
@@ -135,7 +147,7 @@ export default class MiddleWare{
             return dispatch => {
                 axios.get('https://api.coinmarketcap.com/v1/ticker/?start=0&limit=150')
                 .then((res) => {
-                    console.log("response of getting data req", res.data)
+                    // console.log("response of getting data req", res.data)
                     dispatch(handleAction.getData1(res.data))
                 })
                 .catch((err) => {
@@ -149,7 +161,7 @@ export default class MiddleWare{
             return dispatch => {
                 axios.get('https://api.coinmarketcap.com/v1/ticker/?start=150&limit=150')
                 .then((res) => {
-                    console.log("response of getting data req", res.data)
+                    // console.log("response of getting data req", res.data)
                     dispatch(handleAction.getData2(res.data))
                 })
                 .catch((err) => {
@@ -163,7 +175,7 @@ export default class MiddleWare{
             return dispatch => {
                 axios.get('https://api.coinmarketcap.com/v1/ticker/?start=300&limit=150')
                 .then((res) => {
-                    console.log("response of getting data req", res.data)
+                    // console.log("response of getting data req", res.data)
                     dispatch(handleAction.getData3(res.data))
                 })
                 .catch((err) => {
@@ -177,7 +189,7 @@ export default class MiddleWare{
             return dispatch => {
                 axios.get('https://api.coinmarketcap.com/v1/ticker/?start=450&limit=150')
                 .then((res) => {
-                    console.log("response of getting data req", res.data)
+                    // console.log("response of getting data req", res.data)
                     dispatch(handleAction.getData4(res.data))
                 })
                 .catch((err) => {
@@ -191,7 +203,7 @@ export default class MiddleWare{
             return dispatch => {
                 axios.get('https://api.coinmarketcap.com/v1/ticker/?start=600&limit=150')
                 .then((res) => {
-                    console.log("response of getting data req", res.data)
+                    // console.log("response of getting data req", res.data)
                     dispatch(handleAction.getData5(res.data))
                 })
                 .catch((err) => {
@@ -205,7 +217,7 @@ export default class MiddleWare{
             return dispatch => {
                 axios.get('https://api.coinmarketcap.com/v1/ticker/?start=750&limit=150')
                 .then((res) => {
-                    console.log("response of getting data req", res.data)
+                    // console.log("response of getting data req", res.data)
                     dispatch(handleAction.getData6(res.data))
                 })
                 .catch((err) => {
@@ -219,7 +231,7 @@ export default class MiddleWare{
             return dispatch => {
                 axios.get('https://api.coinmarketcap.com/v1/ticker/?start=900&limit=150')
                 .then((res) => {
-                    console.log("response of getting data req", res.data)
+                    // console.log("response of getting data req", res.data)
                     dispatch(handleAction.getData7(res.data))
                 })
                 .catch((err) => {
@@ -233,7 +245,7 @@ export default class MiddleWare{
             return dispatch => {
                 axios.get('https://api.coinmarketcap.com/v1/ticker/?start=1050&limit=150')
                 .then((res) => {
-                    console.log("response of getting data req", res.data)
+                    // console.log("response of getting data req", res.data)
                     dispatch(handleAction.getData8(res.data))
                 })
                 .catch((err) => {
@@ -247,7 +259,7 @@ export default class MiddleWare{
             return dispatch => {
                 axios.get('https://api.coinmarketcap.com/v1/ticker/?start=1200&limit=150')
                 .then((res) => {
-                    console.log("response of getting data req", res.data)
+                    // console.log("response of getting data req", res.data)
                     dispatch(handleAction.getData9(res.data))
                 })
                 .catch((err) => {
@@ -261,7 +273,7 @@ export default class MiddleWare{
             return dispatch => {
                 axios.get('https://api.coinmarketcap.com/v1/ticker/?start=1350&limit=200')
                 .then((res) => {
-                    console.log("response of getting data req", res.data)
+                    // console.log("response of getting data req", res.data)
                     dispatch(handleAction.getData10(res.data))
                 })
                 .catch((err) => {
@@ -273,7 +285,7 @@ export default class MiddleWare{
         return dispatch => {
             axios.get('https://api.coinmarketcap.com/v1/global/')
             .then((res) => {
-                console.log('response of getting global req', res.data)
+                // console.log('response of getting global req', res.data)
                 dispatch(handleAction.getGlobal(res.data))
             })
             .catch((err) => {
@@ -286,7 +298,7 @@ export default class MiddleWare{
         return dispatch => {
             axios.get('https://api.coinmarketcap.com/v1/ticker/?limit=1600')
             .then((res) => {
-                console.log('response of getting global req', res.data)
+                // console.log('response of getting global req', res.data)
                 dispatch(handleAction.getCryptoDetail(res.data))
             })
             .catch((err) => {
@@ -300,7 +312,7 @@ export default class MiddleWare{
         return dispatch => {
             axios.get('https://api.coinmarketcap.com/v1/ticker/bitcoin/')
             .then((res) => {
-                console.log('response of getting bitcoin page', res.data)
+                // console.log('response of getting bitcoin page', res.data)
                 dispatch(handleAction.getBitcoin(res.data))
             })
             .catch((err) => {

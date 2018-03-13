@@ -3,6 +3,8 @@
     flex-direction: column;
     align-items: center;
   
+    width: 100px;
+    /* left: 0px; */
     position: absolute;
     margin-left: -150px;
     padding: 5px;
@@ -17,6 +19,12 @@
   
 
 
+  @media(max-width: 800px) {
+    .hover {
+      width: 100px;
+      margin-left: -350px;
+     }
+  }
 /* 
    .hover {
     display: flex;

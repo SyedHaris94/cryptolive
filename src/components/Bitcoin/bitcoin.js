@@ -81,9 +81,10 @@ class Bitcoin extends React.Component{
     render(){
         // for catching the API array
         let m = this.props.resdata;
-        let urlParam = this.props.match.params.symbol;
         // {console.log('parameters',this.props.resdata)}
-        {console.log('parameters',this.props.match.params.symbol)}
+        
+        let urlParam = this.props.match.params.symbol;
+        // {console.log('parameters',this.props.match.params.symbol)}
         function gotoUrl(api, url) {
             let test = {};
 
@@ -123,9 +124,9 @@ class Bitcoin extends React.Component{
                 <section id="cp-heading">
                     <div className="container">
                         <div className="row">
-                        {console.log('asdasd', this.state.data)}
+                        {/* {console.log('asdasd', this.state.data)} */}
                             <div className="col-md-8 col-xs-8">
-                            {console.log('logo', this.props.imageParam)}
+                            {/* {console.log('logo', this.props.imageParam)} */}
                             <img src={"https://chasing-coins.com/api/v1/std/logo/"+this.props.match.params.symbol+""} className="pull-left img-responsive currency-icon" style={{width: '10%', height: '10%'}}/>
                                 {/* <img className="pull-left img-responsive currency-icon" src={BTC} alt="BTC-icon" /> */}
                                 <h2>{pageParam.name} <span>{pageParam.symbol}</span></h2>
@@ -232,7 +233,7 @@ class Bitcoin extends React.Component{
                     </div>
                 </section>
                 {/* <!--CURRENCY CHART ENDS--> */}
-                <TableData/>
+                <div id="bitcoin-table"> <TableData/> </div>
                 <BottomCards/>
                 <Footer/>
             </div>

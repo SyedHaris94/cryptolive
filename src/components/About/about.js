@@ -38,10 +38,7 @@ class About extends React.Component {
                      {/* <!-- About starts--> */}
                     <section id="about">
                         <div className="container ">
-                            <div className="col-md-6 col-sm-12 col-xs-12  pull-right talk-img" id="group-7" align="center">
-                                <img src={group7white} className="white-img" alt="logo"/>
-                                <img src={group7blck} className="black-img" alt="logo" style={{marginTop:'2rem'}} />
-                            </div>
+                           
                             <div className="col-md-6 col-sm-12 col-xs-12 talk-about">
                                 <h4>
                                     Talk About ICOs with like-minded people</h4>
@@ -49,6 +46,11 @@ class About extends React.Component {
                                     minima fuga ab veniam harum animi doloribus sapiente recusandae illo eveniet in voluptatibus voluptate
                                     voluptatum deserunt?
                                 </p>
+                            </div>
+
+                             <div className="col-md-6 col-sm-12 col-xs-12 talk-img" id="group-7" align="center">
+                                <img src={group7white} className="white-img" alt="logo"/>
+                                <img src={group7blck} className="black-img" alt="logo" style={{marginTop:'2rem'}} />
                             </div>
 
                         </div>
@@ -79,8 +81,8 @@ class About extends React.Component {
                     <section id="ask">
                         <div className="container ">
                             <div className="col-md-6  col-sm-12 col-xs-12 pull-right">
-                                <img src={group16white} alt="logo" className="white-img" style={{width:400}}/>
-                                <img src={group16blck} className="black-img" alt="logo" style={{width:400}}/>
+                                <img src={group16white} alt="logo" className="white-img" />
+                                <img src={group16blck} className="black-img" alt="logo" />
                                 {/* <!-- <img src="icons/about-page/Group 16.png" alt="logo" style="width: 100%; height: 100%" className=""> --> */}
                             </div>
                             <div className="col-md-6  col-sm-12 col-xs-12 questions">

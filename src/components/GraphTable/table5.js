@@ -112,7 +112,9 @@ class GraphTable extends React.Component{
     super(props);
     
     this.state = {
-      tableData: []
+      tableData: [],
+      isLoading: true
+
     };
 
   }
@@ -145,6 +147,7 @@ rateData = (start, end) => {
       
       this.setState({
         tableData: tabledata,
+        isLoading: false
       })
     })
     .catch((e) => {
@@ -166,72 +169,74 @@ componentDidMount() {
           }
           const pageData = this.state.tableData
            
-          return <tbody>
-          {console.log('page data ',pageData )}
-           {/* <!-- GRAPH TABLE STARTS--> */}
-                     {this.state.tableData.map ? this.state.tableData.map(
-                         (m, v) => {
-                       const pageSym = m.symbol
-                           return <tr key={v}>
-                               <td className="td-border">
-                                 {m.rank}
-                               </td>
-                               <td style={{ width: "15%" }}>
-                                 <Link to={gotoUrl(pageSym)} style={{ textDecoration: "none" }}>
-                                 <td style={{width: '20%' , textAlign: 'left'}} >
-                                        <img src={"https://chasing-coins.com/api/v1/std/logo/"+pageSym+""} className="pull-left"
-                                           style={{width: '20%', }}/>
-                                       <div style={{textAlign: 'left', paddingTop: '5px', marginLeft: '10px'}} class="pull-left"> {m.name} {m.symbol}  </div>
-                                 </td>
-                                
-                                 </Link>
-                               </td>
-                               <td className="graph-td-green">
-                                 ${m.price_usd.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                                 <i className="fa fa-caret-up" aria-hidden="true" style={{ paddingLeft: "5px" }} />
-                               </td>
-                               <td>
-                                 ${
-                                   m.market_cap_usd.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                                 }
-                               </td>
-                               <td>
-                                 ${
-                                  m.volume_usd.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                                 }
-                               </td>
-                               <td>
-                                 {
-                                   m.available_supply.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                                 }
-                               </td>
-                               <td className="graph-td-red-1">
-                                 {m.percent_change_1h}%
-                                 <i className="fa fa-caret-down" aria-hidden="true" style={{ paddingLeft: "5px" }} />
-                               </td>
-                               <td className="graph-td-red-1">
-                                 {m.percent_change_24h}%
-                                 <i className="fa fa-caret-down" aria-hidden="true" style={{ paddingLeft: "5px" }} />
-                               </td>
-                               <td>
-                               <ImageChart 
-                                 imgNumbers={m.symbol}
-                                 page={pageData}
-                               />
-
-                               {/* <HomePagination
-                                 imgNumbers={m.symbol}
-                                 page={pageData}
-                               /> */}
-
-                                 {m.percent_change_7d}%
-                                 <i className="fa fa-caret-down" aria-hidden="true" style={{ paddingLeft: "5px", color:'#c11b55'}} />                                                                  
-                               </td>
-                             </tr>;
-                         }
-                       ) : <div />}
-                   </tbody>;
-                             
+          return (
+            <tbody>
+              {/* {console.log('page data ',pageData )} */}
+              {/* <!-- GRAPH TABLE STARTS--> */}
+              {this.state.isLoading ? <h1 style={{ marginLeft: '400px',textAlign: 'center', color: 'pink' }}>loading ...</h1> : 
+                       this.state.tableData.map(
+                            (m, v) => {
+                          const pageSym = m.symbol
+                              return <tr key={v}>
+                                  <td className="td-border">
+                                    {m.rank}
+                                  </td>
+                                  <td style={{ width: "15%" }}>
+                                    <Link to={gotoUrl(pageSym)} style={{ textDecoration: "none" }}>
+                                    <td style={{width: '20%' , textAlign: 'left'}} >
+                                          <img src={"https://chasing-coins.com/api/v1/std/logo/"+pageSym+""} className="pull-left"
+                                              style={{width: '20%', }}/>
+                                          <div style={{textAlign: 'left', paddingTop: '5px', marginLeft: '10px'}} class="pull-left"> {m.name} {m.symbol}  </div>
+                                    </td>
+                                  
+                                    </Link>
+                                  </td>
+                                  <td className="graph-td-green">
+                                    ${m.price_usd.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                    <i className="fa fa-caret-up" aria-hidden="true" style={{ paddingLeft: "5px" }} />
+                                  </td>
+                                  <td>
+                                    ${
+                                      m.market_cap_usd.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                                    }
+                                  </td>
+                                  <td>
+                                    ${
+                                    m.volume_usd.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                                    }
+                                  </td>
+                                  <td>
+                                    {
+                                      m.available_supply.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                                    }
+                                  </td>
+                                  <td className="graph-td-red-1">
+                                    {m.percent_change_1h}%
+                                    <i className="fa fa-caret-down" aria-hidden="true" style={{ paddingLeft: "5px" }} />
+                                  </td>
+                                  <td className="graph-td-red-1">
+                                    {m.percent_change_24h}%
+                                    <i className="fa fa-caret-down" aria-hidden="true" style={{ paddingLeft: "5px" }} />
+                                  </td>
+                                  <td>
+                                  <ImageChart 
+                                    imgNumbers={m.symbol}
+                                    page={pageData}
+                                  />
+  
+                                  {/* <HomePagination
+                                    imgNumbers={m.symbol}
+                                    page={pageData}
+                                  /> */}
+  
+                                    {m.percent_change_7d}%
+                                    <i className="fa fa-caret-down" aria-hidden="true" style={{ paddingLeft: "5px", color:'#c11b55'}} />                                                                  
+                                  </td>
+                                </tr>;
+                            }
+                          ) 
+                          }
+            </tbody>);
                            {/* GRAPH TABLE ENDS */}
 
     }

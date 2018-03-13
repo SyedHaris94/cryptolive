@@ -12,7 +12,7 @@ class TwoTable extends React.Component{
                 <section id="two-tables">
                     <div className="container">
                         <div className="row">
-                            <div className="col-md-9 left-table table-responsive">
+                            <div className="col-md-7 left-table table-responsive">
                                 <h4>TRENDING</h4>
                                 {/* <Link to="/icoview"style={{ textDecoration: "none" }} > */}
                                     <table className="table" >
@@ -21,14 +21,14 @@ class TwoTable extends React.Component{
                                                 <th> Name</th>
                                                 <th>ETA</th>
                                                  <th>TEAM</th>
-                                                <th>TECH</th>
-                                                <th>STRUCT</th>
-                                                <th>COMM</th>
+                                                <th>CONCEPT</th>
+                                                <th>WHITE</th>
+                                                {/* <th>COMM</th>
                                                 <th>HYPE</th>
                                                 <th>POSITIVE</th>
                                                 <th>NEUTRAL</th>
                                                 <th>NEGATIVE</th>
-                                                <th>OVERALL</th>
+                                                <th>OVERALL</th> */}
                                                 <th>SOCIAL</th>
                                             </tr>
                                         </thead>
@@ -46,7 +46,7 @@ class TwoTable extends React.Component{
                                
                             </div>
                 
-                            <div className="col-md-3 right-table">
+                            <div className="col-md-5 right-table">
                                     <h4 className="grey-color">LAST MINUTE</h4>
                                     {/* <Link to="/icoview"style={{ textDecoration: "none" }} > */}
                                         <table className="table">
@@ -139,7 +139,7 @@ class RowData1 extends React.Component{
           }
         return(
             <tbody>
-            {console.log('dsdsd',this.state.tableData1)}
+            {/* {console.log('dsdsd',this.state.tableData1)} */}
             {this.state.tableData1.map ? this.state.tableData1.map(
                             (m, v) => {
                           const pageSym = m.name
@@ -148,32 +148,26 @@ class RowData1 extends React.Component{
                           if (m.count <= 6){
                               return <tr key={m.count}>
                                 <Link to={gotoUrl(pageSym, live)} style={{ textDecoration: "none" }}>
-                                    <td style={{width: '25%' , textAlign: 'left'}} >
+                                    <td style={{width: '10%' , textAlign: 'left'}} >
                                         <img src={m.image}
                                             imageParam= {pageSym} 
-                                            style={{width: '45%', height: '30%'}} className="pull-left"/>
+                                            style={{marginLeft: '15px', width: '45%', height: '30%'}} className="pull-left"/>
                                         <div style={{textAlign: 'left', marginLeft: '15px'}} class="pull-left"> {m.name}</div>
                                     </td>
                                 </Link>
-                                    <td style={{width: '10%' , }} >
+                                    <td style={{width: '15%' , }} >
                                         3.5
                                     </td>
-                                    <td style={{width: '10%' , }} >
+                                    <td style={{width: '15%' , }} >
                                         23
                                     </td>
-                                    <td >
+                                    <td style={{width: '15%' , }}>
                                         3.5
                                     </td>
-                                    <td>
+                                    <td style={{width: '15%' , }}>
                                         23
                                     </td>
-                                    <td >
-                                        3.5
-                                    </td>
-                                    <td>
-                                        23
-                                    </td>
-                                    <td >
+                                    {/* <td >
                                         3.5
                                     </td>
                                     <td>
@@ -185,6 +179,12 @@ class RowData1 extends React.Component{
                                     <td>
                                         23
                                     </td>
+                                    <td >
+                                        3.5
+                                    </td>
+                                    <td>
+                                        23
+                                    </td> */}
                                     <td>
                                     <i className="fa fa-facebook favicon-icons" aria-hidden="true">
                                     </i>
@@ -245,7 +245,7 @@ class RowData2 extends React.Component{
       
       
       componentDidMount() {
-          console.log('did mount run')
+        //   console.log('did mount run')
         this.rateData();
       }
       
@@ -258,30 +258,29 @@ class RowData2 extends React.Component{
           }
         return(
             <tbody>
-            {console.log('dsdsd',this.state.tableData2)}
+            {/* {console.log('dsdsd',this.state.tableData2)} */}
             {this.state.tableData2.map ? this.state.tableData2.map(
                             (m, v) => {
                           const pageSym = m.name
                           const live = m.live
                           const img = m.name.toLowerCase();
-                          if (m.count <= 5){
+                          if (m.count <= 6){
                               return <tr key={v}>
                                 <Link to={gotoUrl(pageSym, live)} style={{ textDecoration: "none" }}>
-                                    <td style={{width: '30%' , textAlign: 'left'}} >
+                                <td style={{width: '35%' , textAlign: 'left'}} >
                                         <img src={m.image}
                                             imageParam= {pageSym} 
-                                            style={{width: '50%', height: '30%'}} 
-                                            className="pull-left"/>
-                                        <div style={{textAlign: 'left', marginLeft: '2px'}} > {m.name}</div>
+                                            style={{marginLeft: '15px', width: '30%', height: '30%'}} className="pull-left"/>
+                                        <div style={{ }} class="pull-right"> {m.name}</div>
                                     </td>
                                 </Link>
-                                  <td >
+                                  <td style={{width: '10%' , }}  >
                                     3.5
                                   </td>
-                                  <td>
+                                  <td style={{width: '10%' , }} >
                                     23
                                   </td>
-                                  <td>
+                                  <td style={{width: '10%' , }} >
                                   <i className="fa fa-facebook favicon-icons" aria-hidden="true">
                                   </i>
                                   <i className="fa fa-twitter favicon-icons" aria-hidden="true"></i> 

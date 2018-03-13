@@ -66,12 +66,10 @@ class Auth extends React.Component{
             email: this.state.email,
             password: this.state.password,
         };
-        this.setState({email: ""});
+
         this.setState({password: ""});
-        // this.setState({ open: false });
-        // const el = findDOMNode(this.refs.toggle);
-        // // $('#signupbox').hide(); $('#loginbox').show()
-        // $('#myModal').hide();
+        this.setState({email: ""});
+  
         
         let route = this.props.history;
         console.log('user', useradd)
@@ -83,7 +81,7 @@ class Auth extends React.Component{
         e.preventDefault();
         let obj = {
           name: this.state.firstName + this.state.lastName,
-        // name: this.state.name,
+          //name: this.state.name,
           email: this.state.email,
           password: this.state.password,
           contactNum: this.state.contact
@@ -92,6 +90,7 @@ class Auth extends React.Component{
         this.setState({password: ""});
         this.setState({email: ""});
         this.setState({contactNum: ""});
+        
 
         let route = this.props.history;
         console.log("user", obj);
@@ -116,9 +115,9 @@ class Auth extends React.Component{
     render(){
         // const {user} = this.state
         return(
-               <div class="modal" id="myModal" role="dialog"  onHide={this.close}>
+                <div class="modal fade" id="myModal" role="dialog"  >
                     <div class="modal-body">
-                        <div id="loginbox" style={{marginTop:'50px'}} class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+                        <div id="loginbox" style={{marginTop:'50px'}} class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" align= "center">                    
                             <div class="panel panel-info" >
                                     <div class="panel-heading">
                                         <div class="panel-title">Sign In</div>
@@ -129,24 +128,24 @@ class Auth extends React.Component{
 
                                         <div style={{display:'none'}} id="login-alert" class="alert alert-danger col-sm-12"></div>
                                             
-                                        <form id="loginform" class="form-horizontal" role="form"  onSubmit={this.loginUser && this.close}>
+                                        <form id="loginform" class="form-horizontal" role="form"  onSubmit={this.loginUser } method="post">
                                                     
-                                            <div style={{marginBottom: '25px'}} class="input-group">
-                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                                        <input 
-                                                            style={{width: '200px'}}
-                                                            type="email" 
-                                                            class="form-control" 
-                                                            value={this.state.email}
-                                                            onChange={this.handleEmailChange}
-                                                            placeholder="User Email" 
-                                                            name="email" 
-                                                            id="mail"
-                                                            autofocus
-                                                            required/>                                        
+                                            <div style={{marginBottom: '25px'}} class="input-group col-md-offset-3">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                                <input 
+                                                    style={{width: '200px'}}
+                                                    type="email" 
+                                                    class="form-control" 
+                                                    value={this.state.email}
+                                                    onChange={this.handleEmailChange}
+                                                    placeholder="User Email" 
+                                                    name="email" 
+                                                    id="mail"
+                                                    autofocus
+                                                    required/>                                        
                                             </div>
                                                 
-                                            <div style={{marginBottom: '25px'}} class="input-group">
+                                            <div style={{marginBottom: '25px'}} class="input-group col-md-offset-3">
                                                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                                         <input 
                                                             style={{width: '200px'}}
@@ -163,7 +162,7 @@ class Auth extends React.Component{
                                                     
 
                                                 
-                                            <div class="input-group">
+                                            <div class="input-group ">
                                                     <div class="checkbox">
                                                         <label>
                                                         <input id="login-remember" type="checkbox" name="remember" value="1"/> Remember me
@@ -175,7 +174,7 @@ class Auth extends React.Component{
                                             <div style={{marginTop:'10px'}} class="form-group">
 
                                                 <div class="col-sm-12 controls">
-                                                <button type="submit"
+                                                <button type="submit" onClick= {this.close}
                                                  className="btn btn-primary" style={{textAlign: 'center', width: '150px',backgroundColor: '#0097A7', borderRadius: '1px'}} 
                                                  >Submit</button>
                                                     <FacebookAuth/>
@@ -188,7 +187,7 @@ class Auth extends React.Component{
                                                 <div class="col-md-12 control">
                                                     <div style={{borderTop: '1px solid #888', paddingTop:'15px', fontSize:'85%'}} ref={'toggle1'}>
                                                         Don't have an account! 
-                                                        <a href="#" onClick={this.handledsignup} >
+                                                        <a href="#" onClick={this.handledsignup}  style={{paddingLeft: '5px'}}>
                                                         Sign Up Here
                                                         </a>
                                                     </div>
@@ -206,7 +205,7 @@ class Auth extends React.Component{
                                         <div style={{float:'right', fontSize: '85%', position: 'relative', top:'-10px'}} ><a id="signinlink" href="#" onClick={this.handlelogin}>Sign In</a></div>
                                     </div>  
                                     <div class="panel-body" >
-                                        <form id="signupform" class="form-horizontal" role="form" onSubmit={this.signupUser}>
+                                        <form id="signupform" class="form-horizontal" role="form" onSubmit={this.signupUser } method="post">
                                             
                                             <div class="form-group">
                                                 <label for="email" class="col-md-3 control-label">Email</label>
@@ -231,7 +230,8 @@ class Auth extends React.Component{
                                                         type="text" 
                                                         class="form-control" 
                                                         name="name" 
-                                                        placeholder="First Name"/>
+                                                        placeholder="First Name"
+                                                        required/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -255,7 +255,8 @@ class Auth extends React.Component{
                                                         type="password" 
                                                         class="form-control" 
                                                         name="password" 
-                                                        placeholder="Password"/>
+                                                        placeholder="Password"
+                                                        required/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -267,7 +268,8 @@ class Auth extends React.Component{
                                                         type="number" 
                                                         class="form-control" 
                                                         name="number" 
-                                                        placeholder="contact number"/>
+                                                        placeholder="contact number"
+                                                        required/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -328,8 +330,10 @@ class FacebookAuth extends React.Component{
 
 
         return(
-            <button type="button" onClick={this.login.bind(this)} classNameName="btn btn-primary" style={{color: '#fff',textAlign: 'center',width: '180px',marginLeft: '40px',backgroundColor: '#303f9f'}}>
-                   Login With Facebook
+            <button type="button" onClick={this.login.bind(this)} classNameName="btn btn-primary" 
+            style={{color: '#fff',textAlign: 'center',height: '33px',
+                    width: '200px',marginLeft: '40px',backgroundColor: '#303f9f'}}>
+                  <i className="fa fa-facebook footer-color" aria-hidden="true" style={{marginRight: '10px'}}></i> Login With Facebook 
             </button>
            
         )

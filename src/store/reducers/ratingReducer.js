@@ -9,9 +9,9 @@ const initialState = {
 export default function (state= initialState, action) {
     switch(action.type){
         case handleAction.SENDRATING:
-            return{... state, sendrating: 'true', sendrate: action.data}
+            return{... state, sendrating: 'true', sendrate: action.payload}
         case handleAction.GETRATING:
-            return{... state, getrating: 'true', getrate: action.data}
+            return{... state, getrating: 'true', getrate: action.payload}
         default: 
             return state
     }

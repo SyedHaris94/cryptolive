@@ -14,12 +14,15 @@ body {
   .btn-green {
     border: none;
     background-color: #0097A7;
-    color: white;
+    color: #fff;
     border-radius: 0;
     font-weight: 200;
     padding: 5px 40px 5px 40px;
     /* align-items: center */
   }
+  
+
+  .btn-green:hover {color: #fff}
   
 
   
@@ -728,6 +731,8 @@ body {
     -webkit-box-shadow: 0 5px 32px 0 rgba(0,0,0,.1);
     -moz-box-shadow: 0 5px 32px 0 rgba(0,0,0,.1);
     box-shadow: 0 5px 32px 0 rgba(0,0,0,.1);
+    line-height: 12px;
+
   }
   
   /* GRAPH TABLE */
@@ -868,19 +873,34 @@ body {
   }
   
   #ico-listing .table > tbody > tr > td {
-    border-bottom: 1px solid #F7F7F7;
+    border-bottom: 0px #F7F7F7;
     border-widows: 50%;
     padding-top: 15px;
     padding-bottom: 15px;
     padding-left: 50px;
     color: #727272;
-    border-color: #848484;
-  }
+    border-color: #F7F7F7;
+}
   
   #ico-listing .table > tbody > tr > td > img {
     padding-right: 15px;
   }
+
+  #ico-listing td > a {
+    color: #000;
+    text-decoration: none
+  }
   
+
+  #ico-listing-item .btn-block {  
+    background-color: #FFFFFF;
+    box-shadow: 0 5px 32px 0 rgba(0,0,0,.1);
+    color: #000;
+    margin-left: 32px;
+    width: 845px;
+
+  }
+
   #ico-listing-item {
     margin-top: 20px;
   }
@@ -888,6 +908,8 @@ body {
   #ico-listing-item .ico-card {
     margin-top: 20px;
     padding-top: 10px;
+    margin-left: 32px;
+    width: 845px;
     padding-bottom: 10px;
     box-shadow: 0 5px 32px 0 rgba(0,0,0,.1);
   }
@@ -930,6 +952,11 @@ body {
   #ico-listing p.rating-feedback {
     color: #9E9D9D;
   }
+
+  #ico-listing .left-ico-table{
+    width: 260px;
+  }
+
   /*ICO HOMEPAGE END*/
   
   /*ICO VIEW PAGE START*/
@@ -1099,6 +1126,7 @@ body {
   #video .btn-default {
     background-color: white;
     width: 50%;
+    height: 30px;
     border-radius: 1px;
     color:#A3A3A3;
     border-color: #A3A3A3;
@@ -1833,7 +1861,27 @@ body {
     #card  .coin-screener-icon img {
         padding-top: 1px;
     }
-  
+
+    #ico-listing-item .ico-card {
+      margin-top: 20px;
+      padding-top: 10px;
+      margin-left: 25px;
+      /* margin-right: 0px; */
+      width: 700px;
+      padding-bottom: 10px;
+      -webkit-box-shadow: 0 5px 32px 0 rgba(0,0,0,.1);
+      box-shadow: 0 5px 32px 0 rgba(0,0,0,.1);
+    }
+
+    #ico-listing-item .btn-block {
+      background-color: #FFFFFF;
+      -webkit-box-shadow: 0 5px 32px 0 rgba(0,0,0,.1);
+      box-shadow: 0 5px 32px 0 rgba(0,0,0,.1);
+      color: #000;
+      margin-left: 25px;
+      width: 700px;
+    }
+
     #cp-heading .price-info .row{
     margin-right: -15px;
     margin-left: -15px;
@@ -1880,12 +1928,17 @@ body {
     #cp-heading .price-info h3{
         font-size: 1.5em;
     }
+    
   
-    #browse-ico .container .row p{
+    #browse-ico .ico-list{
         display: none
     }
+
+    #browse-ico .browse-head{
+      margin-bottom: 60px
+    }
     
-    #browse-ico .left-col{
+     .left-col{
         display: none;
     }
     
@@ -2156,6 +2209,18 @@ body {
     {
         font-size: 0.7em;
     }
+
+    #card .top-cards h4 {
+      font-size: 0.55em;
+      font-weight: 400;
+      color: #A7A7A7;
+   }
+
+    #card .top-cards p {
+      font-size: 0.45em;
+      font-weight: 300;
+      color: #1DA0B4;
+    }
   
     #card .coin-screener-icon,
     #card .customise-grid-icon {
@@ -2170,10 +2235,6 @@ body {
         margin-top: -40px;
     }
     
-    
-    #graph-table .table {
-     display: none
-    }
     #graph-table .stacktable .st-head-row-main {
         display: none;
     }
@@ -2186,13 +2247,21 @@ body {
     #graph-table .stacktable .val6{
         display: none;
     }
-  
-    /*#graph-table .table {*/
-    /*display:none;*/
-    /*}*/
-  
+
+    #graph-table {
+      display: none
+     }
+   
+    #bitcoin-table {
+      display: none
+     }
+
     .table-responsive{
         border: none;
+    }
+
+    #homepage-pagination { 
+      display: none
     }
   
     #ico-top-panel {
@@ -2205,12 +2274,27 @@ body {
         margin-bottom: 10px;
     }
   
-  
-  
     #ico-listing-item .ico-card {
-        padding-top: 20px;
-    }
+        margin-top: 20px;
+        padding-top: 10px;
+        margin-left: 15px;
+        /* margin-right: 20px; */
+        width: 320px;
+        padding-bottom: 10px;
+        -webkit-box-shadow: 0 5px 32px 0 rgba(0,0,0,.1);
+        box-shadow: 0 5px 32px 0 rgba(0,0,0,.1);
+      }
+
+      #ico-listing-item .btn-block {
+        background-color: #FFFFFF;
+        -webkit-box-shadow: 0 5px 32px 0 rgba(0,0,0,.1);
+        box-shadow: 0 5px 32px 0 rgba(0,0,0,.1);
+        color: #000;
+        margin-left: 15px;
+        width: 320px;
+      }
   
+ 
   
     #ico-listing-item .ico-card h3{
         font-size: 1.2em;
@@ -2311,6 +2395,29 @@ body {
       margin-left: 50px;
       margin-right: 50px;
    }
-  
+
+   #about .talk-img{
+    /* padding-top: 150px; */
+    margin-left: -10px;
+    width: 100px;
+    height: 30%;
+   }
+
+   #about .talk-about{
+     margin-left: 20px;
+     margin-right: 20px
+   }
+
+   #ask .white-img{
+    padding-left: 80px;
+    width: 90%;
+    height: 80%;
   }
 
+  #learn-start .white-img{
+    padding-left: 80px;
+    width: 90%;
+    height: 80%;
+
+  }
+}
