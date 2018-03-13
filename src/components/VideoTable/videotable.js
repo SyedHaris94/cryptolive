@@ -62,7 +62,7 @@ class VideoTable extends React.Component{
                                         </tbody>
                                     </table>
 
-                                    <button type="button" class="btn btn-green">MORE ON ICO</button>
+                                    <button type="button" class="btn btn-green"><a href="https://cryptolife.herokuapp.com" target="_blank">MORE ON ICO</a> </button>
                                     <button type="button" class="btn btn-default">Report</button>
                                 </div>
                             </div>
