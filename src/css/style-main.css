@@ -1138,6 +1138,12 @@ body {
   border-radius: 1px;
   width: 50%;
 }
+
+
+#video .btn-green > a {
+  color: #fff;
+  text-decoration: none
+}
   /* DESCRIPTION SECTION */
   #description{
     padding-top: 60px;
