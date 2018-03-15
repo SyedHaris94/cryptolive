@@ -66,6 +66,7 @@ class IcoBrief extends React.Component{
         // {console.log('deadline',this.state.deadline)}
 
         }
+
         leading0(num) {
             return num < 10 ? '0' + num : num;
         }                                                                                                                                                                             
@@ -145,6 +146,7 @@ class IcoBrief extends React.Component{
         
         return(
             <div>
+                {/* {console.log('web link', pageParam.website_link)} */}
                 {/* <!-- MEDICAL STARTS --> */}
                 <section id="ico-stats-brief">
                     <div className="container" >

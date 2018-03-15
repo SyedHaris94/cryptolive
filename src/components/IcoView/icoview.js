@@ -6,7 +6,6 @@ class IcoView extends React.Component{
     render(){
         let nameParam = this.props.match.params.name;
         let liveParam = this.props.match.params.live;
-        let webParam = this.props.match.params.website_link;
 
 
         return(
@@ -18,7 +17,9 @@ class IcoView extends React.Component{
                 />
                 <SocailIcon/>
                 <VideoTable
-                weblink = {nameParam}/>
+                namePram = {nameParam}
+                livePram = {liveParam}
+                />
                 <Suscribe/>
                 <Description 
                     icoNameParam = {nameParam}
