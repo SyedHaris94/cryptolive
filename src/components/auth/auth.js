@@ -32,7 +32,7 @@ class Auth extends React.Component{
         this.handleContactChange = this.handleContactChange.bind(this);
         this.loginUser = this.loginUser.bind(this);
         this.signupUser = this.signupUser.bind(this);
-
+        this.forgetPass = this.forgetPass.bind(this);
         this.close = this.close.bind(this);
 
         
@@ -99,13 +99,19 @@ class Auth extends React.Component{
 
     handledsignup = () => {
         const el = findDOMNode(this.refs.toggle1); 
-        $('#loginbox').hide(); $('#signupbox').show()               
+        $('#loginbox').hide(); $('#forgetpass').hide();  $('#signupbox').show()               
     };
 
     handlelogin= () => {
         const el = findDOMNode(this.refs.toggle2);
-        $('#signupbox').hide(); $('#loginbox').show()
+        $('#signupbox').hide(); $('#forgetpass').hide(); $('#loginbox').show()
     };
+
+    forgetPass = () => {
+        const el = findDOMNode(this.refs.toggle3); 
+        $('#loginbox').hide(); $('#forgetpass').show()               
+    };
+
 
 
     close() {
@@ -117,20 +123,20 @@ class Auth extends React.Component{
         return(
                 <div class="modal fade" id="myModal" role="dialog"  >
                     <div class="modal-body">
-                        <div id="loginbox" style={{marginTop:'50px'}} class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" align= "center">                    
+                        <div id="loginbox" style={{marginTop:'50px'}} class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" align= "center" ref={'toggle1'}>                    
                             <div class="panel panel-info" >
                                     <div class="panel-heading">
                                         <div class="panel-title">Sign In</div>
-                                        <div style={{float:'right', fontSize: '80%' ,position: 'relative', top:'-10px'}}><a href="#">Forgot password?</a></div>
+                                        <div style={{float:'right', fontSize: '80%' ,position: 'relative', top:'-10px'}}><a href="#" onClick={this.forgetPass}>Forgot password?</a></div>
                                     </div>     
 
                                     <div style={{paddingTop:'30px'}} class="panel-body" >
 
                                         <div style={{display:'none'}} id="login-alert" class="alert alert-danger col-sm-12"></div>
                                             
-                                        <form id="loginform" class="form-horizontal" role="form"  onSubmit={this.loginUser } method="post">
+                                        <form id="loginform" class="form-horizontal" role="form"  onSubmit={this.loginUser} method="post">
                                                     
-                                            <div style={{marginBottom: '25px'}} class="input-group col-md-offset-3">
+                                            <div style={{marginBottom: '25px'}} class="input-group col-md-offset-4">
                                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                                 <input 
                                                     style={{width: '200px'}}
@@ -145,47 +151,41 @@ class Auth extends React.Component{
                                                     required/>                                        
                                             </div>
                                                 
-                                            <div style={{marginBottom: '25px'}} class="input-group col-md-offset-3">
-                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                                        <input 
-                                                            style={{width: '200px'}}
-                                                            type="password" 
-                                                            class="form-control" 
-                                                            value={this.state.password}
-                                                            onChange={this.handlePasswordChange}
-                                                            placeholder="password" 
-                                                            name="password" 
-                                                            id="pass"
-                                                            required/> 
+                                            <div style={{marginBottom: '25px'}} class="input-group col-md-offset-4">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                                <input 
+                                                    style={{width: '200px'}}
+                                                    type="password" 
+                                                    class="form-control" 
+                                                    value={this.state.password}
+                                                    onChange={this.handlePasswordChange}
+                                                    placeholder="password" 
+                                                    name="password" 
+                                                    id="pass"
+                                                    required/> 
                                                         
                                             </div>
-                                                    
 
-                                                
                                             <div class="input-group ">
-                                                    <div class="checkbox">
-                                                        <label>
-                                                        <input id="login-remember" type="checkbox" name="remember" value="1"/> Remember me
-                                                        </label>
-                                                    </div>
-                                            </div>
-
-
-                                            <div style={{marginTop:'10px'}} class="form-group">
-
-                                                <div class="col-sm-12 controls">
-                                                <button type="submit" onClick= {this.close}
-                                                 className="btn btn-primary" style={{textAlign: 'center', width: '150px',backgroundColor: '#0097A7', borderRadius: '1px'}} 
-                                                 >Submit</button>
-                                                    <FacebookAuth/>
-
+                                                <div class="checkbox">
+                                                    <label>
+                                                    <input id="login-remember" type="checkbox" name="remember" value="1"/> Remember me
+                                                    </label>
                                                 </div>
                                             </div>
 
+                                            <div style={{marginTop:'10px'}} class="form-group">
+                                                <div class="col-sm-12 controls">
+                                                    <button type="submit" onClick= {this.close}
+                                                        className="btn btn-primary" style={{marginLeft: '10px',marginBottom: '10px', marginTop: '10px',textAlign: 'center', width: '200px',backgroundColor: '#0097A7', borderRadius: '1px'}}>Submit
+                                                    </button>
+                                                    <FacebookAuth/>
+                                                </div>
+                                            </div>
 
                                             <div class="form-group" >
                                                 <div class="col-md-12 control">
-                                                    <div style={{borderTop: '1px solid #888', paddingTop:'15px', fontSize:'85%'}} ref={'toggle1'}>
+                                                    <div style={{borderTop: '1px solid #888', paddingTop:'15px', fontSize:'85%'}} >
                                                         Don't have an account! 
                                                         <a href="#" onClick={this.handledsignup}  style={{paddingLeft: '5px'}}>
                                                         Sign Up Here
@@ -282,6 +282,88 @@ class Auth extends React.Component{
                                     </div>
                                 </div>             
                         </div> 
+                        {/* <div id="forgetpass" style={{marginTop:'50px'}} class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" align= "center" >                    
+                            <div class="panel panel-info" >
+                                    <div class="panel-heading">
+                                        <div class="panel-title">Resset Password</div>
+                                    </div>     
+
+                                    <div style={{paddingTop:'30px'}} class="panel-body" >
+
+                                        <div style={{display:'none'}} id="foregetpass-alert" class="alert alert-danger col-sm-12"></div>
+                                            
+                                        <form id="forgetform" class="form-horizontal" role="form"  onSubmit={''} method="post">                                                   
+                                            <div style={{marginBottom: '25px'}} class="input-group col-md-offset-3">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                                <input 
+                                                    style={{width: '200px'}}
+                                                    type="email" 
+                                                    class="form-control" 
+                                                    value={this.state.email}
+                                                    onChange={this.handleEmailChange}
+                                                    placeholder="User Email" 
+                                                    name="email" 
+                                                    id="mail"
+                                                    autofocus
+                                                    required/>                                        
+                                            </div>
+                                                
+                                            <div style={{marginTop:'10px'}} class="form-group">
+                                                <div class="col-sm-12 controls">
+                                                <button type="submit" onClick= {this.close}
+                                                 className="btn btn-primary" style={{textAlign: 'center', width: '150px',backgroundColor: '#0097A7', borderRadius: '1px'}} 
+                                                 >Submit</button>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group" >
+                                                <div class="col-md-12 control">
+                                                    <div style={{borderTop: '1px solid #888', paddingTop:'15px', fontSize:'85%'}}>
+                                                        Click Here to 
+                                                        <a href="#" onClick={this.handlelogin}  style={{paddingLeft: '5px'}}>
+                                                            Login! 
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>    
+                                        </form>     
+
+                                    </div>                     
+                            </div>  
+                        </div> */}
+                        <div id="forgetpass" style={{display:'none', marginTop:'50px'}} class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" ref={'toggle3'} align= "center">
+                                <div class="panel panel-info">
+                                    <div class="panel-heading">
+                                        <div class="panel-title" >Forget Password</div>
+                                        <div style={{float:'right', fontSize: '85%', position: 'relative', top:'-10px'}} ><a id="signinlink" href="#" onClick={this.handlelogin}>Sign In</a></div>
+                                    </div>  
+                                    <div class="panel-body" >
+                                        <form id="forgetpassform" class="form-horizontal" role="form" onSubmit={'this.signupUser '} method="post">
+                                            
+                                            <div class="form-group">
+                                                <label for="email" class="col-md-3 control-label">Email</label>
+                                                <div class="col-md-9">
+                                                    <input 
+                                                        value={this.state.email}
+                                                        onChange={this.handleEmailChange}
+                                                        type="email" 
+                                                        class="form-control" 
+                                                        name="email" 
+                                                        placeholder="Email Address"
+                                                        autofocus
+                                                        required/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-offset-2 col-md-9">
+                                                    <button type="submit" className="btn btn-primary" style={{textAlign: 'center', width: '150px',backgroundColor: '#0097A7', borderRadius: '1px'}}>Submit Here</button>
+                                                </div>
+                                            </div>
+                                            
+                                        </form>
+                                    </div>
+                                </div>             
+                        </div> 
                     </div>
                 </div>
         );
@@ -331,7 +413,7 @@ class FacebookAuth extends React.Component{
 
         return(
             <button type="button" onClick={this.login.bind(this)} classNameName="btn btn-primary" 
-            style={{color: '#fff',textAlign: 'center',height: '33px',
+            style={{color: '#fff',textAlign: 'center',height: '35px', marginRight: '30px', marginBottom: '20px',
                     width: '200px',marginLeft: '40px',backgroundColor: '#303f9f'}}>
                   <i className="fa fa-facebook footer-color" aria-hidden="true" style={{marginRight: '10px'}}></i> Login With Facebook 
             </button>
