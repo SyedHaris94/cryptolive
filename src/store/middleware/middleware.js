@@ -90,6 +90,26 @@ export default class MiddleWare{
             });
         };
       }
+
+
+      static resetPass(data) {
+        console.log("reset email", data);
+        return dispatch => {
+          dispatch(handleAction.resetpass(data));
+          var emailAddress = data.email;
+          DB.auth
+            .sendPasswordResetEmail(emailAddress)
+            .then(function() {
+              // Email sent.
+              alert("Email Successfully Sent");
+            })
+            .catch(function(error) {
+              // An error happened.
+              var errorMessage = "The email address you entered is not Registered";
+              alert(errorMessage);
+            });
+        };
+      }
     
       static SendRating(data) {
         console.log("send data", data);

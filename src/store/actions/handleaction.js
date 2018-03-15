@@ -19,8 +19,12 @@ export class handleAction {
 
     static USERPROFILE = "USER PROFILE";
 
+    static PASSWORD_RESET = "PASSWORD_RESET";
+
     static SENDRATING = "SENDRATING";
     static GETRATING = "GETRATING"
+
+
 
     static login = (payload) => ({
         type: handleAction.LOGIN,
@@ -32,6 +36,10 @@ export class handleAction {
         payload
     })
 
+    static resetpass = (payload) => ({
+        type: handleAction.PASSWORD_RESET,
+        payload
+    })
     static userprofile = (payload) => ({
         type: handleAction.USERPROFILE,
         payload

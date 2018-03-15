@@ -22,6 +22,7 @@ class Auth extends React.Component{
             password: '',
             firstName: '',
             lastName: '',
+            resetmail: '',
             contact: 0,           
         };
 
@@ -30,8 +31,10 @@ class Auth extends React.Component{
         this.handleEmailChange = this.handleEmailChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.handleContactChange = this.handleContactChange.bind(this);
+        this.resetEmailChange = this.resetEmailChange.bind(this);
         this.loginUser = this.loginUser.bind(this);
         this.signupUser = this.signupUser.bind(this);
+        this.ResetingPass = this.ResetingPass.bind(this);
         this.forgetPass = this.forgetPass.bind(this);
         this.close = this.close.bind(this);
 
@@ -59,6 +62,10 @@ class Auth extends React.Component{
         this.setState({ contact : e.target.value });
         }
 
+    resetEmailChange(e) {
+        this.setState({ resetmail : e.target.value });
+        }
+        
     loginUser = (e) => {
         e.preventDefault();
 
@@ -96,6 +103,16 @@ class Auth extends React.Component{
         console.log("user", obj);
         this.props.SignupData(obj, route);
     };
+
+    ResetingPass = e => {
+        e.preventDefault();
+        let resetpassword = {
+          email: this.state.resetmail
+        };
+        this.setState({resetmail: ""});
+        console.log("reseting", resetpassword);
+        this.props.reseted(resetpassword);
+      };
 
     handledsignup = () => {
         const el = findDOMNode(this.refs.toggle1); 
@@ -282,70 +299,21 @@ class Auth extends React.Component{
                                     </div>
                                 </div>             
                         </div> 
-                        {/* <div id="forgetpass" style={{marginTop:'50px'}} class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" align= "center" >                    
-                            <div class="panel panel-info" >
-                                    <div class="panel-heading">
-                                        <div class="panel-title">Resset Password</div>
-                                    </div>     
-
-                                    <div style={{paddingTop:'30px'}} class="panel-body" >
-
-                                        <div style={{display:'none'}} id="foregetpass-alert" class="alert alert-danger col-sm-12"></div>
-                                            
-                                        <form id="forgetform" class="form-horizontal" role="form"  onSubmit={''} method="post">                                                   
-                                            <div style={{marginBottom: '25px'}} class="input-group col-md-offset-3">
-                                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                                <input 
-                                                    style={{width: '200px'}}
-                                                    type="email" 
-                                                    class="form-control" 
-                                                    value={this.state.email}
-                                                    onChange={this.handleEmailChange}
-                                                    placeholder="User Email" 
-                                                    name="email" 
-                                                    id="mail"
-                                                    autofocus
-                                                    required/>                                        
-                                            </div>
-                                                
-                                            <div style={{marginTop:'10px'}} class="form-group">
-                                                <div class="col-sm-12 controls">
-                                                <button type="submit" onClick= {this.close}
-                                                 className="btn btn-primary" style={{textAlign: 'center', width: '150px',backgroundColor: '#0097A7', borderRadius: '1px'}} 
-                                                 >Submit</button>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group" >
-                                                <div class="col-md-12 control">
-                                                    <div style={{borderTop: '1px solid #888', paddingTop:'15px', fontSize:'85%'}}>
-                                                        Click Here to 
-                                                        <a href="#" onClick={this.handlelogin}  style={{paddingLeft: '5px'}}>
-                                                            Login! 
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>    
-                                        </form>     
-
-                                    </div>                     
-                            </div>  
-                        </div> */}
                         <div id="forgetpass" style={{display:'none', marginTop:'50px'}} class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" ref={'toggle3'} align= "center">
                                 <div class="panel panel-info">
                                     <div class="panel-heading">
-                                        <div class="panel-title" >Forget Password</div>
+                                        <div class="panel-title" >Reset Password Here</div>
                                         <div style={{float:'right', fontSize: '85%', position: 'relative', top:'-10px'}} ><a id="signinlink" href="#" onClick={this.handlelogin}>Sign In</a></div>
                                     </div>  
                                     <div class="panel-body" >
-                                        <form id="forgetpassform" class="form-horizontal" role="form" onSubmit={'this.signupUser '} method="post">
+                                        <form id="forgetpassform" class="form-horizontal" role="form" onSubmit={this.ResetingPass} method="post">
                                             
                                             <div class="form-group">
                                                 <label for="email" class="col-md-3 control-label">Email</label>
                                                 <div class="col-md-9">
                                                     <input 
-                                                        value={this.state.email}
-                                                        onChange={this.handleEmailChange}
+                                                        value={this.state.resetmail}
+                                                        onChange={this.resetEmailChange}
                                                         type="email" 
                                                         class="form-control" 
                                                         name="email" 
@@ -371,17 +339,19 @@ class Auth extends React.Component{
 }
 
 
-// function mapStateToProps(state) {
-//     return {
-//         loggedin: state.AuthReducer
+function mapStateToProps(state) {
+    return {
+        reseting: state.ResetPassReducer
 
-//     }
-// }
+    }
+}
 
 function mapDispatchToProps(dispatch) {
     return {
         userData: (data, route) => dispatch(MiddleWare.LoginRequest(data, route)),
-        SignupData: (data, route) => dispatch(MiddleWare.SignupRequest(data, route))
+        SignupData: (data, route) => dispatch(MiddleWare.SignupRequest(data, route)),
+        reseted: data => dispatch(MiddleWare.resetPass(data))
+
 
     }
 }
