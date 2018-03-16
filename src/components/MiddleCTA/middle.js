@@ -40,10 +40,10 @@ class Middle extends React.Component{
                                     <h4>REFRESH</h4>
                                     <p>2 Sec</p>
                                 </div>
-                                <div className="col-md-1 col-xs-2 korean-option-card">
+                                {/* <div className="col-md-1 col-xs-2 korean-option-card">
                                     <h4>KOREAN</h4>
                                     <p>2 Sec</p>
-                                </div>                                
+                                </div>                                 */}
                                 
                                 <div className="col-md-2 col-xs-2 global-market">        
                                     <h4>GLOBAL MARKET</h4>
@@ -61,14 +61,14 @@ class Middle extends React.Component{
 
                             </div>
 
-                            <div className="col-md-offset-1 col-md-1 customise-grid-icon">
+                            {/* <div className="col-md-offset-1 col-md-1 customise-grid-icon">
                                 <img className="img-responsive pull-left" src={setting} alt="logo"/>
                                 <p>CUSTOMIZE GRID</p>
-                            </div>
+                            </div> */}
 
-                            <div className="col-md-1 coin-screener-icon">
+                            <div className="col-md-2 col-md-offset-2 coin-screener-icon">
                                 <img className="pull-left"  src={glass} alt="logo"/>
-                                <p>COIN SCREENER</p>
+                                <p>LAYOUT</p>
                             </div>
 
                             <div className="col-md-2 col-xs-12 form-inpt">

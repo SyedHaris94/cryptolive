@@ -71,8 +71,6 @@ class Rating extends React.Component{
     }
 
     render(){
-        // let rateICo = this.props.rateIcoName
-        // console.log('rateico', rateICo)
         return(                  
                 <div class="form-group" >
                     <h4>Team</h4>

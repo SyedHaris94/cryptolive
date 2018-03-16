@@ -73,7 +73,7 @@ class VideoTable extends React.Component{
         }
 
         let pageParam = gotoUrl(m, nameParam);
-        let date = pageParam.end_time
+        // let date = pageParam.end_time
         return(
             <div>
                <section id="video">

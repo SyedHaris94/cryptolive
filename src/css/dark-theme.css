@@ -83,40 +83,56 @@ body {
 
 /* MAIN BANNER END */
 
-/*FIVE FEATURES START*/
-#five-features{
-    background-color: #304359;
+  /*FIVE FEATURES START*/
+  #five-features{
+    background-color: #F7F7F7;
     text-align: center;
-}
-
-#five-features .container {
+  }
+  
+  #five-features .container {
     padding-top: 25px;
     padding-bottom: 10px;
-}
-
-#five-features .fv-item p{
+  }
+  
+  #five-features .fv-item p{
     font-weight: 400;
     color: #A7A7A7;
     padding-top: 10px;
-}
+  }
 
-#five-features .fv-item p.selected {
+  #five-features .fv-item  {
+  
+    color: #A7A7A7;
+
+  }
+
+  
+  #five-features .fv-item .five-icons {
+    color: #A7A7A7;
+  }
+
+  
+  #five-features .fv-item :hover{
     font-weight: 700;
     color: #1DA0B4;
-}
+  }
 
-#five-features .fv-item p.currency-heading{
+
+  #five-features .fv-item :active{
+    color: #1DA0B4;
+  }
+
+  #five-features .fv-item p.currency-heading{
     padding-top: 17px;
-}
-
-#five-features .fv-item p.markets-heading{
+  }
+  
+  #five-features .fv-item p.markets-heading{
     padding-top: 12px;
-}
-
-#five-features .fv-item p.portfolio-heading{
+  }
+  
+  #five-features .fv-item p.portfolio-heading{
     padding-top: 13px;
-}
-
+  }
 /*STATS AND CONFIG SECTION STARTS*/
 
 #card {
@@ -1946,6 +1962,13 @@ color: #fff;
         min-width: 0;
     }
 
+    #description .container .row .desc-card{
+        margin-left: 20px;
+        margin-right: 20px;
+        /* box-shadow: 0 5px 32px 0 rgba(0,0,0,.1); */
+      
+      }
+
     #graph-table .table > thead > tr > th {
         font-size: 0.8em;
     }
@@ -2062,10 +2085,25 @@ color: #fff;
         font-size: 0.7em;
     }
 
+    #card .top-cards h4 {
+        font-size: 0.55em;
+        
+     }
+  
+      #card .top-cards p {
+        font-size: 0.45em;
+        
+      }
+
     #card .coin-screener-icon,
     #card .customise-grid-icon {
         display: none;
     }
+
+    #card .input-group {
+        width: 92%;
+        padding-bottom: 30px;
+      } 
 
     #card .form-horizontal .input-group input {
         min-width: 50px;
@@ -2127,9 +2165,17 @@ color: #fff;
     }
 
     #ico-listing-item .ico-card {
-        padding-top: 20px;
-    }
+        margin-left: 15px;
+        margin-right: 20px;
+        width: 350px;
+        }
 
+      #ico-listing-item .btn-block {
+        margin-left: 15px;
+        margin-right: 25px;
+        width: 350px;
+      }
+  
 
     #ico-listing-item .ico-card h3{
         font-size: 1.2em;
@@ -2192,8 +2238,15 @@ color: #fff;
     }
 
     #cp-heading .price-info h3{
-        font-size: 0.9em;
+        font-size: 1em;
+        padding-top: 8px;
+        padding-left: 29px;
+    
+      }
 
+    #cp-heading .price-info h4.in-green-zone {
+        padding-top: 24px;
+        font-size: 0.6em;
     }
 
     #cp-heading .anchors a{
@@ -2234,6 +2287,21 @@ color: #fff;
 
 } 
 
+
+@media(max-width: 400px) {
+
+    #ico-listing-item .ico-card {
+    margin-left: 15px;
+    margin-right: 20px;
+    width: 350px;
+    }
+  
+    #ico-listing-item .btn-block {
+    margin-left: 15px;
+    margin-right: 25px;
+    width: 350px;
+    }
+  }
 
 
 

@@ -15,10 +15,12 @@ class IcoView extends React.Component{
                     namePram = {nameParam}
                     livePram = {liveParam}
                 />
-                <SocailIcon/>
+                <SocailIcon
+                    namePram = {nameParam}
+                />
                 <VideoTable
-                namePram = {nameParam}
-                livePram = {liveParam}
+                    namePram = {nameParam}
+                    livePram = {liveParam}
                 />
                 <Suscribe/>
                 <Description 

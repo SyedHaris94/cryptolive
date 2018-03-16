@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 
 class SocailIcon extends React.Component{
     render(){
+        let icoparam = this.props.namePram
+        {console.log('asdasdger',icoparam)}  
         return(
             <div>
                 {/* <!-- ICO Social Starts --> */}
@@ -9,25 +11,25 @@ class SocailIcon extends React.Component{
                     <div className="container">
                         <div className="row">
                             <div className="col-md-2 social">
-                                <p><i className="fa fa-twitter fa-1.5x"></i> /Medicalchain</p>
+                                <p><i className="fa fa-twitter fa-1.5x"></i> {"/"+icoparam}</p>
                             </div>
                             <div className="col-md-2 social">
-                                    <p><i className="fa fa-facebook"></i> /Medicalchain</p>
+                                    <p><i className="fa fa-facebook"></i> {"/"+icoparam}</p>
                                 </div>
                             {/* <!-- <div className="col-md-2 social">
                                 <p ><i className="fa fa-facebook fa-1.5x"></i> /Medicalchain</p>
                             </div> --> */}
                             <div className="col-md-2 social">
-                                <p><i className="fa fa-github-alt fa-1.5x" ></i> /Medicalchain</p>
+                                <p><i className="fa fa-github-alt fa-1.5x" ></i> {"/"+icoparam}</p>
                             </div>
                             <div className="col-md-2 social">
-                                <p><i className="fa fa-reddit-alien fa-1.5x"></i> /Medicalchain</p>
+                                <p><i className="fa fa-reddit-alien fa-1.5x"></i> {"/"+icoparam}</p>
                             </div>
                             <div className="col-md-2 social">
-                                <p><i className="fa fa-medium fa-1.5x"></i> /Medicalchain</p>
+                                <p><i className="fa fa-medium fa-1.5x"></i> {"/"+icoparam}</p>
                             </div>
                             <div className="col-md-2 social">
-                                <p><i className="fa fa-paper-plane fa-1.5x"></i> /Medicalchain</p>
+                                <p><i className="fa fa-paper-plane fa-1.5x"></i> {"/"+icoparam}</p>
                             </div>
 
                         </div>

@@ -144,9 +144,10 @@ class Bitcoin extends React.Component{
                                        <h3>${pageParam.price_usd} <br /> <span>{pageParam.price_btc} {pageParam.symbol}</span></h3>
                                     </div>
                                     <div className="col-md-4 col-xs-4 ">
-                                        <h4 className="in-green-zone">{pageParam.percent_change_1h}% <i className="fa fa-caret-up" aria-hidden="true"></i></h4>
+                                    {pageParam.percent_change_1h < 0 ?  
                                         <h4 className="in-red-zone">{pageParam.percent_change_1h}% <i className="fa fa-caret-down" aria-hidden="true"></i></h4>
-                                    </div>
+                                      : <h4 className="in-green-zone">{pageParam.percent_change_1h}% <i className="fa fa-caret-up" aria-hidden="true"></i></h4>
+                                    }</div>
                                 </div>
                             </div>
                         </div>
@@ -213,15 +214,16 @@ class Bitcoin extends React.Component{
                                 <div className="row">
                                     <div className="col-md-12 cp-right-card">
                                         <h4>1 Hr</h4>
-                                        <p className="in-green-zone">{pageParam.percent_change_1h}%<i className="fa fa-caret-up " aria-hidden="true"></i></p>
+                                        
+                                       {pageParam.percent_change_1h < 0 ? <p className="in-red-zone">{pageParam.percent_change_1h}%<i className="fa fa-caret-down " aria-hidden="true"></i></p> : <p className="in-green-zone">{pageParam.percent_change_1h}%<i className="fa fa-caret-up " aria-hidden="true"></i></p> }
                                     </div>
                                     <div className="col-md-12 cp-right-card">
                                         <h4>24 Hr</h4>
-                                        <p className="in-green-zone">{pageParam.percent_change_24h}2% <i className="fa fa-caret-up" aria-hidden="true"></i></p>
+                                        {pageParam.percent_change_24h < 0 ? <p className="in-red-zone">{pageParam.percent_change_24h}2% <i className="fa fa-caret-down" aria-hidden="true"></i></p> : <p className="in-green-zone">{pageParam.percent_change_24h}2% <i className="fa fa-caret-up" aria-hidden="true"></i></p> }
                                     </div>
                                     <div className="col-md-12 cp-right-card">
                                         <h4>7 DAYS</h4>
-                                        <p className="in-green-zone">{pageParam.percent_change_7d}% <i className="fa fa-caret-up" aria-hidden="true"></i></p>
+                                        {pageParam.percent_change_7d < 0 ? <p className="in-red-zone">{pageParam.percent_change_7d}% <i className="fa fa-caret-down" aria-hidden="true"></i></p> : <p className="in-red-zone">{pageParam.percent_change_7d}% <i className="fa fa-caret-up" aria-hidden="true"></i></p>}
                                     </div>
                                     {/* <div className="col-md-12 cp-right-card">
                                         <h4>30 DAYS</h4>

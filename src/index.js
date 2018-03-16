@@ -8,13 +8,15 @@ import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
 import store from './store//store'
 
+// import FilteredList from './components/search/search'
 
 
 ReactDOM.render(
 
     <Provider store = {store} >
             <Routes />
-    </Provider>
+            {/* // <FilteredList/> */}
+     </Provider>
 
     
     ,document.getElementById('root'));

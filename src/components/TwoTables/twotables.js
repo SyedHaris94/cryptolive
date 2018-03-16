@@ -145,6 +145,8 @@ class RowData1 extends React.Component{
                           const pageSym = m.name
                           const live = m.live
                           const img = m.name.toLowerCase();
+                          let name = m.name
+                          let ico_name = m.name.substr(0, 5);
                           if (m.count <= 6){
                               return <tr key={m.count}>
                                 <Link to={gotoUrl(pageSym, live)} style={{ textDecoration: "none" }}>
@@ -152,7 +154,7 @@ class RowData1 extends React.Component{
                                         <img src={m.image}
                                             imageParam= {pageSym} 
                                             style={{marginLeft: '15px', width: '45%', height: '30%'}} className="pull-left"/>
-                                        <div style={{textAlign: 'left', marginLeft: '15px'}} class="pull-left"> {m.name}</div>
+                                        <div style={{textAlign: 'left', marginLeft: '15px'}} class="pull-left"> {ico_name + '...'}</div>
                                     </td>
                                 </Link>
                                     <td style={{width: '15%' , }} >
@@ -264,6 +266,9 @@ class RowData2 extends React.Component{
                           const pageSym = m.name
                           const live = m.live
                           const img = m.name.toLowerCase();
+                          let name = m.name
+                          let ico_name = m.name.substr(0, 5);
+                          
                           if (m.count <= 6){
                               return <tr key={v}>
                                 <Link to={gotoUrl(pageSym, live)} style={{ textDecoration: "none" }}>
@@ -271,7 +276,7 @@ class RowData2 extends React.Component{
                                         <img src={m.image}
                                             imageParam= {pageSym} 
                                             style={{marginLeft: '15px', width: '30%', height: '30%'}} className="pull-left"/>
-                                        <div style={{ }} class="pull-right"> {m.name}</div>
+                                        <div style={{ }} class="pull-right"> {ico_name + '...'}</div>
                                     </td>
                                 </Link>
                                   <td style={{width: '10%' , }}  >
