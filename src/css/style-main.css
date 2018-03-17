@@ -75,6 +75,14 @@ body {
     margin-top:-5px;height: 20px;
     
   }
+
+  #navbar-strap .selectpicker {
+    margin-right: 10px; 
+    background-color: #000;
+    border-color: #000;
+    color: #fff;
+  }
+
   /*NAVBAR END*/
   
   /* MAIN BANNER START */
@@ -205,6 +213,12 @@ body {
     -moz-box-shadow: 0 0 20px rgba(0,0,0,.06);
     box-shadow: 0 0 20px rgba(0,0,0,.06);
   }
+
+  #card .selectpicker {
+    background-color: #fff;
+    border-color: transparent;
+    color: #35A0B3;
+  }
   
   #card .top-cards div:nth-child(5) {
     margin-right:0;
@@ -244,6 +258,7 @@ body {
     border: 1px solid #1DA0B4;
     border-right: none;
     border-radius: 0;
+    color: #1DA0B4;
   }
   
   #card .form-horizontal .input-group .input-group-btn .btn-default {

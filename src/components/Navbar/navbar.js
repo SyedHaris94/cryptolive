@@ -23,14 +23,18 @@ class Navbar extends React.Component{
                   <div className="container">
                       <div className="col-md-12">
                         <div className="pull-right right-side-button" >
-                              <img className="top-nav-currency-icon" src={round} />
-                               <a id="style-main" className="style-changer" href="#">
-                                  <i className="fa fa-2x fa-sun-o" aria-hidden="true"></i>
-                              </a>
-                              <a id="dark-theme" className="style-changer" href="#">
-                                  <i className="fa fa-2x fa-moon-o" aria-hidden="true"></i>
-                              </a>
-                              <a data-toggle="modal" data-target="#myModal">LOGIN</a>
+                            <select class="selectpicker" >
+                                <option>USD</option>
+                                <option>EUR</option>
+                            </select>
+                            {/* <img className="top-nav-currency-icon" src={round} /> */}
+                            <a id="style-main" className="style-changer" href="#">
+                                <i className="fa fa-2x fa-sun-o" aria-hidden="true"></i>
+                            </a>
+                            <a id="dark-theme" className="style-changer" href="#">
+                                <i className="fa fa-2x fa-moon-o" aria-hidden="true"></i>
+                            </a>
+                            <a data-toggle="modal" data-target="#myModal">LOGIN</a>
                               {/* <Link to='auth' style={{textDecoration: 'none'}}>LOGIN</Link> */}
                                   {/* <Link to='auth' style={{textDecoration: 'none'}}>SIGN UP</Link> */}
                         </div>

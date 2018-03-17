@@ -43,6 +43,14 @@ body {
     color: #fff;
 }
 
+
+#navbar-strap .selectpicker {
+    margin-right: 10px; 
+    background-color: #000;
+    border-color: #000;
+    color: #fff;
+  }
+
 /*NAVBAR END*/
 
 /* MAIN BANNER START */
@@ -165,6 +173,12 @@ body {
     box-shadow: 0 0 20px rgba(0,0,0,.06);
 }
 
+#card .selectpicker {
+    background-color: #fff;
+    border-color: transparent;
+    color: #35A0B3;
+}
+
 #card .top-cards div:nth-child(5) {
     margin-right:0;
 }
@@ -204,6 +218,7 @@ body {
     border-right: none;
     background-color: #2a3a4d;
     border-radius: 0;
+    color: #1DA0B4;
 }
 
 #card .form-horizontal .input-group .input-group-btn .btn-default {
@@ -218,6 +233,8 @@ body {
     background: transparent;
     border-left: none;
 }
+
+
 
 /*FIVE FEATURES END*/
 

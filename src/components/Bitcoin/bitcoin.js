@@ -219,7 +219,7 @@ class Bitcoin extends React.Component{
                                     </div>
                                     <div className="col-md-12 cp-right-card">
                                         <h4>24 Hr</h4>
-                                        {pageParam.percent_change_24h < 0 ? <p className="in-red-zone">{pageParam.percent_change_24h}2% <i className="fa fa-caret-down" aria-hidden="true"></i></p> : <p className="in-green-zone">{pageParam.percent_change_24h}2% <i className="fa fa-caret-up" aria-hidden="true"></i></p> }
+                                        {pageParam.percent_change_24h < 0 ? <p className="in-red-zone">{pageParam.percent_change_24h}% <i className="fa fa-caret-down" aria-hidden="true"></i></p> : <p className="in-green-zone">{pageParam.percent_change_24h}% <i className="fa fa-caret-up" aria-hidden="true"></i></p> }
                                     </div>
                                     <div className="col-md-12 cp-right-card">
                                         <h4>7 DAYS</h4>

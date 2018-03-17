@@ -40,7 +40,6 @@ class LeftColBrowse extends React.Component{
                                         <li>
                                             <a href="#">JavaScript</a>
                                         </li>
-                                        <li className="divider"></li>
                                         <li>
                                             <a href="#">About Us</a>
                                         </li>

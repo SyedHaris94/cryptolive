@@ -11,7 +11,7 @@ class Home extends Component {
             <Auth/>
             <FiveFeature/>
             <Middle/>
-            <TableData/>
+            {/* <TableData/> */}
             <HomePagination/>
             <BottomCards/>
             <Footer/>

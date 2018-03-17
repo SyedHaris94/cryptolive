@@ -2,9 +2,6 @@ import React, {Component} from 'react'
 
 import {HomePagination} from '../index'
 
-// import number format
-import NumberFormat from 'react-number-format';
-
 // react-router
 import { Link } from "react-router-dom";
 
@@ -14,52 +11,59 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 import MiddleWare from '../../store//middleware/middleware'
 
-
 import Pagination from "react-js-pagination";
 
 // TableData > TableRow > CrptoDetail > ImageChart > ClickableTable
 
+
 class TableData extends React.Component{
-constructor(props){
-  super(props);
-  this.state = {
-  }
+
+componentDidMount(){
+  console.log('afdasda', this.props.table)
 }
   
   render(){
-    
+    // const pageData = this.props.tableData
     const pageData = this.props.tableData
-    return(
-    
-    <div>
 
+    // const pageData = this.props.tableDat
+
+    return(
+    <div>
         <section id="graph-table" >    
           <div className="container">
-                  <div className="row">
-                    <table className="table">
-                      <thead>
-                        <tr>
-                          <th>RANK</th>
-                          <th>NAME</th>
-                          <th>PRICE</th>
-                          <th>MARKETCAP</th>
-                          <th>VOLUME (24H)</th>
-                          <th>CIRCULATING</th>
-                          <th>1h</th>
-                          <th>24h</th>
-                          <th>WEEKLY</th>
-                        </tr>
-                      </thead>
-                        <GraphTable/>
-                      </table>
-                      {/* <TablePagination/> */}
-                  </div>
-                </div>
+            <div className="row">
+                <table className="table">
+                  <thead>
+                    <tr>
+                      <th>RANK</th>
+                      <th>NAME</th>
+                      <th>PRICE</th>
+                      <th>MARKETCAP</th>
+                      <th>VOLUME (24H)</th>
+                      <th>CIRCULATING</th>
+                      <th>1h</th>
+                      <th>24h</th>
+                      <th>WEEKLY</th>
+                    </tr>
+                  </thead>
+                    <GraphTable tableDat = {this.props.table}/>
+                </table>
+                {/* <ul className="list-group">
+                  {
+                    this.props.items.map(function(item) {
+                      return 
+                      <li className="list-group-item" data-category={item} key={item}>{item}</li>
+                    })
+                  }
+                </ul> */}
+                  {/* <TablePagination/> */}
+            </div>
+          </div>
                 {/* <HomePagination
                   // imgNumbers={m.symbol}
                   page={pageData}
                 /> */}
-                
         </section>
       </div>
     )
@@ -79,7 +83,7 @@ class GraphTable extends React.Component{
     
     this.state = {
       tableData: [],
-      isLoading: true
+      // isLoading: true
 
     };
 
@@ -122,9 +126,9 @@ rateData = (start, end) => {
 }
 
 
-componentDidMount() {
-  this.rateData(0, 150);
-}
+  componentDidMount() {
+    this.rateData(0, 150);
+  }
 
     render(){
 
@@ -133,15 +137,15 @@ componentDidMount() {
               pathname: `/bitcoin/${sym}`
             }
           }
-          const pageData = this.state.tableData
+          const pageData = this.props.tableDat
            
         return (
-            
             <tbody>
+              {console.log('arace',pageData)}
                 {/* {console.log('page data ',pageData )} */}
                   {/* <!-- GRAPH TABLE STARTS--> */}
-                  {this.state.isLoading ? <h1 style={{ marginLeft: '400px',textAlign: 'center', color: 'pink' }}>loading ...</h1> : 
-                           this.state.tableData.map(
+                 
+                           {this.state.tableData.map(
                                 (m, v) => {
                               const pageSym = m.symbol
                               let name = m.name;
@@ -151,14 +155,13 @@ componentDidMount() {
                                       <td className="td-border">
                                         {m.rank}
                                       </td>
-                                      <td style={{ width: "15%" }}>
+                                      <td style={{ width: "10%" }}>
                                         <Link to={gotoUrl(pageSym)} style={{ textDecoration: "none" }}>
-                                        <td style={{width: '20%' , textAlign: 'left'}} >
-                                              <img src={"https://chasing-coins.com/api/v1/std/logo/"+pageSym+""} className="pull-left"
-                                                  style={{width: '20%', }}/>
-                                              <div style={{textAlign: 'left', paddingTop: '5px', marginLeft: '10px'}} class="pull-left"> {c_name + '...'} <br/>{m.symbol}  </div>
-                                        </td>
-                                      
+                                          <td style={{width: '20%' , textAlign: 'left'}} >
+                                            <img src={"https://chasing-coins.com/api/v1/std/logo/"+pageSym+""} className="pull-left"
+                                                style={{width: '20%', }}/>
+                                            <div style={{textAlign: 'left', marginLeft: '10px'}} class="pull-left"> {c_name + '...'} <br/>{m.symbol}  </div>
+                                          </td>
                                         </Link>
                                       </td>
                                       {m.percent_change_1h < 0 ?  <td className="graph-td-red-1">
@@ -168,7 +171,6 @@ componentDidMount() {
                                         ${m.price_usd.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                                         <i className="fa fa-caret-up" aria-hidden="true" style={{ paddingLeft: "5px" }} />
                                       </td>}
-                                     
                                       <td>
                                         ${
                                           m.market_cap_usd.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
@@ -204,12 +206,6 @@ componentDidMount() {
                                         imgNumbers={m.symbol}
                                         page={pageData}
                                       />
-
-                                      {/* <HomePagination
-                                        imgNumbers={m.symbol}
-                                        page={pageData}
-                                      /> */}
-
                                         {m.percent_change_7d}%
                                         <i className="fa fa-caret-down" aria-hidden="true" style={{ paddingLeft: "5px", color:'#c11b55'}} />                                                                  
                                       </td> : <td className="graph-td-green">
@@ -217,12 +213,6 @@ componentDidMount() {
                                         imgNumbers={m.symbol}
                                         page={pageData}
                                       />
-
-                                      {/* <HomePagination
-                                        imgNumbers={m.symbol}
-                                        page={pageData}
-                                      /> */}
-
                                         {m.percent_change_7d}%
                                         <i className="fa fa-caret-up" aria-hidden="true" style={{ paddingLeft: "5px", color:'#2e7d32'}} />                                                                  
                                       </td>}
@@ -232,11 +222,8 @@ componentDidMount() {
                               ) 
                               }
             </tbody>
-   
-         
       )
-                                
-                              {/* GRAPH TABLE ENDS */}
+      {/* GRAPH TABLE ENDS */}
 
     }
 }
@@ -298,29 +285,11 @@ class ImageChart extends React.Component{
                           Math.round(item.high , item.low)
                         );
                       })}
-                    {/* <svg viewBox="0 0 500 100" class="chart">
-                      <polyline
-                        fill="none"
-                        stroke="#0074d9"
-                        stroke-width="2"
-                        points="
-                        108,101
-                        110,103
-                        110,102
-                        111,108
-                        115,110
-                        115,110
-                        116,114
-                      "
-                      />
-                    </svg> */}
-                   
                     <img src={"https://chart.googleapis.com/chart?&cht=ls&chd=t:"+x[0]+","+x[1]+","+x[2]+","+x[3]+","+x[4]+","+x[5]+","+x[6]+"&chco=ff0000&chs=180x50&chds=0,"+Math.max(...x)+""} />
                     </div>
                   );
               }
   }
-
 
   // class TablePagination extends React.Component{
   //   constructor(props) {
