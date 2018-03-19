@@ -19,14 +19,9 @@ import Pagination from "react-js-pagination";
 class TableData extends React.Component{
 
 componentDidMount(){
-  console.log('afdasda', this.props.table)
 }
   
   render(){
-    // const pageData = this.props.tableData
-    const pageData = this.props.tableData
-
-    // const pageData = this.props.tableDat
 
     return(
     <div>
@@ -37,33 +32,30 @@ componentDidMount(){
                   <thead>
                     <tr>
                       <th>RANK</th>
-                      <th>NAME</th>
-                      <th>PRICE</th>
-                      <th>MARKETCAP</th>
-                      <th>VOLUME (24H)</th>
-                      <th>CIRCULATING</th>
-                      <th>1h</th>
-                      <th>24h</th>
-                      <th>WEEKLY</th>
+                      <th>NAME</th> 
+                      <th>PRICE</th> 
+                      {this.props.market ? <th>MARKETCAP</th> : null}
+                      {this.props.volume ? <th>VOLUME (24H)</th> : null}
+                      {this.props.circul ? <th>CIRCULATING</th> : null}
+                      {this.props.one_h ? <th>1h</th> : null}
+                      {this.props.twenty_4 ? <th>24h</th> : null}
+                      {this.props.week ?<th>WEEKLY</th> : null}
                     </tr>
                   </thead>
-                    <GraphTable tableDat = {this.props.table}/>
+                    <GraphTable 
+                    tableDat = {this.props.table} 
+                    market_param = {this.props.market}
+                    volume_param = {this.props.volume}
+                    circul_param = {this.props.circul}
+                    one_h_param = {this.props.one_h}
+                    twenty_4_param = {this.props.twenty_4}
+                    week_param = {this.props.week} />
                 </table>
-                {/* <ul className="list-group">
-                  {
-                    this.props.items.map(function(item) {
-                      return 
-                      <li className="list-group-item" data-category={item} key={item}>{item}</li>
-                    })
-                  }
-                </ul> */}
+             
                   {/* <TablePagination/> */}
             </div>
           </div>
-                {/* <HomePagination
-                  // imgNumbers={m.symbol}
-                  page={pageData}
-                /> */}
+              
         </section>
       </div>
     )
@@ -77,59 +69,6 @@ export default (TableData)
 
 class GraphTable extends React.Component{
 
-  constructor(props) {
-            
-    super(props);
-    
-    this.state = {
-      tableData: [],
-      // isLoading: true
-
-    };
-
-  }
-
-rateData = (start, end) => {
-
-  const url = 'https://api.coinmarketcap.com/v1/ticker/?start='+start+'&limit='+end+'';
-
-  fetch(url).then( r => r.json())
-    .then((marketData) => {
-      const tabledata = [];
-
-      for (let index in marketData){
-        tabledata.push({
-            id: marketData[index].id,
-            rank: marketData[index].rank,
-            name: marketData[index].name,
-            symbol: marketData[index].symbol,
-            rank: marketData[index].rank,
-            price_usd: marketData[index].price_usd,
-            market_cap_usd: marketData[index].market_cap_usd,
-            volume_usd: marketData[index]['24h_volume_usd'],
-            available_supply: marketData[index].available_supply,
-            percent_change_1h: marketData[index].percent_change_1h,
-            percent_change_24h: marketData[index].percent_change_24h,
-            percent_change_7d: marketData[index].percent_change_7d
-          });
-      }
-      
-      this.setState({
-        tableData: tabledata,
-        isLoading: false
-
-      })
-    })
-    .catch((e) => {
-      console.log(e);
-    });
-}
-
-
-  componentDidMount() {
-    this.rateData(0, 150);
-  }
-
     render(){
 
         function gotoUrl(sym) {
@@ -138,6 +77,12 @@ rateData = (start, end) => {
             }
           }
           const pageData = this.props.tableDat
+          const market_param = this.props.market_param
+          const volume_param = this.props.volume_param
+          const circul_param = this.props.circul_param
+          const one_h_param = this.props.one_h_param
+          const twenty_4_param = this.props.twenty_4_param
+          const week_param = this.props.week_param
            
         return (
             <tbody>
@@ -145,82 +90,82 @@ rateData = (start, end) => {
                 {/* {console.log('page data ',pageData )} */}
                   {/* <!-- GRAPH TABLE STARTS--> */}
                  
-                           {this.state.tableData.map(
-                                (m, v) => {
-                              const pageSym = m.symbol
-                              let name = m.name;
-                              let c_name = name.substr(0, 5);
+              {pageData.map(
+                  (m, v) => {
+                const pageSym = m.symbol
+                let name = m.name;
+                let c_name = name.substr(0, 5);
 
-                                  return <tr key={v}>
-                                      <td className="td-border">
-                                        {m.rank}
-                                      </td>
-                                      <td style={{ width: "10%" }}>
-                                        <Link to={gotoUrl(pageSym)} style={{ textDecoration: "none" }}>
-                                          <td style={{width: '20%' , textAlign: 'left'}} >
-                                            <img src={"https://chasing-coins.com/api/v1/std/logo/"+pageSym+""} className="pull-left"
-                                                style={{width: '20%', }}/>
-                                            <div style={{textAlign: 'left', marginLeft: '10px'}} class="pull-left"> {c_name + '...'} <br/>{m.symbol}  </div>
-                                          </td>
-                                        </Link>
-                                      </td>
-                                      {m.percent_change_1h < 0 ?  <td className="graph-td-red-1">
-                                        ${m.price_usd.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                                        <i className="fa fa-caret-down" aria-hidden="true" style={{ paddingLeft: "5px" }} />
-                                      </td> :  <td className="graph-td-green">
-                                        ${m.price_usd.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                                        <i className="fa fa-caret-up" aria-hidden="true" style={{ paddingLeft: "5px" }} />
-                                      </td>}
-                                      <td>
-                                        ${
-                                          m.market_cap_usd.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                                        }
-                                      </td>
-                                      <td>
-                                        ${
-                                        m.volume_usd.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                                        }
-                                      </td>
-                                      <td>
-                                        {
-                                          m.available_supply.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                                        }
-                                      </td>
-                                      {m.percent_change_1h < 0 ?  <td className="graph-td-red-1">
-                                        {m.percent_change_1h}%
-                                        <i className="fa fa-caret-down" aria-hidden="true" style={{ paddingLeft: "5px" }} />
-                                      </td> : <td className="graph-td-green">
-                                        {m.percent_change_1h}%
-                                        <i className="fa fa-caret-up" aria-hidden="true" style={{ paddingLeft: "5px" }} />
-                                      </td>}
-                                     
-                                      {m.percent_change_24h < 0 ? <td className="graph-td-red-1">
-                                        {m.percent_change_24h}%
-                                        <i className="fa fa-caret-down" aria-hidden="true" style={{ paddingLeft: "5px" }} />
-                                      </td> : <td className="graph-td-green">
-                                        {m.percent_change_24h}%
-                                        <i className="fa fa-caret-up" aria-hidden="true" style={{ paddingLeft: "5px" }} />
-                                      </td>}
-                                      {m.percent_change_7d < 0 ? <td className="graph-td-red-1">
-                                      <ImageChart 
-                                        imgNumbers={m.symbol}
-                                        page={pageData}
-                                      />
-                                        {m.percent_change_7d}%
-                                        <i className="fa fa-caret-down" aria-hidden="true" style={{ paddingLeft: "5px", color:'#c11b55'}} />                                                                  
-                                      </td> : <td className="graph-td-green">
-                                      <ImageChart 
-                                        imgNumbers={m.symbol}
-                                        page={pageData}
-                                      />
-                                        {m.percent_change_7d}%
-                                        <i className="fa fa-caret-up" aria-hidden="true" style={{ paddingLeft: "5px", color:'#2e7d32'}} />                                                                  
-                                      </td>}
-                                      
-                                    </tr>;
-                                }
-                              ) 
-                              }
+                    return <tr key={v}>
+                        <td className="td-border">
+                          {m.rank}
+                        </td>
+                        <td style={{ width: "10%" }}>
+                          <Link to={gotoUrl(pageSym)} style={{ textDecoration: "none" }}>
+                            <td style={{width: '20%' , textAlign: 'left'}} >
+                              <img src={"https://chasing-coins.com/api/v1/std/logo/"+pageSym+""} className="pull-left"
+                                  style={{width: '20%', }}/>
+                              <div style={{textAlign: 'left', marginLeft: '10px'}} class="pull-left"> {c_name + '...'} <br/>{m.symbol}  </div>
+                            </td>
+                          </Link>
+                        </td>
+                        {m.percent_change_1h < 0 ?  <td className="graph-td-red-1">
+                          ${m.price_usd.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                          <i className="fa fa-caret-down" aria-hidden="true" style={{ paddingLeft: "5px" }} />
+                        </td> :  <td className="graph-td-green">
+                          ${m.price_usd.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                          <i className="fa fa-caret-up" aria-hidden="true" style={{ paddingLeft: "5px" }} />
+                        </td>}
+                        
+                        {market_param ?  
+                        <td>
+                          ${m.market_cap_usd.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                        </td> : null }
+                        { volume_param ?
+                        <td>
+                          ${m.volume_usd.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                        </td> : null }
+                        {circul_param  ?
+                        <td>
+                          {m.available_supply.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                        </td> : null }
+                        { one_h_param ?
+                          m.percent_change_1h < 0 ?  <td className="graph-td-red-1">
+                          {m.percent_change_1h}%
+                          <i className="fa fa-caret-down" aria-hidden="true" style={{ paddingLeft: "5px" }} />
+                        </td> : <td className="graph-td-green">
+                          {m.percent_change_1h}%
+                          <i className="fa fa-caret-up" aria-hidden="true" style={{ paddingLeft: "5px" }} />
+                        </td> : null }
+                        {twenty_4_param ?
+                          m.percent_change_24h < 0 ? <td className="graph-td-red-1">
+                          {m.percent_change_24h}%
+                          <i className="fa fa-caret-down" aria-hidden="true" style={{ paddingLeft: "5px" }} />
+                        </td> : <td className="graph-td-green">
+                          {m.percent_change_24h}%
+                          <i className="fa fa-caret-up" aria-hidden="true" style={{ paddingLeft: "5px" }} />
+                        </td> : null }
+                        {week_param ?
+                          m.percent_change_7d < 0 ? <td className="graph-td-red-1">
+                        <ImageChart 
+                          imgNumbers={m.symbol}
+                          page={pageData}
+                        />
+                          {m.percent_change_7d}%
+                          <i className="fa fa-caret-down" aria-hidden="true" style={{ paddingLeft: "5px", color:'#c11b55'}} />                                                                  
+                        </td> : <td className="graph-td-green">
+                        <ImageChart 
+                          imgNumbers={m.symbol}
+                          page={pageData}
+                        />
+                          {m.percent_change_7d}%
+                          <i className="fa fa-caret-up" aria-hidden="true" style={{ paddingLeft: "5px", color:'#2e7d32'}} />                                                                  
+                        </td> : null }
+                        
+                      </tr>;
+                  }
+                ) 
+                }
             </tbody>
       )
       {/* GRAPH TABLE ENDS */}
@@ -326,3 +271,58 @@ class ImageChart extends React.Component{
   //     );
   //   }
   // }
+
+
+
+  //   constructor(props) {
+//             
+//     super(props);
+    
+//     this.state = {
+//       tableData: [],
+//       // isLoading: true
+
+//     };
+
+//   }
+
+// rateData = (start, end) => {
+
+//   const url = 'https://api.coinmarketcap.com/v1/ticker/?start='+start+'&limit='+end+'';
+
+//   fetch(url).then( r => r.json())
+//     .then((marketData) => {
+//       const tabledata = [];
+
+//       for (let index in marketData){
+//         tabledata.push({
+//             id: marketData[index].id,
+//             rank: marketData[index].rank,
+//             name: marketData[index].name,
+//             symbol: marketData[index].symbol,
+//             rank: marketData[index].rank,
+//             price_usd: marketData[index].price_usd,
+//             market_cap_usd: marketData[index].market_cap_usd,
+//             volume_usd: marketData[index]['24h_volume_usd'],
+//             available_supply: marketData[index].available_supply,
+//             percent_change_1h: marketData[index].percent_change_1h,
+//             percent_change_24h: marketData[index].percent_change_24h,
+//             percent_change_7d: marketData[index].percent_change_7d
+//           });
+//       }
+      
+//       this.setState({
+//         tableData: tabledata,
+//         isLoading: false
+
+//       })
+//     })
+//     .catch((e) => {
+//       console.log(e);
+//     });
+// }
+
+
+//   componentDidMount() {
+//     this.rateData(0, 150);
+//   }

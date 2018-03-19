@@ -235,7 +235,7 @@ class Bitcoin extends React.Component{
                     </div>
                 </section>
                 {/* <!--CURRENCY CHART ENDS--> */}
-                <div id="bitcoin-table"> <TableData/> </div>
+                {/* <div id="bitcoin-table"> <TableData/> </div> */}
                 <BottomCards/>
                 <Footer/>
             </div>

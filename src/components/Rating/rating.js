@@ -17,7 +17,6 @@ class Rating extends React.Component{
         this.handleTeamChange = this.handleTeamChange.bind(this);
         this.handleConceptChange = this.handleConceptChange.bind(this);
         this.handleWhiteChange = this.handleWhiteChange.bind(this);
-
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.handleCommentChange = this.handleCommentChange.bind(this);
         
