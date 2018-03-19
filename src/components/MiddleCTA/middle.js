@@ -22,7 +22,7 @@ class Middle extends React.Component{
             term : '',
             tableData: [],
             isLoading: true,
-            timerInterval: 1000,
+            timerInterval: 2000,
             // showResults : false
             market_show: true,
             volume_show : true,

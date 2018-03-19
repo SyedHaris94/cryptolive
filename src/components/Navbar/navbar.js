@@ -12,10 +12,27 @@ import Auth from '../auth/auth'
 import { Link } from "react-router-dom";
 
 class Navbar extends React.Component{
+
+    constructor(props){
+        super(props);
+        this.state = {
+            selectedOption1: 'usd',
+        }
+        this.handlecurrency = this.handlecurrency.bind(this);
+    }
+
+    handlecurrency(e){
+        
+        this.setState({
+            selectedOption1: e.target.value,
+        });
+
+    }
+    
     render(){
         return(
             <div>
-
+{console.log('you have selected',this.state.selectedOption1)}
                {/* NAVBAR SECTION STARTS*/}
           <section id="navbar-strap">
           <div className="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -23,9 +40,10 @@ class Navbar extends React.Component{
                   <div className="container">
                       <div className="col-md-12">
                         <div className="pull-right right-side-button" >
-                            <select class="selectpicker" >
-                                <option>USD</option>
-                                <option>EUR</option>
+                            <select class="selectpicker" value={this.state.selectedOption1} onChange={this.handlecurrency} >
+                                <option value="pkr">PKR</option>
+                                <option value="usd">USD</option>
+                                <option value="eur">EUR</option>
                             </select>
                             {/* <img className="top-nav-currency-icon" src={round} /> */}
                             <a id="style-main" className="style-changer" href="#">
