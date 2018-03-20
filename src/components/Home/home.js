@@ -4,13 +4,16 @@ import {Navbar, Jumbo,Auth, FiveFeature, Middle, TableData, HomePagination, Bott
 
 class Home extends Component {
   render() {
+    let currency = this.props.selectedOption1
+console.log('curr',currency)
     return (
+
       <div className="App">
             <Navbar/>   
             <Jumbo/>  
             <Auth/>
             <FiveFeature/>
-            <Middle/>
+            <Middle currency = {currency}/>
             {/* <TableData/> */}
             <HomePagination/>
             <BottomCards/>

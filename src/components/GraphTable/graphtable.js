@@ -11,16 +11,11 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 import MiddleWare from '../../store//middleware/middleware'
 
-import Pagination from "react-js-pagination";
-
-// TableData > TableRow > CrptoDetail > ImageChart > ClickableTable
+// import Pagination from 'react-paginating';
 
 
 class TableData extends React.Component{
 
-componentDidMount(){
-}
-  
   render(){
 
     return(
@@ -49,9 +44,10 @@ componentDidMount(){
                     circul_param = {this.props.circul}
                     one_h_param = {this.props.one_h}
                     twenty_4_param = {this.props.twenty_4}
-                    week_param = {this.props.week} />
+                    week_param = {this.props.week}
+                    curren_select = {this.props.curr_select} />
                 </table>
-             
+             {console.log('sd',this.props.curr_select)}
                   {/* <TablePagination/> */}
             </div>
           </div>
@@ -67,11 +63,11 @@ componentDidMount(){
 export default (TableData)
 
 
+
 class GraphTable extends React.Component{
-
-    render(){
-
-        function gotoUrl(sym) {
+  render(){
+  
+    function gotoUrl(sym) {
             return {
               pathname: `/bitcoin/${sym}`
             }
@@ -83,20 +79,40 @@ class GraphTable extends React.Component{
           const one_h_param = this.props.one_h_param
           const twenty_4_param = this.props.twenty_4_param
           const week_param = this.props.week_param
-           
-        return (
+          const curren_select = this.props.curren_select
+
+          console.log(curren_select)
+             return (
             <tbody>
+
               {console.log('arace',pageData)}
-                {/* {console.log('page data ',pageData )} */}
                   {/* <!-- GRAPH TABLE STARTS--> */}
                  
               {pageData.map(
                   (m, v) => {
                 const pageSym = m.symbol
                 let name = m.name;
-                let c_name = name.substr(0, 5);
+                if (name.length > 7){
+                  var c_name = name.substr(0, 7);
+                  var c_name = c_name+'...' ;
+                  
+                }
+                else{
+                  var c_name = name;
+                }
+                
+                if (curren_select === "usd"){
+                   var market = m.market_cap_usd
+                   var price = m.price_usd
+                   var volume = m.volume_usd
+                }
+                else if(curren_select === "eur"){
+                   var market = m.market_cap_eur
+                   var price = m.price_eur
+                   var volume = m.volume_eur
+                }
 
-                    return <tr key={v}>
+              return <tr key={v}>
                         <td className="td-border">
                           {m.rank}
                         </td>
@@ -105,25 +121,26 @@ class GraphTable extends React.Component{
                             <td style={{width: '20%' , textAlign: 'left'}} >
                               <img src={"https://chasing-coins.com/api/v1/std/logo/"+pageSym+""} className="pull-left"
                                   style={{width: '20%', }}/>
-                              <div style={{textAlign: 'left', marginLeft: '10px'}} class="pull-left"> {c_name + '...'} <br/>{m.symbol}  </div>
+                              <div style={{textAlign: 'left', marginLeft: '10px'}} class="pull-left"> {c_name} <br/>{m.symbol}  </div>
                             </td>
                           </Link>
                         </td>
-                        {m.percent_change_1h < 0 ?  <td className="graph-td-red-1">
-                          ${m.price_usd.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                        {m.percent_change_1h < 0 ? 
+                        <td style={{ width: "15%" }} className="graph-td-red-1">
+                          {curren_select === "usd" ? '$' + price.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : '€' + price.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                           <i className="fa fa-caret-down" aria-hidden="true" style={{ paddingLeft: "5px" }} />
                         </td> :  <td className="graph-td-green">
-                          ${m.price_usd.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                          {curren_select === "usd" ? '$' + price.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : '€' + price.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}                          
                           <i className="fa fa-caret-up" aria-hidden="true" style={{ paddingLeft: "5px" }} />
                         </td>}
                         
                         {market_param ?  
                         <td>
-                          ${m.market_cap_usd.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                          { curren_select === "usd" ? '$' + market.replace(/\B(?=(\d{3})+(?!\d))/g, ",") :  '€' + market.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                         </td> : null }
                         { volume_param ?
                         <td>
-                          ${m.volume_usd.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                          {curren_select === "usd" ? '$' + volume.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : '€' + volume.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                         </td> : null }
                         {circul_param  ?
                         <td>
@@ -166,6 +183,7 @@ class GraphTable extends React.Component{
                   }
                 ) 
                 }
+
             </tbody>
       )
       {/* GRAPH TABLE ENDS */}
@@ -236,41 +254,41 @@ class ImageChart extends React.Component{
               }
   }
 
-  // class TablePagination extends React.Component{
-  //   constructor(props) {
-  //     super(props);
-  //     this.state = {
-  //       activePage: 1
-  //     };
-  //     this.handlePageChange = this.handlePageChange.bind(this)
-  //   }
+  class TablePagination extends React.Component{
+    constructor(props) {
+      super(props);
+      this.state = {
+        activePage: 1
+      };
+      this.handlePageChange = this.handlePageChange.bind(this)
+    }
 
-  // handlePageChange(pageNumber) {
-  // console.log(`active page is ${pageNumber}`);
-  // this.setState({activePage: pageNumber});
-  // }
+  handlePageChange(pageNumber) {
+  console.log(`active page is ${pageNumber}`);
+  this.setState({activePage: pageNumber});
+  }
 
 
-  //   render(){
-  //     return(
-  //       <div>
-  //         {/* <!-- HOME PAGINATION --> */}
-  //         {/* <section id="homepage-pagination">
-  //             <div className="col-md-12" align="center">
-  //                 <Pagination
-  //                 activePage={this.state.activePage}
-  //                 itemsCountPerPage={50}
-  //                 totalItemsCount={450}
-  //                 pageRangeDisplayed={5}
-  //                 onChange={this.handlePageChange}
-  //                  />
-  //             </div>
-  //           </section> */}
-  //           {/* <!-- HOME PAGINATION ENDS --> */}
-  //       </div>
-  //     );
-  //   }
-  // }
+    render(){
+      return(
+        <div>
+          {/* <!-- HOME PAGINATION --> */}
+          {/* <section id="homepage-pagination">
+              <div className="col-md-12" align="center">
+                  <Pagination
+                  activePage={this.state.activePage}
+                  itemsCountPerPage={50}
+                  totalItemsCount={450}
+                  pageRangeDisplayed={5}
+                  onChange={this.handlePageChange}
+                   />
+              </div>
+            </section> */}
+            {/* <!-- HOME PAGINATION ENDS --> */}
+        </div>
+      );
+    }
+  }
 
 
 

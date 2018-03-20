@@ -19,32 +19,27 @@ class Navbar extends React.Component{
             selectedOption1: 'usd',
         }
         this.handlecurrency = this.handlecurrency.bind(this);
+
     }
 
     handlecurrency(e){
-        
         this.setState({
             selectedOption1: e.target.value,
         });
-
     }
-    
+
+   
     render(){
         return(
             <div>
-{console.log('you have selected',this.state.selectedOption1)}
-               {/* NAVBAR SECTION STARTS*/}
+        
+              {/* NAVBAR SECTION STARTS*/}
           <section id="navbar-strap">
           <div className="navbar navbar-default navbar-fixed-top" role="navigation">
               <div className="col-md-12 top-nav">
                   <div className="container">
                       <div className="col-md-12">
                         <div className="pull-right right-side-button" >
-                            <select class="selectpicker" value={this.state.selectedOption1} onChange={this.handlecurrency} >
-                                <option value="pkr">PKR</option>
-                                <option value="usd">USD</option>
-                                <option value="eur">EUR</option>
-                            </select>
                             {/* <img className="top-nav-currency-icon" src={round} /> */}
                             <a id="style-main" className="style-changer" href="#">
                                 <i className="fa fa-2x fa-sun-o" aria-hidden="true"></i>

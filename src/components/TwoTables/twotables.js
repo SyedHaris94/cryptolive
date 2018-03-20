@@ -145,8 +145,15 @@ class RowData1 extends React.Component{
                           const pageSym = m.name
                           const live = m.live
                           const img = m.name.toLowerCase();
-                          let name = m.name
-                          let ico_name = m.name.substr(0, 5);
+                          let name = m.name;
+                        //   console.log('strlength',name.length)
+                          if (name.length > 6){
+                            var ico_name = name.substr(0, 5);
+                            var ico_name = ico_name+'...' ;
+                          }
+                          else{
+                            var ico_name = name;
+                          }
                           if (m.count <= 6){
                               return <tr key={m.count}>
                                 <Link to={gotoUrl(pageSym, live)} style={{ textDecoration: "none" }}>
@@ -154,7 +161,7 @@ class RowData1 extends React.Component{
                                         <img src={m.image}
                                             imageParam= {pageSym} 
                                             style={{marginLeft: '15px', width: '45%', height: '30%'}} className="pull-left"/>
-                                        <div style={{textAlign: 'left', marginLeft: '15px'}} class="pull-left"> {ico_name + '...'}</div>
+                                        <div style={{textAlign: 'left', marginLeft: '15px'}} class="pull-left"> {ico_name}</div>
                                     </td>
                                 </Link>
                                     <td style={{width: '15%' , }} >
@@ -169,24 +176,6 @@ class RowData1 extends React.Component{
                                     <td style={{width: '15%' , }}>
                                         23
                                     </td>
-                                    {/* <td >
-                                        3.5
-                                    </td>
-                                    <td>
-                                        23
-                                    </td>
-                                    <td >
-                                        3.5
-                                    </td>
-                                    <td>
-                                        23
-                                    </td>
-                                    <td >
-                                        3.5
-                                    </td>
-                                    <td>
-                                        23
-                                    </td> */}
                                     <td>
                                     <i className="fa fa-facebook favicon-icons" aria-hidden="true">
                                     </i>
@@ -262,39 +251,47 @@ class RowData2 extends React.Component{
             <tbody>
             {/* {console.log('dsdsd',this.state.tableData2)} */}
             {this.state.tableData2.map ? this.state.tableData2.map(
-                            (m, v) => {
-                          const pageSym = m.name
-                          const live = m.live
-                          const img = m.name.toLowerCase();
-                          let name = m.name
-                          let ico_name = m.name.substr(0, 5);
-                          
-                          if (m.count <= 6){
-                              return <tr key={v}>
-                                <Link to={gotoUrl(pageSym, live)} style={{ textDecoration: "none" }}>
-                                <td style={{width: '35%' , textAlign: 'left'}} >
-                                        <img src={m.image}
-                                            imageParam= {pageSym} 
-                                            style={{marginLeft: '15px', width: '30%', height: '30%'}} className="pull-left"/>
-                                        <div style={{ }} class="pull-right"> {ico_name + '...'}</div>
-                                    </td>
-                                </Link>
-                                  <td style={{width: '10%' , }}  >
-                                    3.5
-                                  </td>
-                                  <td style={{width: '10%' , }} >
-                                    23
-                                  </td>
-                                  <td style={{width: '10%' , }} >
-                                  <i className="fa fa-facebook favicon-icons" aria-hidden="true">
-                                  </i>
-                                  <i className="fa fa-twitter favicon-icons" aria-hidden="true"></i> 
-                                  </td>
-                                  
-                                </tr>;
-                          }
-                            }
-                          ) : <div />}
+                        (m, v) => {
+                        const pageSym = m.name
+                        const live = m.live
+                        const img = m.name.toLowerCase();
+                        
+                        let name = m.name;
+                        // console.log('strlength',name.length)
+                        if (name.length > 6){
+                        var ico_name = name.substr(0, 5);
+                        var ico_name = ico_name+'...' ;
+                        
+                        }
+                        else{
+                        var ico_name = name;
+                        }
+                        if (m.count <= 6){
+                            return <tr key={v}>
+                            <Link to={gotoUrl(pageSym, live)} style={{ textDecoration: "none" }}>
+                            <td style={{width: '35%' , textAlign: 'left'}} >
+                                    <img src={m.image}
+                                        imageParam= {pageSym} 
+                                        style={{marginLeft: '15px', width: '30%', height: '30%'}} className="pull-left"/>
+                                    <div style={{ }} class="pull-right"> {ico_name}</div>
+                                </td>
+                            </Link>
+                                <td style={{width: '10%' , }}  >
+                                3.5
+                                </td>
+                                <td style={{width: '10%' , }} >
+                                23
+                                </td>
+                                <td style={{width: '10%' , }} >
+                                <i className="fa fa-facebook favicon-icons" aria-hidden="true">
+                                </i>
+                                <i className="fa fa-twitter favicon-icons" aria-hidden="true"></i> 
+                                </td>
+                                
+                            </tr>;
+                        }
+                        }
+                        ) : <div />}
             </tbody>
         );
     }

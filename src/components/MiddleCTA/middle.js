@@ -15,8 +15,8 @@ import NumberFormat from 'react-number-format';
 import TableData from '../GraphTable/graphtable'
 
 class Middle extends React.Component{
-  
-    constructor(props){
+
+  constructor(props){
         super(props);
         this.state = {
             term : '',
@@ -31,6 +31,9 @@ class Middle extends React.Component{
             twenty_4_show: true,
             week_show : true,
 
+            selectedOption1: 'usd',
+
+
 
 
         }
@@ -38,8 +41,15 @@ class Middle extends React.Component{
         // this.filterList = this.filterList.bind(this);
         this.searchHandler = this.searchHandler.bind(this);
         this.searchFor = this.searchFor.bind(this);
+        this.handlecurrency = this.handlecurrency.bind(this);
+
     }
 
+    handlecurrency(e){
+        this.setState({
+            selectedOption1: e.target.value,
+        });
+    }
 
     getNames = () => {
         console.log('names');
@@ -59,7 +69,7 @@ class Middle extends React.Component{
 
     rateData = (start, end) => {
 
-        const url = 'https://api.coinmarketcap.com/v1/ticker/?start='+start+'&limit='+end+'';
+        const url = 'https://api.coinmarketcap.com/v1/ticker/?convert=EUR&start='+start+'&limit='+end+'';
       
         fetch(url).then( r => r.json())
           .then((marketData) => {
@@ -73,8 +83,11 @@ class Middle extends React.Component{
                   symbol: marketData[index].symbol,
                   rank: marketData[index].rank,
                   price_usd: marketData[index].price_usd,
+                  price_eur: marketData[index].price_eur,
                   market_cap_usd: marketData[index].market_cap_usd,
+                  market_cap_eur: marketData[index].market_cap_eur,
                   volume_usd: marketData[index]['24h_volume_usd'],
+                  volume_eur: marketData[index]['24h_volume_eur'],
                   available_supply: marketData[index].available_supply,
                   percent_change_1h: marketData[index].percent_change_1h,
                   percent_change_24h: marketData[index].percent_change_24h,
@@ -118,6 +131,10 @@ class Middle extends React.Component{
         );
         // for catching the API array
         let m = this.props.resdata;
+        
+        const curr_select = this.state.selectedOption1
+        {console.log('you have selected',curr_select)}
+          
 
         return(
             <div>
@@ -125,23 +142,28 @@ class Middle extends React.Component{
                 <section id="card" >
                     <div className="container">
                         <div className="row">
-                        {this.state.data}
                             <div className="top-cards" align="center">
                                 <div className="col-md-1 col-xs-2 refresh-rate-card">
                                     <h4>REFRESH</h4>
-                                    <select id="timerInterval" class="selectpicker" onChange={this.handleTimer}>
+                                    <select id="timerInterval" className="selectpicker" onChange={this.handleTimer}>
                                         <option value= "2">2 Sec</option>
                                         <option value = "5">5 Sec</option>
                                         <option value = "10">10 Sec</option>
                                     </select>        
                                 </div>
-                                {/* <div className="col-md-1 col-xs-2 korean-option-card">
-                                    <h4>KOREAN</h4>
-                                    <p>2 Sec</p>
-                                </div>                                 */}
+                                <div className="col-md-1 col-xs-2 curren-option-card">
+                                    <h4>CURRENCY</h4>
+                                    <select class="selectpicker" value={this.state.selectedOption1} onChange={this.handlecurrency} >
+                                        <option value="usd">USD</option>
+                                        <option value="eur">EUR</option>
+                                    </select>     
+                                </div>                                
                                 <div className="col-md-2 col-xs-2 global-market">        
                                     <h4>GLOBAL MARKET</h4>
-                                   <p><NumberFormat value={m.total_market_cap_usd} displayType={'text'} thousandSeparator={true} prefix={'$'} /></p>
+                                    {/* {console.log('sds',m.total_market_cap_usd.replace(/\B(?=(\d{3})+(?!\d))/g, ","))} */}
+                                    <p>{curr_select === "usd" ? '$' + m.total_market_cap_usd : '€' + m.total_market_cap_usd * 0.814079}</p>
+
+                                   {/* <p><NumberFormat value={curr_select === 'usd' ? m.total_market_cap_usd : m.total_market_cap_usd * 0.814079} displayType={'text'} thousandSeparator={true}/></p> */}
                                 </div>
                                 <div className="col-md-1 col-xs-2 bitcoin-dominance-card">
                                     <h4>DOMINANCE</h4>
@@ -158,7 +180,7 @@ class Middle extends React.Component{
                                 <p>CUSTOMIZE GRID</p>
                             </div> */}
 
-                            <div className="col-md-2 col-md-offset-2 coin-screener-icon">
+                            <div className="col-md-1 col-md-offset-2 coin-screener-icon">
                                 <a href="#" style={{textDecoration: 'none'}} data-toggle="modal" data-target="#layoutModal"><img className="pull-left" src={glass} alt="logo"/><p>LAYOUT</p></a>
                             </div>
                             <div className="col-md-2 col-xs-12 form-inpt">
@@ -170,109 +192,109 @@ class Middle extends React.Component{
                                         </div>
                                     </div>
                                 </form>
-                            </div>                        
+                            </div>     
+                                         
                         </div>
                     </div>
                     {this.state.isLoading ? <h1 style={{textAlign: 'center', color: 'pink' }}>loading ...</h1> : 
-                                     <TableData 
-                                        table={filterData} 
-                                        // name= {this.state.name_show }
-                                        market = {this.state.market_show}
-                                        volume = {this.state.volume_show}
-                                        circul = {this.state.cicular_show}
-                                        one_h = {this.state.one_h_show}
-                                        twenty_4 = {this.state.twenty_4_show}
-                                        week = {this.state.week_show}
-                                    /> 
-                                   
+                        <TableData 
+                            table={filterData} 
+                            market = {this.state.market_show}
+                            volume = {this.state.volume_show}
+                            circul = {this.state.cicular_show}
+                            one_h = {this.state.one_h_show}
+                            twenty_4 = {this.state.twenty_4_show}
+                            week = {this.state.week_show}
+                            curr_select = {curr_select}
+                        /> 
                     }
 
-
                     {/* Layout Modal */}
-                    <div id="layoutModal" class="modal fade" role="dialog">
-                    <div class="modal-dialog">
+                    <div id="layoutModal" className="modal fade" role="dialog">
+                        <div className="modal-dialog">
+                            {/* <!-- Modal content--> */}
+                            <div className="modal-content" align="center">
+                                <div className="modal-header" align= "center">
+                                    <button type="button" className="close" data-dismiss="modal">&times;</button>
+                                    <h3 className="modal-title">Column Visibility</h3>
+                                    <h4>Select values you wish to see</h4>
+                                </div>
+                                <div className="modal-body col-md-6" >
+                                    <div className="row"> 
+                                        <span style={{marginLeft: '20px'}}>Market Cap</span>
+                                        <div className="col-md-offset-1">
+                                            <label className="switch">
+                                                <input type="checkbox" data-toggle="toggle"  onClick={() => this.setState({ market_show: !market_show })}/>
+                                                <span className="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="modal-body col-md-6" >
+                                    <div className="row"> 
+                                        <span style={{marginLeft: '20px'}}>Volume</span>
+                                        <div className="col-md-offset-1">
+                                            <label className="switch">
+                                                <input type="checkbox" data-toggle="toggle" onClick={() => this.setState({ volume_show: !volume_show })}/>
+                                                <span className="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="modal-body col-md-6" >
+                                    <div className="row"> 
+                                    <span style={{marginLeft: '20px'}}>Circulating</span>
+                                        <div className="col-md-offset-1">   
+                                            <label className="switch">
+                                                <input type="checkbox" data-toggle="toggle" onClick={() => this.setState({ cicular_show: !cicular_show })}/>
+                                                <span className="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="modal-body col-md-6" >
+                                    <div class = "row">
+                                        <span style={{marginLeft: '20px'}}>1 h </span> 
+                                        <div className="col-md-offset-1">  
+                                            <label className="switch">
+                                                <input type="checkbox" data-toggle="toggle" onClick={() => this.setState({ one_h_show: !one_h_show })}/>
+                                                <span className="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="modal-body col-md-6" >
+                                    <div className="row"> 
+                                        <span style={{marginLeft: '20px'}}>24 h </span> 
+                                        <div className="col-md-offset-1"> 
+                                            <label className="switch">
+                                                <input type="checkbox" data-toggle="toggle" onClick={() => this.setState({ twenty_4_show: !twenty_4_show })}/>
+                                                <span className="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="modal-body col-md-6" >
+                                    <div className="row"> 
+                                        <span style={{marginLeft: '20px'}}>Weekly</span> 
+                                        <div className="col-md-offset-1"> 
+                                            <label className="switch">
+                                                <input type="checkbox" data-toggle="toggle" onClick={() => this.setState({ week_show: !week_show })}/>
+                                                <span className="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="modal-footer">
+                                    <button type="button" className="btn btn-success" data-dismiss="modal">Done</button>
+                                </div>
+                            </div>
 
-                        {/* <!-- Modal content--> */}
-                        <div class="modal-content" align="center">
-                            <div class="modal-header" align= "center">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h3 class="modal-title">Column Visibility</h3>
-                                <h4>Select values you wish to see</h4>
-                            </div>
-                            <div class="modal-body col-md-6" >
-                                <div class="row"> 
-                                    <span style={{marginLeft: '20px'}}>Market Cap</span>
-                                    <div class="col-md-offset-1">
-                                        <label class="switch">
-                                            <input type="checkbox" data-toggle="toggle"  onClick={() => this.setState({ market_show: !market_show })}/>
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-body col-md-6" >
-                                <div class="row"> 
-                                    <span style={{marginLeft: '20px'}}>Volume</span>
-                                    <div class="col-md-offset-1">
-                                        <label class="switch">
-                                            <input type="checkbox" data-toggle="toggle" onClick={() => this.setState({ volume_show: !volume_show })}/>
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-body col-md-6" >
-                                <div class="row"> 
-                                <span style={{marginLeft: '20px'}}>Circulating</span>
-                                    <div class="col-md-offset-1">   
-                                        <label class="switch">
-                                            <input type="checkbox" data-toggle="toggle" onClick={() => this.setState({ cicular_show: !cicular_show })}/>
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-body col-md-6" >
-                                <div class = "row">
-                                    <span style={{marginLeft: '20px'}}>1 h </span> 
-                                    <div class="col-md-offset-1">  
-                                        <label class="switch">
-                                            <input type="checkbox" data-toggle="toggle" onClick={() => this.setState({ one_h_show: !one_h_show })}/>
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-body col-md-6" >
-                                <div class="row"> 
-                                    <span style={{marginLeft: '20px'}}>24 h </span> 
-                                    <div class="col-md-offset-1"> 
-                                        <label class="switch">
-                                            <input type="checkbox" data-toggle="toggle" onClick={() => this.setState({ twenty_4_show: !twenty_4_show })}/>
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-body col-md-6" >
-                                <div class="row"> 
-                                    <span style={{marginLeft: '20px'}}>Weekly</span> 
-                                    <div class="col-md-offset-1"> 
-                                        <label class="switch">
-                                            <input type="checkbox" data-toggle="toggle" onClick={() => this.setState({ week_show: !week_show })}/>
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-success" data-dismiss="modal">Done</button>
-                            </div>
                         </div>
-
-                    </div>
                     </div>
 
+
+                
                 </section>
                 {/* <!-- MIDDLE CTA ENDS--> */}
             </div>

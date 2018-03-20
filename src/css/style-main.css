@@ -275,6 +275,14 @@ input:checked + .slider:before {
     box-shadow: 0 0 20px rgba(0,0,0,.06);
   }
 
+  #card .top-cards .refresh-rate-card{
+    padding-bottom: 6px
+  }
+
+  #card .top-cards .curren-option-card{
+    padding-bottom: 6px
+  }
+
   #card .selectpicker {
     background-color: #fff;
     border-color: transparent;

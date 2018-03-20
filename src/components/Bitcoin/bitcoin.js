@@ -18,11 +18,9 @@ import moment from 'moment';
 import ToolTip from '../tooltip/tooltip';
 
 // import line chart
-import LineChart from '../linechart/linechart';
+// import LineChart from '../linechart/linechart';
 
-
-// import images0
-import BTC from '../../icons/BTC.png'
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 
 class Bitcoin extends React.Component{
@@ -79,6 +77,7 @@ class Bitcoin extends React.Component{
     }
 
     render(){
+       
         // for catching the API array
         let m = this.props.resdata;
         // {console.log('parameters',this.props.resdata)}
@@ -96,13 +95,15 @@ class Bitcoin extends React.Component{
                     test.symbol = m.symbol;
                     test.rank = m.rank;
                     test.price_usd = m.price_usd;
+                    test.price_eur = m.price_eur;
                     test.price_btc = m.price_btc;
                     test['24h_volume_usd'] = m['24h_volume_usd'];
+                    test['24h_volume_eur'] = m['24h_volume_eur'];
                     test.market_cap_usd = m.market_cap_usd;
+                    test.market_cap_eur = m.market_cap_eur;
                     test.available_supply = m.available_supply;
                     test.total_supply = m.total_supply;
                     test.max_supply = m.max_supply;
-                    test.market_cap_usd = m.market_cap_usd;
                     test.percent_change_1h = m.percent_change_1h;
                     test.percent_change_24h = m.percent_change_24h;
                     test.percent_change_7d = m.percent_change_7d;
@@ -116,7 +117,23 @@ class Bitcoin extends React.Component{
         }
 
         let pageParam = gotoUrl(m, urlParam);
-        
+
+        const data = [
+            {name: 'January', volume: 4000, price: 2400, },
+            {name: 'February', volume: 3000, price: 1398, },
+            {name: 'March', volume: 2000, price: 9800, },
+            {name: 'April', volume: 2780, price: 3908, },
+            {name: 'May', volume: 1890, price: 4800, },
+            {name: 'June', volume: 2390, price: 3800, },
+            {name: 'July', volume: 3490, price: 1890, },
+            {name: 'August', volume: 1890, price: 4800, },
+            {name: 'September', volume: 2390, price: 9800, },
+            {name: 'October', volume: 3490, price: 3800, },
+            {name: 'November', volume: 2390, price: 1890, },
+            {name: 'December', volume: 1890, price: 4800, },
+         
+      ];
+        let data1 = this.state.data
     return(
             <div>
                 <Navbar/>
@@ -124,7 +141,7 @@ class Bitcoin extends React.Component{
                 <section id="cp-heading">
                     <div className="container">
                         <div className="row">
-                        {/* {console.log('asdasd', this.state.data)} */}
+                        {console.log('asdasd', data1)}
                             <div className="col-md-8 col-xs-8">
                             {/* {console.log('logo', this.props.imageParam)} */}
                             <img src={"https://chasing-coins.com/api/v1/std/logo/"+this.props.match.params.symbol+""} className="pull-left img-responsive currency-icon" style={{width: '10%', height: '10%'}}/>
@@ -194,8 +211,18 @@ class Bitcoin extends React.Component{
                         <div className="row">
 
                             <div className="col-md-10 " id="graph-imag">
-                                {/* <div className= "container"> */}
-                                    <div className='row'>
+                            <LineChart width={800} height={300} data={data}
+                                    margin={{top: 5, right: 30, left: 20, bottom: 5}}>
+                                <XAxis dataKey="name"/>
+                                <YAxis/>
+                                <CartesianGrid strokeDasharray="3 3"/>
+                                <Tooltip/>
+                                <Legend />
+                                <Line type="monotone" dataKey="price" stroke="#8884d8" activeDot={{r: 6}}/>
+                                <Line type="monotone" dataKey="volume" stroke="#82ca9d" />
+                            </LineChart>
+                                {/* <div className= "container">
+                                     <div className='row'>
                                         <div className='popup'>
                                             {this.state.hoverLoc ? <ToolTip hoverLoc={this.state.hoverLoc} activePoint={this.state.activePoint}/> : null}
                                         </div>
@@ -206,8 +233,8 @@ class Bitcoin extends React.Component{
                                             <LineChart data={this.state.data} onChartHover={ (a,b) => this.handleChartHover(a,b) }/>
                                             : null }
                                         </div>
-                                    </div>
-                                {/* </div> */}
+                                    </div> 
+                                </div> */}
                             </div>
 
                             <div className="col-md-2 cp-right-panel">
