@@ -24,7 +24,11 @@ export class handleAction {
     static SENDRATING = "SENDRATING";
     static GETRATING = "GETRATING"
 
+    static SENDCRYPTO = "SENDCRYPTO";
 
+    static SEND_ICO = "SEND_ICO";
+    static SEND_UC_ICO = "SEND_UC_ICO";
+    static SEND_END_ICO = "SEND_END_ICO";
 
     static login = (payload) => ({
         type: handleAction.LOGIN,
@@ -40,25 +44,41 @@ export class handleAction {
         type: handleAction.PASSWORD_RESET,
         payload
     })
+
     static userprofile = (payload) => ({
         type: handleAction.USERPROFILE,
         payload
     })
-
 
     static sendRating = (payload) => ({
         type: handleAction.SENDRATING,
         payload
     })
 
-    
     static getRating = (payload) => ({
         type: handleAction.GETRATING,
         payload
     })
 
+    static send_crypto = (payload) => ({
+        type: handleAction.SENDCRYPTO,
+        payload
+    })
 
+    static send_ICO = (payload) => ({
+        type: handleAction.SEND_ICO,
+        payload
+    })
 
+    static send_uc_ICO = (payload) => ({
+        type: handleAction.SEND_UC_ICO,
+        payload
+    })
+
+    static send_end_ICO = (payload) => ({
+        type: handleAction.SEND_END_ICO,
+        payload
+    })
 
     static getData1 = (payload) => ({
         type: handleAction.GETDATA_1,

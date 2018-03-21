@@ -147,6 +147,128 @@ export default class MiddleWare{
         };
       }
 
+    static  sendCryptoCurr(data){
+        console.log("send data", data);
+        return dispatch => {
+            let database = DB.database.ref("CryptoCurrency")
+            if(data.coin !== data.coin){
+
+            database.push(
+              {
+                coin: data.coin 
+              }
+            ,
+              success => {
+                dispatch(
+                  handleAction.send_crypto(
+                    {
+                    coin: data.coin
+                    }
+                  )
+                ),
+                console.log('succesfully updated data');
+               }
+            );
+        }
+        else {
+                console.log('already exist');
+            }
+        }};
+
+   
+    static  sendAllICO(data){
+            console.log("send data", data);
+            return dispatch => {
+                let database = DB.database.ref("ICO/All ICO")
+                if(data.allico !== data.allico){
+    
+                database.push(
+                  {
+                    allico: data.allico 
+                  }
+                ,
+                  success => {
+                    dispatch(
+                      handleAction.send_ICO(
+                        {
+                            allico: data.allico
+                        }
+                      )
+                    ),
+                    alert('success')
+                    // console.log('succesfully updated data');
+                   }
+                );
+            }
+            else {
+                alert('exist')
+                    // console.log('already exist');
+                }
+            }};
+    
+
+
+    static sendUpcomingICO(data){
+        console.log("send data", data);
+        return dispatch => {
+            let database = DB.database.ref("ICO/Upcoming ICO")
+            if(data.upcomingico === data.upcomingico){
+
+            database.push(
+                {
+                    upcomingico: data.upcomingico
+                }
+            ,
+                success => {
+                dispatch(
+                    handleAction.send_ICO(
+                    {
+                        upcomingico: data.upcomingico
+                    }
+                    )
+                ),
+                alert('successfully sent');
+                // console.log('succesfully updated data');
+                }
+            );
+        }
+        else {
+                alert('already exist');
+                // console.log('already exist');
+            }
+        }};
+
+    static sendEndedICO(data){
+        console.log("send data", data);
+        return dispatch => {
+            let database = DB.database.ref("ICO/Ended ICO")
+            if(data.endedico === data.endedico){
+
+            database.push(
+                {
+                    endedico: data.endedico
+                }
+            ,
+                success => {
+                dispatch(
+                    handleAction.send_end_ICO(
+                    {
+                        endedico: data.endedico
+                    }
+                    )
+                ),
+                alert('successfully sent');
+                // console.log('succesfully updated data');
+                }
+            );
+        }
+        else {
+                alert('already exist');
+                // console.log('already exist');
+            }
+        }};
+    
+
       static GetRating() {
         console.log("fetching data");
         return dispatch => {

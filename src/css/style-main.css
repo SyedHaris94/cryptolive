@@ -178,6 +178,7 @@ input:checked + .slider:before {
   
   .jumbotron .btn-default:active{
     color: #fff;
+    border-color: #fff;
     background-color: transparent;
   }
   
@@ -185,18 +186,6 @@ input:checked + .slider:before {
     margin-right: 30px;
   }
   
-
-/* #five-features .div1{
-  width: 150px;
-  height: 150px;
-  background-color: blue;
-  display: inline-block;
-}
-
-#five-features .div1.active{
-  background-color: red;
-} */
-
   /* MAIN BANNER END */
   
   /*FIVE FEATURES START*/

@@ -45,7 +45,8 @@ class TableData extends React.Component{
                     one_h_param = {this.props.one_h}
                     twenty_4_param = {this.props.twenty_4}
                     week_param = {this.props.week}
-                    curren_select = {this.props.curr_select} />
+                    curren_select = {this.props.curr_select} 
+                    />
                 </table>
              {console.log('sd',this.props.curr_select)}
                   {/* <TablePagination/> */}

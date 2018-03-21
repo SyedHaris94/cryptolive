@@ -131,8 +131,8 @@ class Bitcoin extends React.Component{
             {name: 'October', volume: 3490, price: 3800, },
             {name: 'November', volume: 2390, price: 1890, },
             {name: 'December', volume: 1890, price: 4800, },
-         
-      ];
+        ];
+        
         let data1 = this.state.data
     return(
             <div>

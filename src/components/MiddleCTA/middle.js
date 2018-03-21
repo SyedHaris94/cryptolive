@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-// import axios from 'axios';
 
 import { connect } from 'react-redux';
 import MiddleWare from '../../store//middleware/middleware'
@@ -30,18 +29,13 @@ class Middle extends React.Component{
             one_h_show : true,
             twenty_4_show: true,
             week_show : true,
-
             selectedOption1: 'usd',
-
-
-
-
+            coin: ''
         }
-
-        // this.filterList = this.filterList.bind(this);
         this.searchHandler = this.searchHandler.bind(this);
         this.searchFor = this.searchFor.bind(this);
         this.handlecurrency = this.handlecurrency.bind(this);
+        this.SendCryptoData = this.SendCryptoData.bind(this);
 
     }
 
@@ -111,7 +105,7 @@ class Middle extends React.Component{
         this.props.getdataa();
         this.rateData(0, 150);
         setTimeout(this.getNames, this.state.timerInterval);
-
+        this.SendCryptoData();
     }
 
     handleTimer = (e) => {
@@ -119,6 +113,20 @@ class Middle extends React.Component{
         console.log('interval', val*1000);
         this.setState({timerInterval: val*1000})
      }
+
+
+     SendCryptoData (ev) {
+        // ev.preventDefault();
+        let crypto_coin = this.state.tableData
+        console.log('rate', crypto_coin)
+        let crypto = {
+            coin : crypto_coin
+
+        }
+        console.log("crypto Curr info", crypto);
+
+        this.props.sendingData(crypto);
+    }
 
     render(){
         const { name_show, market_show, volume_show, cicular_show, one_h_show, twenty_4_show, week_show } = this.state;
@@ -133,11 +141,11 @@ class Middle extends React.Component{
         let m = this.props.resdata;
         
         const curr_select = this.state.selectedOption1
-        {console.log('you have selected',curr_select)}
+        console.log('you have selected',curr_select)
           
-
+        console.log('filterDataa',filterData)
         return(
-            <div>
+            <div >
                 {/* <!-- MIDDLE CTA STARTS--> */}
                 <section id="card" >
                     <div className="container">
@@ -160,7 +168,6 @@ class Middle extends React.Component{
                                 </div>                                
                                 <div className="col-md-2 col-xs-2 global-market">        
                                     <h4>GLOBAL MARKET</h4>
-                                    {/* {console.log('sds',m.total_market_cap_usd.replace(/\B(?=(\d{3})+(?!\d))/g, ","))} */}
                                     <p>{curr_select === "usd" ? '$' + m.total_market_cap_usd : '€' + m.total_market_cap_usd * 0.814079}</p>
 
                                    {/* <p><NumberFormat value={curr_select === 'usd' ? m.total_market_cap_usd : m.total_market_cap_usd * 0.814079} displayType={'text'} thousandSeparator={true}/></p> */}
@@ -188,7 +195,7 @@ class Middle extends React.Component{
                                     <div className="input-group">
                                         <input type="text" className="form-control form-control-lg" placeholder="Search" onChange={this.searchHandler} value = {term}/>
                                         <div className="input-group-btn">
-                                            <button className="btn btn-default" type="submit"><i className="glyphicon glyphicon-search"></i></button>
+                                            <button className="btn btn-default" type="submit" ><i className="glyphicon glyphicon-search"></i></button>
                                         </div>
                                     </div>
                                 </form>
@@ -305,7 +312,11 @@ class Middle extends React.Component{
 
 const mapDispatchToProps = (dispatch) => {
     return ({
-        getdataa : () => {dispatch(MiddleWare.GetGlobal()); }
+        getdataa : () => {dispatch(MiddleWare.GetGlobal())},
+        
+        sendingData: cr_coin => {
+            dispatch(MiddleWare.sendCryptoCurr(cr_coin))
+            },
     })
 }
 
