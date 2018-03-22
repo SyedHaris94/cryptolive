@@ -1,17 +1,17 @@
 import { handleAction } from '../actions/handleaction';
 
 const initialState = {
-    ico_data : [],
+    end_ico_data: [],
 }
 
-const ICOReducer = ( state = initialState, actions) => {
+const EndedICOReducer = ( state = initialState, actions) => {
     // console.log('action payload', actions.payload)
     switch (actions.type) {
-        case handleAction.SEND_ICO:
+        case handleAction.SEND_END_ICO:
             return { ...state }
             break;
-        case handleAction.GET_ICO:
-            return {...state, ico_data: actions.payload}
+        case handleAction.GET_END_ICO:
+            return {...state, end_ico_data: actions.payload}
             break;
         default:
             return state
@@ -19,4 +19,4 @@ const ICOReducer = ( state = initialState, actions) => {
 
 }
 
-export default ICOReducer;
+export default EndedICOReducer;

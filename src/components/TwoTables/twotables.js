@@ -3,6 +3,9 @@ import React, {Component} from 'react'
 // react-router
 import { Link } from "react-router-dom";
 
+import { connect } from 'react-redux';
+import MiddleWare from '../../store//middleware/middleware'
+
 class TwoTable extends React.Component{
     render(){
         
@@ -81,7 +84,26 @@ class TwoTable extends React.Component{
 }
 
 
-export default TwoTable;
+const mapDispatchToProps = (dispatch) => {
+    return ({
+        getList: () => {
+            dispatch(MiddleWare.fetchIcoData());
+            },
+        getupcoming: () => {
+            dispatch(MiddleWare.fetchUpcomingICO());
+            },
+    })
+}
+
+
+const mapStateToProps = (state) => {
+    return ({
+        AllIcoState: state.ICOReducer.ico_data,
+        upcomingIcoState: state.UpcomingICOReducer.up_ico_data,
+    })
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TwoTable);
 
 
 class RowData1 extends React.Component{

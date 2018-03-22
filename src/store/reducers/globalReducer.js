@@ -6,7 +6,7 @@ const initialState = {
 
 
 const GlobalReducer = (state = initialState, actions) => {
-    console.log('action payload', actions.payload)
+    // console.log('action payload', actions.payload)
     switch (actions.type) {
         case handleAction.GETGLOBAL:
             return {...state, data: actions.payload}

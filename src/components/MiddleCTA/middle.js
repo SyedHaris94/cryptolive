@@ -106,6 +106,8 @@ class Middle extends React.Component{
         this.rateData(0, 150);
         setTimeout(this.getNames, this.state.timerInterval);
         this.SendCryptoData();
+        // console.log("didmount running",this.props.getList());
+        this.props.getList();
     }
 
     handleTimer = (e) => {
@@ -114,8 +116,7 @@ class Middle extends React.Component{
         this.setState({timerInterval: val*1000})
      }
 
-
-     SendCryptoData (ev) {
+    SendCryptoData (ev) {
         // ev.preventDefault();
         let crypto_coin = this.state.tableData
         console.log('rate', crypto_coin)
@@ -130,7 +131,7 @@ class Middle extends React.Component{
 
     render(){
         const { name_show, market_show, volume_show, cicular_show, one_h_show, twenty_4_show, week_show } = this.state;
-
+        console.log("list", this.props.listState[0])
         const {term} = this.state;
         let filterData = this.state.tableData.filter(
             (tableData) => {
@@ -141,9 +142,9 @@ class Middle extends React.Component{
         let m = this.props.resdata;
         
         const curr_select = this.state.selectedOption1
-        console.log('you have selected',curr_select)
+        // console.log('you have selected',curr_select)
           
-        console.log('filterDataa',filterData)
+        // console.log('filterDataa',filterData)
         return(
             <div >
                 {/* <!-- MIDDLE CTA STARTS--> */}
@@ -181,11 +182,6 @@ class Middle extends React.Component{
                                     <p>{m.active_markets}</p>
                                 </div>
                             </div>
-
-                            {/* <div className="col-md-offset-1 col-md-1 customise-grid-icon">
-                                <img className="img-responsive pull-left" src={setting} alt="logo"/>
-                                <p>CUSTOMIZE GRID</p>
-                            </div> */}
 
                             <div className="col-md-1 col-md-offset-2 coin-screener-icon">
                                 <a href="#" style={{textDecoration: 'none'}} data-toggle="modal" data-target="#layoutModal"><img className="pull-left" src={glass} alt="logo"/><p>LAYOUT</p></a>
@@ -296,12 +292,8 @@ class Middle extends React.Component{
                                     <button type="button" className="btn btn-success" data-dismiss="modal">Done</button>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-
-
-                
                 </section>
                 {/* <!-- MIDDLE CTA ENDS--> */}
             </div>
@@ -313,19 +305,17 @@ class Middle extends React.Component{
 const mapDispatchToProps = (dispatch) => {
     return ({
         getdataa : () => {dispatch(MiddleWare.GetGlobal())},
-        
-        sendingData: cr_coin => {
-            dispatch(MiddleWare.sendCryptoCurr(cr_coin))
-            },
+        getList: () => {dispatch(MiddleWare.fetchCryptoData())},
+        sendingData: cr_coin => {dispatch(MiddleWare.sendCryptoCurr(cr_coin))},
     })
 }
 
 const mapStateToProps = (state) => {
     return ({
-        resdata : state.GlobalReducer.data
-        
+        resdata : state.GlobalReducer.data,
+        listState: state.CryptoReducer.crypto_data,
     })
-
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Middle);
+
+export default connect(mapStateToProps,mapDispatchToProps)(Middle);

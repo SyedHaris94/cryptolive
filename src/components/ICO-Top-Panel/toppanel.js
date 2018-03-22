@@ -11,9 +11,10 @@ class IcoTopPanel extends React.Component{
             icoData1: [],
             icoData2: [],
             icoData3: [],
-            allico: '',
-            upcomingico: '',
-            endedico: ''
+            allico: [],
+            upcomingico: [],
+            endedico: [],
+            
 
         };
         this.SendAllICo = this.SendAllICo.bind(this);
@@ -40,6 +41,7 @@ class IcoTopPanel extends React.Component{
                     timezone: marketData.ico.live[index].timezone,
                     description: marketData.ico.live[index].description,
                     count: count,
+                    live: 1
                 });
                 count++
             }
@@ -69,6 +71,7 @@ class IcoTopPanel extends React.Component{
                     timezone: marketData.ico.upcoming[index].timezone,
                     description: marketData.ico.upcoming[index].description,
                     count: count,
+                    live: 0
                 });
                 count++
             }
@@ -111,13 +114,27 @@ class IcoTopPanel extends React.Component{
           });
       }
 
-    componentDidMount() {
+    // componentWillMount() {
+    //     this.activeData();
+    //     this.upcomingData();
+    //     this.FinishedData();
+    //     // this.SendAllICo();
+    //     // this.SendEndedICo();
+    //     // this.SendUpcomingICo();
+    //     this.props.getList();
+    //     this.props.getupcoming();
+    //     this.props.getended(); 
+
+    // }
+
+    componentDidMount(){
+        this.SendAllICo();
         this.activeData();
         this.upcomingData();
         this.FinishedData();
-        // this.SendAllICo();
-        // this.SendEndedICo();
-        // this.SendUpcomingICo();
+        this.props.getList();
+        this.props.getupcoming();
+        this.props.getended();     
     }
 
     SendAllICo(ev){
@@ -137,12 +154,12 @@ class IcoTopPanel extends React.Component{
     SendUpcomingICo(ev){
         ev.preventDefault();
         let upcoming_ico = this.state.icoData2;
-        console.log('rate', upcoming_ico)
+        // console.log('rate', upcoming_ico)
         let UpcomingIco = {
             upcomingico : upcoming_ico
 
         }
-        console.log("upcoming ico info", UpcomingIco);
+        // console.log("upcoming ico info", UpcomingIco);
 
         this.props.sendingData2(UpcomingIco);
 
@@ -151,29 +168,41 @@ class IcoTopPanel extends React.Component{
     SendEndedICo(ev){
         ev.preventDefault();
         let ended_ico = this.state.icoData3;
-        console.log('rate', ended_ico)
+        // console.log('rate', ended_ico)
         let Endedico = {
             endedico : ended_ico
 
         }
-        console.log("ended ico info", Endedico);
+        // console.log("ended ico info", Endedico);
 
         this.props.sendingData3(Endedico);
 
     }
-
     render(){
         let allico = this.state.icoData1.length;
         let upcomingico = this.state.icoData2.length;
         let endedico = this.state.icoData3.length;
             
+    
+        {console.log("api_list_0", this.state.icoData1)}
+        {console.log("api_list_1", this.state.icoData2)}
+        {console.log("api_list_2", this.state.icoData3)}
+
+        {console.log("list0", this.props.AllIcoState)}
+        {console.log("list1", this.props.upcomingIcoState)}
+        {console.log("list2", this.props.EndedIcoState)}
+  
+        //    let allico = this.props.AllIcoState[0].length;
+        //     let upcomingico = this.props.upcomingIcoState[0].length;
+        //     let endedico = this.props.EndedIcoState[0].length;
+
         return(
 
         // <!--ICO-GREY  -->
             <section id="ico-top-panel">
                 {/* {console.log('dsdsd',this.state.icoData1.length)} */}
-                {console.log('asasc',this.state.icoData2)}
-
+                {/* {console.log('asasc',this.state.icoData2)} */}
+               
                 <div className="container" >
                     <div className="row" >
                         <div className="col-md-9 ico-stats-panel" align="center" >
@@ -231,7 +260,25 @@ const mapDispatchToProps = (dispatch) => {
         sendingData3: end_icodata => {
             dispatch(MiddleWare.sendEndedICO(end_icodata))
             },
+        getList: () => {
+            dispatch(MiddleWare.fetchIcoData());
+            },
+        getupcoming: () => {
+            dispatch(MiddleWare.fetchUpcomingICO());
+            },
+        getended: () => {
+            dispatch(MiddleWare.fetchEndedICO());
+            },
     })
 }
 
-export default connect(null, mapDispatchToProps)(IcoTopPanel);
+
+const mapStateToProps = (state) => {
+    return ({
+        AllIcoState: state.ICOReducer.ico_data,
+        upcomingIcoState: state.UpcomingICOReducer.up_ico_data,
+        EndedIcoState: state.EndedICOReducer.end_ico_data,
+    })
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(IcoTopPanel);

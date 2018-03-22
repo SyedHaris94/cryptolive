@@ -3,6 +3,9 @@ import React, {Component} from 'react'
 // react-router
 import { Link } from "react-router-dom";
 
+import { connect } from 'react-redux';
+import MiddleWare from '../../store//middleware/middleware'
+
 class IcoListingItem extends React.Component{
     
     constructor(props) {      
@@ -48,9 +51,7 @@ class IcoListingItem extends React.Component{
       
 
 
-      upcomingData = () => {
-
-        // const pageID = this.props.match.params.symbol;
+    upcomingData = () => {
         const url = 'https://api.icowatchlist.com/public/v1/upcoming';
       
         fetch(url).then( r => r.json())
@@ -73,44 +74,49 @@ class IcoListingItem extends React.Component{
             this.setState({
                 upcData: upcdata,
             })
-          })
+        })
           .catch((e) => {
             console.log(e);
-          });
-      }
+        });
+    }
       
       
-      componentDidMount() {
-          console.log('did mount run')
+    componentDidMount() {
+        //   console.log('did mount run')
         this.liveData();
         this.upcomingData();
-      }
+        this.props.getList();
+        this.props.getupcoming();
+        this.props.getended(); 
+    }
       
 
 
     render(){
+
+        let allico = this.props.AllIcoState[0];
+        let upcoming = this.props.upcomingIcoState[0];
+        let ended = this.props.EndedIcoState[0];
+
         function gotoUrl(sym,live) {
             return {
               pathname: `/icoview/${sym}/${live}`
             }
           }
-        //   const comData =
+
         let combine = this.state.icoData.concat(this.state.upcData);
-        console.log('combining data',combine);
+        // let combine = allico.concat(upcoming);
+        // console.log('combining data',allico.concat(upcoming));
         
         return(
             <div>
-                {console.log('abcd',this.state.icoData)}
-                {console.log('xyz',this.state.upcData)}
-                
-
                 {/* ICO LISTING ITEMS STARTS */}
                 <section id="ico-listing-item">
                    {combine.map(
                             (m, v) => {
                             let pageSym = m.name
                             let live = m.live
-                        {console.log('sds',combine[0].name)}
+                        // {console.log('sds',combine[0].name)}
                         const img = m.name.toLowerCase();
                         if (m.count <= 2){
                             return <div className="col-md-9 ico-card" key={m.count}>
@@ -162,4 +168,28 @@ class IcoListingItem extends React.Component{
     }
 }
 
-export default IcoListingItem;
+
+const mapDispatchToProps = (dispatch) => {
+    return ({
+        getList: () => {
+            dispatch(MiddleWare.fetchIcoData());
+            },
+        getupcoming: () => {
+            dispatch(MiddleWare.fetchUpcomingICO());
+            },
+        getended: () => {
+            dispatch(MiddleWare.fetchEndedICO());
+            },
+    })
+}
+
+
+const mapStateToProps = (state) => {
+    return ({
+        AllIcoState: state.ICOReducer.ico_data,
+        upcomingIcoState: state.UpcomingICOReducer.up_ico_data,
+        EndedIcoState: state.EndedICOReducer.end_ico_data,
+    })
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (IcoListingItem);

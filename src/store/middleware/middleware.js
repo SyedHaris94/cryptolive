@@ -11,13 +11,12 @@ export default class MiddleWare{
           return DB.auth
             .signInWithEmailAndPassword(data.email, data.password)
             .then(sent => {
-                           dispatch(handleAction.login(data));
-                            alert("successfully Login");
-                            // route.push(
-                            //     // "/icopage"
-                            //   )
-              }
-            )
+                dispatch(handleAction.login(data));
+                alert("successfully Login");
+                // route.push(
+                //     // "/icopage"
+                //   )
+            })
             .catch(error => {
               var errorMessage ="The email address or password you entered is not valid";
               alert(errorMessage);
@@ -34,7 +33,7 @@ export default class MiddleWare{
               .then(send => {
                 var user = DB.auth.currentUser;
                   console.log('user', user) 
-                       const ref = DB.database.ref("User/" + send.uid);
+                        const ref = DB.database.ref("User/" + send.uid);
                                ref.set(
                                  {
                                     uid:
@@ -69,7 +68,7 @@ export default class MiddleWare{
                                      );
                                    
                                  }
-                               );
+                            );
                       })
         
         };
@@ -131,28 +130,26 @@ export default class MiddleWare{
                 handleAction.sendRating(
                   {
                     comment: data.comment,
-                      Team: data.Team,
-                      Concept: data.Concept,
-                      Whitepaper: data.Whitepaper,
-                      icoName: data.icoName
+                    Team: data.Team,
+                    Concept: data.Concept,
+                    Whitepaper: data.Whitepaper,
+                    icoName: data.icoName
                   }
                 )
               ),
                 alert(
                   "successfully rated"
                 );
-           
             }
           );
         };
-      }
+    }
 
     static  sendCryptoCurr(data){
         console.log("send data", data);
         return dispatch => {
             let database = DB.database.ref("CryptoCurrency")
             if(data.coin !== data.coin){
-
             database.push(
               {
                 coin: data.coin 
@@ -166,16 +163,38 @@ export default class MiddleWare{
                     }
                   )
                 ),
+                // alert('succesfully send')
                 console.log('succesfully updated data');
                }
             );
         }
         else {
+            // alert('exist')
                 console.log('already exist');
             }
-        }};
+        }
+    };
 
-   
+    static fetchCryptoData() {
+        console.log("fetching data");
+        return dispatch => {
+            let arrdata = [];
+            let dataabase = DB.database.ref('CryptoCurrency/');
+            dataabase.on("value", snapshot => {
+                snapshot.forEach((cryptoSnapshot) => {
+                    let array = [];
+                    let obj = cryptoSnapshot.val();
+                    console.log('data ===' ,obj)
+                    for (var a in obj) {
+                        array.push(obj[a]);
+                        console.log('array ===' ,array)
+                        dispatch(handleAction.get_crypto(array))
+                    }
+                })
+            });
+        };
+    }
+
     static  sendAllICO(data){
             console.log("send data", data);
             return dispatch => {
@@ -206,7 +225,25 @@ export default class MiddleWare{
                 }
             }};
     
-
+    static fetchIcoData() {
+        console.log("fetching data");
+        return dispatch => {
+            let arrdata = [];
+            let dataabase = DB.database.ref('ICO/All ICO');
+            dataabase.on("value", snapshot => {
+                snapshot.forEach((icoSnapshot) => {
+                    let array = [];
+                    let obj = icoSnapshot.val();
+                    console.log('data ===' ,obj)
+                    for (var a in obj) {
+                        array.push(obj[a]);
+                        console.log('array ===' ,array)
+                        dispatch(handleAction.get_ICO(array))
+                    }
+                })
+            });
+        };
+    }
 
     static sendUpcomingICO(data){
         console.log("send data", data);
@@ -237,6 +274,46 @@ export default class MiddleWare{
                 // console.log('already exist');
             }
         }};
+
+    static fetchUpcomingICO() {
+        console.log("fetching data");
+        return dispatch => {
+            let arrdata = [];
+            let dataabase = DB.database.ref('ICO/Upcoming ICO');
+            dataabase.on("value", snapshot => {
+                snapshot.forEach((upcomSnapshot) => {
+                    let array = [];
+                    let obj = upcomSnapshot.val();
+                    console.log('data ===' ,obj)
+                    for (var a in obj) {
+                        array.push(obj[a]);
+                        console.log('array ===' ,array)
+                        dispatch(handleAction.get_uc_ICO(array))
+                    }
+                })
+            });
+        };
+    }
+
+    static fetchEndedICO() {
+        console.log("fetching data");
+        return dispatch => {
+            let arrdata = [];
+            let dataabase = DB.database.ref('ICO/Ended ICO');
+            dataabase.on("value", snapshot => {
+                snapshot.forEach((endedSnapshot) => {
+                    let array = [];
+                    let obj = endedSnapshot.val();
+                    console.log('data ===' ,obj)
+                    for (var a in obj) {
+                        array.push(obj[a]);
+                        console.log('array ===' ,array)
+                        dispatch(handleAction.get_end_ICO(array))
+                    }
+                })
+            });
+        };
+    }
 
     static sendEndedICO(data){
         console.log("send data", data);

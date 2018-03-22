@@ -6,7 +6,7 @@ const initialState = {
 
 
 const GraphTableReducer =(state = initialState, actions) => {
-    console.log('action payload', actions.payload)
+    // console.log('action payload', actions.payload)
     switch (actions.type) {
         case handleAction.GETDATA_1:
             return {...state, data: actions.payload}

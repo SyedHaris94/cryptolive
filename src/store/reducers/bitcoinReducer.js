@@ -6,7 +6,7 @@ const initialState = {
 
 
 const BitcoinReducer =(state = initialState, actions) => {
-    console.log('action payload', actions.payload)
+    // console.log('action payload', actions.payload)
     switch (actions.type) {
         case handleAction.GETCRYPTODETAIL:
             return {...state, data: actions.payload}
