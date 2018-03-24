@@ -101,13 +101,17 @@ class Middle extends React.Component{
       }
 
 
+    componentWillMount(){
+        this.props.getList();
+    }
+
     componentDidMount(){
         this.props.getdataa();
         this.rateData(0, 150);
         setTimeout(this.getNames, this.state.timerInterval);
-        this.SendCryptoData();
+        // this.SendCryptoData();
         // console.log("didmount running",this.props.getList());
-        this.props.getList();
+       
     }
 
     handleTimer = (e) => {
@@ -117,7 +121,7 @@ class Middle extends React.Component{
      }
 
     SendCryptoData (ev) {
-        // ev.preventDefault();
+        ev.preventDefault();
         let crypto_coin = this.state.tableData
         console.log('rate', crypto_coin)
         let crypto = {
@@ -131,9 +135,9 @@ class Middle extends React.Component{
 
     render(){
         const { name_show, market_show, volume_show, cicular_show, one_h_show, twenty_4_show, week_show } = this.state;
-        console.log("list", this.props.listState[0])
+        console.log("list", this.props.listState)
         const {term} = this.state;
-        let filterData = this.state.tableData.filter(
+        let filterData = this.props.listState.filter(
             (tableData) => {
                 return tableData.name.toLowerCase().indexOf(this.state.term) !== -1;
             }
@@ -144,7 +148,7 @@ class Middle extends React.Component{
         const curr_select = this.state.selectedOption1
         // console.log('you have selected',curr_select)
           
-        // console.log('filterDataa',filterData)
+        console.log('filterDataa',filterData)
         return(
             <div >
                 {/* <!-- MIDDLE CTA STARTS--> */}
@@ -191,7 +195,7 @@ class Middle extends React.Component{
                                     <div className="input-group">
                                         <input type="text" className="form-control form-control-lg" placeholder="Search" onChange={this.searchHandler} value = {term}/>
                                         <div className="input-group-btn">
-                                            <button className="btn btn-default" type="submit" ><i className="glyphicon glyphicon-search"></i></button>
+                                            <button className="btn btn-default" type="submit" ><i className="glyphicon glyphicon-search" onClick={this.SendCryptoData}></i></button>
                                         </div>
                                     </div>
                                 </form>

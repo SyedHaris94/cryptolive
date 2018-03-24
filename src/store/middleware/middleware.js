@@ -150,7 +150,7 @@ export default class MiddleWare{
         return dispatch => {
             let database = DB.database.ref("CryptoCurrency")
             if(data.coin !== data.coin){
-            database.push(
+            database.set(
               {
                 coin: data.coin 
               }
@@ -163,13 +163,13 @@ export default class MiddleWare{
                     }
                   )
                 ),
-                // alert('succesfully send')
+                alert('succesfully send')
                 console.log('succesfully updated data');
                }
             );
         }
         else {
-            // alert('exist')
+            alert('exist')
                 console.log('already exist');
             }
         }
@@ -201,7 +201,7 @@ export default class MiddleWare{
                 let database = DB.database.ref("ICO/All ICO")
                 if(data.allico !== data.allico){
     
-                database.push(
+                database.update(
                   {
                     allico: data.allico 
                   }
@@ -215,13 +215,13 @@ export default class MiddleWare{
                       )
                     ),
                     alert('success')
-                    // console.log('succesfully updated data');
+                    console.log('succesfully updated data');
                    }
                 );
             }
             else {
                 alert('exist')
-                    // console.log('already exist');
+                    console.log('already exist');
                 }
             }};
     
@@ -237,7 +237,7 @@ export default class MiddleWare{
                     console.log('data ===' ,obj)
                     for (var a in obj) {
                         array.push(obj[a]);
-                        console.log('array ===' ,array)
+                        // console.log('array all_ico ===' ,array)
                         dispatch(handleAction.get_ICO(array))
                     }
                 })
@@ -251,7 +251,7 @@ export default class MiddleWare{
             let database = DB.database.ref("ICO/Upcoming ICO")
             if(data.upcomingico === data.upcomingico){
 
-            database.push(
+            database.set(
                 {
                     upcomingico: data.upcomingico
                 }
@@ -287,28 +287,8 @@ export default class MiddleWare{
                     console.log('data ===' ,obj)
                     for (var a in obj) {
                         array.push(obj[a]);
-                        console.log('array ===' ,array)
+                        // console.log('array uc_ico ===' ,array)
                         dispatch(handleAction.get_uc_ICO(array))
-                    }
-                })
-            });
-        };
-    }
-
-    static fetchEndedICO() {
-        console.log("fetching data");
-        return dispatch => {
-            let arrdata = [];
-            let dataabase = DB.database.ref('ICO/Ended ICO');
-            dataabase.on("value", snapshot => {
-                snapshot.forEach((endedSnapshot) => {
-                    let array = [];
-                    let obj = endedSnapshot.val();
-                    console.log('data ===' ,obj)
-                    for (var a in obj) {
-                        array.push(obj[a]);
-                        console.log('array ===' ,array)
-                        dispatch(handleAction.get_end_ICO(array))
                     }
                 })
             });
@@ -319,9 +299,9 @@ export default class MiddleWare{
         console.log("send data", data);
         return dispatch => {
             let database = DB.database.ref("ICO/Ended ICO")
-            if(data.endedico === data.endedico){
+            if(data.endedico !== data.endedico){
 
-            database.push(
+            database.set(
                 {
                     endedico: data.endedico
                 }
@@ -344,6 +324,48 @@ export default class MiddleWare{
                 // console.log('already exist');
             }
         }};
+
+
+        static fetchEndedICO() {
+            console.log("fetching data");
+            return dispatch => {
+                let arrdata = [];
+                let dataabase = DB.database.ref('ICO/Ended ICO');
+                dataabase.on("value", snapshot => {
+                    snapshot.forEach((endSnapshot) => {
+                        let array = [];
+                        let obj = endSnapshot.val();
+                        console.log('data ===' ,obj)
+                        for (var a in obj) {
+                            array.push(obj[a]);
+                            // console.log('array ended_ico ===' ,array)
+                            dispatch(handleAction.get_end_ICO(array))
+                        }
+                    })
+                });
+            };
+        }
+    // static fetchEndedICO() {
+    //     console.log("fetching data");
+    //     return dispatch => {
+    //         let arrdata = [];
+    //         let database = DB.database.ref("ICO/Ended ICO")
+    //         database.on("value", snapshot => {
+    //             snapshot.forEach((endedSnapshot) => {
+    //                 let array = [];
+    //                 let obj = endedSnapshot.val();
+    //                 console.log('data ===' ,obj)
+    //                 for (var a in obj) {
+    //                     array.push(obj[a]);
+    //                     console.log('array ===' ,array)
+    //                     dispatch(handleAction.get_end_ICO(array))
+    //                 }
+    //             })
+    //         });
+    //     };
+    // }
+
+   
     
 
       static GetRating() {
