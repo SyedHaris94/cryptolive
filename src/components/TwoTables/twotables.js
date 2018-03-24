@@ -7,7 +7,14 @@ import { connect } from 'react-redux';
 import MiddleWare from '../../store//middleware/middleware'
 
 class TwoTable extends React.Component{
+    componentDidMount(){
+        this.props.getList();
+        this.props.getupcoming();
+    }
+
     render(){
+        {console.log("list0", this.props.AllIcoState)}
+        {console.log("list1", this.props.upcomingIcoState)}
         
         return(
             <div>
@@ -83,6 +90,14 @@ class TwoTable extends React.Component{
     }
 }
 
+const mapStateToProps = (state) => {
+    return ({
+        AllIcoState: state.ICOReducer.ico_data,
+        upcomingIcoState: state.UpcomingICOReducer.up_ico_data,
+        // EndedIcoState: state.EndedICOReducer.end_ico_data,
+    })
+}
+
 
 const mapDispatchToProps = (dispatch) => {
     return ({
@@ -92,14 +107,6 @@ const mapDispatchToProps = (dispatch) => {
         getupcoming: () => {
             dispatch(MiddleWare.fetchUpcomingICO());
             },
-    })
-}
-
-
-const mapStateToProps = (state) => {
-    return ({
-        AllIcoState: state.ICOReducer.ico_data,
-        upcomingIcoState: state.UpcomingICOReducer.up_ico_data,
     })
 }
 
