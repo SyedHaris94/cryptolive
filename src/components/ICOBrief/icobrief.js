@@ -5,6 +5,9 @@ import medicalchain from '../../icons/medicalchain_logo_dark_cropped_og.png'
 import medicalwhite from '../../icons/ICO view page.png'
 import medicalblck from '../../icons/Screen Shot 2018-02-15 at 7.29.17 PM.png'
 
+import CircularProgressbar from 'react-circular-progressbar';
+
+
 class IcoBrief extends React.Component{
 
     constructor(props) {
@@ -170,8 +173,11 @@ class IcoBrief extends React.Component{
                                 </div>
                             </div>
                             <div className="col-md-6">
-                                <img className="img-responsive medical-img-wh" src={medicalwhite} alt="logo"/>
-                                <img className="img-responsive medical-img-blck" src={medicalblck} alt="logo"/>
+                            <CircularProgressbar percentage={50} style={{marginLeft: '30px', marginRight: '20px'}} />
+                            <CircularProgressbar percentage={20} />
+
+            {/*                 // <img className="img-responsive medical-img-wh" src={medicalwhite} alt="logo"/>
+                                // <img className="img-responsive medical-img-blck" src={medicalblck} alt="logo"/>*/}
                             </div>
                         </div>
                     </div>
