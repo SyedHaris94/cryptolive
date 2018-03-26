@@ -2,7 +2,8 @@ import {handleAction} from '../actions/handleaction'
 
 const initialState = {
     sendrating : "false",
-    getrating : "false"
+    getrating : "false",
+    getrate: []
 
 }
 

@@ -16,8 +16,8 @@ import {Rating} from '../index'
 
 class Description extends React.Component{
   
-    componentWillMount() {
-        console.log("wilmount running");
+    componentDidMount() {
+        console.log("didmount running");
         this.props.getList();
         this.props.getUserList();
     }
@@ -25,6 +25,25 @@ class Description extends React.Component{
     render(){
         let icoparam = this.props.icoNameParam
         {console.log('asdasdger',icoparam)}        
+
+        {console.log("list", this.props.listState)}
+        {console.log("user list", this.props.userState)}
+       
+      
+
+        this.props.listState.map((m,v) => {
+            return
+            let Concept = m.Concept;
+            let Team = m.Team;
+            let Whitepaper = m.Whitepaper;
+            let comment = m.comment;
+            let icoName = m.icoName;
+            let ico_uid = m.uid;
+            console.log('ren_concept',Concept)
+            console.log('ren_Team',Team)
+            console.log('ren_Whitepaper',Whitepaper)
+            console.log('ren_comment',comment)
+        })
         return(
             <div>
                 {/* <!-- DESCRIPTION STARTS --> */}
@@ -138,51 +157,136 @@ class Description extends React.Component{
                                     </div>
                                     <div className="col-md-12 content" >
                                         {/* <!-- Nav tabs --> */}
-                                        <ul className="nav nav-tabs" role="tablist">
-                                            <li role="presentation" className="active">
-                                                <a href="#home" aria-controls="home" role="tab" data-toggle="tab">POSITIVE <span className="label label-default" style={{backgroundColor: '#35A0B3'}}>4</span></a>
-                                            </li>
-                                            <li role="presentation">
-                                                <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">NEUTRAL <span className="label label-default" style={{backgroundColor: '#FAC728'}}>2</span></a>
-                                            </li>
-                                            <li role="presentation">
-                                                <a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">NEGATIVE <span className="label label-default" style={{backgroundColor: '#d50026'}}>6</span></a>
-                                            </li>
-                                        </ul>
-                                        
-                                        {console.log("list", this.props.listState)}
-                                        {console.log("user list", this.props.userState)}
-                                        {/* {this.props.listState.map ? this.props.listState.map((m, v) => {
-                                                    return <div className="col-lg-12 jasmine-content" key={v}>
-                                                    {console.log('name', m.icoName)}
-                                                      <div style={{paddingTop: '10px'}} className="col-md-2 col-sm-2" >
-                                                          <img src={jasmine} alt="logo" />
-                                                      </div>
-                                                      <div className="col-md-8 col-sm-8 jasmine-color">
-                                                          <p>Jasmine Jones</p>
-                                                          <p> WePower provides access to  investments in the field of renewable energy.This project already
-                                                              has a working beta.
-                                                          </p>
-                                                      </div>
-                                                      <div  className="col-md-2 col-sm-2 right"><span className="label label-default" style={{marginLeft: '-14px'}}>4</span> <img src={arrowupblue} alt="logo"/></div>
-                                                  </div>;
-                                                }): 
-                                                <div className="alert alert-danger searchNoResult">
-                                                            Type the text and press <b>"Enter"</b> to add item.
+                                        {this.props.userState.map((m,v) => {
+                                            return (
+                                                <div key={v} class="tab-content"> 
+                                                    {this.props.listState.map((x,y) => {
+                                                        const concept = x.Concept
+                                                        const team = x.Team
+                                                        const white = x.Whitepaper
+                                                        const rate_percent = (team + concept + white) / 100 * 15
+                                                        let out_of_five = rate_percent/100*5
+                                                        out_of_five = Math.round( out_of_five * 10 ) / 10
+                                                        return m.uid === x.uid && x.icoName == icoparam && out_of_five >= 4 ?
+                                                        <div>
+                                                            <ul className="nav nav-tabs" role="tablist">
+                                                                <li role="presentation" className="active">
+                                                                    <a href="#positive" aria-controls="positive" role="tab" data-toggle="tab">POSITIVE <span className="label label-default" style={{backgroundColor: '#35A0B3'}}>4</span></a>
+                                                                </li>
+                                                                <li role="presentation" class="disabled">
+                                                                    <a href="#neutral" aria-controls="neutral" role="tab" data-toggle="tab">NEUTRAL <span className="label label-default " style={{backgroundColor: '#FAC728'}}>2</span></a>
+                                                                </li>
+                                                                <li role="presentation">
+                                                                    <a href="#negative" aria-controls="negative" role="tab" data-toggle="tab">NEGATIVE <span className="label label-default" style={{backgroundColor: '#d50026'}}>6</span></a>
+                                                                </li>
+                                                            </ul>
+                                                            <div id="positive" className="col-lg-12 jasmine-content tab-pane fade in active">
+                                                                positive
+                                                                <div style={{paddingTop: '10px'}} className="col-md-2 col-sm-2" >
+                                                                    <img src={jasmine} alt="logo" />
+                                                                </div>
+                                                                <div className="col-md-8 col-sm-8 jasmine-color">
+                                                                    {console.log('user name', m.name)}
+                                                                    <p>{m.name}</p>
+                                                                    <p>{x.comment}</p>
+                                                                </div>
+                                                                <div className="col-md-2 col-sm-2 right" >
+                                                                        <span className="label label-default" style={{marginLeft: '-14px', marginTop: '20px'}}>
+                                                                            {out_of_five}
+                                                                        </span> 
+                                                                        <i className="fa fa-caret-up" aria-hidden="true" style={{ marginTop: '-30px',paddingLeft: "15px", color:'#37A1B4'}} />                                                                  
+                                                                </div>
+                                                            </div> 
+                                                        </div>: null
+                                                    })}
+                                                    {this.props.listState.map((x,y) => {
+                                                        const concept = x.Concept
+                                                        const team = x.Team
+                                                        const white = x.Whitepaper
+                                                        const rate_percent = (team + concept + white) / 100 * 15
+                                                        let out_of_five = rate_percent/100*5
+                                                        out_of_five = Math.round( out_of_five * 10 ) / 10
+                                                        // console.log('rate percent', rate_percent) 
+                                                        
+                                                        return m.uid === x.uid && x.icoName == icoparam && out_of_five >= 3 && out_of_five <= 2  ?
+                                                        <div>
+                                                            <ul className="nav nav-tabs" role="tablist">
+                                                            <li role="presentation" className="active">
+                                                                <a href="#positive" aria-controls="positive" role="tab" data-toggle="tab">POSITIVE <span className="label label-default" style={{backgroundColor: '#35A0B3'}}>4</span></a>
+                                                            </li>
+                                                            <li role="presentation" class="disabled">
+                                                                <a href="#neutral" aria-controls="neutral" role="tab" data-toggle="tab">NEUTRAL <span className="label label-default " style={{backgroundColor: '#FAC728'}}>2</span></a>
+                                                            </li>
+                                                            <li role="presentation">
+                                                                <a href="#negative" aria-controls="negative" role="tab" data-toggle="tab">NEGATIVE <span className="label label-default" style={{backgroundColor: '#d50026'}}>6</span></a>
+                                                            </li>
+                                                        </ul> 
+                                                        
+                                                        <div id="neutral" className="col-lg-12 jasmine-content tab-pane fade ">
+                                                            neutral
+                                                                <div style={{paddingTop: '10px'}} className="col-md-2 col-sm-2" >
+                                                                    <img src={jasmine} alt="logo" />
+                                                                </div>
+                                                                <div className="col-md-8 col-sm-8 jasmine-color">
+                                                                    {console.log('user name', m.name)}
+                                                                    <p>{m.name}</p>
+                                                                    <p>{x.comment}</p>
+                                                                </div>
+                                                                <div className="col-md-2 col-sm-2 right" >
+                                                                    <span className="label label-default" style={{marginLeft: '-14px', marginTop: '20px'}}>
+                                                                        {out_of_five}
+                                                                    </span> 
+                                                                    <i className="fa fa-caret-up" aria-hidden="true" style={{ marginTop: '-30px',paddingLeft: "15px", color:'#37A1B4'}} />                                                                  
+                                                                </div> 
+                                                        </div>
+                                                        </div>: null
+                                                    })}
+                                                    {this.props.listState.map((x,y) => {
+                                                        const concept = x.Concept
+                                                        const team = x.Team
+                                                        const white = x.Whitepaper
+                                                        const rate_percent = (team + concept + white) / 100 * 15
+                                                        let out_of_five = rate_percent/100*5
+                                                        out_of_five = Math.round( out_of_five * 10 ) / 10
+                                                        // console.log('rate percent', rate_percent) 
+                                                        
+                                                        return m.uid === x.uid && x.icoName == icoparam && out_of_five >= 2 && out_of_five <= 1 ? 
+                                                          <div>
+                                                            <ul className="nav nav-tabs" role="tablist">
+                                                                <li role="presentation" className="active">
+                                                                    <a href="#positive" aria-controls="positive" role="tab" data-toggle="tab">POSITIVE <span className="label label-default" style={{backgroundColor: '#35A0B3'}}>4</span></a>
+                                                                </li>
+                                                                <li role="presentation" class="disabled">
+                                                                    <a href="#neutral" aria-controls="neutral" role="tab" data-toggle="tab">NEUTRAL <span className="label label-default " style={{backgroundColor: '#FAC728'}}>2</span></a>
+                                                                </li>
+                                                                <li role="presentation">
+                                                                    <a href="#negative" aria-controls="negative" role="tab" data-toggle="tab">NEGATIVE <span className="label label-default" style={{backgroundColor: '#d50026'}}>6</span></a>
+                                                                </li>
+                                                            </ul>
+                                                            <div id="negative" className="col-lg-12 jasmine-content tab-pane fade">
+                                                                Negative
+                                                                <div style={{paddingTop: '10px'}} className="col-md-2 col-sm-2" >
+                                                                    <img src={jasmine} alt="logo" />
+                                                                </div>
+                                                                <div className="col-md-8 col-sm-8 jasmine-color">
+                                                                    {console.log('user name', m.name)}
+                                                                    <p>{m.name}</p>
+                                                                    <p>{x.comment}</p>
+                                                                </div>
+                                                                <div className="col-md-2 col-sm-2 right" >
+                                                                        <span className="label label-default" style={{marginLeft: '-14px', marginTop: '20px'}}>
+                                                                            {out_of_five}
+                                                                        </span> 
+                                                                        <i className="fa fa-caret-up" aria-hidden="true" style={{ marginTop: '-30px',paddingLeft: "15px", color:'#37A1B4'}} />                                                                  
+                                                                </div>
+                                                            </div> 
+                                                        </div>: null
+                                                    })}           
                                                 </div>
-                                        } */}
-                                         <div className="col-lg-12 jasmine-content">
-                                            <div style={{paddingTop: '10px'}} className="col-md-2 col-sm-2" >
-                                                <img src={jasmine} alt="logo" />
-                                            </div>
-                                            <div className="col-md-8 col-sm-8 jasmine-color">
-                                                <p>Jasmine Jones</p>
-                                                <p> WePower provides access to  investments in the field of renewable energy.This project already
-                                                    has a working beta.
-                                                </p>
-                                            </div>
-                                            <div  className="col-md-2 col-sm-2 right"><span className="label label-default" style={{marginLeft: '-14px'}}>4</span> <img src={arrowupblue} alt="logo"/></div>
-                                        </div>
+                                            )
+                                        })}
+                                          
+                                          
                                         {/*<div className="col-lg-12 jasmine-content">
                                             <div style={{paddingTop: '10px'}} className="col-md-2 col-sm-2" >
                                                 <img src={jasmine} alt="logo" />
@@ -210,7 +314,7 @@ class Description extends React.Component{
     }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
     return {
     listState: state.RateReducer.getrate,
     userState: state.AuthReducer.profile,
@@ -218,8 +322,7 @@ function mapStateToProps(state) {
       };
     }
   
-    
-function mapDispatchToProps(dispatch) {
+const  mapDispatchToProps = (dispatch) => {
     return {
         getList: () => {
         dispatch(MiddleWare.GetRating());
@@ -264,3 +367,4 @@ class Modal extends React.Component{
     }
   }
   
+

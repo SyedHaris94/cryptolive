@@ -32,9 +32,9 @@ export default class MiddleWare{
               .createUserWithEmailAndPassword(data.email, data.password)
               .then(send => {
                 var user = DB.auth.currentUser;
-                  console.log('user', user) 
-                        const ref = DB.database.ref("User/" + send.uid);
-                               ref.set(
+                //   console.log('user', user) 
+                        const ref = DB.database.ref("User/Profiles");
+                               ref.push(
                                  {
                                     uid:
                                      send.uid,
@@ -80,12 +80,12 @@ export default class MiddleWare{
         return dispatch => {
         //   let user = DB.auth.currentUser;
           let arrdata = [];
-          let dataabase = DB.database.ref("/User");
+          let dataabase = DB.database.ref("User/Profiles");
           dataabase.on("value", object => {
             let data = object.val();
             for (var a in data) arrdata.push(data[a]);
                 dispatch(handleAction.userprofile(arrdata));   
-                console.log("fetched user profile", arrdata);
+                // console.log("fetched user profile", data);
             });
         };
       }

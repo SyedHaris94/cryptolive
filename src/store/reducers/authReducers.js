@@ -4,6 +4,7 @@ const initialState = {
     loggedIn: 'false',
     isregistered: "false",
     isprofile: 'false',
+    profile: [],
     isresset: 'false'
 
 }

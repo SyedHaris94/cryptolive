@@ -1,9 +1,12 @@
 import React, {Component} from 'react'
 
 // import image
-import medicalchain from '../../icons/medicalchain_logo_dark_cropped_og.png'
-import medicalwhite from '../../icons/ICO view page.png'
-import medicalblck from '../../icons/Screen Shot 2018-02-15 at 7.29.17 PM.png'
+// import medicalchain from '../../icons/medicalchain_logo_dark_cropped_og.png'
+// import medicalwhite from '../../icons/ICO view page.png'
+// import medicalblck from '../../icons/Screen Shot 2018-02-15 at 7.29.17 PM.png'
+
+import MiddleWare from "../../store//middleware/middleware";
+import { connect } from "react-redux";
 
 import CircularProgressbar from 'react-circular-progressbar';
 
@@ -62,17 +65,17 @@ class IcoBrief extends React.Component{
         this.getTimeUntil(this.state.deadline);
     }
      
-      
     componentDidMount() {
         this.rateData();
         setInterval(() => this.getTimeUntil(this.state.deadline), 1000);
         // {console.log('deadline',this.state.deadline)}
+        console.log("didmount running");
+        this.props.getList();
+    }
 
-        }
-
-        leading0(num) {
-            return num < 10 ? '0' + num : num;
-        }                                                                                                                                                                             
+    leading0(num) {
+        return num < 10 ? '0' + num : num;
+    }                                                                                                                                                                             
         
         getTimeUntil(deadline) {
             const time = Date.parse(deadline) - Date.parse(new Date());
@@ -126,6 +129,9 @@ class IcoBrief extends React.Component{
         const nameParam = this.props.namePram;
         const liveParam = this.props.livePram;
 
+        {console.log("ico_name", this.props.listState)}
+       
+
         function gotoUrl(api, url) {
             let test = {};
             m.map((m, v) => {                  
@@ -145,11 +151,9 @@ class IcoBrief extends React.Component{
 
         let pageParam = gotoUrl(m, nameParam);
         let date = pageParam.end_time
-        // console.log('time',date)
         
         return(
             <div>
-                {/* {console.log('web link', pageParam.website_link)} */}
                 {/* <!-- MEDICAL STARTS --> */}
                 <section id="ico-stats-brief">
                     <div className="container" >
@@ -172,12 +176,33 @@ class IcoBrief extends React.Component{
                                     <div className="col-md-2 launch-card"><h3>{this.leading0(this.state.seconds)}  <br/><span>Seconds</span></h3></div>
                                 </div>
                             </div>
-                            <div className="col-md-6">
-                            <CircularProgressbar percentage={50} style={{marginLeft: '30px', marginRight: '20px'}} />
-                            <CircularProgressbar percentage={20} />
-
-            {/*                 // <img className="img-responsive medical-img-wh" src={medicalwhite} alt="logo"/>
-                                // <img className="img-responsive medical-img-blck" src={medicalblck} alt="logo"/>*/}
+                            <div className="col-md-6 rate-section">
+                                {this.props.listState.map((m,v) => {
+                                    
+                                    let icoName = m.icoName
+                                    console.log('ico-name',icoName)
+                                    let Concept = m.Concept/ 5 * 100 
+                                    let Team = m.Team / 5 * 100 
+                                    let Whitepaper = m.Whitepaper / 5 * 100 
+                                    let avrg = (Concept + Whitepaper + Team) / 100 * 15
+                                    return  (
+                                        icoName === nameParam ? 
+                                        <div className="row" key={v}>
+                                            <div className= "col-md-4 overall-rate" >
+                                              
+                                            <h4 style={{marginTop: '-10px', fontSize: '1.4em'}}>Over All Rating</h4>
+                                                <CircularProgressbar percentage={avrg} />
+                                            </div>
+                                            <div className= "col-md-8">
+                                                <h4 style={{marginTop: '-10px', fontSize: '1.4em'}} >Ratings</h4> 
+                                                <h5 style={{fontSize: '0.8em',color: '#90CFD8', paddingBottom: '10px'}}>See all ratings</h5>
+                                                <div className="col-md-4 team"><p>Team</p><CircularProgressbar percentage={Team} /></div>
+                                                <div className="col-md-4 concept"><p>Concept</p><CircularProgressbar percentage={Concept} /></div>
+                                                <div className="col-md-4 whitepaper"><p>WhitePaper</p><CircularProgressbar percentage={Whitepaper} /></div>
+                                            </div>
+                                        </div>
+                                        : null);
+                                      })}
                             </div>
                         </div>
                     </div>
@@ -189,4 +214,23 @@ class IcoBrief extends React.Component{
 
 }
 
-export default IcoBrief;
+const mapStateToProps = (state) => {
+    return {
+        listState: state.RateReducer.getrate,
+        // userState: state.AuthReducer.profile,
+      };
+    }
+  
+const  mapDispatchToProps = (dispatch) => {
+    return {
+            getList: () => {
+            dispatch(MiddleWare.GetRating());
+        },
+            // getUserList: () => {
+            // dispatch(MiddleWare.UserProfile());
+        // }
+    }
+};
+    
+
+export default connect(mapStateToProps,mapDispatchToProps) (IcoBrief);

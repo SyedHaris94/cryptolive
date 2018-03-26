@@ -53,7 +53,7 @@ class VideoTable extends React.Component{
     render(){
         let m = this.state.icoData;
         const nameParam = this.props.namePram;
-        const liveParam = this.props.livePram;
+        // const liveParam = this.props.livePram;
 
         function gotoUrl(api, url) {
             let test = {};
