@@ -2682,7 +2682,7 @@ input:checked + .slider:before {
   #ico-listing-item .btn-block {
   margin-left: 15px;
   margin-right: 25px;
-  width: 250px;
+  width: 100px;
   }
 
   .top-right-red{
