@@ -152,6 +152,7 @@ class Bitcoin extends React.Component{
 
       
         const data1 = [];
+       
         let chart = this.state.data.map((u,v) => {
             data1.push({
                 name: u.d,

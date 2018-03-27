@@ -2654,7 +2654,7 @@ input:checked + .slider:before {
 
   }
   .recharts-surface{
-    margin-top: -20px;
+    margin-top: -40px;
     width: 420px;
   }
   .recharts-default-legend{
@@ -2672,6 +2672,11 @@ input:checked + .slider:before {
   margin-left: 15px;
   margin-right: 20px;
   width: 350px;
+  }
+
+   .recharts-surface{
+    margin-top: -40px;
+    width: 250px;
   }
 
   #ico-listing-item .btn-block {

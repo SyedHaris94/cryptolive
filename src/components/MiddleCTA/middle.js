@@ -135,8 +135,9 @@ class Middle extends React.Component{
     render(){
         const { name_show, market_show, volume_show, cicular_show, one_h_show, twenty_4_show, week_show } = this.state;
         console.log("list", this.props.listState)
+        console.log('sdasd',this.state.tableData)
         const {term} = this.state;
-        let filterData = this.props.listState.filter(
+        let filterData = this.state.tableData.filter(
             (tableData) => {
                 return tableData.name.toLowerCase().indexOf(this.state.term) !== -1;
             }
