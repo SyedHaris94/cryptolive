@@ -13,8 +13,6 @@ import MiddleWare from '../../store//middleware/middleware'
 
 // import Pagination from 'react-paginating';
 
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-
 
 class TableData extends React.Component{
 
@@ -170,6 +168,7 @@ class GraphTable extends React.Component{
                         <ImageChart 
                           imgNumbers={m.symbol}
                           page={pageData}
+                          percent_change = {m.percent_change_7d}
                         />
                           {m.percent_change_7d}%
                           <i className="fa fa-caret-down" aria-hidden="true" style={{ paddingLeft: "5px", color:'#c11b55'}} />                                                                  
@@ -222,7 +221,6 @@ class ImageChart extends React.Component{
                     high: bitcoinData.Data[index].high,
                     low: bitcoinData.Data[index].low,
                     open: bitcoinData.Data[index].open,
-                    close: bitcoinData.Data[index].close,
                   });
                   count++;
               }
@@ -235,7 +233,7 @@ class ImageChart extends React.Component{
     
         componentDidMount() {
           const imgProp = this.props.imgNumbers
-          
+          const p = this.props.page
           this.ImageApi(imgProp)
           // console.log(imgProp)
           // console.log('table data', p);
@@ -243,36 +241,18 @@ class ImageChart extends React.Component{
           
       
         render(){
-          
-
-          const page = this.props.page
-          console.log('ada',page)
-                const x = [];
-                  this.state.mainCurData.map((item) => {
-                    x.push(
-                       item.high , item.low
-                    );
-                    return x
-                  })
-
-               
-                  console.log('graph chart', x)
-                  const data = [
-                    {name: 'Page A', uv: 4000, pv: x[0], amt: 2400},
-                    {name: 'Page B', uv: 3000, pv: x[1], amt: 2210},
-                    {name: 'Page C', uv: 2000, pv: x[2], amt: 2290},
-                    {name: 'Page D', uv: 2780, pv: x[3], amt: 2000},
-                    {name: 'Page E', uv: 1890, pv: x[4], amt: 2181},
-                    {name: 'Page F', uv: 2390, pv: x[5], amt: 2500},
-                    {name: 'Page G', uv: 3490, pv: x[6], amt: 2100},
-                  ];
-
+          const percent_change = this.props.percent_change
+                  const x = [];
                   return(
                     <div>
-                      {/* <LineChart width={90} height={50} data={x}>
-                          <Line type='monotone' dataKey='close' stroke='#8884d8' strokeWidth={2} />
-                      </LineChart> */}
-                      <img src={"https://chart.googleapis.com/chart?&cht=ls&chd=t:"+x[0]+","+x[1]+","+x[2]+","+x[3]+","+x[4]+","+x[5]+","+x[6]+"&chco=ff0000&chs=180x50&chds=0,100"} />
+                      {/* {console.log('dfdsdsawrerf',this.state.mainCurData)} */}
+                      {this.state.mainCurData.map((item) => {
+                        x.push(
+                         item.high , item.low
+                        );
+                      })}
+                    {percent_change < 0 ? <img src={"https://chart.googleapis.com/chart?&cht=ls&chd=t:"+x[0]+","+x[1]+","+x[2]+","+x[3]+","+x[4]+","+x[5]+","+x[6]+"&chco=BD0056&chs=180x50&chds="+Math.min(...x)+","+Math.max(...x)+""} /> :
+                  <img src={"https://chart.googleapis.com/chart?&cht=ls&chd=t:"+x[0]+","+x[1]+","+x[2]+","+x[3]+","+x[4]+","+x[5]+","+x[6]+"&chco=328035&chs=180x50&chds="+Math.min(...x)+","+Math.max(...x)+""} />}
                     </div>
                   );
               }
