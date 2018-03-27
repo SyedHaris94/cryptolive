@@ -20,9 +20,8 @@ class Middle extends React.Component{
         this.state = {
             term : '',
             tableData: [],
-            isLoading: true,
             timerInterval: 2000,
-            // showResults : false
+            isLoading: true,
             market_show: true,
             volume_show : true,
             cicular_show: true,

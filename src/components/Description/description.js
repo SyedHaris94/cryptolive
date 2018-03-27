@@ -15,7 +15,6 @@ import {Rating} from '../index'
 
 
 class Description extends React.Component{
-  
     componentDidMount() {
         console.log("didmount running");
         this.props.getList();
@@ -25,25 +24,42 @@ class Description extends React.Component{
     render(){
         let icoparam = this.props.icoNameParam
         {console.log('asdasdger',icoparam)}        
-
-        {console.log("list", this.props.listState)}
-        {console.log("user list", this.props.userState)}
+        
        
-      
+        const list = this.props.listState
+        {console.log("list", list)}
 
-        this.props.listState.map((m,v) => {
-            return
-            let Concept = m.Concept;
-            let Team = m.Team;
-            let Whitepaper = m.Whitepaper;
-            let comment = m.comment;
-            let icoName = m.icoName;
-            let ico_uid = m.uid;
-            console.log('ren_concept',Concept)
-            console.log('ren_Team',Team)
-            console.log('ren_Whitepaper',Whitepaper)
-            console.log('ren_comment',comment)
-        })
+        const user = this.props.userState
+        {console.log("user list", user)}
+        
+        function rateUrl(api, url) {
+            let test = {};
+
+            api.map((m, v) => {    
+                
+                if (url == m.icoName) {
+                    test.icoName = m.icoName;
+                    test.uid = m.uid;
+                    test.Concept = m.Concept;
+                    test.comment = m.comment;
+                    test.Whitepaper = m.Whitepaper;
+                    test.Team = m.Team;
+                }
+
+            });
+
+            return test;
+        }
+
+        let pageParam = rateUrl(list, icoparam);
+        console.log(pageParam)
+        const concept = pageParam.Concept
+        const team = pageParam.Team
+        const white = pageParam.Whitepaper
+        const rate_percent = (team + concept + white) / 100 * 15
+        let out_of_five = rate_percent/100*5
+        out_of_five = Math.round( out_of_five * 10 ) / 10
+
         return(
             <div>
                 {/* <!-- DESCRIPTION STARTS --> */}
@@ -52,7 +68,6 @@ class Description extends React.Component{
                             <div className="row">
                                 <div className="col-md-8 desc-card" >
                                     <div className="nav-border">
-
                                         {/* <!-- Nav tabs --> */}
                                         <ul className="nav nav-tabs" role="tablist" style={{textDecoration: 'none'}}>
                                             <li role="presentation" className="active">
@@ -73,11 +88,8 @@ class Description extends React.Component{
                                             <li role="presentation">
                                                 <a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">WHITE PAPER</a>
                                             </li>
-
                                             <button type="button" className="btn btn-grey-white" >SHARE</button>
-
                                         </ul>
-
                                         {/* <!-- Tab panes --> */}
                                         <div className="tab-content">
                                             <div role="tabpanel" className="tab-pane active" id="ABOUT"></div>
@@ -87,7 +99,6 @@ class Description extends React.Component{
                                             <div role="tabpanel" className="tab-pane" id="RATING"></div>
                                             <div role="tabpanel" className="tab-pane" id="WHITE PAPER"></div>
                                         </div>
-
                                     </div>
                                     <div className="desc-border col-md-12">
                                         <div className="row">
@@ -156,151 +167,22 @@ class Description extends React.Component{
                                         </div>
                                     </div>
                                     <div className="col-md-12 content" >
+                                        {<ul className="nav nav-tabs" role="tablist">
+                                            <li role="presentation" className="active">
+                                                <a href="#positive" aria-controls="positive" role="tab" data-toggle="tab">POSITIVE <span className="label label-default" style={{backgroundColor: '#35A0B3'}}>4</span></a>
+                                            </li>
+                                            <li role="presentation" class="disabled">
+                                                <a href="#neutral" aria-controls="neutral" role="tab" data-toggle="tab">NEUTRAL <span className="label label-default " style={{backgroundColor: '#FAC728'}}>2</span></a>
+                                            </li>
+                                            <li role="presentation">
+                                                <a href="#negative" aria-controls="negative" role="tab" data-toggle="tab">NEGATIVE <span className="label label-default" style={{backgroundColor: '#d50026'}}>6</span></a>
+                                            </li>
+                                        </ul>}
                                         {/* <!-- Nav tabs --> */}
-                                        {this.props.userState.map((m,v) => {
-                                            return (
-                                                <div key={v} class="tab-content"> 
-                                                    {this.props.listState.map((x,y) => {
-                                                        const concept = x.Concept
-                                                        const team = x.Team
-                                                        const white = x.Whitepaper
-                                                        const rate_percent = (team + concept + white) / 100 * 15
-                                                        let out_of_five = rate_percent/100*5
-                                                        out_of_five = Math.round( out_of_five * 10 ) / 10
-                                                        return m.uid === x.uid && x.icoName == icoparam && out_of_five >= 4 ?
-                                                        <div>
-                                                            <ul className="nav nav-tabs" role="tablist">
-                                                                <li role="presentation" className="active">
-                                                                    <a href="#positive" aria-controls="positive" role="tab" data-toggle="tab">POSITIVE <span className="label label-default" style={{backgroundColor: '#35A0B3'}}>4</span></a>
-                                                                </li>
-                                                                <li role="presentation" class="disabled">
-                                                                    <a href="#neutral" aria-controls="neutral" role="tab" data-toggle="tab">NEUTRAL <span className="label label-default " style={{backgroundColor: '#FAC728'}}>2</span></a>
-                                                                </li>
-                                                                <li role="presentation">
-                                                                    <a href="#negative" aria-controls="negative" role="tab" data-toggle="tab">NEGATIVE <span className="label label-default" style={{backgroundColor: '#d50026'}}>6</span></a>
-                                                                </li>
-                                                            </ul>
-                                                            <div id="positive" className="col-lg-12 jasmine-content tab-pane fade in active">
-                                                                positive
-                                                                <div style={{paddingTop: '10px'}} className="col-md-2 col-sm-2" >
-                                                                    <img src={jasmine} alt="logo" />
-                                                                </div>
-                                                                <div className="col-md-8 col-sm-8 jasmine-color">
-                                                                    {console.log('user name', m.name)}
-                                                                    <p>{m.name}</p>
-                                                                    <p>{x.comment}</p>
-                                                                </div>
-                                                                <div className="col-md-2 col-sm-2 right" >
-                                                                        <span className="label label-default" style={{marginLeft: '-14px', marginTop: '20px'}}>
-                                                                            {out_of_five}
-                                                                        </span> 
-                                                                        <i className="fa fa-caret-up" aria-hidden="true" style={{ marginTop: '-30px',paddingLeft: "15px", color:'#37A1B4'}} />                                                                  
-                                                                </div>
-                                                            </div> 
-                                                        </div>: null
-                                                    })}
-                                                    {this.props.listState.map((x,y) => {
-                                                        const concept = x.Concept
-                                                        const team = x.Team
-                                                        const white = x.Whitepaper
-                                                        const rate_percent = (team + concept + white) / 100 * 15
-                                                        let out_of_five = rate_percent/100*5
-                                                        out_of_five = Math.round( out_of_five * 10 ) / 10
-                                                        // console.log('rate percent', rate_percent) 
-                                                        
-                                                        return m.uid === x.uid && x.icoName == icoparam && out_of_five >= 3 && out_of_five <= 2  ?
-                                                        <div>
-                                                            <ul className="nav nav-tabs" role="tablist">
-                                                            <li role="presentation" className="active">
-                                                                <a href="#positive" aria-controls="positive" role="tab" data-toggle="tab">POSITIVE <span className="label label-default" style={{backgroundColor: '#35A0B3'}}>4</span></a>
-                                                            </li>
-                                                            <li role="presentation" class="disabled">
-                                                                <a href="#neutral" aria-controls="neutral" role="tab" data-toggle="tab">NEUTRAL <span className="label label-default " style={{backgroundColor: '#FAC728'}}>2</span></a>
-                                                            </li>
-                                                            <li role="presentation">
-                                                                <a href="#negative" aria-controls="negative" role="tab" data-toggle="tab">NEGATIVE <span className="label label-default" style={{backgroundColor: '#d50026'}}>6</span></a>
-                                                            </li>
-                                                        </ul> 
-                                                        
-                                                        <div id="neutral" className="col-lg-12 jasmine-content tab-pane fade ">
-                                                            neutral
-                                                                <div style={{paddingTop: '10px'}} className="col-md-2 col-sm-2" >
-                                                                    <img src={jasmine} alt="logo" />
-                                                                </div>
-                                                                <div className="col-md-8 col-sm-8 jasmine-color">
-                                                                    {console.log('user name', m.name)}
-                                                                    <p>{m.name}</p>
-                                                                    <p>{x.comment}</p>
-                                                                </div>
-                                                                <div className="col-md-2 col-sm-2 right" >
-                                                                    <span className="label label-default" style={{marginLeft: '-14px', marginTop: '20px'}}>
-                                                                        {out_of_five}
-                                                                    </span> 
-                                                                    <i className="fa fa-caret-up" aria-hidden="true" style={{ marginTop: '-30px',paddingLeft: "15px", color:'#37A1B4'}} />                                                                  
-                                                                </div> 
-                                                        </div>
-                                                        </div>: null
-                                                    })}
-                                                    {this.props.listState.map((x,y) => {
-                                                        const concept = x.Concept
-                                                        const team = x.Team
-                                                        const white = x.Whitepaper
-                                                        const rate_percent = (team + concept + white) / 100 * 15
-                                                        let out_of_five = rate_percent/100*5
-                                                        out_of_five = Math.round( out_of_five * 10 ) / 10
-                                                        // console.log('rate percent', rate_percent) 
-                                                        
-                                                        return m.uid === x.uid && x.icoName == icoparam && out_of_five >= 2 && out_of_five <= 1 ? 
-                                                          <div>
-                                                            <ul className="nav nav-tabs" role="tablist">
-                                                                <li role="presentation" className="active">
-                                                                    <a href="#positive" aria-controls="positive" role="tab" data-toggle="tab">POSITIVE <span className="label label-default" style={{backgroundColor: '#35A0B3'}}>4</span></a>
-                                                                </li>
-                                                                <li role="presentation" class="disabled">
-                                                                    <a href="#neutral" aria-controls="neutral" role="tab" data-toggle="tab">NEUTRAL <span className="label label-default " style={{backgroundColor: '#FAC728'}}>2</span></a>
-                                                                </li>
-                                                                <li role="presentation">
-                                                                    <a href="#negative" aria-controls="negative" role="tab" data-toggle="tab">NEGATIVE <span className="label label-default" style={{backgroundColor: '#d50026'}}>6</span></a>
-                                                                </li>
-                                                            </ul>
-                                                            <div id="negative" className="col-lg-12 jasmine-content tab-pane fade">
-                                                                Negative
-                                                                <div style={{paddingTop: '10px'}} className="col-md-2 col-sm-2" >
-                                                                    <img src={jasmine} alt="logo" />
-                                                                </div>
-                                                                <div className="col-md-8 col-sm-8 jasmine-color">
-                                                                    {console.log('user name', m.name)}
-                                                                    <p>{m.name}</p>
-                                                                    <p>{x.comment}</p>
-                                                                </div>
-                                                                <div className="col-md-2 col-sm-2 right" >
-                                                                        <span className="label label-default" style={{marginLeft: '-14px', marginTop: '20px'}}>
-                                                                            {out_of_five}
-                                                                        </span> 
-                                                                        <i className="fa fa-caret-up" aria-hidden="true" style={{ marginTop: '-30px',paddingLeft: "15px", color:'#37A1B4'}} />                                                                  
-                                                                </div>
-                                                            </div> 
-                                                        </div>: null
-                                                    })}           
-                                                </div>
-                                            )
-                                        })}
-                                          
-                                          
-                                        {/*<div className="col-lg-12 jasmine-content">
-                                            <div style={{paddingTop: '10px'}} className="col-md-2 col-sm-2" >
-                                                <img src={jasmine} alt="logo" />
-                                            </div>
-                                            <div className="col-md-8 col-sm-8 jasmine-color">
-                                                <p>Jasmine Jones</p>
-                                                <p> WePower provides access to  investments in the field of renewable energy.This project already
-                                                    has a working beta.
-                                                </p>
-                                            </div>
-                                            <div  className="col-md-2 col-sm-2 right"><span className="label label-default" style={{marginLeft: '-14px'}}>4</span> <img src={arrowupblue} alt="logo"/></div>
-                                        </div> */}
+                                       
+                                        <NavTabs user ={user} list={list} icoparam={icoparam} />
                                         <div className="col-md-12 col-sm-12 col-xs-12">
-                                                <button id="singlebutton" name="singlebutton" className="btn btn-order" data-toggle="modal" data-target="#myModal">Rate Here..</button>
+                                            <button id="singlebutton" name="singlebutton" className="btn btn-order" data-toggle="modal" data-target="#myModal">Rate Here..</button>
                                         </div>
                                           <Modal modalParam = {icoparam}/>
                                     </div>
@@ -335,6 +217,92 @@ const  mapDispatchToProps = (dispatch) => {
     
 
 export default connect(mapStateToProps,mapDispatchToProps)( Description)
+
+class NavTabs extends React.Component{
+
+    render(){
+        let icoparam = this.props.icoparam;
+        let user = this.props.user;
+        let list = this.props.list
+        return(
+            <div>
+                {list.map((x,y) => {
+                const concept = x.Concept
+                const team = x.Team
+                const white = x.Whitepaper
+                const rate_percent = (team + concept + white) / 100 * 15
+                let out_of_five = rate_percent/100*5
+                out_of_five = Math.round( out_of_five * 10 ) / 10
+
+                console.log('out of', y)
+                return user.map((m,v) => {
+                    if (x.uid === m.uid && x.icoName === icoparam){                                              
+                    return(
+                        <div class="tab-content" key={v} >
+                            {out_of_five <= 5  && out_of_five  >= 4 ? <div id="positive" className="col-lg-12 jasmine-content tab-pane fade in active">
+                                    positive
+                                <div style={{paddingTop: '10px'}} className="col-md-2 col-sm-2" >
+                                    <img src={jasmine} alt="logo" />
+                                </div>
+                                    <div className="col-md-8 col-sm-8 jasmine-color">
+                                        POSITIVE
+                                        <p>{m.name}</p>
+                                        <p>{x.comment}</p>
+                                    </div>
+                                <div className="col-md-2 col-sm-2 right" >
+                                    <span className="label label-default" style={{marginLeft: '-14px', marginTop: '20px'}}>
+                                        {out_of_five}
+                                    </span> 
+                                    <i className="fa fa-caret-up" aria-hidden="true" style={{ marginTop: '-30px',paddingLeft: "15px", color:'#37A1B4'}} />                                                                  
+                                </div>
+                            </div> : null}
+                            {out_of_five < 4 && out_of_five >= 2 ? <div id="neutral" className="col-lg-12 jasmine-content tab-pane fade ">
+                                    neutral
+                                    <div style={{paddingTop: '10px'}} className="col-md-2 col-sm-2" >
+                                    <img src={jasmine} alt="logo" />
+                                </div>
+                                    <div className="col-md-8 col-sm-8 jasmine-color">
+                                        NEUTRAL
+                                        <p>{m.name}</p>
+                                        <p>{x.comment}</p>
+                                    </div>
+                                <div className="col-md-2 col-sm-2 right" >
+                                    <span className="label label-default" style={{marginLeft: '-14px', marginTop: '20px'}}>
+                                        {out_of_five}
+                                    </span> 
+                                    <i className="fa fa-caret-up" aria-hidden="true" style={{ marginTop: '-30px',paddingLeft: "15px", color:'#37A1B4'}} />                                                                  
+                                </div>
+                            </div> : null} 
+                            {out_of_five < 2 ? <div id="negative" className="col-lg-12 jasmine-content tab-pane fade">
+                                negative
+                                <div style={{paddingTop: '10px'}} className="col-md-2 col-sm-2" >
+                                    <img src={jasmine} alt="logo" />
+                                </div>
+                                    <div className="col-md-8 col-sm-8 jasmine-color">
+                                        NEGATIVE
+                                        <p>{m.name}</p>
+                                        <p>{x.comment}</p>
+                                    </div>
+                                <div className="col-md-2 col-sm-2 right" >
+                                    <span className="label label-default" style={{marginLeft: '-14px', marginTop: '20px'}}>
+                                        {out_of_five}
+                                    </span> 
+                                    <i className="fa fa-caret-up" aria-hidden="true" style={{ marginTop: '-30px',paddingLeft: "15px", color:'#37A1B4'}} />                                                                  
+                                </div>
+                            </div> : null}
+                        </div>)
+                    }
+                    else{
+                        null
+                    }    
+                })
+                
+                })}
+            </div>
+
+        );
+    }
+}
 
 
 class Modal extends React.Component{

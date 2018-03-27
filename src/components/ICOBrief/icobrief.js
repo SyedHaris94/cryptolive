@@ -21,7 +21,9 @@ class IcoBrief extends React.Component{
             hours: 0,
             minutes: 0,
             seconds: 0,
-            deadline: ''
+            deadline: '',
+            fetchingData: true,
+            data: [],
         };
       }
 
@@ -63,15 +65,17 @@ class IcoBrief extends React.Component{
 
     componentWillMount() {
         this.getTimeUntil(this.state.deadline);
+        this.props.getList();
     }
      
     componentDidMount() {
         this.rateData();
         setInterval(() => this.getTimeUntil(this.state.deadline), 1000);
         // {console.log('deadline',this.state.deadline)}
-        console.log("didmount running");
-        this.props.getList();
-    }
+        console.log("didmount running");       
+}
+
+    
 
     leading0(num) {
         return num < 10 ? '0' + num : num;
@@ -128,9 +132,46 @@ class IcoBrief extends React.Component{
         let m = this.state.icoData;
         const nameParam = this.props.namePram;
         const liveParam = this.props.livePram;
+        const rateParam = this.props.listState;
 
-        {console.log("ico_name", this.props.listState)}
-       
+       console.log("ico_name", this.props.listState)
+
+    //    function getData(api, url) {
+    //     let sortedData = [];
+    //     m.map((m,v) => {
+    //         if(nameParam == m.icoName){
+    //             sortedData.Concept= m.Concept,
+    //             sortedData.Team= m.Team,
+    //             sortedData.Whitepaper= m.Whitepaper,
+    //             sortedData.comment= m.comment,
+    //             sortedData.icoName= m.icoName,
+    //             sortedData.uid= m.uid
+               
+    //         }          
+    //     });
+    //     return sortedData;
+    // }
+    //     let testing = getData(rateParam, nameParam);
+    //     console.log('data', testing)
+
+        function rateUrl(api, url) {
+            let test = {};
+            m.map((m, v) => {                  
+                if (nameParam == m.icoName) {
+                    test.icoName = m.icoName;
+                    test.Concept = m.Concept;
+                    test.Team = m.Team;
+                    test.Whitepaper = m.Whitepaper;
+                    test.comment = m.comment;
+                    test.uid = m.uid;
+                }
+            });
+            return test;
+        }
+
+        let RateParam = rateUrl(rateParam, nameParam);
+        console.log('rateparam', RateParam)
+
 
         function gotoUrl(api, url) {
             let test = {};
@@ -150,6 +191,8 @@ class IcoBrief extends React.Component{
         }
 
         let pageParam = gotoUrl(m, nameParam);
+        console.log('pageparam', pageParam)
+
         let date = pageParam.end_time
         
         return(

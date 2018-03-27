@@ -1158,6 +1158,10 @@ input:checked + .slider:before {
   stroke: transparent;
 }
 
+#chartdiv {
+  width: 100%;
+  height: 100%;
+}
   
   #ico-stats-brief .medical-img-blck{
     display: none

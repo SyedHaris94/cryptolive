@@ -13,6 +13,8 @@ import MiddleWare from '../../store//middleware/middleware'
 
 // import Pagination from 'react-paginating';
 
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+
 
 class TableData extends React.Component{
 
@@ -240,15 +242,32 @@ class ImageChart extends React.Component{
           
       
         render(){
+
+                      const data = [
+                        {name: 'Page A', uv: 4000, pv: 2400, amt: 2400},
+                        {name: 'Page B', uv: 3000, pv: 1398, amt: 2210},
+                        {name: 'Page C', uv: 2000, pv: 9800, amt: 2290},
+                        {name: 'Page D', uv: 2780, pv: 3908, amt: 2000},
+                        {name: 'Page E', uv: 1890, pv: 4800, amt: 2181},
+                        {name: 'Page F', uv: 2390, pv: 3800, amt: 2500},
+                        {name: 'Page G', uv: 3490, pv: 4300, amt: 2100},
+                  ];
                   const x = [];
+
+                  this.state.mainCurData.map((item) => {
+                    x.push(
+                      Math.round(item.high , item.low)
+                    );
+                    return x
+                  })
+
+                  console.log('graph chart', x[0])
+
                   return(
                     <div>
-                      {/* {console.log('dfdsdsawrerf',this.state.mainCurData)} */}
-                      {this.state.mainCurData.map((item) => {
-                        x.push(
-                          Math.round(item.high , item.low)
-                        );
-                      })}
+                      <LineChart width={300} height={100} data={data}>
+                          <Line type='monotone' dataKey='pv' stroke='#8884d8' strokeWidth={2} />
+                      </LineChart>
                     <img src={"https://chart.googleapis.com/chart?&cht=ls&chd=t:"+x[0]+","+x[1]+","+x[2]+","+x[3]+","+x[4]+","+x[5]+","+x[6]+"&chco=ff0000&chs=180x50&chds=0,"+Math.max(...x)+""} />
                     </div>
                   );
