@@ -157,8 +157,6 @@ class Bitcoin extends React.Component{
                 name: u.d,
                 price: u.y,
                 volume: u.volumeto,
-                
-                
             });
             // count++;
             return data1;
@@ -166,20 +164,20 @@ class Bitcoin extends React.Component{
         
         console.log('ch',chart)
 
-        const data =[  {name: 'January', volume: 4000, price: 2400, amt: 1500},
-            {name: 'February', volume: 3000, price: 1398, amt: 1000},
-            {name: 'March', volume: 2000, price: 15000, amt: 200},
-            {name: 'April', volume: 2780, price: 3908, amt: 2181},
-            {name: 'May', volume: 1890, price: 4800, amt: 2500},
-            {name: 'June', volume: 2390, price: 3800, amt: 500},
-            {name: 'July', volume: 3490, price: 1890, amt: 800},
-            {name: 'August', volume: 1890, price: 4800, amt: 2181},
-            {name: 'September', volume: 2390, price: 9800,  amt: 2000 },
-            {name: 'October', volume: 3490, price: 3800, amt: 2500},
-            {name: 'November', volume: 2390, price: 1890, amt: 1540},
-            {name: 'December', volume: 1890, price: 4800, amt: 300
-        }
-];
+        // const data =[  {name: 'January', volume: 4000, price: 2400, amt: 1500},
+        //     {name: 'February', volume: 3000, price: 1398, amt: 1000},
+        //     {name: 'March', volume: 2000, price: 15000, amt: 200},
+        //     {name: 'April', volume: 2780, price: 3908, amt: 2181},
+        //     {name: 'May', volume: 1890, price: 4800, amt: 2500},
+        //     {name: 'June', volume: 2390, price: 3800, amt: 500},
+        //     {name: 'July', volume: 3490, price: 1890, amt: 800},
+        //     {name: 'August', volume: 1890, price: 4800, amt: 2181},
+        //     {name: 'September', volume: 2390, price: 9800,  amt: 2000 },
+        //     {name: 'October', volume: 3490, price: 3800, amt: 2500},
+        //     {name: 'November', volume: 2390, price: 1890, amt: 1540},
+        //     {name: 'December', volume: 1890, price: 4800, amt: 300
+        // }
+        // ];
 
 // var chart = makeChart( "chartdiv", {
 //     "type": "stock",
@@ -462,7 +460,7 @@ class Bitcoin extends React.Component{
                         <div className="row">
 
                             <div className="col-md-10 " id="graph-imag">
-                                <LineChart width={800} height={300} data={data1}
+                                <LineChart  style={{marginTop: '50px'}}width={800} height={300} data={data1}
                                     margin={{top: 5, right: 30, left: 20, bottom: 5}}>
                                     <XAxis dataKey="name"/>
                                     <YAxis yAxisId="left" />
