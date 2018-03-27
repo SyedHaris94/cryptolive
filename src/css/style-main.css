@@ -2476,7 +2476,7 @@ input:checked + .slider:before {
     }
 
     #graph-table {
-      display: none
+      /* display: none */
      }
    
     #bitcoin-table {
@@ -2652,6 +2652,17 @@ input:checked + .slider:before {
     width: 90%;
     height: 80%;
 
+  }
+  .recharts-surface{
+    margin-top: -20px;
+    width: 420px;
+  }
+  .recharts-default-legend{
+    display: none
+  }
+
+  .table-chart{
+    width: 110px
   }
 }
 
