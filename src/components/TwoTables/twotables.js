@@ -186,14 +186,14 @@ class RowData1 extends React.Component{
                           if (m.count <= 6){
                               return <tr key={m.count}>
                                 <Link to={gotoUrl(pageSym, live)} style={{ textDecoration: "none" }}>
-                                    <td style={{width: '10%' , textAlign: 'left'}} >
+                                    <td style={{textAlign: 'left'}} >
                                         <img src={m.image}
                                             imageParam= {pageSym} 
-                                            style={{marginLeft: '15px', width: '45%', height: '30%'}} className="pull-left"/>
-                                        <div style={{textAlign: 'left', marginLeft: '15px'}} class="pull-left ico_name_1"> {ico_name}</div>
+                                            style={{marginLeft: '35px', width: '45%', height: '30%'}} className="pull-left"/>
+                                        {/* <div style={{textAlign: 'left', marginLeft: '15px'}} class="pull-left ico_name_1"> {ico_name}</div> */}
                                     </td>
                                 </Link>
-                                    <td style={{width: '15%' , }} >
+                                    <td style={{width: '20%' , }} >
                                         3.5
                                     </td>
                                     <td style={{width: '15%' , }} >
@@ -298,20 +298,20 @@ class RowData2 extends React.Component{
                         if (m.count <= 6){
                             return <tr key={v}>
                             <Link to={gotoUrl(pageSym, live)} style={{ textDecoration: "none" }}>
-                            <td style={{width: '25%' , textAlign: 'left'}} >
+                            <td style={{width:'5%', textAlign: 'left'}} >
                                     <img src={m.image}
                                         imageParam= {pageSym} 
-                                        style={{marginLeft: '15px', width: '30%', height: '30%'}} className="pull-left"/>
-                                    <div class="pull-right ico_name_2"> {ico_name}</div>
+                                        style={{marginLeft: '35px', width: '30%', height: '30%'}} className=""/>
+                                    {/* <div class="pull-right ico_name_2"> {ico_name}</div> */}
                                 </td>
                             </Link>
-                                <td style={{width: '10%' , }}  >
+                                <td style={{width: '25%' , }}  >
                                 3.5
                                 </td>
-                                <td style={{width: '10%' , }} >
+                                <td style={{width: '25%' , }} >
                                 23
                                 </td>
-                                <td style={{width: '10%' , }} >
+                                <td style={{width: '20%' , }} >
                                 <i className="fa fa-facebook favicon-icons" aria-hidden="true">
                                 </i>
                                 <i className="fa fa-twitter favicon-icons" aria-hidden="true"></i> 

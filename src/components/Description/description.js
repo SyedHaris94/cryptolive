@@ -205,7 +205,7 @@ class Description extends React.Component{
                                         {this.props.userLogin ? <button id="singlebutton" name="singlebutton" className="btn btn-order" data-toggle="modal" data-target="#rateModal">Rate Here..</button> : 
                                         <button id="singlebutton" name="singlebutton" className="btn btn-order" data-toggle="modal" data-target="#myModal">Rate Here..</button> }
                                         </div>
-                                        {this.props.userLogin ?    
+                                        {!this.props.userLogin ?    
                                              <Modal modalParam = {icoparam}/>:alert('please sign in') }
                                     </div>
                                 </div>                     
