@@ -11,6 +11,9 @@ import Auth from '../auth/auth'
 // react-router
 import { Link } from "react-router-dom";
 
+import { connect } from 'react-redux';
+import MiddleWare from '../../store//middleware/middleware'
+
 class Navbar extends React.Component{
 
     constructor(props){
@@ -28,10 +31,20 @@ class Navbar extends React.Component{
         });
     }
 
+    componentDidMount(){
+        if(this.props.userLogin === true){
+            this.props.userData();
+            this.props.userLogin();
+    }
+    }
+
    
     render(){
         return(
             <div>
+        
+        {console.log("user", this.props.userState)}
+        {console.log("login", this.props.userLogin)}
         
               {/* NAVBAR SECTION STARTS*/}
           <section id="navbar-strap">
@@ -41,13 +54,13 @@ class Navbar extends React.Component{
                       <div className="col-md-12">
                         <div className="pull-right right-side-button" >
                             {/* <img className="top-nav-currency-icon" src={round} /> */}
-                            <a id="style-main" className="style-changer" href="#">
+                            {/* <a id="style-main" className="style-changer" href="#">
                                 <i className="fa fa-2x fa-sun-o" aria-hidden="true"></i>
                             </a>
                             <a id="dark-theme" className="style-changer" href="#">
                                 <i className="fa fa-2x fa-moon-o" aria-hidden="true"></i>
-                            </a>
-                            <a data-toggle="modal" data-target="#myModal">LOGIN</a>
+                            </a> */}
+                            {this.props.userLogin ? <a href="#" data-toggle="modal" data-target="#myModal" style={{textDecoration: 'none'}}>LOGIN</a>  :<a href="#" style={{textDecoration: 'none'}}>Welcome</a>}
                               {/* <Link to='auth' style={{textDecoration: 'none'}}>LOGIN</Link> */}
                                   {/* <Link to='auth' style={{textDecoration: 'none'}}>SIGN UP</Link> */}
                         </div>
@@ -113,4 +126,25 @@ class Navbar extends React.Component{
 }
 
 
-export default Navbar;
+const mapStateToProps = (state) => {
+    return {
+    // listState: state.RateReducer.getrate,
+    userState: state.AuthReducer.profile,
+    userLogin: state.AuthReducer.loggedIn
+
+      };
+    }
+
+const mapDispatchToProps=(dispatch) =>{
+    return {
+        userData: (data) => dispatch(MiddleWare.LoginRequest(data)),
+        getUserList: () => {
+            dispatch(MiddleWare.UserProfile());
+        }
+
+
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

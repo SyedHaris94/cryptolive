@@ -22,10 +22,10 @@ class Middle extends React.Component{
             tableData: [],
             timerInterval: 2000,
             isLoading: true,
-            market_show: false,
+            market_show: true,
             volume_show : true,
-            cicular_show: false,
-            one_h_show : false,
+            cicular_show: true,
+            one_h_show : true,
             twenty_4_show: true,
             week_show : true,
             selectedOption1: 'usd',
@@ -158,18 +158,22 @@ class Middle extends React.Component{
                             <div className="top-cards" align="center">
                                 <div className="col-md-1 col-xs-2 refresh-rate-card">
                                     <h4>REFRESH</h4>
-                                    <select id="timerInterval" className="selectpicker" onChange={this.handleTimer}>
-                                        <option value= "2">2 Sec</option>
-                                        <option value = "5">5 Sec</option>
-                                        <option value = "10">10 Sec</option>
-                                    </select>        
+                                    <div class="select-container">
+                                        <select id="timerInterval" className="selectpicker" onChange={this.handleTimer}>
+                                            <option value= "2">2 Sec</option>
+                                            <option value = "5">5 Sec</option>
+                                            <option value = "10">10 Sec</option>
+                                        </select>        
+                                    </div>
                                 </div>
                                 <div className="col-md-1 col-xs-2 curren-option-card">
                                     <h4>CURRENCY</h4>
-                                    <select class="selectpicker" value={this.state.selectedOption1} onChange={this.handlecurrency} >
-                                        <option value="usd">USD</option>
-                                        <option value="eur">EUR</option>
-                                    </select>     
+                                    <div class="select-container">
+                                        <select class="selectpicker" value={this.state.selectedOption1} onChange={this.handlecurrency} >
+                                            <option value="usd">USD</option>
+                                            <option value="eur">EUR</option>
+                                        </select>     
+                                    </div>
                                 </div>                                
                                 <div className="col-md-2 col-xs-2 global-market">        
                                     <h4>GLOBAL MARKET</h4>

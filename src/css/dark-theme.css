@@ -970,6 +970,8 @@ body {
 
 
 /*ICO VIEW PAGE START*/
+
+
 #ico-stats-brief {
     padding-top: 180px;
     padding-bottom: 50px;
@@ -1011,6 +1013,89 @@ body {
     font-weight: 200;
 
 }
+
+.overall-rate .CircularProgressbar {
+    padding-top: 30px;
+    padding-left: 10px;
+    width: 60%;
+    
+  }
+
+  .team .CircularProgressbar {
+    width: 70%;
+  }
+
+  .team > p {
+    color: #BDBDBD;
+  }
+  
+
+  .concept .CircularProgressbar {
+    width: 70%;
+  }
+
+  .concept > p {
+    color: #BDBDBD;
+  }
+
+  .whitepaper .CircularProgressbar {
+    width: 70%;
+  }
+  
+  .whitepaper > p {
+    color: #BDBDBD;
+  }
+  
+.CircularProgressbar .CircularProgressbar-path {
+    stroke: #1FA1B5;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s ease 0s;
+  }
+  
+  .CircularProgressbar .CircularProgressbar-trail {
+    stroke: #d6d6d6;
+  }
+  
+  .CircularProgressbar .CircularProgressbar-text {
+    fill: #1FA1B5;
+    /* font-size: 20px; */
+    dominant-baseline: middle;
+    text-anchor: middle;
+  }
+  
+  .CircularProgressbar .CircularProgressbar-background {
+    fill: #d6d6d6;
+  }
+  
+  /*
+   * Sample background styles. Use these with e.g.:
+   *
+   *   <CircularProgressbar
+   *     className="CircularProgressbar-inverted"
+   *     background
+   *     percentage={50}
+   *   />
+   */
+  .CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-background {
+    fill: #1FA1B5;
+  }
+  
+  .CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-text {
+    fill: #fff;
+  }
+  
+  .CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-path {
+    stroke: #fff;
+  }
+  
+  .CircularProgressbar.CircularProgressbar-inverted .CircularProgressbar-trail {
+    stroke: transparent;
+  }
+  
+  #chartdiv {
+    width: 100%;
+    height: 100%;
+  }
 
 /* ICO-SOCIAL SECTION */
 #ico-social{
@@ -2301,24 +2386,92 @@ color: #fff;
         width: 100%;
         height: 100%;
       }
-
-} 
-
-
-@media(max-width: 400px) {
-
-    #ico-listing-item .ico-card {
-    margin-left: 15px;
-    margin-right: 20px;
-    width: 350px;
+      #learn-start .white-img{
+        padding-left: 80px;
+        width: 90%;
+        height: 80%;
+    
+      }
+      .recharts-surface{
+        margin-top: -40px;
+        width: 250px;
+      }
+      .recharts-default-legend{
+        display: none
+      }
+    
+      .recharts-tooltip-wrapper{
+      margin-left: -288px;
+      }
+    
+      .recharts-tooltip-item{
+        font-size: 0.8em;
+      }
+    
+      
+    
+      .table-chart{
+        width: 70px
+      }
+    
+      .volume{
+        display: none;
+      }
+    
+      .circulating{
+        display: none;
+      }
+    
+      .twenty4_hr{
+        display: none
+      }
+      .market{
+        display: none;
+      }
+      .rank{
+        width: 5%;
+      }
     }
-  
-    #ico-listing-item .btn-block {
-    margin-left: 15px;
-    margin-right: 25px;
-    width: 350px;
+    
+    @media(max-width: 400px) {
+    
+      #ico-listing-item .ico-card {
+      margin-left: 15px;
+      margin-right: 20px;
+      width: 350px;
+      }
+    
+       .recharts-surface{
+        margin-top: -40px;
+        width: 250px;
+      }
+    
+      #ico-listing-item .btn-block {
+      margin-left: 15px;
+      margin-right: 25px;
+      width: 100px;
+      }
+    
+      .top-right-red{
+        margin-left: -50px;
+        margin-top: 30px;
+      }
+    
+      
+      .volume{
+        display: none;
+      }
+    
+      .circulating{
+        display: none;
+      }
+    
+      .twenty4_hr{
+        display: none;
+      }
+      .market{
+        display: none;
+      }
     }
-  }
-
 
 

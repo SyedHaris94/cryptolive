@@ -133,45 +133,34 @@ class IcoBrief extends React.Component{
         const nameParam = this.props.namePram;
         const liveParam = this.props.livePram;
         const rateParam = this.props.listState;
+        console.log("ico_name", this.props.listState)
 
-       console.log("ico_name", this.props.listState)
-
-    //    function getData(api, url) {
-    //     let sortedData = [];
-    //     m.map((m,v) => {
-    //         if(nameParam == m.icoName){
-    //             sortedData.Concept= m.Concept,
-    //             sortedData.Team= m.Team,
-    //             sortedData.Whitepaper= m.Whitepaper,
-    //             sortedData.comment= m.comment,
-    //             sortedData.icoName= m.icoName,
-    //             sortedData.uid= m.uid
-               
-    //         }          
-    //     });
-    //     return sortedData;
-    // }
-    //     let testing = getData(rateParam, nameParam);
-    //     console.log('data', testing)
 
         function rateUrl(api, url) {
-            let test = {};
-            m.map((m, v) => {                  
-                if (nameParam == m.icoName) {
-                    test.icoName = m.icoName;
-                    test.Concept = m.Concept;
-                    test.Team = m.Team;
-                    test.Whitepaper = m.Whitepaper;
-                    test.comment = m.comment;
-                    test.uid = m.uid;
+            let test = [];
+            let count = 1
+
+            api.map((m, v) => {    
+                
+                if (url == m.icoName) {
+                    test.push({
+                        icoName: m.icoName,
+                        Concept: m.Concept,
+                        Whitepaper: m.Whitepaper,
+                        Team: m.Team ,
+                        comment: m.comment,
+                        uid: m.uid,
+                        count: count++
+                    })
+                    // let Concept = test.Concept/ 5 * 100 
+                    // let Team = test.Team / 5 * 100 
+                    // let Whitepaper = test.Whitepaper / 5 * 100 
+                    // let avrg = (Concept + Whitepaper + Team) / 100 * 15
                 }
             });
             return test;
         }
-
-        let RateParam = rateUrl(rateParam, nameParam);
-        console.log('rateparam', RateParam)
-
+        let pageParam = rateUrl(rateParam, nameParam);
 
         function gotoUrl(api, url) {
             let test = {};
@@ -190,10 +179,42 @@ class IcoBrief extends React.Component{
             return test;
         }
 
-        let pageParam = gotoUrl(m, nameParam);
-        console.log('pageparam', pageParam)
+        let icoParam = gotoUrl(m, nameParam);
+        console.log('icoParam', icoParam)
 
         let date = pageParam.end_time
+
+        let Count = pageParam.map(a => a.count);
+        let count = Count.length;
+        console.log('count',count);
+
+        let Concept = pageParam.map(a => a.Concept);
+        Concept = Concept.map(Number); 
+        let sum_concept = Concept.reduce((a, b) => a + b, 0);
+        let concept_rate = Math.round(sum_concept / (count * 5) * 100 )
+        console.log('sum_concept', sum_concept)
+        console.log('Concept', concept_rate)
+       
+
+        let Team = pageParam.map(a => a.Team);
+        Team = Team.map(Number);
+        let sum_team = Team.reduce((a, b) => a + b, 0);
+        let team_rate = Math.round(sum_team / (count * 5) * 100 )
+        console.log('sum_team', sum_team)
+        console.log('team', team_rate)
+
+        let White = pageParam.map(a => a.Whitepaper);
+        White = White.map(Number);
+        let white_sum = White.reduce((a, b) => a + b, 0);
+        let white_rate = Math.round(white_sum / (count * 5) * 100 )
+        console.log('sum_white', white_sum)
+        console.log('white', white_rate)
+
+        let total_rate = white_sum + sum_team + sum_concept
+        let overall = Math.round(total_rate / (count * 15) * 100)
+        
+        console.log('overall', overall)
+
         
         return(
             <div>
@@ -204,12 +225,12 @@ class IcoBrief extends React.Component{
                             <div className="col-md-6">
                                 <div className="row" style={{marginBottom: '50px'}}>
                                     <div className="col-md-3 col-xs-3" style={{paddingTop: '25px'}}>
-                                        <img src={pageParam.image}
+                                        <img src={icoParam.image}
                                         style={{width: '100%', height: '40%'}} className="pull-left"/>
                                     </div>
                                     <div className="col-md-9 col-xs-9 medicalchain">
-                                        <h3>{pageParam.name} <span className="premium-icon" style={{letterSpacing: '3px'}}>PREMIUM</span></h3>
-                                        <p>{pageParam.description}</p>
+                                        <h3>{icoParam.name} <span className="premium-icon" style={{letterSpacing: '3px'}}>PREMIUM</span></h3>
+                                        <p>{icoParam.description}</p>
                                     </div>
                                 </div>
                                 <div className="row">
@@ -219,33 +240,20 @@ class IcoBrief extends React.Component{
                                     <div className="col-md-2 launch-card"><h3>{this.leading0(this.state.seconds)}  <br/><span>Seconds</span></h3></div>
                                 </div>
                             </div>
-                            <div className="col-md-6 rate-section">
-                                {this.props.listState.map((m,v) => {
-                                    
-                                    let icoName = m.icoName
-                                    console.log('ico-name',icoName)
-                                    let Concept = m.Concept/ 5 * 100 
-                                    let Team = m.Team / 5 * 100 
-                                    let Whitepaper = m.Whitepaper / 5 * 100 
-                                    let avrg = (Concept + Whitepaper + Team) / 100 * 15
-                                    return  (
-                                        icoName === nameParam ? 
-                                        <div className="row" key={v}>
-                                            <div className= "col-md-4 overall-rate" >
-                                              
-                                            <h4 style={{marginTop: '-10px', fontSize: '1.4em'}}>Over All Rating</h4>
-                                                <CircularProgressbar percentage={avrg} />
-                                            </div>
-                                            <div className= "col-md-8">
-                                                <h4 style={{marginTop: '-10px', fontSize: '1.4em'}} >Ratings</h4> 
-                                                <h5 style={{fontSize: '0.8em',color: '#90CFD8', paddingBottom: '10px'}}>See all ratings</h5>
-                                                <div className="col-md-4 team"><p>Team</p><CircularProgressbar percentage={Team} /></div>
-                                                <div className="col-md-4 concept"><p>Concept</p><CircularProgressbar percentage={Concept} /></div>
-                                                <div className="col-md-4 whitepaper"><p>WhitePaper</p><CircularProgressbar percentage={Whitepaper} /></div>
-                                            </div>
-                                        </div>
-                                        : null);
-                                      })}
+                            <div className="col-md-6 rate-section">                                   
+                             <div className="row" >
+                                    <div className= "col-md-4 col-xs-4 overall-rate" >                                       
+                                    <h4 style={{marginTop: '-10px', fontSize: '1.4em'}}>Over All Rating</h4>
+                                        <CircularProgressbar percentage={overall} />
+                                    </div>
+                                    <div className= "col-md-8 col-xs-8">
+                                        <h4 style={{marginTop: '-10px', fontSize: '1.4em'}} >Ratings</h4> 
+                                        <h5 style={{fontSize: '0.8em',color: '#90CFD8', paddingBottom: '10px'}}>See all ratings</h5>
+                                        <div className="col-md-4 col-xs-4 team"><p>Team</p><CircularProgressbar percentage={team_rate} /></div>
+                                        <div className="col-md-4 col-xs-4 concept"><p>Concept</p><CircularProgressbar percentage={concept_rate} /></div>
+                                        <div className="col-md-4 col-xs-4 whitepaper"><p>WhitePaper</p><CircularProgressbar percentage={white_rate} /></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -260,7 +268,6 @@ class IcoBrief extends React.Component{
 const mapStateToProps = (state) => {
     return {
         listState: state.RateReducer.getrate,
-        // userState: state.AuthReducer.profile,
       };
     }
   
@@ -269,9 +276,6 @@ const  mapDispatchToProps = (dispatch) => {
             getList: () => {
             dispatch(MiddleWare.GetRating());
         },
-            // getUserList: () => {
-            // dispatch(MiddleWare.UserProfile());
-        // }
     }
 };
     

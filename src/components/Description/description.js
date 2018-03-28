@@ -12,19 +12,37 @@ import { connect } from "react-redux";
 
 import {Rating} from '../index'
 
+import {Tabs, Tab} from 'material-ui/Tabs';
+
+import {Auth} from '../index'
 
 
+
+const styles = {
+    headline: {
+      fontSize: 24,
+      paddingTop: 16,
+      marginBottom: 12,
+      fontWeight: 400,
+    },
+  };
+
+  
 class Description extends React.Component{
+    // componentWillMount(){
+    //     this.props.getList();
+    //     this.props.getUserList();
+    
+    // }
+
     componentDidMount() {
-        console.log("didmount running");
-        this.props.getList();
+      this.props.getList();
         this.props.getUserList();
     }
-         
+
     render(){
         let icoparam = this.props.icoNameParam
         {console.log('asdasdger',icoparam)}        
-        
        
         const list = this.props.listState
         {console.log("list", list)}
@@ -33,7 +51,7 @@ class Description extends React.Component{
         {console.log("user list", user)}
         
         function rateUrl(api, url) {
-            let test = {};
+            let test = [];
 
             api.map((m, v) => {    
                 
@@ -45,20 +63,22 @@ class Description extends React.Component{
                     test.Whitepaper = m.Whitepaper;
                     test.Team = m.Team;
                 }
-
             });
-
             return test;
         }
+        // console.log('test', test)
 
         let pageParam = rateUrl(list, icoparam);
-        console.log(pageParam)
+
+
+        console.log('pagePram',pageParam)
         const concept = pageParam.Concept
         const team = pageParam.Team
         const white = pageParam.Whitepaper
         const rate_percent = (team + concept + white) / 100 * 15
         let out_of_five = rate_percent/100*5
         out_of_five = Math.round( out_of_five * 10 ) / 10
+        {console.log("login", this.props.userLogin)}
 
         return(
             <div>
@@ -167,7 +187,7 @@ class Description extends React.Component{
                                         </div>
                                     </div>
                                     <div className="col-md-12 content" >
-                                        {<ul className="nav nav-tabs" role="tablist">
+                                        {/* {<ul className="nav nav-tabs" role="tablist">
                                             <li role="presentation" className="active">
                                                 <a href="#positive" aria-controls="positive" role="tab" data-toggle="tab">POSITIVE <span className="label label-default" style={{backgroundColor: '#35A0B3'}}>4</span></a>
                                             </li>
@@ -177,14 +197,16 @@ class Description extends React.Component{
                                             <li role="presentation">
                                                 <a href="#negative" aria-controls="negative" role="tab" data-toggle="tab">NEGATIVE <span className="label label-default" style={{backgroundColor: '#d50026'}}>6</span></a>
                                             </li>
-                                        </ul>}
+                                        </ul>} */}
                                         {/* <!-- Nav tabs --> */}
                                        
                                         <NavTabs user ={user} list={list} icoparam={icoparam} />
                                         <div className="col-md-12 col-sm-12 col-xs-12">
-                                            <button id="singlebutton" name="singlebutton" className="btn btn-order" data-toggle="modal" data-target="#myModal">Rate Here..</button>
+                                        {this.props.userLogin ? <button id="singlebutton" name="singlebutton" className="btn btn-order" data-toggle="modal" data-target="#rateModal">Rate Here..</button> : 
+                                        <button id="singlebutton" name="singlebutton" className="btn btn-order" data-toggle="modal" data-target="#myModal">Rate Here..</button> }
                                         </div>
-                                          <Modal modalParam = {icoparam}/>
+                                        {this.props.userLogin ?    
+                                             <Modal modalParam = {icoparam}/>:alert('please sign in') }
                                     </div>
                                 </div>                     
                             </div>
@@ -200,12 +222,15 @@ const mapStateToProps = (state) => {
     return {
     listState: state.RateReducer.getrate,
     userState: state.AuthReducer.profile,
+    userLogin: state.AuthReducer.loggedIn
+
 
       };
     }
   
 const  mapDispatchToProps = (dispatch) => {
     return {
+        userData: (data) => dispatch(MiddleWare.LoginRequest(data)),
         getList: () => {
         dispatch(MiddleWare.GetRating());
         },
@@ -219,6 +244,18 @@ const  mapDispatchToProps = (dispatch) => {
 export default connect(mapStateToProps,mapDispatchToProps)( Description)
 
 class NavTabs extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+          value: 'a',
+        };
+      }
+    
+      handleChange = (value) => {
+        this.setState({
+          value: value,
+        });
+      };
 
     render(){
         let icoparam = this.props.icoparam;
@@ -226,78 +263,126 @@ class NavTabs extends React.Component{
         let list = this.props.list
         return(
             <div>
-                {list.map((x,y) => {
-                const concept = x.Concept
-                const team = x.Team
-                const white = x.Whitepaper
-                const rate_percent = (team + concept + white) / 100 * 15
-                let out_of_five = rate_percent/100*5
-                out_of_five = Math.round( out_of_five * 10 ) / 10
-
-                console.log('out of', y)
-                return user.map((m,v) => {
-                    if (x.uid === m.uid && x.icoName === icoparam){                                              
-                    return(
-                        <div class="tab-content" key={v} >
-                            {out_of_five <= 5  && out_of_five  >= 4 ? <div id="positive" className="col-lg-12 jasmine-content tab-pane fade in active">
-                                    positive
-                                <div style={{paddingTop: '10px'}} className="col-md-2 col-sm-2" >
-                                    <img src={jasmine} alt="logo" />
-                                </div>
-                                    <div className="col-md-8 col-sm-8 jasmine-color">
-                                        POSITIVE
-                                        <p>{m.name}</p>
-                                        <p>{x.comment}</p>
-                                    </div>
-                                <div className="col-md-2 col-sm-2 right" >
-                                    <span className="label label-default" style={{marginLeft: '-14px', marginTop: '20px'}}>
-                                        {out_of_five}
-                                    </span> 
-                                    <i className="fa fa-caret-up" aria-hidden="true" style={{ marginTop: '-30px',paddingLeft: "15px", color:'#37A1B4'}} />                                                                  
-                                </div>
-                            </div> : null}
-                            {out_of_five < 4 && out_of_five >= 2 ? <div id="neutral" className="col-lg-12 jasmine-content tab-pane fade ">
-                                    neutral
-                                    <div style={{paddingTop: '10px'}} className="col-md-2 col-sm-2" >
-                                    <img src={jasmine} alt="logo" />
-                                </div>
-                                    <div className="col-md-8 col-sm-8 jasmine-color">
-                                        NEUTRAL
-                                        <p>{m.name}</p>
-                                        <p>{x.comment}</p>
-                                    </div>
-                                <div className="col-md-2 col-sm-2 right" >
-                                    <span className="label label-default" style={{marginLeft: '-14px', marginTop: '20px'}}>
-                                        {out_of_five}
-                                    </span> 
-                                    <i className="fa fa-caret-up" aria-hidden="true" style={{ marginTop: '-30px',paddingLeft: "15px", color:'#37A1B4'}} />                                                                  
-                                </div>
-                            </div> : null} 
-                            {out_of_five < 2 ? <div id="negative" className="col-lg-12 jasmine-content tab-pane fade">
-                                negative
-                                <div style={{paddingTop: '10px'}} className="col-md-2 col-sm-2" >
-                                    <img src={jasmine} alt="logo" />
-                                </div>
-                                    <div className="col-md-8 col-sm-8 jasmine-color">
-                                        NEGATIVE
-                                        <p>{m.name}</p>
-                                        <p>{x.comment}</p>
-                                    </div>
-                                <div className="col-md-2 col-sm-2 right" >
-                                    <span className="label label-default" style={{marginLeft: '-14px', marginTop: '20px'}}>
-                                        {out_of_five}
-                                    </span> 
-                                    <i className="fa fa-caret-up" aria-hidden="true" style={{ marginTop: '-30px',paddingLeft: "15px", color:'#37A1B4'}} />                                                                  
-                                </div>
-                            </div> : null}
-                        </div>)
-                    }
-                    else{
-                        null
-                    }    
-                })
-                
-                })}
+                    <Tabs className="nav-tab"
+                        value={this.state.value}
+                        onChange={this.handleChange}
+                    >
+                        <Tab label="Positive" value="a" >
+                               {list.map((x,y)=> {
+                                    const concept = x.Concept
+                                    const team = x.Team
+                                    const white = x.Whitepaper
+                                    const rate_percent = (team + concept + white) / 100 * 15
+                                    let out_of_five = rate_percent/100*5
+                                    out_of_five = Math.round( out_of_five * 10 ) / 10
+                                
+                                    return user.map((m,v) => {
+                                        if (x.uid === m.uid && x.icoName === icoparam){                                              
+                                            return(
+                                                <div key={v} style={{marginTop: '20px'}}>
+                                                        {out_of_five <= 5  && out_of_five  >= 4 ? 
+                                                        <div>
+                                                         
+                                                        
+                                                       
+                                                        <div className="col-md-7 col-sm-8 jasmine-color">
+                                                        <div className="col-md-2 col-sm-2" >
+                                                            <img src={jasmine} alt="logo" />
+                                                            </div>
+                                                            {/* POSITIVE */}
+                                                            <p style={{marginTop: '20px',marginLeft: '80px'}} >{m.name}</p>
+                                                            <p style={{marginLeft: '80px'}} >{x.comment}</p>
+                                                        </div>
+                                                        <div className="col-md-2 col-sm-2 right" >
+                                                            <span className="label label-default" style={{marginLeft: '-14px', marginTop: '20px'}}>
+                                                                {out_of_five}
+                                                            </span> 
+                                                            <i className="fa fa-caret-up" aria-hidden="true" style={{ marginTop: '-30px',paddingLeft: "15px", color:'#37A1B4'}} />                                                                  
+                                                        </div>
+                                                    </div> : null}
+                                                </div>
+                                            )   
+                                    
+                                        }})
+                                })}
+                            
+                        </Tab>
+                        <Tab label="Neutral" value="b">
+                            <div>
+                                {list.map((x,y)=> {
+                                    const concept = x.Concept
+                                    const team = x.Team
+                                    const white = x.Whitepaper
+                                    const rate_percent = (team + concept + white) / 100 * 15
+                                    let out_of_five = rate_percent/100*5
+                                    out_of_five = Math.round( out_of_five * 10 ) / 10
+                                
+                                    return user.map((m,v) => {
+                                        if (x.uid === m.uid && x.icoName === icoparam){                                              
+                                            return(
+                                                <div key={v} style={{marginTop: '20px'}}>
+                                                         {out_of_five < 4 && out_of_five >= 2 ?  <div >
+                                                        <div className="col-md-2 col-sm-2" >
+                                                            <img src={jasmine} alt="logo" />
+                                                        </div>
+                                                        <div className="col-md-8 col-sm-8 jasmine-color">
+                                                            {/* NEUTRAL */}
+                                                            <p>{m.name}</p>
+                                                            <p>{x.comment}</p>
+                                                        </div>
+                                                        <div className="col-md-2 col-sm-2 right" >
+                                                            <span className="label label-default" style={{marginLeft: '-14px', marginTop: '20px'}}>
+                                                                {out_of_five}
+                                                            </span> 
+                                                            <i className="fa fa-caret-up" aria-hidden="true" style={{ marginTop: '-30px',paddingLeft: "15px", color:'#37A1B4'}} />                                                                  
+                                                        </div>
+                                                    </div> : null}
+                                                </div>
+                                            )   
+                                    
+                                        }})
+                                })}
+                            </div>
+                        </Tab>
+                        <Tab label="Negative" value="c">
+                            <div>
+                                {list.map((x,y)=> {
+                                    const concept = x.Concept
+                                    const team = x.Team
+                                    const white = x.Whitepaper
+                                    const rate_percent = (team + concept + white) / 100 * 15
+                                    let out_of_five = rate_percent/100*5
+                                    out_of_five = Math.round( out_of_five * 10 ) / 10
+                                
+                                    return user.map((m,v) => {
+                                        if (x.uid === m.uid && x.icoName === icoparam){                                              
+                                            return(
+                                                <div key={v} style={{marginTop: '20px'}}>
+                                                         {out_of_five < 2 ?  <div>
+                                                        <div className="col-md-2 col-sm-2" >
+                                                            <img src={jasmine} alt="logo" />
+                                                        </div>
+                                                        <div className="col-md-8 col-sm-8 jasmine-color">
+                                                            {/* NEGATIVE */}
+                                                            <p>{m.name}</p>
+                                                            <p>{x.comment}</p>
+                                                        </div>
+                                                        <div className="col-md-2 col-sm-2 right" >
+                                                            <span className="label label-default" style={{marginLeft: '-14px', marginTop: '20px'}}>
+                                                                {out_of_five}
+                                                            </span> 
+                                                            <i className="fa fa-caret-up" aria-hidden="true" style={{ marginTop: '-30px',paddingLeft: "15px", color:'#37A1B4'}} />                                                                  
+                                                        </div>
+                                                    </div> : null}
+                                                </div>
+                                            )   
+                                    
+                                        }})
+                                })}
+                            </div>
+                        </Tab>
+                        </Tabs>
+                   
             </div>
 
         );
@@ -312,7 +397,7 @@ class Modal extends React.Component{
         {console.log('modal',modal)}
       return(
         // <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
+  <div class="modal fade" id="rateModal" role="dialog">
     <div class="modal-dialog">
     
       {/* <!-- Modal content--> */}

@@ -190,7 +190,7 @@ class RowData1 extends React.Component{
                                         <img src={m.image}
                                             imageParam= {pageSym} 
                                             style={{marginLeft: '15px', width: '45%', height: '30%'}} className="pull-left"/>
-                                        <div style={{textAlign: 'left', marginLeft: '15px'}} class="pull-left"> {ico_name}</div>
+                                        <div style={{textAlign: 'left', marginLeft: '15px'}} class="pull-left ico_name_1"> {ico_name}</div>
                                     </td>
                                 </Link>
                                     <td style={{width: '15%' , }} >
@@ -298,11 +298,11 @@ class RowData2 extends React.Component{
                         if (m.count <= 6){
                             return <tr key={v}>
                             <Link to={gotoUrl(pageSym, live)} style={{ textDecoration: "none" }}>
-                            <td style={{width: '35%' , textAlign: 'left'}} >
+                            <td style={{width: '25%' , textAlign: 'left'}} >
                                     <img src={m.image}
                                         imageParam= {pageSym} 
                                         style={{marginLeft: '15px', width: '30%', height: '30%'}} className="pull-left"/>
-                                    <div style={{ }} class="pull-right"> {ico_name}</div>
+                                    <div class="pull-right ico_name_2"> {ico_name}</div>
                                 </td>
                             </Link>
                                 <td style={{width: '10%' , }}  >

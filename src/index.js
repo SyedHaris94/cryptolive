@@ -8,14 +8,18 @@ import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
 import store from './store//store'
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+
 // import FilteredList from './components/search/search'
 
 
 ReactDOM.render(
-
+    
     <Provider store = {store} >
+        <MuiThemeProvider>
             <Routes />
-            {/* // <FilteredList/> */}
+        </MuiThemeProvider>        
      </Provider>
 
     

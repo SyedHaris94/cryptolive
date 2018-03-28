@@ -265,17 +265,18 @@ input:checked + .slider:before {
   }
 
   #card .top-cards .refresh-rate-card{
-    padding-bottom: 6px
+    padding-bottom: 10px
   }
 
   #card .top-cards .curren-option-card{
-    padding-bottom: 6px
+    padding-bottom: 10px
   }
 
   #card .selectpicker {
     background-color: #fff;
     border-color: transparent;
     color: #35A0B3;
+    font-size: 0.7em;
   }
   
   #card .top-cards div:nth-child(5) {
@@ -369,9 +370,10 @@ input:checked + .slider:before {
   }
   
   #graph-table .table > tbody > tr {
-    -webkit-box-shadow: 0 5px 32px 0 rgba(0,0,0,.1);
     -moz-box-shadow: 0 5px 32px 0 rgba(0,0,0,.1);
     box-shadow: 0 5px 32px 0 rgba(0,0,0,.1);
+    -webkit-box-shadow: 0 5px 32px 0 rgba(0,0,0,.1);
+
   }
   
   /* GRAPH TABLE */
@@ -383,9 +385,10 @@ input:checked + .slider:before {
   }
   
   #graph-table .table > thead {
-    -webkit-box-shadow: 0 0 22px 0 rgba(0,0,0,.1);
-    -moz-box-shadow: 0 0 22px 0 rgba(0,0,0,.1);
     box-shadow: 0 0 22px 0 rgba(0,0,0,.1);
+    -moz-box-shadow: 0 0 22px 0 rgba(0,0,0,.1);
+    -webkit-box-shadow: 0 0 22px 0 rgba(0,0,0,.1);
+
   }
   
   #graph-table .table > thead > tr > th {
@@ -1075,7 +1078,8 @@ input:checked + .slider:before {
   #ico-stats-brief .rate-section{
     box-shadow: 0 0 22px 0 rgba(0,0,0,.1);
     padding-top: 40px;
-    padding-bottom: 70px
+    padding-bottom: 70px;
+    
   }
 
   
@@ -1364,7 +1368,21 @@ input:checked + .slider:before {
     background: none
     /* background-color: green */
   }
+
+  #description .nav-tab{
+    padding-top: 10px;
+  }
+
   
+  /* #description .nav-tab :nth-child(1) {
+    background-color: white;
+    color: #000
+  } */
+  
+  /* #description .nav-tab :nth-child(2) > :nth-child(1) {
+    background-color: #2897A6;
+  } */
+
   #description{
     padding-bottom: 40px
   }
@@ -1476,7 +1494,14 @@ input:checked + .slider:before {
     margin-top: -10px
   
   }
+ 
   
+  .right{
+    
+    margin-left: 68px;
+    margin-top: 27px;
+
+  }
   
   
   #description .jasmine-content .label-default {
@@ -2160,6 +2185,36 @@ input:checked + .slider:before {
       width: 778px;
       padding-left: 30px;
   }
+
+  .jasmine-color{
+    margin-top: 18px;
+
+  }
+
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* padding: .5em; */
+    /* background: #efefef; */
+    border: none;
+    border-radius: 3px;
+    padding: 1em 2em 1em 1em;
+    font-size: 0.5em;
+}
+.select-container {position:relative; display: inline;}
+.select-container:after {content:""; width:0; height:0; position:absolute; pointer-events: none;}
+.select-container:after {
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    top: .3em;
+    right: .75em;
+    border-top: 8px solid black;
+    opacity: 0.5;
+}
+select::-ms-expand {
+    display: none;
+}
        
     
   }
@@ -2375,6 +2430,8 @@ input:checked + .slider:before {
        width: 700px;
        /* height: 95%; */ 
      }
+
+     
   
   }
 
@@ -2415,10 +2472,11 @@ input:checked + .slider:before {
     /*{*/
         /*display: none;*/
     /*}*/
-  
+ 
+
     #card .top-cards  .refresh-rate-card h4,
     #card .top-cards  .korean-option-card h4,
-    #card .top-cards  .global-market-card h4,
+    /* #card .top-cards  .global-market-card h4, */
     #card .top-cards  .bitcoin-dominance-card h4,
     #card .top-cards  .total-accounts-card h4
     {
@@ -2427,11 +2485,20 @@ input:checked + .slider:before {
   
     #card .top-cards  .refresh-rate-card p,
     #card .top-cards  .korean-option-card p,
-    #card .top-cards  .global-market-card p,
+    /* #card .top-cards  .global-market-card p, */
     #card .top-cards  .bitcoin-dominance-card p,
     #card .top-cards  .total-accounts-card p
     {
         font-size: 0.7em;
+    }
+
+    #card .top-cards .bitcoin-dominance-card{
+      padding-bottom: 15px;
+
+    }
+
+    #card .top-cards  .total-accounts-card{
+      padding-bottom: 15px;
     }
 
     #card .top-cards h4 {
@@ -2609,10 +2676,15 @@ input:checked + .slider:before {
       width: 300px;
      }
 
-     #description .right{
+    #description .right{
       float: right;
-      margin-top: -100px;
-  }
+      margin-top: -46px;
+    }
+
+    .jasmine-color{
+      margin-top: 18px;
+
+    }
 
    #description .nav-tabs{
        font-size: xx-small;
@@ -2655,15 +2727,103 @@ input:checked + .slider:before {
   }
   .recharts-surface{
     margin-top: -40px;
-    width: 420px;
+    width: 250px;
   }
   .recharts-default-legend{
     display: none
   }
 
-  .table-chart{
-    width: 110px
+  .recharts-tooltip-wrapper{
+  margin-left: -288px;
   }
+
+  .recharts-tooltip-item{
+    font-size: 0.8em;
+  }
+
+  
+
+  .table-chart{
+    width: 70px
+  }
+
+  .volume{
+    display: none;
+  }
+
+  .circulating{
+    display: none;
+  }
+
+  .twenty4_hr{
+    display: none
+  }
+  .market{
+    display: none;
+  }
+  .rank{
+    width: 5%;
+  }
+
+  .overall-rate .CircularProgressbar {
+    padding-top: 30px;
+    padding-left: 10px;
+    width: 70%;
+    
+  }
+
+  .team .CircularProgressbar {
+    width: 90%;
+  }
+
+  .team > p {
+    font-size: 0.8em;
+    color: #BDBDBD;
+  }
+  
+
+  .concept .CircularProgressbar {
+    width: 90%;
+  }
+
+  .concept > p {
+    font-size: 0.8em;
+    color: #BDBDBD;
+  }
+
+  .whitepaper .CircularProgressbar {
+    width: 90%;
+  }
+  
+  .whitepaper > p {
+    font-size: 0.8em;
+
+    color: #BDBDBD;
+  }
+
+  #ico-stats-brief .rate-section{
+    margin-top: 10px
+  }
+
+  .global-market{
+    display: none;
+  }
+
+  .ico_name_1{
+    display: none;
+  }
+
+  
+  .ico_name_2{
+    display: none;
+  }
+  /* .jasmine-color {
+    margin-top: 18px;
+    align-items: center;
+    text-align: center;
+    margin-top: -35px;
+    margin-left: -21px;
+} */
 }
 
 @media(max-width: 400px) {
@@ -2688,5 +2848,21 @@ input:checked + .slider:before {
   .top-right-red{
     margin-left: -50px;
     margin-top: 30px;
+  }
+
+  
+  .volume{
+    display: none;
+  }
+
+  .circulating{
+    display: none;
+  }
+
+  .twenty4_hr{
+    display: none;
+  }
+  .market{
+    display: none;
   }
 }

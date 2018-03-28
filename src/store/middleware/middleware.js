@@ -366,21 +366,55 @@ export default class MiddleWare{
     // }
 
    
-    
+    static fetchEndedICO() {
+        console.log("fetching data");
+        return dispatch => {
+            let arrdata = [];
+            let dataabase = DB.database.ref('ICO/Ended ICO');
+            dataabase.on("value", snapshot => {
+                snapshot.forEach((endSnapshot) => {
+                    let array = [];
+                    let obj = endSnapshot.val();
+                    console.log('data ===' ,obj)
+                    for (var a in obj) {
+                        array.push(obj[a]);
+                        // console.log('array ended_ico ===' ,array)
+                        dispatch(handleAction.get_end_ICO(array))
+                    }
+                })
+            });
+        };
+    }
 
       static GetRating() {
         console.log("fetching data");
         return dispatch => {
-          let arrdata = [];
-          let dataabase = DB.database.ref("/User/Rating/");
-          dataabase.on("value", object => {
-            let data = object.val();
-            for (var a in data) arrdata.push(data[a]);
-                dispatch(handleAction.getRating(arrdata));   
-                console.log("fetched data", arrdata);
-            });
+            let dataabase = DB.database.ref('User/Rating/');
+            dataabase.on("value", snapshot => {
+                // snapshot.forEach((endSnapshot) => {
+                    let array = [];
+                    let obj = snapshot.val();
+                    console.log('data ===' ,obj)
+                    for (var a in obj) {
+                        array.push(obj[a]);
+                        // console.log('array ended_ico ===' ,array)
+                        dispatch(handleAction.getRating(array))
+                    }
+                })
+            // });
         };
-      }
+    }
+    //     return dispatch => {
+    //       let arrdata = [];
+    //       let dataabase = DB.database.ref("/User/Rating/");
+    //       dataabase.on("value", object => {
+    //         let data = object.val();
+    //         for (var a in data) arrdata.push(data[a]);
+    //             dispatch(handleAction.getRating(arrdata));   
+    //             console.log("fetched data", arrdata);
+    //         });
+    //     };
+    //   }
     
     
     

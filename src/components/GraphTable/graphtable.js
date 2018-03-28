@@ -26,15 +26,15 @@ class TableData extends React.Component{
                 <table className="table">
                   <thead>
                     <tr>
-                      <th>RANK</th>
-                      <th>NAME</th> 
-                      <th>PRICE</th> 
-                      {this.props.market ? <th>MARKETCAP</th> : null}
-                      {this.props.volume ? <th>VOLUME (24H)</th> : null}
-                      {this.props.circul ? <th>CIRCULATING</th> : null}
-                      {this.props.one_h ? <th>1h</th> : null}
-                      {this.props.twenty_4 ? <th>24h</th> : null}
-                      {this.props.week ?<th>WEEKLY</th> : null}
+                      <th className="rank">RANK</th>
+                      <th className="name">NAME</th> 
+                      <th className="price">PRICE</th> 
+                      {this.props.market ? <th className="market"> MARKETCAP</th> : null}
+                      {this.props.volume ? <th className="volume">VOLUME (24H)</th> : null}
+                      {this.props.circul ? <th className="circulating">CIRCULATING</th> : null}
+                      {this.props.one_h ? <th className="one_hr">1h</th> : null}
+                      {this.props.twenty_4 ? <th className="twenty4_hr">24h</th> : null}
+                      {this.props.week ?<th className="weekly">WEEKLY</th> : null}
                     </tr>
                   </thead>
                     <GraphTable 
@@ -114,10 +114,10 @@ class GraphTable extends React.Component{
                 }
 
               return <tr key={v}>
-                        <td className="td-border">
+                        <td className="td-border rank">
                           {m.rank}
                         </td>
-                        <td style={{ width: "10%" }}>
+                        <td style={{ width: "10%" }} className="name">
                           <Link to={gotoUrl(pageSym)} style={{ textDecoration: "none" }}>
                             <td style={{width: '20%' , textAlign: 'left'}} >
                               <img src={"https://chasing-coins.com/api/v1/std/logo/"+pageSym+""} className="pull-left"
@@ -127,44 +127,44 @@ class GraphTable extends React.Component{
                           </Link>
                         </td>
                         {m.percent_change_1h < 0 ? 
-                        <td style={{ width: "15%" }} className="graph-td-red-1">
+                        <td style={{ width: "15%" }} className="graph-td-red-1 price">
                           {curren_select === "usd" ? '$' + price.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : '€' + price.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                           <i className="fa fa-caret-down" aria-hidden="true" style={{ paddingLeft: "5px" }} />
-                        </td> :  <td className="graph-td-green">
+                        </td> :  <td className="graph-td-green price">
                           {curren_select === "usd" ? '$' + price.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : '€' + price.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}                          
                           <i className="fa fa-caret-up" aria-hidden="true" style={{ paddingLeft: "5px" }} />
                         </td>}
                         
                         {market_param ?  
-                        <td>
+                        <td className="market">
                           { curren_select === "usd" ? '$' + market.replace(/\B(?=(\d{3})+(?!\d))/g, ",") :  '€' + market.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                         </td> : null }
                         { volume_param ?
-                        <td>
+                        <td className="volume">
                           {curren_select === "usd" ? '$' + volume.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : '€' + volume.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                         </td> : null }
                         {circul_param  ?
-                        <td>
+                        <td className="circulating">
                           {m.available_supply.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                         </td> : null }
                         { one_h_param ?
-                          m.percent_change_1h < 0 ?  <td className="graph-td-red-1">
+                          m.percent_change_1h < 0 ?  <td className="graph-td-red-1 one_hr">
                           {m.percent_change_1h}%
                           <i className="fa fa-caret-down" aria-hidden="true" style={{ paddingLeft: "5px" }} />
-                        </td> : <td className="graph-td-green">
+                        </td> : <td className="graph-td-green one_hr">
                           {m.percent_change_1h}%
                           <i className="fa fa-caret-up" aria-hidden="true" style={{ paddingLeft: "5px" }} />
                         </td> : null }
                         {twenty_4_param ?
-                          m.percent_change_24h < 0 ? <td className="graph-td-red-1">
+                          m.percent_change_24h < 0 ? <td className="graph-td-red-1 twenty4_hr">
                           {m.percent_change_24h}%
                           <i className="fa fa-caret-down" aria-hidden="true" style={{ paddingLeft: "5px" }} />
-                        </td> : <td className="graph-td-green">
+                        </td> : <td className="graph-td-green twenty4_hr">
                           {m.percent_change_24h}%
                           <i className="fa fa-caret-up" aria-hidden="true" style={{ paddingLeft: "5px" }} />
                         </td> : null }
                         {week_param ?
-                          m.percent_change_7d < 0 ? <td className="graph-td-red-1">
+                          m.percent_change_7d < 0 ? <td className="graph-td-red-1 weekly">
                         <ImageChart 
                           imgNumbers={m.symbol}
                           page={pageData}
@@ -172,7 +172,7 @@ class GraphTable extends React.Component{
                         />
                           {m.percent_change_7d}%
                           <i className="fa fa-caret-down" aria-hidden="true" style={{ paddingLeft: "5px", color:'#c11b55'}} />                                                                  
-                        </td> : <td className="graph-td-green">
+                        </td> : <td className="graph-td-green weekly">
                         <ImageChart 
                           imgNumbers={m.symbol}
                           page={pageData}
@@ -235,8 +235,6 @@ class ImageChart extends React.Component{
           const imgProp = this.props.imgNumbers
           const p = this.props.page
           this.ImageApi(imgProp)
-          // console.log(imgProp)
-          // console.log('table data', p);
         }
           
       
@@ -245,7 +243,6 @@ class ImageChart extends React.Component{
                   const x = [];
                   return(
                     <div>
-                      {/* {console.log('dfdsdsawrerf',this.state.mainCurData)} */}
                       {this.state.mainCurData.map((item) => {
                         x.push(
                          item.high , item.low
