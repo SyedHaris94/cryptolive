@@ -10,6 +10,9 @@ import { connect } from "react-redux"
 import { findDOMNode } from 'react-dom';
 import $ from 'jquery';
 
+import { toast } from 'react-toastify';
+import { css } from 'glamor';
+
  // react-router
 // import { Route , withRouter} from 'react-router-dom'
 
@@ -368,8 +371,26 @@ class FacebookAuth extends React.Component{
     }
    
     login() {
-        const result =  auth.signInWithPopup(provider)
-        this.setState({user: result.user});
+    //  app.auth().signInWithPopup(facebookProvider)
+    const result =  auth.signInWithPopup(provider)
+              .then((result, error) => {
+                if (error) {
+                    var errorMessage ="Unable to Signin with Facebook";
+                    toast.error(errorMessage, {
+                        position: toast.POSITION.TOP_CENTER
+                      });
+                } else {
+                toast.success("successfully Login !", {
+                    position: toast.POSITION.TOP_CENTER
+                });
+                  this.setState({ redirect: true })
+                }
+              })
+              this.setState({user: result.user})
+
+        
+        
+        
     }
 
     logout() {

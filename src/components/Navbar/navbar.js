@@ -14,6 +14,10 @@ import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import MiddleWare from '../../store//middleware/middleware'
 
+import { ToastContainer, toast } from 'react-toastify';
+
+import * as DB from "../../firebase/firebase";
+
 class Navbar extends React.Component{
 
     constructor(props){
@@ -40,10 +44,30 @@ class Navbar extends React.Component{
 
    
     render(){
+        const  user = DB.auth.currentUser;
+        // console.log('user', user)
+
+        // if (user === null) {
+        //     console.log('User not signed in',user);
+        //   }
+        //   else{
+        //     console.log('signed in',user);
+        //   }
+          
+
+         const auth =  DB.auth.onAuthStateChanged(function(user) {
+            if (user) {
+                console.log('User not signed in',user);
+            } else {
+                console.log('signed in',user);
+            }
+          });
+
+          console.log('auth',auth)
         return(
             <div>
         
-        {console.log("user", this.props.userState)}
+        {/* {console.log("user", this.props.userState)} */}
         {console.log("login", this.props.userLogin)}
         
               {/* NAVBAR SECTION STARTS*/}
@@ -60,6 +84,8 @@ class Navbar extends React.Component{
                             <a id="dark-theme" className="style-changer" href="#">
                                 <i className="fa fa-2x fa-moon-o" aria-hidden="true"></i>
                             </a> */}
+                                        <ToastContainer />
+
                             {this.props.userLogin ? <a href="#" data-toggle="modal" data-target="#myModal" style={{textDecoration: 'none'}}>LOGIN</a>  :<a href="#" style={{textDecoration: 'none'}}>Welcome</a>}
                               {/* <Link to='auth' style={{textDecoration: 'none'}}>LOGIN</Link> */}
                                   {/* <Link to='auth' style={{textDecoration: 'none'}}>SIGN UP</Link> */}

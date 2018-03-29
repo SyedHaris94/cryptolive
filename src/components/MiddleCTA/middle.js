@@ -11,7 +11,7 @@ import glass from '../../icons/glass-martini.png'
 // import number format
 import NumberFormat from 'react-number-format';
 
-import TableData from '../GraphTable/graphtable'
+import TableData from '../GraphTable/graphtable';
 
 class Middle extends React.Component{
 
@@ -166,6 +166,7 @@ class Middle extends React.Component{
                                         </select>        
                                     </div>
                                 </div>
+                                {/* <button onClick={this.notify}>Notify !</button> */}
                                 <div className="col-md-1 col-xs-2 curren-option-card">
                                     <h4>CURRENCY</h4>
                                     <div class="select-container">

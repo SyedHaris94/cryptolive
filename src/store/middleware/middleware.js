@@ -2,6 +2,9 @@ import axios from 'axios';
 import { handleAction } from '../actions/handleaction';
 import * as DB from "../../firebase/firebase";
 
+import { toast } from 'react-toastify';
+import { css } from 'glamor';
+
 export default class MiddleWare{
 
 
@@ -12,14 +15,18 @@ export default class MiddleWare{
             .signInWithEmailAndPassword(data.email, data.password)
             .then(sent => {
                 dispatch(handleAction.login(data));
-                alert("successfully Login");
-                // route.push(
-                //     // "/icopage"
-                //   )
+                   toast.success("successfully Login !", {
+                      position: toast.POSITION.TOP_CENTER
+                    });
+                    // route.push(
+                    //  "/icopage"
+                    // )
             })
             .catch(error => {
               var errorMessage ="The email address or password you entered is not valid";
-              alert(errorMessage);
+              toast.error(errorMessage, {
+                position: toast.POSITION.TOP_CENTER
+              });
             });
         };
     }
@@ -63,9 +70,9 @@ export default class MiddleWare{
                                    route.push(
                                     "/"
                                   );
-                                     alert(
-                                       "successfully signup"
-                                     );
+                                  toast.success("successfully Login !", {
+                                    position: toast.POSITION.TOP_CENTER
+                                  });
                                    
                                  }
                             );
@@ -100,12 +107,17 @@ export default class MiddleWare{
             .sendPasswordResetEmail(emailAddress)
             .then(function() {
               // Email sent.
-              alert("Email Successfully Sent");
+              toast.success("Email Successfully Sent!", {
+                position: toast.POSITION.TOP_CENTER
+              });
+            //   alert("Email Successfully Sent");
             })
             .catch(function(error) {
               // An error happened.
               var errorMessage = "The email address you entered is not Registered";
-              alert(errorMessage);
+              toast.error(errorMessage, {
+                position: toast.POSITION.TOP_CENTER
+              });
             });
         };
       }

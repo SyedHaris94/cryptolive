@@ -16,6 +16,8 @@ import {Tabs, Tab} from 'material-ui/Tabs';
 
 import {Auth} from '../index'
 
+import { ToastContainer, toast } from 'react-toastify';
+import { css } from 'glamor';
 
 
 const styles = {
@@ -29,16 +31,16 @@ const styles = {
 
   
 class Description extends React.Component{
-    // componentWillMount(){
-    //     this.props.getList();
-    //     this.props.getUserList();
-    
-    // }
-
+   
     componentDidMount() {
       this.props.getList();
         this.props.getUserList();
     }
+     
+    
+    notify = () => toast.error("You are not Loggin !!", {
+        position: toast.POSITION.TOP_CENTER
+      });;
 
     render(){
         let icoparam = this.props.icoNameParam
@@ -82,6 +84,8 @@ class Description extends React.Component{
 
         return(
             <div>
+                          <ToastContainer />
+
                 {/* <!-- DESCRIPTION STARTS --> */}
                     <section id="description" > 
                         <div className="container" >
@@ -202,11 +206,10 @@ class Description extends React.Component{
                                        
                                         <NavTabs user ={user} list={list} icoparam={icoparam} />
                                         <div className="col-md-12 col-sm-12 col-xs-12">
-                                        {this.props.userLogin ? <button id="singlebutton" name="singlebutton" className="btn btn-order" data-toggle="modal" data-target="#rateModal">Rate Here..</button> : 
-                                        <button id="singlebutton" name="singlebutton" className="btn btn-order" data-toggle="modal" data-target="#myModal">Rate Here..</button> }
+                                        {!this.props.userLogin ? <button id="singlebutton" name="singlebutton" className="btn btn-order" data-toggle="modal" data-target="#rateModal">Rate Here..</button> : 
+                                        <button id="singlebutton" name="singlebutton" className="btn btn-order" data-toggle="modal" onClick={this.notify}>Rate Here..</button>                                            }
                                         </div>
-                                        {!this.props.userLogin ?    
-                                             <Modal modalParam = {icoparam}/>:alert('please sign in') }
+                                            <Modal modalParam = {icoparam}/>
                                     </div>
                                 </div>                     
                             </div>
