@@ -15,7 +15,7 @@ class Home extends Component {
             <FiveFeature/>
             <Middle currency = {currency}/>
             {/* <TableData/> */}
-            <HomePagination/>
+            {/* <HomePagination/> */}
             <BottomCards/>
             <Footer/>
 

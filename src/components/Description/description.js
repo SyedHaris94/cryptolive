@@ -19,6 +19,9 @@ import {Auth} from '../index'
 import { ToastContainer, toast } from 'react-toastify';
 import { css } from 'glamor';
 
+import * as DB from "../../firebase/firebase";
+
+
 
 const styles = {
     headline: {
@@ -82,10 +85,23 @@ class Description extends React.Component{
         out_of_five = Math.round( out_of_five * 10 ) / 10
         {console.log("login", this.props.userLogin)}
 
-        return(
+
+        const  User = DB.auth.currentUser;
+        
+        // const loginUser = DB.auth.onAuthStateChanged(firebaseUser => {
+        //     if (firebaseUser) {
+        //         console.log('signed in',firebaseUser);
+        //     } else {
+        //         console.log('user not signed in',firebaseUser);
+        //     }
+        //   });
+          
+          console.log('sds', User)
+
+          return(
             <div>
                           <ToastContainer />
-
+                            <Auth/>
                 {/* <!-- DESCRIPTION STARTS --> */}
                     <section id="description" > 
                         <div className="container" >
@@ -206,7 +222,7 @@ class Description extends React.Component{
                                        
                                         <NavTabs user ={user} list={list} icoparam={icoparam} />
                                         <div className="col-md-12 col-sm-12 col-xs-12">
-                                        {!this.props.userLogin ? <button id="singlebutton" name="singlebutton" className="btn btn-order" data-toggle="modal" data-target="#rateModal">Rate Here..</button> : 
+                                        {User != null ? <button id="singlebutton" name="singlebutton" className="btn btn-order" data-toggle="modal" data-target="#rateModal">Rate Here..</button> : 
                                         <button id="singlebutton" name="singlebutton" className="btn btn-order" data-toggle="modal" onClick={this.notify}>Rate Here..</button>                                            }
                                         </div>
                                             <Modal modalParam = {icoparam}/>
@@ -283,11 +299,8 @@ class NavTabs extends React.Component{
                                         if (x.uid === m.uid && x.icoName === icoparam){                                              
                                             return(
                                                 <div key={v} style={{marginTop: '20px'}}>
-                                                        {out_of_five <= 5  && out_of_five  >= 4 ? 
-                                                        <div>
-                                                         
-                                                        
-                                                       
+                                                    {out_of_five <= 5  && out_of_five  >= 4 ? 
+                                                    <div>
                                                         <div className="col-md-7 col-sm-8 jasmine-color">
                                                         <div className="col-md-2 col-sm-2" >
                                                             <img src={jasmine} alt="logo" />
@@ -330,11 +343,11 @@ class NavTabs extends React.Component{
                                                         </div>
                                                         <div className="col-md-8 col-sm-8 jasmine-color">
                                                             {/* NEUTRAL */}
-                                                            <p>{m.name}</p>
-                                                            <p>{x.comment}</p>
+                                                            <p style={{marginTop: '20px',marginLeft: '80px'}} >{m.name}</p>
+                                                            <p style={{marginLeft: '80px'}} >{x.comment}</p>
                                                         </div>
                                                         <div className="col-md-2 col-sm-2 right" >
-                                                            <span className="label label-default" style={{marginLeft: '-14px', marginTop: '20px'}}>
+                                                        <span className="label label-default" style={{marginLeft: '-14px', marginTop: '20px'}}>
                                                                 {out_of_five}
                                                             </span> 
                                                             <i className="fa fa-caret-up" aria-hidden="true" style={{ marginTop: '-30px',paddingLeft: "15px", color:'#37A1B4'}} />                                                                  
@@ -367,8 +380,8 @@ class NavTabs extends React.Component{
                                                         </div>
                                                         <div className="col-md-8 col-sm-8 jasmine-color">
                                                             {/* NEGATIVE */}
-                                                            <p>{m.name}</p>
-                                                            <p>{x.comment}</p>
+                                                            <p style={{marginTop: '20px',marginLeft: '80px'}} >{m.name}</p>
+                                                            <p style={{marginLeft: '80px'}} >{x.comment}</p>
                                                         </div>
                                                         <div className="col-md-2 col-sm-2 right" >
                                                             <span className="label label-default" style={{marginLeft: '-14px', marginTop: '20px'}}>

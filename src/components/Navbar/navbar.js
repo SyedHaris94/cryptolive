@@ -24,8 +24,10 @@ class Navbar extends React.Component{
         super(props);
         this.state = {
             selectedOption1: 'usd',
+            User: null
         }
         this.handlecurrency = this.handlecurrency.bind(this);
+        this.logout.bind(this);
 
     }
 
@@ -33,6 +35,12 @@ class Navbar extends React.Component{
         this.setState({
             selectedOption1: e.target.value,
         });
+    }
+
+    logout() {
+        let authen = DB.auth;
+        authen.signOut()
+        console.log('logout')
     }
 
     componentDidMount(){
@@ -44,31 +52,37 @@ class Navbar extends React.Component{
 
    
     render(){
-        const  user = DB.auth.currentUser;
-        // console.log('user', user)
-
-        // if (user === null) {
-        //     console.log('User not signed in',user);
-        //   }
-        //   else{
-        //     console.log('signed in',user);
-        //   }
-          
-
-         const auth =  DB.auth.onAuthStateChanged(function(user) {
-            if (user) {
-                console.log('User not signed in',user);
+        const  User = DB.auth.currentUser;
+        
+        DB.auth.onAuthStateChanged(firebaseUser => {
+            if (firebaseUser) {
+                console.log('signed in');
             } else {
-                console.log('signed in',user);
+                console.log('user not signed in');
             }
           });
+          
+          console.log('sds', User)
 
-          console.log('auth',auth)
+          let name, email, photoUrl, uid, emailVerified;
+          
+          if (User != null) {
+            name = User.displayName;
+            email = User.email;
+            // photoUrl = user.photoURL;
+            emailVerified = User.emailVerified;
+            uid = User.uid;  
+          }
+
+          console.log('name', name)
+          console.log('email', email)
+          console.log('uid', uid)
+         
         return(
             <div>
         
         {/* {console.log("user", this.props.userState)} */}
-        {console.log("login", this.props.userLogin)}
+        {/* {console.log("login", this.props.userLogin)} */}
         
               {/* NAVBAR SECTION STARTS*/}
           <section id="navbar-strap">
@@ -77,18 +91,8 @@ class Navbar extends React.Component{
                   <div className="container">
                       <div className="col-md-12">
                         <div className="pull-right right-side-button" >
-                            {/* <img className="top-nav-currency-icon" src={round} /> */}
-                            {/* <a id="style-main" className="style-changer" href="#">
-                                <i className="fa fa-2x fa-sun-o" aria-hidden="true"></i>
-                            </a>
-                            <a id="dark-theme" className="style-changer" href="#">
-                                <i className="fa fa-2x fa-moon-o" aria-hidden="true"></i>
-                            </a> */}
-                                        <ToastContainer />
-
-                            {this.props.userLogin ? <a href="#" data-toggle="modal" data-target="#myModal" style={{textDecoration: 'none'}}>LOGIN</a>  :<a href="#" style={{textDecoration: 'none'}}>Welcome</a>}
-                              {/* <Link to='auth' style={{textDecoration: 'none'}}>LOGIN</Link> */}
-                                  {/* <Link to='auth' style={{textDecoration: 'none'}}>SIGN UP</Link> */}
+                                <ToastContainer />
+                            {User != null ? <a id="btn-logut" href="#" style={{textDecoration: 'none'}} onClick={this.logout} hide> Welcome: {email} </a> : <a id="btn-login" href="#" data-toggle="modal" data-target="#myModal" style={{textDecoration: 'none'}}>LOGIN</a> }
                         </div>
                       </div>
                   </div>

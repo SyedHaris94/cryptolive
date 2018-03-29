@@ -51,6 +51,7 @@ class TableData extends React.Component{
                 </table>
              {console.log('sd',this.props.curr_select)}
                   {/* <TablePagination/> */}
+                  <TodoApp/>
             </div>
           </div>
               
@@ -67,7 +68,54 @@ export default (TableData)
 
 
 class GraphTable extends React.Component{
+
+  constructor() {
+    super();
+    this.state = {
+      todos: [],
+      currentPage: 1,
+      todosPerPage: 10
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  componentDidMount(){
+    this.setState({
+      todos : this.props.tableDat
+    })
+  }
+  handleClick(event) {
+    this.setState({
+      currentPage: Number(event.target.id)
+    });
+  }
+
   render(){
+    const { todos, currentPage, todosPerPage } = this.state;
+ 
+    // Logic for displaying todos
+     const indexOfLastTodo = currentPage * todosPerPage;
+     const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
+     const currentTodos = todos.slice(indexOfFirstTodo, indexOfLastTodo);
+ 
+     console.log('current',currentTodos)
+      // Logic for displaying page numbers
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(todos.length / todosPerPage); i++) {
+      pageNumbers.push(i);
+    }
+
+    const renderPageNumbers = pageNumbers.map(number => {
+      return (
+        <li
+          key={number}
+          id={number}
+          onClick={this.handleClick}
+        >
+          {number}
+        </li>
+      );
+    });
   
     function gotoUrl(sym) {
             return {
@@ -90,7 +138,7 @@ class GraphTable extends React.Component{
               {console.log('arace',pageData)}
                   {/* <!-- GRAPH TABLE STARTS--> */}
                  
-              {pageData.map(
+              {currentTodos.map(
                   (m, v) => {
                 const pageSym = m.symbol
                 let name = m.name;
@@ -186,8 +234,12 @@ class GraphTable extends React.Component{
                   }
                 ) 
                 }
-
+ <ul id="page-numbers">
+          {renderPageNumbers}
+        </ul>
             </tbody>
+
+            
       )
       {/* GRAPH TABLE ENDS */}
 
@@ -256,41 +308,66 @@ class ImageChart extends React.Component{
               }
   }
 
-  class TablePagination extends React.Component{
-    constructor(props) {
-      super(props);
-      this.state = {
-        activePage: 1
-      };
-      this.handlePageChange = this.handlePageChange.bind(this)
-    }
-
-  handlePageChange(pageNumber) {
-  console.log(`active page is ${pageNumber}`);
-  this.setState({activePage: pageNumber});
+class TodoApp extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      todos: ['a','b','c','d','e','f','g','h','i','j','k'],
+      currentPage: 1,
+      todosPerPage: 3
+    };
+    this.handleClick = this.handleClick.bind(this);
   }
 
+  handleClick(event) {
+    this.setState({
+      currentPage: Number(event.target.id)
+    });
+  }
 
-    render(){
-      return(
-        <div>
-          {/* <!-- HOME PAGINATION --> */}
-          {/* <section id="homepage-pagination">
-              <div className="col-md-12" align="center">
-                  <Pagination
-                  activePage={this.state.activePage}
-                  itemsCountPerPage={50}
-                  totalItemsCount={450}
-                  pageRangeDisplayed={5}
-                  onChange={this.handlePageChange}
-                   />
-              </div>
-            </section> */}
-            {/* <!-- HOME PAGINATION ENDS --> */}
-        </div>
+  render() {
+    const { todos, currentPage, todosPerPage } = this.state;
+
+    // Logic for displaying todos
+    const indexOfLastTodo = currentPage * todosPerPage;
+    const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
+    const currentTodos = todos.slice(indexOfFirstTodo, indexOfLastTodo);
+
+    const renderTodos = currentTodos.map((todo, index) => {
+      return <li key={index}>{todo}</li>;
+    });
+
+    // Logic for displaying page numbers
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(todos.length / todosPerPage); i++) {
+      pageNumbers.push(i);
+    }
+
+    const renderPageNumbers = pageNumbers.map(number => {
+      return (
+        <li
+          key={number}
+          id={number}
+          onClick={this.handleClick}
+        >
+          {number}
+        </li>
       );
-    }
+    });
+
+    return (
+      <div>
+        <ul>
+          {renderTodos}
+        </ul>
+        <ul id="page-numbers">
+          {renderPageNumbers}
+        </ul>
+      </div>
+    );
   }
+}
+
 
 
 
