@@ -11,11 +11,31 @@ import moment from 'moment';
 import { connect } from 'react-redux';
 import MiddleWare from '../../store//middleware/middleware'
 
+import Pagination from '../Pagination/pagination';
 
 // import Pagination from 'react-paginating';
 
 
 class TableData extends React.Component{
+
+  constructor() {
+    super();
+    this.state = {
+      // todos: [],
+      // currentPage: 1,
+      // todosPerPage: 10,
+      pageOfItems: []
+    };
+    // this.handleClick = this.handleClick.bind(this);
+    this.onChangePage = this.onChangePage.bind(this);
+  }
+
+
+  
+  onChangePage(pageOfItems) {
+    // update state with new page of items
+    this.setState({ pageOfItems: pageOfItems });
+}
 
   render(){
 
@@ -46,16 +66,27 @@ class TableData extends React.Component{
                     one_h_param = {this.props.one_h}
                     twenty_4_param = {this.props.twenty_4}
                     week_param = {this.props.week}
-                    curren_select = {this.props.curr_select} 
+                    curren_select = {this.props.curr_select}
+                    pageOfItems = {this.state.pageOfItems}
+                     
                     />
+                    
+                    
                 </table>
-             {console.log('sd',this.props.curr_select)}
-                  {/* <TablePagination/> */}
-                  <TodoApp/>
+                <div className="col-md-12">
+                  <div className="container">
+                    <div className="row">
+                      <Pagination items={this.props.table} onChangePage={this.onChangePage} />
+                    </div>
+                  </div>
+                </div>
             </div>
+            
           </div>
-              
+           
+          
         </section>
+       
       </div>
     )
   }
@@ -68,55 +99,7 @@ export default (TableData)
 
 
 class GraphTable extends React.Component{
-
-  constructor() {
-    super();
-    this.state = {
-      todos: [],
-      currentPage: 1,
-      todosPerPage: 10
-    };
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  componentDidMount(){
-    this.setState({
-      todos : this.props.tableDat
-    })
-  }
-  handleClick(event) {
-    this.setState({
-      currentPage: Number(event.target.id)
-    });
-  }
-
   render(){
-    const { todos, currentPage, todosPerPage } = this.state;
- 
-    // Logic for displaying todos
-     const indexOfLastTodo = currentPage * todosPerPage;
-     const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
-     const currentTodos = todos.slice(indexOfFirstTodo, indexOfLastTodo);
- 
-     console.log('current',currentTodos)
-      // Logic for displaying page numbers
-    const pageNumbers = [];
-    for (let i = 1; i <= Math.ceil(todos.length / todosPerPage); i++) {
-      pageNumbers.push(i);
-    }
-
-    const renderPageNumbers = pageNumbers.map(number => {
-      return (
-        <li
-          key={number}
-          id={number}
-          onClick={this.handleClick}
-        >
-          {number}
-        </li>
-      );
-    });
-  
     function gotoUrl(sym) {
             return {
               pathname: `/bitcoin/${sym}`
@@ -130,15 +113,16 @@ class GraphTable extends React.Component{
           const twenty_4_param = this.props.twenty_4_param
           const week_param = this.props.week_param
           const curren_select = this.props.curren_select
+          const pageOfItems = this.props.pageOfItems
 
           console.log(curren_select)
              return (
             <tbody>
-
+              {console.log('dsds',volume_param)}
               {console.log('arace',pageData)}
                   {/* <!-- GRAPH TABLE STARTS--> */}
                  
-              {currentTodos.map(
+              {pageOfItems.map(
                   (m, v) => {
                 const pageSym = m.symbol
                 let name = m.name;
@@ -177,24 +161,24 @@ class GraphTable extends React.Component{
                         </td>
                         {m.percent_change_1h < 0 ? 
                         <td style={{ width: "15%" }} className="graph-td-red-1 price">
-                          {curren_select === "usd" ? '$' + price.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : '€' + price.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                          {price !== null ? curren_select === "usd" ? '$' + price.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : '€' + price.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : null}
                           <i className="fa fa-caret-down" aria-hidden="true" style={{ paddingLeft: "5px" }} />
                         </td> :  <td className="graph-td-green price">
-                          {curren_select === "usd" ? '$' + price.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : '€' + price.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}                          
+                          {price !== null ? curren_select === "usd" ? '$' + price.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : '€' + price.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : null}                          
                           <i className="fa fa-caret-up" aria-hidden="true" style={{ paddingLeft: "5px" }} />
                         </td>}
                         
                         {market_param ?  
                         <td className="market">
-                          { curren_select === "usd" ? '$' + market.replace(/\B(?=(\d{3})+(?!\d))/g, ",") :  '€' + market.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                          {market !== null ? curren_select === "usd" ? '$' + market.replace(/\B(?=(\d{3})+(?!\d))/g, ",") :  '€' + market.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : null}
                         </td> : null }
                         { volume_param ?
                         <td className="volume">
-                          {curren_select === "usd" ? '$' + volume.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : '€' + volume.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                          {volume !== null ? curren_select === "usd" ? '$' + volume.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : '€' + volume.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : null}
                         </td> : null }
                         {circul_param  ?
                         <td className="circulating">
-                          {m.available_supply.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                          {m.available_supply !== null ? m.available_supply.replace(/\B(?=(\d{3})+(?!\d))/g, ",") : null}
                         </td> : null }
                         { one_h_param ?
                           m.percent_change_1h < 0 ?  <td className="graph-td-red-1 one_hr">
@@ -234,10 +218,7 @@ class GraphTable extends React.Component{
                   }
                 ) 
                 }
- <ul id="page-numbers">
-          {renderPageNumbers}
-        </ul>
-            </tbody>
+              </tbody>
 
             
       )
@@ -249,177 +230,60 @@ class GraphTable extends React.Component{
 
 class ImageChart extends React.Component{
   constructor(props) {
-          super(props);
-          this.ImageApi = this.ImageApi.bind(this);
-          this.state = {
-            mainCurData: []
-          };
+      super(props);
+      this.ImageApi = this.ImageApi.bind(this);
+      this.state = {
+        mainCurData: []
+      };
+    }
     
-        }
     
-    
-        ImageApi = (sym) => {
-          const url = 'https://min-api.cryptocompare.com/data/histoday?fsym='+sym+'&tsym=USD&limit=6&aggregate=1&e=CCCAGG';
-            fetch(url).then( r => r.json())
-            .then((bitcoinData) => {
-              const sortedData = [];
-              let count = 0;
-              
-              for (let index in bitcoinData.Data){
-                sortedData.push({
-                    d: moment.unix(bitcoinData.Data[index].time).format('MMM DD'),
-                    p: bitcoinData.Data[index].close.toLocaleString('us-EN',{ style: 'currency', currency: 'USD' }),
-                    x: count, //previous days
-                    y: bitcoinData.Data[index].close, // numerical price
-                    high: bitcoinData.Data[index].high,
-                    low: bitcoinData.Data[index].low,
-                    open: bitcoinData.Data[index].open,
-                  });
-                  count++;
-              }
-              
-              this.setState({
-                mainCurData: sortedData
-              })
-            });
-        }
-    
-        componentDidMount() {
-          const imgProp = this.props.imgNumbers
-          const p = this.props.page
-          this.ImageApi(imgProp)
-        }
+      ImageApi = (sym) => {
+        const url = 'https://min-api.cryptocompare.com/data/histoday?fsym='+sym+'&tsym=USD&limit=6&aggregate=1&e=CCCAGG';
+          fetch(url).then( r => r.json())
+          .then((bitcoinData) => {
+            const sortedData = [];
+            let count = 0;
+            
+            for (let index in bitcoinData.Data){
+              sortedData.push({
+                  d: moment.unix(bitcoinData.Data[index].time).format('MMM DD'),
+                  p: bitcoinData.Data[index].close.toLocaleString('us-EN',{ style: 'currency', currency: 'USD' }),
+                  x: count, //previous days
+                  y: bitcoinData.Data[index].close, // numerical price
+                  high: bitcoinData.Data[index].high,
+                  low: bitcoinData.Data[index].low,
+                  open: bitcoinData.Data[index].open,
+                });
+                count++;
+            }
+            
+            this.setState({
+              mainCurData: sortedData
+            })
+          });
+      }
+  
+      componentDidMount() {
+        const imgProp = this.props.imgNumbers
+        const p = this.props.page
+        this.ImageApi(imgProp)
+      }
           
       
-        render(){
-          const percent_change = this.props.percent_change
-                  const x = [];
-                  return(
-                    <div>
-                      {this.state.mainCurData.map((item) => {
-                        x.push(
-                         item.high , item.low
-                        );
-                      })}
-                    {percent_change < 0 ? <img className="table-chart" src={"https://chart.googleapis.com/chart?&cht=ls&chd=t:"+x[0]+","+x[1]+","+x[2]+","+x[3]+","+x[4]+","+x[5]+","+x[6]+"&chco=BD0056&chs=180x50&chds="+Math.min(...x)+","+Math.max(...x)+""} /> :
-                  <img className="table-chart" src={"https://chart.googleapis.com/chart?&cht=ls&chd=t:"+x[0]+","+x[1]+","+x[2]+","+x[3]+","+x[4]+","+x[5]+","+x[6]+"&chco=328035&chs=180x50&chds="+Math.min(...x)+","+Math.max(...x)+""} />}
-                    </div>
-                  );
-              }
-  }
-
-class TodoApp extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      todos: ['a','b','c','d','e','f','g','h','i','j','k'],
-      currentPage: 1,
-      todosPerPage: 3
-    };
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick(event) {
-    this.setState({
-      currentPage: Number(event.target.id)
-    });
-  }
-
-  render() {
-    const { todos, currentPage, todosPerPage } = this.state;
-
-    // Logic for displaying todos
-    const indexOfLastTodo = currentPage * todosPerPage;
-    const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
-    const currentTodos = todos.slice(indexOfFirstTodo, indexOfLastTodo);
-
-    const renderTodos = currentTodos.map((todo, index) => {
-      return <li key={index}>{todo}</li>;
-    });
-
-    // Logic for displaying page numbers
-    const pageNumbers = [];
-    for (let i = 1; i <= Math.ceil(todos.length / todosPerPage); i++) {
-      pageNumbers.push(i);
-    }
-
-    const renderPageNumbers = pageNumbers.map(number => {
-      return (
-        <li
-          key={number}
-          id={number}
-          onClick={this.handleClick}
-        >
-          {number}
-        </li>
-      );
-    });
-
-    return (
-      <div>
-        <ul>
-          {renderTodos}
-        </ul>
-        <ul id="page-numbers">
-          {renderPageNumbers}
-        </ul>
-      </div>
-    );
-  }
+      render(){
+                const percent_change = this.props.percent_change
+                const x = [];
+                return(
+                  <div>
+                    {this.state.mainCurData.map((item) => {
+                      x.push(
+                        item.high , item.low
+                      );
+                    })}
+                  {percent_change < 0 ? <img className="table-chart" src={"https://chart.googleapis.com/chart?&cht=ls&chd=t:"+x[0]+","+x[1]+","+x[2]+","+x[3]+","+x[4]+","+x[5]+","+x[6]+"&chco=BD0056&chs=180x50&chds="+Math.min(...x)+","+Math.max(...x)+""} /> :
+                <img className="table-chart" src={"https://chart.googleapis.com/chart?&cht=ls&chd=t:"+x[0]+","+x[1]+","+x[2]+","+x[3]+","+x[4]+","+x[5]+","+x[6]+"&chco=328035&chs=180x50&chds="+Math.min(...x)+","+Math.max(...x)+""} />}
+                  </div>
+                );
+      }
 }
-
-
-
-
-  //   constructor(props) {
-//             
-//     super(props);
-    
-//     this.state = {
-//       tableData: [],
-//       // isLoading: true
-
-//     };
-
-//   }
-
-// rateData = (start, end) => {
-
-//   const url = 'https://api.coinmarketcap.com/v1/ticker/?start='+start+'&limit='+end+'';
-
-//   fetch(url).then( r => r.json())
-//     .then((marketData) => {
-//       const tabledata = [];
-
-//       for (let index in marketData){
-//         tabledata.push({
-//             id: marketData[index].id,
-//             rank: marketData[index].rank,
-//             name: marketData[index].name,
-//             symbol: marketData[index].symbol,
-//             rank: marketData[index].rank,
-//             price_usd: marketData[index].price_usd,
-//             market_cap_usd: marketData[index].market_cap_usd,
-//             volume_usd: marketData[index]['24h_volume_usd'],
-//             available_supply: marketData[index].available_supply,
-//             percent_change_1h: marketData[index].percent_change_1h,
-//             percent_change_24h: marketData[index].percent_change_24h,
-//             percent_change_7d: marketData[index].percent_change_7d
-//           });
-//       }
-      
-//       this.setState({
-//         tableData: tabledata,
-//         isLoading: false
-
-//       })
-//     })
-//     .catch((e) => {
-//       console.log(e);
-//     });
-// }
-
-
-//   componentDidMount() {
-//     this.rateData(0, 150);
-//   }

@@ -265,10 +265,12 @@ input:checked + .slider:before {
   }
 
   #card .top-cards .refresh-rate-card{
+    display: none;
     padding-bottom: 10px
   }
 
   #card .top-cards .curren-option-card{
+    display: none;
     padding-bottom: 10px
   }
 
@@ -2053,13 +2055,28 @@ input:checked + .slider:before {
   display: flex;
 }
 
-#page-numbers > li {
-  margin-right: 0.3em;
-  color: blue;
-  user-select: none;
-  cursor: pointer;
-}
+  #page-numbers > li {
+    margin-right: 0.3em;
+    color: blue;
+    user-select: none;
+    cursor: pointer;
+  }
 
+  .pagination>li>a, .pagination>li>span {
+    border: none
+  }
+
+  .pagination{
+    margin-left: 350px;
+  }
+
+  .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    z-index: 3;
+    color: #fff;
+    cursor: pointer;
+    background-color: lightgray;
+    border-color: #337ab7;
+  }
 
 
 
@@ -2215,19 +2232,20 @@ input:checked + .slider:before {
     padding: 1em 2em 1em 1em;
     font-size: 0.5em;
 }
-.select-container {position:relative; display: inline;}
-.select-container:after {content:""; width:0; height:0; position:absolute; pointer-events: none;}
-.select-container:after {
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    top: .3em;
-    right: .75em;
-    border-top: 8px solid black;
-    opacity: 0.5;
-}
-select::-ms-expand {
-    display: none;
-}
+  .select-container {position:relative; display: inline;}
+  .select-container:after {content:""; width:0; height:0; position:absolute; pointer-events: none;}
+  .select-container:after {
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      top: .3em;
+      right: .75em;
+      border-top: 8px solid black;
+      opacity: 0.5;
+  }
+  select::-ms-expand {
+      display: none;
+  }
+ 
        
     
   }
@@ -2830,13 +2848,18 @@ select::-ms-expand {
   .ico_name_2{
     display: none;
   }
-  /* .jasmine-color {
-    margin-top: 18px;
-    align-items: center;
-    text-align: center;
-    margin-top: -35px;
-    margin-left: -21px;
-} */
+  .pagination{
+    margin-left: 0px;
+    /* font-size: 0.85em */
+    font-size: 13px;
+
+  }
+
+  #card .form-inpt{
+    margin-bottom: 30px;
+
+  }
+  
 }
 
 @media(max-width: 400px) {
@@ -2878,4 +2901,15 @@ select::-ms-expand {
   .market{
     display: none;
   }
+  #table-bottom-stats-cards .card-item{
+
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  #table-bottom-stats-cards .card-item:nth-child(3){
+    margin-right: 0;
+    margin-left: 0;
+  }
+  
 }

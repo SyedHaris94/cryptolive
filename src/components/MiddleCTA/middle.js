@@ -106,7 +106,7 @@ class Middle extends React.Component{
 
     componentDidMount(){
         this.props.getdataa();
-        this.rateData(0, 150);
+        this.rateData(0, 1600);
         setTimeout(this.getNames, this.state.timerInterval);
         // this.SendCryptoData();
         // console.log("didmount running",this.props.getList());
@@ -195,7 +195,7 @@ class Middle extends React.Component{
                             <div className="col-md-1 col-md-offset-2 coin-screener-icon">
                                 <a href="#" style={{textDecoration: 'none'}} data-toggle="modal" data-target="#layoutModal"><img className="pull-left" src={glass} alt="logo"/><p>LAYOUT</p></a>
                             </div>
-                            <div className="col-md-2 col-xs-12 form-inpt">
+                            <div className="col-md-2 col-xs-6 form-inpt">
                                 <form className="form-horizontal" role="Search">
                                     <div className="input-group">
                                         <input type="text" className="form-control form-control-lg" placeholder="Search" onChange={this.searchHandler} value = {term}/>
