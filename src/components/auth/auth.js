@@ -406,7 +406,8 @@ class FacebookAuth extends React.Component{
             <button type="button" onClick={this.login.bind(this)} classNameName="btn btn-primary" 
             style={{color: '#fff',textAlign: 'center',height: '35px', marginRight: '30px', marginBottom: '20px',
                     width: '200px',marginLeft: '40px',backgroundColor: '#303f9f'}}>
-                  <i className="fa fa-facebook footer-color" aria-hidden="true" style={{marginRight: '10px'}}></i> Login With Facebook 
+                  <i className="fa fa-facebook " aria-hidden="true" style={{marginRight: '10px'}}></i> 
+                  Login With Facebook 
             </button>
            
         )

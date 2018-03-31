@@ -8,6 +8,8 @@ import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
 import store from './store//store'
 
+import Admin from '../src/components/Admin/admin'
+
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 
@@ -17,6 +19,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 ReactDOM.render(
     
     <Provider store = {store} >
+    {/* <Admin/> */}
         <MuiThemeProvider>
             <Routes />
         </MuiThemeProvider>        

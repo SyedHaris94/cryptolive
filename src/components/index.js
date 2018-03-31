@@ -30,6 +30,8 @@ import Exchange from './Exchanges/exchanges'
 import Auth from './auth/auth'
 import Rating from './Rating/rating'
 
+import Admin from './Admin/admin'
+
 // graph tables
 import TableData from './GraphTable/graphtable'
 import Table2 from './GraphTable/table2'
@@ -43,6 +45,7 @@ import Table9 from './GraphTable/table9'
 import Table10 from './GraphTable/table10'
 
 export{
+    Admin,
     Home,
     IcoPage,
     Bitcoin,
