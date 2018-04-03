@@ -111,27 +111,28 @@ class HomePagination extends React.Component {
         }
  
         return (
-            <ul className="pagination">
-                <li style={{ float: 'left', marginRight: '-130px'}}
-                    className={pager.currentPage === 1 ? 'disabled' : ''}>
-                    <a onClick={() => this.setPage(1)}>{"<<"} First</a>
-                </li>
-                <li style={{ float: 'left', marginRight: '-130px'}} className={pager.currentPage === 1 ? 'disabled' : ''}>
-                    <a onClick={() => this.setPage(pager.currentPage - 1)}>{"<"} Prev</a>
-                </li>
-                {pager.pages.map((page, index) =>
-                    <li style={{ float: 'left', marginRight: '-158px'}} key={index} className={pager.currentPage === page ? 'active' : ''}>
-                        <a onClick={() => this.setPage(page)}>{page}</a>
-                    </li>
-                )}
-                <li style={{ float: 'left', marginRight: '-130px'}} className={pager.currentPage === pager.totalPages ? 'disabled' : ''}>
-                    <a onClick={() => this.setPage(pager.currentPage + 1)}>Next {">"}</a>
-                </li>
-                <li style={{ float: 'left', marginRight: '-130px'}} className={pager.currentPage === pager.totalPages ? 'disabled' : ''}>
-                    <a onClick={() => this.setPage(pager.totalPages)}>Last {">>"}</a>
-                </li>
-            </ul>
-        );
+        <div style={{textAlign : "center"}}>
+            <ul className="pagination" style={{ marginLeft: "0px"}}>
+                <li style={{float: 'left'}} className={pager.currentPage===1 ? 'disabled' : ''}>
+                    <a onClick={()=> this.setPage(1)}>{"<<"}First
+                    </a>
+                </li>
+                <li style={{float: 'left'}} className={pager.currentPage===1 ? 'disabled' : ''}>
+                    <a onClick={()=> this.setPage(pager.currentPage - 1)}>{"<"}Prev
+                    </a>
+                </li>{pager.pages.map((page, index)=>
+                <li style={{float: 'left'}} className={pager.currentPage===page ? 'active' : ''}>
+                    <a onClick={()=> this.setPage(page)}>{page}</a>
+                </li>)}
+                <li style={{float: 'left'}} className={pager.currentPage===pager.totalPages ? 'disabled' : ''}>
+                    <a onClick={()=> this.setPage(pager.currentPage + 1)}>Next{">"}</a>
+                </li>
+                <li style={{float: 'left'}} className={pager.currentPage===pager.totalPages ? 'disabled' : ''}>
+                    <a onClick={()=> this.setPage(pager.totalPages)}>Last{">>"}</a>
+                </li>
+            </ul>
+        </div>
+                );
     }
 }
  

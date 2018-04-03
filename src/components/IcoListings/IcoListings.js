@@ -3,20 +3,36 @@ import React, {Component} from 'react'
 // react-router
 import { Link } from "react-router-dom";
 
+import {Tabs, Tab} from 'material-ui/Tabs';
+
 import { connect } from 'react-redux';
 import MiddleWare from '../../store//middleware/middleware'
 
+const styles = {
+    headline: {
+      fontSize: 24,
+      paddingTop: 16,
+      marginBottom: 12,
+      fontWeight: 400,
+    },
+  };
+
 class IcoListingItem extends React.Component{
-    
     constructor(props) {      
-        super(props);
-        
+        super(props);   
         this.state = {
             icoData: [],
-            upcData: []
+            upcData: [],
+            value: 'a',
         };
     
       }
+      
+      handleChange = (value) => {
+        this.setState({
+          value: value,
+        });
+      };
 
       liveData = () => {
 
@@ -49,16 +65,12 @@ class IcoListingItem extends React.Component{
           });
       }
       
-
-
     upcomingData = () => {
-        const url = 'https://api.icowatchlist.com/public/v1/upcoming';
-      
+        const url = 'https://api.icowatchlist.com/public/v1/upcoming'; 
         fetch(url).then( r => r.json())
           .then((marketData) => {
             const upcdata = [];
             let count = 0;
-      
             for (let index in marketData.ico.upcoming){
                 upcdata.push({
                   name: marketData.ico.upcoming[index].name,
@@ -94,72 +106,184 @@ class IcoListingItem extends React.Component{
 
     render(){
 
-        let allico = this.props.AllIcoState[0];
-        let upcoming = this.props.upcomingIcoState[0];
-        let ended = this.props.EndedIcoState[0];
+        let allico = this.props.AllIcoState;
+        let upcoming = this.props.upcomingIcoState;
+        let ended = this.props.EndedIcoState;
 
         function gotoUrl(sym,live) {
             return {
               pathname: `/icoview/${sym}/${live}`
             }
           }
-
+          console.log('allico',allico);
+          console.log('upcoming',upcoming);
+          console.log('ended',ended);
         let combine = this.state.icoData.concat(this.state.upcData);
         // let combine = allico.concat(upcoming);
         // console.log('combining data',allico.concat(upcoming));
         
         return(
             <div>
-                {/* ICO LISTING ITEMS STARTS */}
+               {/* ICO LISTING ITEMS STARTS */}
+               
                 <section id="ico-listing-item">
-                   {combine.map(
-                            (m, v) => {
-                            let pageSym = m.name
-                            let live = m.live
-                        // {console.log('sds',combine[0].name)}
-                        const img = m.name.toLowerCase();
-                        if (m.count <= 2){
-                            return <div className="col-md-9 ico-card" key={m.count}>
-                            <Link to={gotoUrl(pageSym, live)} style={{ textDecoration: "none" }}>
-                
-                                <div className="row">
-                                    <div className="col-md-2 col-xs-3">
-                                        <img src={m.image}
-                                        style={{marginTop: '20px',width: '80%', height: '30%'}}/>
-                                    </div>
-                                    <div className="col-md-10 col-xs-9">
-                                        <h3>
-                                            {m.name}        
-                                            {/* <span className="trending-icon">TRENDING</span> <span className="premium-icon">PRIMARY</span> */}
-                                            </h3>
-                                        <p className="rating-feedback">
-                                            <i className="fa fa-star" aria-hidden="true"></i>
-                                            <i className="fa fa-star" aria-hidden="true"></i>
-                                            <i className="fa fa-star-half-o" aria-hidden="true"></i>
-                                            <i className="fa fa-star-o" aria-hidden="true"></i>
-                                            <i className="fa fa-star-o" aria-hidden="true"></i>
-                                            2.7 average based on 82 experts rating
-                                        </p>
-                                        <p className="last-cont">
-                                            {m.description}
-                                        </p>
-                                    </div>
+                <div class="container col-md-9">
+                    <Tabs
+                        value={this.state.value}
+                        onChange={this.handleChange}
+                        >
+                        <Tab label="LIVE ICOs" value="a">
+                            <div>
+                                {allico.map(
+                                    (m, v) => {
+                                    let pageSym = m.name
+                                    let live = m.live
+                                // {console.log('sds',combine[0].name)}
+                                const img = m.name.toLowerCase();
+                                if (m.count <= 5){
+                                    return(
+                                    <div className="col-md-9 ico-card" key={m.count}>
+                                        <Link to={gotoUrl(pageSym, live)} style={{ textDecoration: "none" }}>
+                                            <div className="row">
+                                                <div className="col-md-2 col-xs-3">
+                                                    <img src={m.image}
+                                                    style={{marginTop: '20px',width: '80%', height: '30%'}}/>
+                                                </div>
+                                                <div className="col-md-10 col-xs-9">
+                                                    <h3>
+                                                        {m.name}        
+                                                        {/* <span className="trending-icon">TRENDING</span> <span className="premium-icon">PRIMARY</span> */}
+                                                        </h3>
+                                                    <p className="rating-feedback">
+                                                        <i className="fa fa-star" aria-hidden="true"></i>
+                                                        <i className="fa fa-star" aria-hidden="true"></i>
+                                                        <i className="fa fa-star-half-o" aria-hidden="true"></i>
+                                                        <i className="fa fa-star-o" aria-hidden="true"></i>
+                                                        <i className="fa fa-star-o" aria-hidden="true"></i>
+                                                        2.7 average based on 82 experts rating
+                                                    </p>
+                                                    <p className="last-cont">
+                                                        {m.description}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </Link>
+                                    </div>);
+                                    }                     
+                                })
+                                }
+                                <div className="col-md-9" style={{marginTop: '10px', marginBottom:'10px'}}>
+                                    <Link to="browseico" style={{textDecoration: 'none'}}> 
+                                        <div className="row">
+                                            <button type="button" className="btn btn-block"style={{borderRadius:'1px'}} >VIEW ALL</button>
+                                        </div>
+                                    </Link>
 
                                 </div>
-                            </Link>
-
-                            </div>;
-                            }                     
-                            })
-                        }
-                    <div className="col-md-9" style={{marginTop: '10px', marginBottom:'10px'}}>
-                        <Link to="browseico" style={{textDecoration: 'none'}}> 
-                            <div className="row">
-                                <button type="button" className="btn btn-block"style={{borderRadius:'1px'}} >VIEW ALL</button>
                             </div>
-                        </Link>
+                        </Tab>
+                        <Tab label="UPCOMING ICOs" value="b">
+                            <div>
+                                {upcoming.map(
+                                    (m, v) => {
+                                    let pageSym = m.name
+                                    let live = m.live
+                                const img = m.name.toLowerCase();
+                                if (m.count <= 5){
+                                    return(
+                                    <div className="col-md-9 ico-card" key={m.count}>
+                                        <Link to={gotoUrl(pageSym, live)} style={{ textDecoration: "none" }}>
+                                            <div className="row">
+                                                <div className="col-md-2 col-xs-3">
+                                                    <img src={m.image}
+                                                    style={{marginTop: '20px',width: '80%', height: '30%'}}/>
+                                                </div>
+                                                <div className="col-md-10 col-xs-9">
+                                                    <h3>
+                                                        {m.name}        
+                                                        {/* <span className="trending-icon">TRENDING</span> <span className="premium-icon">PRIMARY</span> */}
+                                                        </h3>
+                                                    <p className="rating-feedback">
+                                                        <i className="fa fa-star" aria-hidden="true"></i>
+                                                        <i className="fa fa-star" aria-hidden="true"></i>
+                                                        <i className="fa fa-star-half-o" aria-hidden="true"></i>
+                                                        <i className="fa fa-star-o" aria-hidden="true"></i>
+                                                        <i className="fa fa-star-o" aria-hidden="true"></i>
+                                                        2.7 average based on 82 experts rating
+                                                    </p>
+                                                    <p className="last-cont">
+                                                        {m.description}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </Link>
+                                    </div>);
+                                    }                     
+                                })
+                                }
+                                <div className="col-md-9" style={{marginTop: '10px', marginBottom:'10px'}}>
+                                    <Link to="browseico" style={{textDecoration: 'none'}}> 
+                                        <div className="row">
+                                            <button type="button" className="btn btn-block"style={{borderRadius:'1px'}} >VIEW ALL</button>
+                                        </div>
+                                    </Link>
 
-                    </div>
+                                </div>
+                            </div>
+                        </Tab>
+                        <Tab label="FINISHED ICOs" value="c">
+                            <div>
+                                {ended.map(
+                                    (m, v) => {
+                                    let pageSym = m.name
+                                    let live = m.live
+                                // {console.log('sds',combine[0].name)}
+                                const img = m.name.toLowerCase();
+                                if (m.count <= 5){
+                                    return(
+                                    <div className="col-md-9 ico-card" key={m.count}>
+                                        <Link to={gotoUrl(pageSym, live)} style={{ textDecoration: "none" }}>
+                                            <div className="row">
+                                                <div className="col-md-2 col-xs-3">
+                                                    <img src={m.image}
+                                                    style={{marginTop: '20px',width: '80%', height: '30%'}}/>
+                                                </div>
+                                                <div className="col-md-10 col-xs-9">
+                                                    <h3>
+                                                        {m.name}        
+                                                        {/* <span className="trending-icon">TRENDING</span> <span className="premium-icon">PRIMARY</span> */}
+                                                        </h3>
+                                                    <p className="rating-feedback">
+                                                        <i className="fa fa-star" aria-hidden="true"></i>
+                                                        <i className="fa fa-star" aria-hidden="true"></i>
+                                                        <i className="fa fa-star-half-o" aria-hidden="true"></i>
+                                                        <i className="fa fa-star-o" aria-hidden="true"></i>
+                                                        <i className="fa fa-star-o" aria-hidden="true"></i>
+                                                        2.7 average based on 82 experts rating
+                                                    </p>
+                                                    <p className="last-cont">
+                                                        {m.description}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </Link>
+                                    </div>);
+                                    }                     
+                                })
+                                }
+                                <div className="col-md-9" style={{marginTop: '10px', marginBottom:'10px'}}>
+                                    <Link to="browseico" style={{textDecoration: 'none'}}> 
+                                        <div className="row">
+                                            <button type="button" className="btn btn-block"style={{borderRadius:'1px'}} >VIEW ALL</button>
+                                        </div>
+                                    </Link>
+
+                                </div>
+                            </div>
+                        </Tab>
+                    </Tabs>
+                </div>
+                   
 
                 </section>
                 {/* ICO LISTING ITEMS ENDS */}

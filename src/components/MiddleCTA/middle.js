@@ -125,10 +125,8 @@ class Middle extends React.Component{
         console.log('rate', crypto_coin)
         let crypto = {
             coin : crypto_coin
-
         }
         console.log("crypto Curr info", crypto);
-
         this.props.sendingData(crypto);
     }
 
@@ -166,7 +164,6 @@ class Middle extends React.Component{
                                         </select>        
                                     </div>
                                 </div>
-                                {/* <button onClick={this.notify}>Notify !</button> */}
                                 <div className="col-md-1 col-xs-2 curren-option-card">
                                     <h4>CURRENCY</h4>
                                     <div class="select-container">
@@ -178,9 +175,8 @@ class Middle extends React.Component{
                                 </div>                                
                                 <div className="col-md-2 col-xs-2 global-market">        
                                     <h4>GLOBAL MARKET</h4>
-                                    <p>{curr_select === "usd" ? '$' + m.total_market_cap_usd : '€' + m.total_market_cap_usd * 0.814079}</p>
-
-                                   {/* <p><NumberFormat value={curr_select === 'usd' ? m.total_market_cap_usd : m.total_market_cap_usd * 0.814079} displayType={'text'} thousandSeparator={true}/></p> */}
+                                    {curr_select === "usd" ?<p><NumberFormat value={m.total_market_cap_usd} displayType={'text'} thousandSeparator={true} prefix={'$'} /></p> :
+                                    <p><NumberFormat value={m.total_market_cap_usd} displayType={'text'} thousandSeparator={true} prefix={'€'} /></p> }
                                 </div>
                                 <div className="col-md-1 col-xs-2 bitcoin-dominance-card">
                                     <h4>DOMINANCE</h4>

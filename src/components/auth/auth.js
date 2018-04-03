@@ -10,11 +10,9 @@ import { connect } from "react-redux"
 import { findDOMNode } from 'react-dom';
 import $ from 'jquery';
 
-import { toast } from 'react-toastify';
 import { css } from 'glamor';
 
- // react-router
-// import { Route , withRouter} from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
 
 class Auth extends React.Component{
     constructor(props){
@@ -140,8 +138,10 @@ class Auth extends React.Component{
    
     render(){
         // const {user} = this.state
+        
         return(
                 <div class="modal fade" id="myModal" role="dialog"  >
+                <ToastContainer />   
                     <div class="modal-body">
                         <div id="loginbox" style={{marginTop:'50px'}} class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" align= "center" ref={'toggle1'}>                    
                             <div class="panel panel-info" >
@@ -214,7 +214,8 @@ class Auth extends React.Component{
                                                 </div>
                                             </div>    
                                         </form>     
-
+                                        <button style={{display: 'none'}} id="closeModal" type="button" className="btn btn-default" data-dismiss="modal">Close
+                                        </button>
                                     </div>                     
                             </div>  
                         </div>
@@ -225,8 +226,7 @@ class Auth extends React.Component{
                                         <div style={{float:'right', fontSize: '85%', position: 'relative', top:'-10px'}} ><a id="signinlink" href="#" onClick={this.handlelogin}>Sign In</a></div>
                                     </div>  
                                     <div class="panel-body" >
-                                        <form id="signupform" class="form-horizontal" role="form" onSubmit={this.signupUser } method="post">
-                                            
+                                        <form id="signupform" class="form-horizontal" role="form" onSubmit={this.signupUser } method="post">                                          
                                             <div class="form-group">
                                                 <label for="email" class="col-md-3 control-label">Email</label>
                                                 <div class="col-md-9">
@@ -344,8 +344,8 @@ class Auth extends React.Component{
 
 function mapStateToProps(state) {
     return {
-        reseting: state.ResetPassReducer
-
+        reseting: state.ResetPassReducer,
+        // userLogin: state.AuthReducer.loggedIn
     }
 }
 
@@ -354,8 +354,6 @@ function mapDispatchToProps(dispatch) {
         userData: (data, route) => dispatch(MiddleWare.LoginRequest(data, route)),
         SignupData: (data, route) => dispatch(MiddleWare.SignupRequest(data, route)),
         reseted: data => dispatch(MiddleWare.resetPass(data))
-
-
     }
 }
  

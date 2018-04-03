@@ -3,6 +3,7 @@ import React , {Component} from 'react'
 import { connect } from 'react-redux';
 import MiddleWare from '../../store//middleware/middleware'
 
+import $ from 'jquery';
 
 class IcoTopPanel extends React.Component{
     constructor(props) {
@@ -123,7 +124,24 @@ class IcoTopPanel extends React.Component{
         // this.activeData();
         this.props.getList();
         this.props.getupcoming();
-        this.props.getended();   
+        this.props.getended();
+
+
+
+    }
+
+    /* Azeem Ullah */
+    showHideContent(event){
+        if(event.target.value.length == 0){
+            $("#two-tables").fadeIn("slow");
+            $("#planning-ico").fadeIn("slow");
+        }
+        else{
+            $("#two-tables").fadeOut("slow");
+            $("#planning-ico").fadeOut("slow");
+
+        }
+
     }
 
     componentWillMount(){
@@ -194,7 +212,7 @@ class IcoTopPanel extends React.Component{
                     <div className="row" >
                         <div className="col-md-9 ico-stats-panel" align="center" >
                             <div className="row">        
-                                <div className="col-md-3 ico-panel-card" >
+                                <div className="col-md-2 ico-panel-card" >
                                     <h4>UPCOMING ICO'S</h4>
                                     <p>{upcomingico}</p>
                                 </div>        
@@ -219,7 +237,7 @@ class IcoTopPanel extends React.Component{
                         <div className="col-md-3 col-xs-12" style={{padding: '15px 0 10px 0'}}>
                             <form className="form-horizontal" role="Search">
                                 <div className="input-group">
-                                    <input type="text" className="form-control" placeholder="Search" name="srch-term" id="srch-term"/>
+                                    <input type="text"  onChange={this.showHideContent} className="form-control" placeholder="Search" name="srch-term" id="srch-term"/>
                                     <div className="input-group-btn">
                                         <button className="btn btn-default" type="submit" >
                                             <i style={{color: '#1DA0B4'}} className="glyphicon glyphicon-search" onClick={this.SendAllICo}></i>

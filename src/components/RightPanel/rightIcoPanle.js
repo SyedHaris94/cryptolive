@@ -35,15 +35,11 @@ class RightIcoPanel extends React.Component{
             <div>
                 {/* <!-- RIGHT ICO PANELS START --> */}
                 <section id="ico-listing">
-
                     <div className="container">
                         <div className="row">
-
                             <div className="col-md-3" >
-
                                 <h4>BROWSE ICOs</h4>
                                 <table className="table table-responsive">
-
                                     <tbody>
                                         <tr> 
                                             <td className="browse-td-bold">
@@ -52,7 +48,6 @@ class RightIcoPanel extends React.Component{
                                                 </a>
                                             </td>
                                         </tr>
-
                                         <tr>
                                             <td>
                                                 <a href="#">
@@ -195,15 +190,11 @@ class RightIcoPanel extends React.Component{
                                             </td>
                                         </tr>
                                     </tbody>
-
                                 </table>
                             </div>
-
                             <IcoListingItem/>
-
                         </div>
                     </div>
-
                 </section>
                 {/* <!-- RIGHT ICO PANELS END --> */}
 

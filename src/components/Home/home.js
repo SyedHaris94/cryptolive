@@ -11,7 +11,7 @@ class Home extends Component {
       <div className="App">
             <Navbar/>   
             <Jumbo/>  
-            <Auth/>
+            {/* <Auth/> */}
             <FiveFeature/>
             <Middle currency = {currency}/>
             {/* <TableData/> */}

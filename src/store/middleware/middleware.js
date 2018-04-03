@@ -4,7 +4,7 @@ import * as DB from "../../firebase/firebase";
 
 import { toast } from 'react-toastify';
 import { css } from 'glamor';
-
+import $ from "jquery";
 export default class MiddleWare{
 
 
@@ -16,17 +16,19 @@ export default class MiddleWare{
             .then(sent => {
                 dispatch(handleAction.login(data));
                    toast.success("successfully Login !", {
-                      position: toast.POSITION.TOP_CENTER
+                      position: toast.POSITION.TOP_RIGHT
                     });
+                    localStorage.setItem('user', sent.email)
+                $("#closeModal").click();
                     // route.push(
                     //  "/icopage"
                     // )
             })
             .catch(error => {
-              var errorMessage ="The email address or password you entered is not valid";
-              toast.error(errorMessage, {
-                position: toast.POSITION.TOP_CENTER
-              });
+                var errorMessage ="The email address or password you entered is not valid";
+                toast.error(errorMessage, {
+                  position: toast.POSITION.TOP_CENTER
+                });
             });
         };
     }
@@ -70,13 +72,18 @@ export default class MiddleWare{
                                    route.push(
                                     "/"
                                   );
-                                  toast.success("successfully Login !", {
+                                  toast.success("successfully Signup!", {
                                     position: toast.POSITION.TOP_CENTER
                                   });
-                                   
+                                     $("#closeModal").click();
                                  }
                             );
-                      })
+                      }).catch( data => {
+                    toast.error(data.message, {
+                        position: toast.POSITION.TOP_RIGHT
+                    });
+
+                });
         
         };
       }
@@ -110,13 +117,14 @@ export default class MiddleWare{
               toast.success("Email Successfully Sent!", {
                 position: toast.POSITION.TOP_CENTER
               });
+                $("#closeModal").click();
             //   alert("Email Successfully Sent");
             })
             .catch(function(error) {
               // An error happened.
               var errorMessage = "The email address you entered is not Registered";
               toast.error(errorMessage, {
-                position: toast.POSITION.TOP_CENTER
+                position: toast.POSITION.TOP_RIGHT
               });
             });
         };

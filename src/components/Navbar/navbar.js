@@ -3,10 +3,12 @@ import '../../css/style-main.css'
 
 // importing images & icons
 import round from '../../icons/round.png'
-import logo from '../../img/logo.png'
+// import logo from '../../img/logo.png'
+
+import logo from '../../img/Slice.png'
 
 
-import Auth from '../auth/auth'
+// import Auth from '../auth/auth'
 
 // react-router
 import { Link } from "react-router-dom";
@@ -14,9 +16,11 @@ import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import MiddleWare from '../../store//middleware/middleware'
 
-import { ToastContainer, toast } from 'react-toastify';
+import {Auth} from '../index'
 
 import * as DB from "../../firebase/firebase";
+import { ToastContainer, toast } from 'react-toastify';
+
 
 class Navbar extends React.Component{
 
@@ -24,7 +28,9 @@ class Navbar extends React.Component{
         super(props);
         this.state = {
             selectedOption1: 'usd',
-            User: null
+            User: null,
+            theme: import ('../../css/style-main.css')
+
         }
         this.handlecurrency = this.handlecurrency.bind(this);
         this.logout.bind(this);
@@ -41,14 +47,36 @@ class Navbar extends React.Component{
         let authen = DB.auth;
         authen.signOut()
         console.log('logout')
+        localStorage.removeItem('user')
+    }
+    
+   
+
+    changeDark(){
+        import ('../../css/dark-theme.css');
     }
 
+    changeLite(){
+        window.location.reload()
+    }
+   
     componentDidMount(){
         if(this.props.userLogin === true){
             this.props.userData();
             this.props.userLogin();
+        }
+
+        
+        console.log('user session',localStorage.getItem("user"))
+        // if (!localStorage.getItem('user')){
+        //     localStorage.setItem('user',0)
+        // }
+
     }
-    }
+
+    componentWillUpdate(nextProps, nextState){
+      
+    } 
 
    
     render(){
@@ -62,7 +90,7 @@ class Navbar extends React.Component{
             }
           });
           
-          console.log('sds', User)
+          console.log('user..', User)
 
           let name, email, photoUrl, uid, emailVerified;
           
@@ -82,17 +110,24 @@ class Navbar extends React.Component{
             <div>
         
         {/* {console.log("user", this.props.userState)} */}
-        {/* {console.log("login", this.props.userLogin)} */}
+        {console.log("login", this.props.userLogin)}
         
               {/* NAVBAR SECTION STARTS*/}
           <section id="navbar-strap">
+          <ToastContainer />   
           <div className="navbar navbar-default navbar-fixed-top" role="navigation">
               <div className="col-md-12 top-nav">
                   <div className="container">
                       <div className="col-md-12">
-                        <div className="pull-right right-side-button" >
-                                <ToastContainer />
-                            {User != null ? <a id="btn-logut" href="#" style={{textDecoration: 'none'}} onClick={this.logout} hide> Welcome: {email} </a> : <a id="btn-login" href="#" data-toggle="modal" data-target="#myModal" style={{textDecoration: 'none'}}>LOGIN</a> }
+                        <div className="pull-right right-side-button" >                                                       
+                        <a id="style-main" class="style-changer" href="#" onClick={this.changeLite}>
+                            <i class="fa fa-2x fa-sun-o" aria-hidden="true"></i>
+                        </a>
+                        <a id="dark-theme" class="style-changer" href="#" onClick={this.changeDark}>
+                            <i class="fa fa-2x fa-moon-o" aria-hidden="true"></i>
+                        </a>
+                            {localStorage.getItem("user") ? <a id="btn-logut" href="#" style={{textDecoration: 'none'}} onClick={this.logout} hide> Welcome {localStorage.getItem("user")} </a> : 
+                            <a id="btn-login" href="#" data-toggle="modal" data-target="#myModal" style={{textDecoration: 'none'}}>LOGIN</a> }
                         </div>
                       </div>
                   </div>
@@ -111,7 +146,7 @@ class Navbar extends React.Component{
           
                       <Link to="/"style={{ textDecoration: "none" }} className="navbar-brand" >
                             <div className="logo">
-                                    <img src={logo} />
+                                    <img src={logo} className="logo" />
                             </div>
                       </Link>
           
@@ -146,6 +181,7 @@ class Navbar extends React.Component{
                   </div>
             </div>
           </div>
+          <Auth/>
       </section>
 
     {/* NAVBAR SECTION ENDS*/}

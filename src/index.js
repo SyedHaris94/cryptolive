@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+// import './index.css';
 import 'font-awesome/css/font-awesome.min.css'
 
 import Routes from './container/Routes'
@@ -12,14 +12,9 @@ import Admin from '../src/components/Admin/admin'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-
-// import FilteredList from './components/search/search'
-
-
 ReactDOM.render(
     
     <Provider store = {store} >
-    {/* <Admin/> */}
         <MuiThemeProvider>
             <Routes />
         </MuiThemeProvider>        

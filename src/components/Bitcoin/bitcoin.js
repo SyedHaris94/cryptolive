@@ -182,8 +182,8 @@ class Bitcoin extends React.Component{
                                 <h2>{pageParam.name} <span>{pageParam.symbol}</span></h2>
                                 <div className="anchors">
                                     <a href="#">Website</a>
-                                    <a href="#">Explorer</a>
-                                    <a href="#">Message board</a>
+                                    {/* <a href="#">Explorer</a>
+                                    <a href="#">Message board</a> */}
                                     <span className="label label-default">#coin</span>
                                     <span className="label label-default">#mineable</span>
                                 </div>

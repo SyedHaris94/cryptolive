@@ -9,12 +9,13 @@ import CryptoReducer from '../store/reducers/cryptoReducer'
 import ICOReducer from '../store/reducers/icoReducer'
 import UpcomingICOReducer from '../store/reducers/upcomingIcoReducer'
 import EndedICOReducer from '../store/reducers/endedicoReducer'
+import MarketReducer from '../store/reducers/marketReducer'
 
 
 let middleware = applyMiddleware(thunk)
 let store = createStore( combineReducers({
     GraphTableReducer, GlobalReducer, BitcoinReducer, AuthReducer, 
-    RateReducer,CryptoReducer,ICOReducer,UpcomingICOReducer,EndedICOReducer
+    RateReducer,CryptoReducer,ICOReducer,UpcomingICOReducer,EndedICOReducer, MarketReducer
 }), middleware)
 
 
