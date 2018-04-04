@@ -1970,40 +1970,40 @@ input:checked + .slider:before {
   
   /* BROWSE ICO ENDS */
   
-  /* FOOTER STARTS */
-  
-  #footer {
-    background-color: #2A3A4D;
-    color: #fff;
-    padding: 30px 0 30px 0;
-  }
-  
-  #footer .left-col {
-    text-align: left;
-  }
-  
-  #footer .centre-col {
-    text-align: center;
-  }
-  
-  #footer .right-col {
-    text-align: right;
-  }
-  
-  #footer h3 {
-    font-size: 1.1em;
-  }
-  
-  #footer .centre-col h3 {
-    font-size: 0.8em;
-    font-weight: 200px;
-  }
-  
-  #footer p {
-    font-size: 0.8em;
-    color: #8B8E9A;
-  }
-  /* FOOTER ENDS */
+/* FOOTER STARTS */
+
+#footer {
+  background-color: #2A3A4D;
+  color: #fff;
+  padding: 30px 0 30px 0;
+}
+
+#footer .left-col {
+  text-align: left;
+}
+
+#footer .centre-col {
+  text-align: center;
+}
+
+#footer .right-col {
+  text-align: right;
+}
+
+#footer h3 {
+  font-size: 1.1em;
+}
+
+#footer .centre-col h3 {
+  font-size: 0.8em;
+  font-weight: 200px;
+}
+
+#footer p {
+  font-size: 0.8em;
+  color: #8B8E9A;
+}
+/* FOOTER ENDS */
   
   
   /* CHARTS */
@@ -3132,6 +3132,7 @@ input:checked + .slider:before {
   .market{
     display: none;
   }
+  
   #table-bottom-stats-cards .card-item{
 
     margin-right: 50px;
@@ -3148,7 +3149,7 @@ input:checked + .slider:before {
 
 /*Rating start*/
 
-.list-inline{
+.rate-star{
     position: absolute;
     top: 5px;
     right: 3px;

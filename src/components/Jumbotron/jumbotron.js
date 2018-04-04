@@ -70,7 +70,7 @@ class Jumbotron extends React.Component{
 
                                 <div class="col-md-2 futureIcoDiv">
                                     <img class="imgdiv" src={desc} alt=""/>
-                                    <div class="list-inline">
+                                    <div class="rate-star">
                                         <li class="rating">4.4</li>
                                         <li class="icon-star"><i class="fa fa-star"></i></li>
                                     </div>
@@ -81,7 +81,7 @@ class Jumbotron extends React.Component{
 
                                 <div class="col-md-2 futureIcoDiv">
                                     <img class="imgdiv" src={futur}/>
-                                    <div class="list-inline">
+                                    <div class="rate-star">
                                         <li class="rating">4.4</li>
                                         <li class="icon-star"><i class="fa fa-star"></i></li>
                                     </div>
@@ -92,7 +92,7 @@ class Jumbotron extends React.Component{
 
                                 <div class="col-md-2 futureIcoDiv">
                                     <img class="imgdiv" src={desc} alt=""/>
-                                    <div class="list-inline">
+                                    <div class="rate-star">
                                         <li class="rating">4.4</li>
                                         <li class="icon-star"><i class="fa fa-star"></i></li>
                                     </div>
@@ -103,7 +103,7 @@ class Jumbotron extends React.Component{
 
                                 <div class="col-md-2 futureIcoDiv">
                                     <img class="imgdiv" src={futur} alt=""/>
-                                    <div class="list-inline">
+                                    <div class="rate-star">
                                         <li class="rating">4.4</li>
                                         <li class="icon-star"><i class="fa fa-star"></i></li>
                                     </div>
@@ -114,7 +114,7 @@ class Jumbotron extends React.Component{
 
                                 <div class="col-md-2 futureIcoDiv">
                                     <img class="imgdiv" src={desc} alt=""/>
-                                    <div class="list-inline">
+                                    <div class="rate-star">
                                         <li class="rating">4.4</li>
                                         <li class="icon-star"><i class="fa fa-star"></i></li>
                                     </div>

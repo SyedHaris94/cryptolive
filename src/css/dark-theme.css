@@ -1721,12 +1721,11 @@ color: #fff;
 
 }
 
-
 /* FOOTER STARTS */
 
 #footer {
-    background-color: #fff;
-    color: #acacac;
+    background-color: #2A3A4D;
+    color: #fff;
     padding: 30px 0 30px 0;
 }
 
@@ -1744,8 +1743,6 @@ color: #fff;
 
 #footer h3 {
     font-size: 1.1em;
-    color: #626b8a;
-
 }
 
 #footer .centre-col h3 {
@@ -1758,7 +1755,6 @@ color: #fff;
     color: #8B8E9A;
 }
 /* FOOTER ENDS */
-
 
 
 
@@ -2419,7 +2415,7 @@ color: #fff;
     }
 
     #graph-table {
-        display: none
+        /* display: none */
        }
 
     #homepage-pagination {
@@ -2704,7 +2700,7 @@ color: #fff;
 
 /*Rating start*/
 
-.list-inline{
+.rate-star{
     position: absolute;
     top: 5px;
     right: 3px;
