@@ -269,6 +269,7 @@ body {
     vertical-align: middle;
     text-align: center;
     border-top: none;
+    
 }
 
 #graph-table .table > tbody > tr {
@@ -711,7 +712,6 @@ body {
     line-height: 1.42857143;
     vertical-align: middle;
     text-align: center;
-    border-top: none;
     color: #eeeff1;    
     background-color: #34465c;
     border-top: none;
@@ -914,7 +914,7 @@ body {
     box-shadow: 0 5px 32px 0 rgba(0,0,0,.1);
     color: #fff;
     margin-left: 32px;
-    width: 845px;
+    width: 133%;
 
   }
 
@@ -1006,13 +1006,8 @@ body {
     color: #fff
 }
 
-#ico-stats-brief .medicalchain p{
-
-    letter-spacing: 2px;
-    font-size: 1.1em;
-    color: #fff;
-    line-height: 26px;
-    font-weight: 200;
+#ico-stats-brief .container .row .col-md-6 .row .medicalchain p{
+    color: #909297;
 }
 
 
@@ -1217,6 +1212,7 @@ body {
     text-align: center;
     font-weight: 300;
     color: #a3a3a3;
+    border-top: none;
 
   }
   
@@ -1724,8 +1720,8 @@ color: #fff;
 /* FOOTER STARTS */
 
 #footer {
-    background-color: #2A3A4D;
-    color: #fff;
+    background-color: #FFFFFF;
+    color: #ACACAC;
     padding: 30px 0 30px 0;
 }
 
@@ -1752,7 +1748,7 @@ color: #fff;
 
 #footer p {
     font-size: 0.8em;
-    color: #8B8E9A;
+    color: #ACACAC;
 }
 /* FOOTER ENDS */
 
@@ -1879,8 +1875,8 @@ color: #fff;
 .iconButtonDiv{
     border-radius: 10px;
     color: #000;
-    background-color: transparent;
-    color: #fff;
+    background-color: #fff;
+    /* color: #fff; */
     padding-bottom: 30px;
     margin-left: -16px;
 
@@ -2050,6 +2046,32 @@ color: #fff;
 }
 /*CONTAINER CSS END */
 
+
+.fileInput
+  {
+    width: 100%;
+    border-bottom: 4px solid lightgray;
+    border-right: 4px solid lightgray;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    padding: 10px;
+    /* margin-left: 10px; */
+    margin-top: 20px;
+    cursor: pointer;
+  }
+
+  .submitButton{  
+    padding: 12px;
+    margin-top: 10px;
+    margin-left: 10px;
+    background: white;
+    border: 4px solid lightgray;
+    border-radius: 15px;
+    font-weight: 700;
+    font-size: 10pt;
+    cursor: pointer; 
+    background: #efefef;
+}
 
 
 /*MEDIA QUERIES for SM*/
@@ -2276,7 +2298,7 @@ color: #fff;
     }
 
     #table-bottom-stats-cards {
-        margin-bottom: 30px;
+        /* margin-bottom: 30px; */
     }
 
     #table-bottom-stats-cards .card-item {
@@ -2458,8 +2480,8 @@ color: #fff;
     }
 
     #two-tables .left-table .table tbody > tr > td {
-        font-size: 0.8em;
-    }
+        font-size: 0.55em;
+      }
 
     #ico-listing-item .ico-card {
         margin-left: 15px;
@@ -2470,7 +2492,7 @@ color: #fff;
       #ico-listing-item .btn-block {
         margin-left: 15px;
         margin-right: 25px;
-        width: 350px;
+        width: 100%
       }
   
 
@@ -2603,43 +2625,74 @@ color: #fff;
         font-size: 0.8em;
       }
     
-      
     
-      .table-chart{
+
+    .table-chart{
         width: 70px
-      }
-    
-      .volume{
+    }
+
+    .volume{
         display: none;
-      }
-    
-      .circulating{
+    }
+
+    .circulating{
         display: none;
-      }
-    
-      .twenty4_hr{
+    }
+
+    .twenty4_hr{
         display: none
-      }
-      .market{
+    }
+    .market{
         display: none;
-      }
-      .rank{
+    }
+    .rank{
         width: 5%;
-      }
+    }
 
-      #table-bottom-stats-cards .card-item{
-
+    #table-bottom-stats-cards .card-item{
         margin-right: 50px;
         margin-left: 50px;
-      }
-    
-      #table-bottom-stats-cards .card-item:nth-child(3){
+    }
+
+    #table-bottom-stats-cards .card-item:nth-child(3){
         margin-right: 50px;
         margin-left: 50px;
-      }
+    }
+
+    #h3Text {
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 40px;
+        margin-left: 30px;
+        padding-top: 20px;
+    }
+
+    .iconButtonDiv{
+        margin-left: -38px;
+
+    }
+
+    #publish .right-form .form-data .col-md-12 .col-md-2 .btn-default{
+        margin-left: -20px;
+        width: 75px;
+        height: 30px;
+        border-radius: 1px;
+        font-size: 11px;
+        color: #ccc;
+        background-color: #304359;
+        border-color: #ccc;
+    }
+
+    #publish .right-form .form-data .col-md-12 .col-md-2 .btn-primary{
+        width: 75px;
+        height: 30px;
+        border-radius: 1px;
+        background-color: #0097A7;
+    }
     }
     
     @media(max-width: 400px) {
+       
         .logo{
             width: 20%; 
             margin-top: -40px
@@ -2661,7 +2714,7 @@ color: #fff;
             color: #fff;
             margin-left: 15px;
             margin-right: 25px;
-            width: 100px;
+            width: 100%;
         }
         
         .top-right-red{
@@ -2691,10 +2744,14 @@ color: #fff;
             margin-left: 50px;
           }
         
-          #table-bottom-stats-cards .card-item:nth-child(3){
+        #table-bottom-stats-cards .card-item:nth-child(3){
             margin-right: 50px;
             margin-left: 50px;
           }
+
+          .logo {
+            margin-top: -20px;
+        }
     }
 
 
@@ -2722,16 +2779,160 @@ color: #fff;
     color: #ffffff;
 }
 
-/* Azeem Ullah  */
+/* Azeem Ullah - 04-04-2018*/
 
-.recharts-wrapper{
-  width: auto !important;
-  height: auto !important;
-}
-
-@media (max-width: 800px) {
-    .pagination {
-        margin-left: 0px;
-        font-size: 11px;
+@media only screen and (max-width: 600px) {
+    .pagination > li:first-child {
+      display: none;
     }
-}
+    .pagination > li:last-child {
+      display: none;
+    }
+    .bitcoin-dominance-card{
+      margin-left: 20px;
+    }
+    .search-bar{
+      float: right;
+      margin-right: 5%;
+    }
+  
+    #group-7 > img{
+      width: calc(100%*3);
+      margin-left: 100%;
+    }
+  
+  
+    .navbar-brand{
+      float: none;
+      position: absolute;
+      vertical-align: middle;
+      margin-top: 7%;
+    }
+  
+  }
+  
+  #ico-listing-item .ico-card{
+    margin-left: 0px !important;
+    width: 100% !important;
+  }
+  #ico-listing-item .btn-block{
+      width: 100%;
+  }
+  
+  /* .logo{
+    margin-top: 0px;
+  } */
+  
+  /*new div rating boxShadow*/
+  
+  .shadow-ratedDiv{
+    padding-bottom: 45px;
+    box-shadow: 0 5px 32px 0 rgba(0,0,0,.1);
+  }
+  
+  .ratePoint {
+    text-align: center;
+    color: #1FA1B5;
+    font-size: 6.5em;
+    font-weight: 500;
+  }
+  
+  .subscript {
+    font-size: 1.9em;
+    position: absolute;
+    top: 50px;
+    right: 56px;
+    color: #9c9c9c;
+  }
+  
+  .fa-star {
+    color: #1FA1B5;
+    font-size: 1em;
+    padding-right: 10px;
+  }
+  
+  .rating-icon{
+    text-align: center;
+  }
+  
+  .star{
+    margin-left: -7px;
+    font-size: 1.4em;
+    color: #cccccc;
+  
+  }
+  
+  .num-rating{
+    color: #9c9c9c;
+  }
+  
+  .rating-row-1{
+    margin-top: 30px;
+  }
+  
+  .progress-bar {
+    margin-left: -14px;
+    padding-right: -31px;
+    float: left;
+    width: 0;
+    height: 100%;
+    font-size: 12px;
+    line-height: 20px;
+    color: #fff;
+    text-align: center;
+    background-color: #1FA1B5;
+  }
+  
+  .beforeIcon-ratingStar {
+    text-align: center;
+    color: #9c9c9c;
+  }
+  
+  
+  @media(max-width: 780px) {
+  
+    /*ratingNewDiv*/
+    .ratePoint {
+        text-align: center;
+        color: #1FA1B5;
+        font-size: 5.5em;
+        font-weight: 500;
+    }
+  
+    .fa{
+        font-size: 2em;
+        padding-right: 10px;
+    }
+  
+  
+  
+    .beforeIcon-ratingStar {
+        text-align: center;
+        color: #9c9c9c;
+    }
+  
+    .subscript {
+        font-size: 1.9em;
+        position: absolute;
+        top: 45px;
+        right: 109px;
+        color: #9c9c9c;
+    }
+  
+    .star {
+        margin-left: -7px;
+        font-size: 1.4em;
+        color: #cccccc;
+    }
+  
+    .num-rat{
+        margin-left: -10px;
+    }
+  
+    .progressBar{
+        display: none;
+    }
+  
+    /*ratingNewDiv*/
+  }
+  

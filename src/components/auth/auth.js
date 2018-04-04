@@ -39,6 +39,8 @@ class Auth extends React.Component{
         this.forgetPass = this.forgetPass.bind(this);
         this.close = this.close.bind(this);
 
+        this.facebook = this.facebook.bind(this);
+
         
     }
 
@@ -130,7 +132,9 @@ class Auth extends React.Component{
         $('#loginbox').hide(); $('#forgetpass').show()               
     };
 
-
+    facebook(){
+        this.props.facebook('adad')
+    }
 
     close() {
         this.setState({showModal: false});
@@ -199,7 +203,12 @@ class Auth extends React.Component{
                                                     <button type="submit" onClick= {this.close}
                                                         className="btn btn-primary" style={{marginLeft: '10px',marginBottom: '10px', marginTop: '10px',textAlign: 'center', width: '200px',backgroundColor: '#0097A7', borderRadius: '1px'}}>Submit
                                                     </button>
-                                                    <FacebookAuth/>
+                                                    <button type="button" onClick={this.facebook} classNameName="btn btn-primary" 
+                                                        style={{color: '#fff',textAlign: 'center',height: '35px', marginRight: '30px', marginBottom: '20px',
+                                                        width: '200px',marginLeft: '40px',backgroundColor: '#303f9f'}} >
+                                                        <i className="fa fa-facebook " aria-hidden="true" style={{marginRight: '10px'}}></i> 
+                                                        Login With Facebook 
+                                                    </button>
                                                 </div>
                                             </div>
 
@@ -351,6 +360,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
+        facebook: data => {dispatch(MiddleWare.LoginFacebook(data))},
         userData: (data, route) => dispatch(MiddleWare.LoginRequest(data, route)),
         SignupData: (data, route) => dispatch(MiddleWare.SignupRequest(data, route)),
         reseted: data => dispatch(MiddleWare.resetPass(data))
@@ -360,54 +370,53 @@ function mapDispatchToProps(dispatch) {
 export default withRouter (connect (null, mapDispatchToProps)(Auth))
 
 
-class FacebookAuth extends React.Component{
-    constructor(){
-        super();
-        this.state = {
-            user: null
-          }
-    }
+// class FacebookAuth extends React.Component{
+//     constructor(){
+//         super();
+//         this.state = {
+//             user: null
+//           }
+//     }
    
-    login() {
-    //  app.auth().signInWithPopup(facebookProvider)
-    const result =  auth.signInWithPopup(provider)
-              .then((result, error) => {
-                if (error) {
-                    var errorMessage ="Unable to Signin with Facebook";
-                    toast.error(errorMessage, {
-                        position: toast.POSITION.TOP_CENTER
-                      });
-                } else {
-                toast.success("successfully Login !", {
-                    position: toast.POSITION.TOP_CENTER
-                });
-                  this.setState({ redirect: true })
-                }
-              })
-              this.setState({user: result.user})
+//     login() {
+//     //  app.auth().signInWithPopup(facebookProvider)
+//     // const result =  auth.signInWithPopup(provider).then((result, error) => {
+//     //             if (error) {
+//     //                 var errorMessage ="Unable to Signin with Facebook";
+//     //                 toast.error(errorMessage, {
+//     //                     position: toast.POSITION.TOP_CENTER
+//     //                   });
+//     //             } else {
+//     //             toast.success("successfully Login !", {
+//     //                 position: toast.POSITION.TOP_CENTER
+//     //             });
+//     //             //   this.setState({ redirect: true })
+//     //             }
+//     //           })
+//             //   this.setState({user: result.user})
 
         
         
         
-    }
+//     }
 
-    logout() {
-        auth.signOut()
-        this.setState({user: null});
-    }
+//     logout() {
+//         auth.signOut()
+//         this.setState({user: null});
+//     }
       
-    render(){
-        const {user} = this.state
+//     render(){
+//         const {user} = this.state
 
 
-        return(
-            <button type="button" onClick={this.login.bind(this)} classNameName="btn btn-primary" 
-            style={{color: '#fff',textAlign: 'center',height: '35px', marginRight: '30px', marginBottom: '20px',
-                    width: '200px',marginLeft: '40px',backgroundColor: '#303f9f'}}>
-                  <i className="fa fa-facebook " aria-hidden="true" style={{marginRight: '10px'}}></i> 
-                  Login With Facebook 
-            </button>
+//         return(
+//             <button type="button" onClick={this.login.bind(this)} classNameName="btn btn-primary" 
+//             style={{color: '#fff',textAlign: 'center',height: '35px', marginRight: '30px', marginBottom: '20px',
+//                     width: '200px',marginLeft: '40px',backgroundColor: '#303f9f'}}>
+//                   <i className="fa fa-facebook " aria-hidden="true" style={{marginRight: '10px'}}></i> 
+//                   Login With Facebook 
+//             </button>
            
-        )
-    }
-}
+//         )
+//     }
+// }

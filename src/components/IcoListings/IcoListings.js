@@ -131,6 +131,7 @@ class IcoListingItem extends React.Component{
                     <Tabs
                         value={this.state.value}
                         onChange={this.handleChange}
+                        className="navi-tab"
                         >
                         <Tab label="LIVE ICOs" value="a">
                             <div>
@@ -172,10 +173,10 @@ class IcoListingItem extends React.Component{
                                     }                     
                                 })
                                 }
-                                <div className="col-md-9" style={{marginTop: '10px', marginBottom:'10px'}}>
+                                <div className="col-md-12" style={{marginTop: '10px', marginBottom:'10px', textAlign: 'center'}}>
                                     <Link to="browseico" style={{textDecoration: 'none'}}> 
                                         <div className="row">
-                                            <button type="button" className="btn btn-block"style={{borderRadius:'1px'}} >VIEW ALL</button>
+                                            <button type="button" className="btn btn-block"style={{borderRadius:'1px', display: "inline-block",marginLeft: '0px'}} >VIEW ALL</button>
                                         </div>
                                     </Link>
 
@@ -191,7 +192,7 @@ class IcoListingItem extends React.Component{
                                 const img = m.name.toLowerCase();
                                 if (m.count <= 5){
                                     return(
-                                    <div className="col-md-9 ico-card" key={m.count}>
+                                    <div className="col-md-9 ico-card " style={{marginRight: '0px !important', marginLeft:'0px !important'}} key={m.count}>
                                         <Link to={gotoUrl(pageSym, live)} style={{ textDecoration: "none" }}>
                                             <div className="row">
                                                 <div className="col-md-2 col-xs-3">
@@ -221,10 +222,10 @@ class IcoListingItem extends React.Component{
                                     }                     
                                 })
                                 }
-                                <div className="col-md-9" style={{marginTop: '10px', marginBottom:'10px'}}>
+                                <div className="col-md-12" style={{marginTop: '10px', marginBottom:'10px', textAlign: 'center'}}>
                                     <Link to="browseico" style={{textDecoration: 'none'}}> 
                                         <div className="row">
-                                            <button type="button" className="btn btn-block"style={{borderRadius:'1px'}} >VIEW ALL</button>
+                                            <button type="button" className="btn btn-block "style={{borderRadius:'1px', display: "inline-block",marginLeft: '0px'}} >VIEW ALL</button>
                                         </div>
                                     </Link>
 
@@ -241,7 +242,7 @@ class IcoListingItem extends React.Component{
                                 const img = m.name.toLowerCase();
                                 if (m.count <= 5){
                                     return(
-                                    <div className="col-md-9 ico-card" key={m.count}>
+                                    <div className="col-md-9 ico-card" style={{marginRight: '0px !important', marginLeft:'0px !important'}} key={m.count}>
                                         <Link to={gotoUrl(pageSym, live)} style={{ textDecoration: "none" }}>
                                             <div className="row">
                                                 <div className="col-md-2 col-xs-3">
@@ -271,10 +272,10 @@ class IcoListingItem extends React.Component{
                                     }                     
                                 })
                                 }
-                                <div className="col-md-9" style={{marginTop: '10px', marginBottom:'10px'}}>
+                                <div className="col-md-12" style={{marginTop: '10px', marginBottom:'10px', textAlign: 'center'}}>
                                     <Link to="browseico" style={{textDecoration: 'none'}}> 
                                         <div className="row">
-                                            <button type="button" className="btn btn-block"style={{borderRadius:'1px'}} >VIEW ALL</button>
+                                            <button type="button" className="btn btn-block"style={{borderRadius:'1px',display: "inline-block", marginLeft: '0px'}} >VIEW ALL</button>
                                         </div>
                                     </Link>
 

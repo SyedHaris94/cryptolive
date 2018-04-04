@@ -126,15 +126,15 @@ class GraphTable extends React.Component{
                   (m, v) => {
                 const pageSym = m.symbol
                 let name = m.name;
-                if (name.length > 7){
-                  var c_name = name.substr(0, 7);
-                  var c_name = c_name+'...' ;
-                  
-                }
-                else{
-                  var c_name = name;
-                }
-                
+                // if (name.length > 7){
+                //   var c_name = name.substr(0, 7);
+                //   var c_name = c_name+'...' ;
+                //
+                // }
+                // else{
+                //   var c_name = name;
+                // }
+
                 if (curren_select === "usd"){
                    var market = m.market_cap_usd
                    var price = m.price_usd
@@ -153,9 +153,13 @@ class GraphTable extends React.Component{
                         <td style={{ width: "10%" }} className="name">
                           <Link to={gotoUrl(pageSym)} style={{ textDecoration: "none" }}>
                             <td style={{width: '20%' , textAlign: 'left'}} >
-                              <img src={"https://chasing-coins.com/api/v1/std/logo/"+pageSym+""} className="pull-left"
-                                  style={{width: '20%', }}/>
-                              <div style={{textAlign: 'left', marginLeft: '10px'}} class="pull-left"> {c_name} <br/>{m.symbol}  </div>
+
+                                <img src={"https://chasing-coins.com/api/v1/std/logo/"+pageSym+""} className="pull-left"
+                                  style={{width: '20%',    marginRight: '9%', marginTop: 'calc(100%/8)'}}/>
+
+                              <div style={{textAlign: 'left', marginLeft: '0px' , width: '70%'}} class="pull-left"> {name} <br/>{m.symbol}  </div>
+
+
                             </td>
                           </Link>
                         </td>

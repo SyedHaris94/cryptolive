@@ -32,8 +32,27 @@ const styles = {
     },
   };
 
-  
+
 class Description extends React.Component{
+
+    constructor(props){
+        super(props);
+        
+        this.twitter = this.twitter.bind(this);
+        this.facebook = this.facebook.bind(this);
+        this.google = this.google.bind(this);
+    }
+      
+    facebook(){
+        this.props.facebook('adad')
+    }
+
+    twitter(){
+        this.props.twitter('adad')
+    }
+    google(){
+        this.props.google('adad')
+    }
    
     componentDidMount() {
       this.props.getList();
@@ -207,16 +226,16 @@ class Description extends React.Component{
                                 <div className="col-md-12 content" >
                                     <div class="col-md-12 iconButtonDiv social-buttons">
                                         <h2 id="h3Text">Rate and Review</h2>
-                                        <button type="button" class="btn btn-facebook">
+                                        <button type="button" class="btn btn-facebook" onClick={this.facebook}>
                                             <i class="fa fa-facebook-square  fa-1x"></i>
                                             CONTINUE WITH FACEBOOK</button>
-                                        <button type="button" class="btn btn-google">
+                                        <button type="button" class="btn btn-google" onClick={this.google}>
                                             <i class="fa fa-google fa-1x"></i>
                                             CONTINUE WITH GOOGLE</button>
-                                        <button type="button" class="btn btn-twitter">
+                                        <button type="button" class="btn btn-twitter" onClick={this.twitter}>
                                             <i class="fa fa-twitter fa-1x"></i>
                                             CONTINUE WITH EMIAL</button>
-                                        <button type="button" class="btn btn-lightBlue">
+                                        <button type="button" class="btn btn-lightBlue" data-toggle="modal" data-target="#myModal">
                                             <i class="fa fa-envelope fa-1x"></i>
                                             CONTINUE WITH EMIAL</button>
                                     </div>
@@ -243,6 +262,9 @@ const mapStateToProps = (state) => {
   
 const  mapDispatchToProps = (dispatch) => {
     return {
+        facebook: data => {dispatch(MiddleWare.LoginFacebook(data))},
+        twitter: data => {dispatch(MiddleWare.LoginTwitter(data))},
+        google: data => {dispatch(MiddleWare.LoginGoogle(data))},
         userData: (data) => dispatch(MiddleWare.LoginRequest(data)),
         getList: () => {
         dispatch(MiddleWare.GetRating());

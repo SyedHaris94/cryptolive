@@ -191,7 +191,7 @@ class Middle extends React.Component{
                             <div className="col-md-1 col-md-offset-2 coin-screener-icon">
                                 <a href="#" style={{textDecoration: 'none'}} data-toggle="modal" data-target="#layoutModal"><img className="pull-left" src={glass} alt="logo"/><p>LAYOUT</p></a>
                             </div>
-                            <div className="col-md-2 col-xs-6 form-inpt">
+                            <div className="col-md-2 col-xs-6 form-inpt search-bar">
                                 <form className="form-horizontal" role="Search">
                                     <div className="input-group">
                                         <input type="text" className="form-control form-control-lg" placeholder="Search" onChange={this.searchHandler} value = {term}/>

@@ -1,3 +1,5 @@
+import { stat } from "fs";
+
 export class handleAction {
     static GETDATA_1 = "GETDATA_1";
    
@@ -30,6 +32,13 @@ export class handleAction {
     static SEND_MARKET = "SEND_MARKET";
     static GET_MARKET = "GET_MARKET";
 
+    static SEND_PUBLISH = "SEND_PUBLISH";
+    static GET_PUBLISH = "GET_PUBLISH";
+
+    static FACEBOOK_AUTH = "FACEBOOK_AUTH";
+    static TWITTER_AUTH = "TWITTER_AUTH";
+    static GOOGLE_AUTH = "GOOGLE_AUTH";
+
     // user authentication and profile firebase
     static login = (payload) => ({
         type: handleAction.LOGIN,
@@ -48,6 +57,21 @@ export class handleAction {
         payload
     })
 
+    static twitterLogin = (payload) => ({
+        type: handleAction.TWITTER_AUTH,
+        payload
+    }) 
+
+    static facebookLogin = (payload) => ({
+        type: handleAction.FACEBOOK_AUTH,
+        payload
+    })
+    
+    static GoogleLogin = (payload) => ({
+        type: handleAction.GOOGLE_AUTH,
+        payload
+    }) 
+
     // rating data firebase
     static sendRating = (payload) => ({
         type: handleAction.SENDRATING,
@@ -57,7 +81,6 @@ export class handleAction {
         type: handleAction.GETRATING,
         payload
     })
-
     // crypto currency data firebase
     static send_crypto = (payload) => ({
         type: handleAction.SENDCRYPTO,
@@ -67,7 +90,6 @@ export class handleAction {
         type: handleAction.GETCRYPTO,
         payload
     })
-
     // ico data firebase
     static send_ICO = (payload) => ({
         type: handleAction.SEND_ICO,
@@ -77,7 +99,7 @@ export class handleAction {
         type: handleAction.GET_ICO,
         payload
     })
-
+    // upcoming ico data
     static send_uc_ICO = (payload) => ({
         type: handleAction.SEND_UC_ICO,
         payload
@@ -86,7 +108,7 @@ export class handleAction {
         type: handleAction.GET_UC_ICO,
         payload
     })
-
+    // end ico data
     static send_end_ICO = (payload) => ({
         type: handleAction.SEND_END_ICO,
         payload
@@ -95,7 +117,7 @@ export class handleAction {
         type: handleAction.GET_END_ICO,
         payload
     })
-
+    // market data
     static send_market = (payload) => ({
         type: handleAction.SEND_MARKET,
         payload
@@ -104,17 +126,23 @@ export class handleAction {
         type: handleAction.GET_MARKET,
         payload
     })
+    // publish ico data
+    static send_publish = (payload) => ({
+        type:handleAction.SEND_PUBLISH,
+        payload
+    })
 
+    // graph table api data
     static getData1 = (payload) => ({
         type: handleAction.GETDATA_1,
         payload
     })
-
+    // global api data
     static getGlobal = (payload) => ({
         type: handleAction.GETGLOBAL,
         payload
     })
-
+    // cryptocurrency api data
     static getCryptoDetail = (payload) => ({
         type: handleAction.GETCRYPTODETAIL,
         payload
@@ -124,5 +152,7 @@ export class handleAction {
         type: handleAction.GETBITCOIN,
         payload
     })
+
+   
 
 }

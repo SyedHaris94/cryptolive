@@ -7,9 +7,33 @@ import { Link } from "react-router-dom";
 import desc from '../../img/divIMg.png'
 import futur from '../../img/futurDiv2.png'
 
+import bitcoin from '../../img/bitcoin-1.jpg'
+// import bitcoin from '../../img/bitcoin.jpeg'
+
 import * as DB from "../../firebase/firebase";
+import { connect } from 'react-redux';
+import MiddleWare from '../../store//middleware/middleware'
 
 class Jumbotron extends React.Component{
+    constructor(props){
+        super(props);
+        
+        this.twitter = this.twitter.bind(this);
+        this.facebook = this.facebook.bind(this);
+        this.google = this.google.bind(this);
+    }
+
+    facebook(){
+        this.props.facebook('adad')
+    }
+
+    twitter(){
+        this.props.twitter('adad')
+    }
+    google(){
+        this.props.google('adad')
+    }
+
     render(){
 
         const  User = DB.auth.currentUser;
@@ -23,7 +47,7 @@ class Jumbotron extends React.Component{
           });
           
           console.log('sds', User)
-
+        
         return(
             <div>
                 {/* <!-- CONTAINER STARTS --> */}
@@ -46,19 +70,19 @@ class Jumbotron extends React.Component{
                                     <div class="col-md-4 iconButtonDiv">
                                         <h3 id="h3Text">Create a free account</h3>
 
-                                        <button type="button" class="btn btn-facebook">
+                                        <button type="button" class="btn btn-facebook" onClick={this.facebook}>
                                             <i class="fa fa-facebook-square  fa-1x"></i>
                                             CONTINUE WITH FACEBOOK</button>
 
-                                        <button type="button" class="btn btn-google">
+                                        <button type="button" class="btn btn-google" onClick={this.google}>
                                             <i class="fa fa-google fa-1x"></i>
                                             CONTINUE WITH GOOGLE</button>
 
-                                        <button type="button" class="btn btn-twitter">
+                                        <button type="button" class="btn btn-twitter" onClick={this.twitter}>
                                             <i class="fa fa-twitter fa-1x"></i>
-                                            CONTINUE WITH EMIAL</button>
+                                            CONTINUE WITH TWITTER</button>
 
-                                        <button type="button" class="btn btn-lightBlue">
+                                        <button type="button" class="btn btn-lightBlue" data-toggle="modal" data-target="#myModal">
                                             <i class="fa fa-envelope fa-1x"></i>
                                             CONTINUE WITH EMIAL</button>
 
@@ -69,8 +93,8 @@ class Jumbotron extends React.Component{
                                 <h3 className= "feature">Feature ICOs</h3>
 
                                 <div class="col-md-2 futureIcoDiv">
-                                    <img class="imgdiv" src={desc} alt=""/>
-                                    <div class="rate-star">
+                                    <img class="imgdiv" src={bitcoin} alt=""/>
+                                    <div class="list-inline rate-star">
                                         <li class="rating">4.4</li>
                                         <li class="icon-star"><i class="fa fa-star"></i></li>
                                     </div>
@@ -80,8 +104,8 @@ class Jumbotron extends React.Component{
                                 </div>
 
                                 <div class="col-md-2 futureIcoDiv">
-                                    <img class="imgdiv" src={futur}/>
-                                    <div class="rate-star">
+                                    <img class="imgdiv" src={bitcoin}/>
+                                    <div class="list-inline rate-star">
                                         <li class="rating">4.4</li>
                                         <li class="icon-star"><i class="fa fa-star"></i></li>
                                     </div>
@@ -91,8 +115,8 @@ class Jumbotron extends React.Component{
                                 </div>
 
                                 <div class="col-md-2 futureIcoDiv">
-                                    <img class="imgdiv" src={desc} alt=""/>
-                                    <div class="rate-star">
+                                    <img class="imgdiv" src={bitcoin} alt=""/>
+                                    <div class="list-inline rate-star">
                                         <li class="rating">4.4</li>
                                         <li class="icon-star"><i class="fa fa-star"></i></li>
                                     </div>
@@ -102,8 +126,8 @@ class Jumbotron extends React.Component{
                                 </div>
 
                                 <div class="col-md-2 futureIcoDiv">
-                                    <img class="imgdiv" src={futur} alt=""/>
-                                    <div class="rate-star">
+                                    <img class="imgdiv" src={bitcoin} alt=""/>
+                                    <div class="list-inline rate-star">
                                         <li class="rating">4.4</li>
                                         <li class="icon-star"><i class="fa fa-star"></i></li>
                                     </div>
@@ -113,8 +137,8 @@ class Jumbotron extends React.Component{
                                 </div>
 
                                 <div class="col-md-2 futureIcoDiv">
-                                    <img class="imgdiv" src={desc} alt=""/>
-                                    <div class="rate-star">
+                                    <img class="imgdiv" src={bitcoin} alt=""/>
+                                    <div class="list-inline rate-star">
                                         <li class="rating">4.4</li>
                                         <li class="icon-star"><i class="fa fa-star"></i></li>
                                     </div>
@@ -132,4 +156,13 @@ class Jumbotron extends React.Component{
     }
 }
 
-export default Jumbotron;
+const mapDispatchToProps = (dispatch) => {
+    return ({
+        facebook: data => {dispatch(MiddleWare.LoginFacebook(data))},
+        twitter: data => {dispatch(MiddleWare.LoginTwitter(data))},
+        google: data => {dispatch(MiddleWare.LoginGoogle(data))},
+    })
+}
+
+
+export default connect(null,mapDispatchToProps)(Jumbotron);

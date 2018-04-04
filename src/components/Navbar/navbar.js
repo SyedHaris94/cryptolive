@@ -48,7 +48,11 @@ class Navbar extends React.Component{
         authen.signOut()
         console.log('logout')
         localStorage.removeItem('user')
-    }
+        window.location.reload()
+        toast.success("logout succesfull", {
+            position: toast.POSITION.TOP_RIGHT
+        })
+}
     
    
 
@@ -126,7 +130,7 @@ class Navbar extends React.Component{
                         <a id="dark-theme" class="style-changer" href="#" onClick={this.changeDark}>
                             <i class="fa fa-2x fa-moon-o" aria-hidden="true"></i>
                         </a>
-                            {localStorage.getItem("user") ? <a id="btn-logut" href="#" style={{textDecoration: 'none'}} onClick={this.logout} hide> Welcome {localStorage.getItem("user")} </a> : 
+                            {localStorage.getItem("user") ? <a id="btn-logut" href="#" style={{textDecoration: 'none'}} onClick={this.logout} hide> Welcome {localStorage.getItem("user")} <i class="fa fa-sign-out" aria-hidden="true"></i></a> : 
                             <a id="btn-login" href="#" data-toggle="modal" data-target="#myModal" style={{textDecoration: 'none'}}>LOGIN</a> }
                         </div>
                       </div>
@@ -146,7 +150,7 @@ class Navbar extends React.Component{
           
                       <Link to="/"style={{ textDecoration: "none" }} className="navbar-brand" >
                             <div className="logo">
-                                    <img src={logo} className="logo" />
+                                <img src={logo} className="logo" />
                             </div>
                       </Link>
           

@@ -19,7 +19,12 @@ export default function (state= initialState, action) {
             return {... state, isprofile: 'true', profile: action.payload}
         case handleAction.PASSWORD_RESET: 
             return {... state, isresset: 'true', reset: action.payload}
-
+        case handleAction.TWITTER_AUTH:
+            return {... state, loggedIn: 'true',}
+        case handleAction.FACEBOOK_AUTH:
+            return {... state, loggedIn: 'true',}
+        case handleAction.GOOGLE_AUTH:
+            return {... state, loggedIn: 'true',}
         default: 
             return state
     }

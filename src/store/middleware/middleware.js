@@ -20,6 +20,7 @@ export default class MiddleWare{
                     });
                     localStorage.setItem('user', sent.email)
                 $("#closeModal").click();
+                window.location.reload()
                     // route.push(
                     //  "/icopage"
                     // )
@@ -103,6 +104,99 @@ export default class MiddleWare{
             });
         };
       }
+
+    static LoginFacebook(){
+        return dispatch => {
+          console.log("login user")
+          DB.auth.signInWithPopup(DB.provider).then((result, error) => {
+            if (error) {
+                var errorMessage ="Unable to Signin with Facebook";
+                toast.error(errorMessage, {
+                    position: toast.POSITION.TOP_CENTER
+                  });
+            } else {
+            console.log('result', result);
+            console.log('provider', DB.provider);
+            localStorage.setItem('user', result.additionalUserInfo.profile.name
+        )
+            dispatch(handleAction.facebookLogin());   
+            toast.success("successfully Login !", {
+                position: toast.POSITION.TOP_CENTER
+
+            });
+            }
+          })
+
+        
+        }
+    }
+
+    static LoginTwitter(){
+        return dispatch => {
+          console.log("login user")
+          DB.auth.signInWithPopup(DB.twitterProvider).then(result =>  {
+            var token = result.credential.accessToken;
+            var secret = result.credential.secret;
+            var user = result.user;
+            console.log('result',result.additionalUserInfo.username)
+            localStorage.setItem('user', result.additionalUserInfo.username)
+            toast.success("successfully Login !", {
+                position: toast.POSITION.TOP_CENTER
+
+            });
+            
+          }).catch(error => {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            
+            // The email of the user's account used.
+            var email = error.email;
+            // The firebase.auth.AuthCredential type that was used.
+            var credential = error.credential;
+
+            console.log(error)
+            
+          });
+
+        console.log('provider', DB.twitterProvider);
+        dispatch(handleAction.twitterLogin());   
+        }
+    }
+
+    static LoginGoogle(){
+        return dispatch => {
+          console.log("login user")
+
+          DB.auth.signInWithPopup(DB.googleProvider).then(result =>  {
+            var token = result.credential.accessToken;
+            
+            var user = result.user;
+            console.log('result',result)
+            localStorage.setItem('user', result.additionalUserInfo.profile.name)
+            toast.success("successfully Login !", {
+                position: toast.POSITION.TOP_CENTER
+
+            });
+            
+          }).catch(error => {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            
+            // The email of the user's account used.
+            var email = error.email;
+            // The firebase.auth.AuthCredential type that was used.
+            var credential = error.credential;
+
+            console.log(error)
+            
+          });
+
+        console.log('provider', DB.twitterProvider);
+        dispatch(handleAction.twitterLogin());   
+        }
+    }
 
 
       static resetPass(data) {
@@ -346,46 +440,6 @@ export default class MiddleWare{
         }};
 
 
-        static fetchEndedICO() {
-            console.log("fetching data");
-            return dispatch => {
-                let arrdata = [];
-                let dataabase = DB.database.ref('ICO/Ended ICO');
-                dataabase.on("value", snapshot => {
-                    snapshot.forEach((endSnapshot) => {
-                        let array = [];
-                        let obj = endSnapshot.val();
-                        console.log('data ===' ,obj)
-                        for (var a in obj) {
-                            array.push(obj[a]);
-                            // console.log('array ended_ico ===' ,array)
-                            dispatch(handleAction.get_end_ICO(array))
-                        }
-                    })
-                });
-            };
-        }
-    // static fetchEndedICO() {
-    //     console.log("fetching data");
-    //     return dispatch => {
-    //         let arrdata = [];
-    //         let database = DB.database.ref("ICO/Ended ICO")
-    //         database.on("value", snapshot => {
-    //             snapshot.forEach((endedSnapshot) => {
-    //                 let array = [];
-    //                 let obj = endedSnapshot.val();
-    //                 console.log('data ===' ,obj)
-    //                 for (var a in obj) {
-    //                     array.push(obj[a]);
-    //                     console.log('array ===' ,array)
-    //                     dispatch(handleAction.get_end_ICO(array))
-    //                 }
-    //             })
-    //         });
-    //     };
-    // }
-
-   
     static fetchEndedICO() {
         console.log("fetching data");
         return dispatch => {
@@ -406,7 +460,58 @@ export default class MiddleWare{
         };
     }
 
-      static GetRating() {
+    static fetchEndedICO() {
+        console.log("fetching data");
+        return dispatch => {
+            let arrdata = [];
+            let dataabase = DB.database.ref('ICO/Ended ICO');
+            dataabase.on("value", snapshot => {
+                snapshot.forEach((endSnapshot) => {
+                    let array = [];
+                    let obj = endSnapshot.val();
+                    console.log('data ===' ,obj)
+                    for (var a in obj) {
+                        array.push(obj[a]);
+                        // console.log('array ended_ico ===' ,array)
+                        dispatch(handleAction.get_end_ICO(array))
+                    }
+                })
+            });
+        };
+    }
+
+    static sendPublishICO(data){
+        console.log("send data", data);
+        return dispatch => {
+            let database = DB.database.ref("ICO/Publish ICO")
+            database.push(
+                {   
+                    email: data.email,
+                    confirm_email: data.confirm_email,
+                    name: data.name,
+                    contact_num: data.contact_num,
+                    ph_num: data.ph_num,
+                    ico_name: data.ico_name
+                },
+                success => {
+                dispatch(
+                    handleAction.send_publish(
+                    {
+                    email: data.email,
+                    confirm_email: data.confirm_email,
+                    name: data.name,
+                    contact_num: data.contact_num,
+                    ph_num: data.ph_num,
+                    ico_name: data.ico_name
+                    }
+                    )
+                ),
+                alert('successfully sent');
+                }
+            );
+    }};
+
+    static GetRating() {
         console.log("fetching data");
         return dispatch => {
             let dataabase = DB.database.ref('User/Rating/');
@@ -421,23 +526,9 @@ export default class MiddleWare{
                         dispatch(handleAction.getRating(array))
                     }
                 })
-            // });
         };
     }
-    //     return dispatch => {
-    //       let arrdata = [];
-    //       let dataabase = DB.database.ref("/User/Rating/");
-    //       dataabase.on("value", object => {
-    //         let data = object.val();
-    //         for (var a in data) arrdata.push(data[a]);
-    //             dispatch(handleAction.getRating(arrdata));   
-    //             console.log("fetched data", arrdata);
-    //         });
-    //     };
-    //   }
-    
-    
-    
+
     static GetData = () => {
             return dispatch => {
                 axios.get('https://api.coinmarketcap.com/v1/ticker/?start=0&limit=150')

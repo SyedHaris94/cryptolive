@@ -1734,7 +1734,9 @@ input:checked + .slider:before {
     margin-left: -20px;
     width: 120px; 
     height: 40px; 
-    border-radius: 1px
+    border-radius: 1px;
+    color: #acacac;
+    
   
   }
   
@@ -2039,13 +2041,13 @@ input:checked + .slider:before {
 
 .fileInput
   {
-  width: 250px;
+  width: 100%;
   border-bottom: 4px solid lightgray;
   border-right: 4px solid lightgray;
   border-top: 1px solid black;
   border-left: 1px solid black;
   padding: 10px;
-  margin-left: 10px;
+  /* margin-left: 10px; */
   margin-top: 20px;
   cursor: pointer;
   }
@@ -2289,6 +2291,11 @@ input:checked + .slider:before {
 .clock{
   padding-bottom: 19px;
   color: black;
+}
+
+.navi-tab:nth-child(2) > div {
+  background-color: rgb(40, 151, 166);
+
 }
 /*CONTAINER CSS END */
 
@@ -2848,7 +2855,7 @@ input:checked + .slider:before {
     }
   
     #two-tables .left-table .table tbody > tr > td {
-        font-size: 0.8em;
+      font-size: 0.55em;
     }
   
     #ico-social .fb p{
@@ -3085,6 +3092,42 @@ input:checked + .slider:before {
     margin-right: 50px;
     margin-left: 50px;
   }
+ 
+  #h3Text {
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 40px;
+    margin-left: 30px;
+    /* margin-left: 30px; */
+    padding-top: 20px;
+  }
+
+  .iconButtonDiv{
+    margin-left: -38px;
+
+  }
+
+  #publish .right-form .form-data .col-md-12 .col-md-2 .btn-default{
+    margin-left: -20px;
+    width: 75px;
+    height: 30px;
+    font-size: 11px;
+    border-radius: 1px;
+    color: #acacac;
+    /* background-color: #304359; */
+    /* border-color: #ccc; */
+}
+
+#publish .right-form .form-data .col-md-12 .col-md-2 .btn-primary{
+  width: 75px;
+  height: 30px;
+  border-radius: 1px;
+  background-color: #0097A7;
+}
+
+.logo {
+  margin-top: -20px;
+}
   
 }
 
@@ -3183,4 +3226,163 @@ input:checked + .slider:before {
         margin-left: 0px;
         font-size: 11px;
     }
+}
+
+
+/* Azeem Ullah - 04-04-2018*/
+
+@media only screen and (max-width: 600px) {
+  .pagination > li:first-child {
+    display: none;
+  }
+  .pagination > li:last-child {
+    display: none;
+  }
+  .bitcoin-dominance-card{
+    margin-left: 20px;
+  }
+  .search-bar{
+    float: right;
+    margin-right: 5%;
+  }
+
+  #group-7 > img{
+    width: calc(100%*3);
+    margin-left: 100%;
+  }
+
+
+  .navbar-brand{
+    float: none;
+    position: absolute;
+    vertical-align: middle;
+    margin-top: 7%;
+  }
+
+}
+
+#ico-listing-item .ico-card{
+  margin-left: 0px !important;
+  width: 100% !important;
+}
+
+#ico-listing-item .btn-block{
+  width: 100%;
+}
+
+/* .logo{
+  margin-top: 0px;
+} */
+
+/*new div rating boxShadow*/
+
+.shadow-ratedDiv{
+  padding-bottom: 45px;
+  box-shadow: 0 5px 32px 0 rgba(0,0,0,.1);
+}
+
+.ratePoint {
+  text-align: center;
+  color: #1FA1B5;
+  font-size: 6.5em;
+  font-weight: 500;
+}
+
+.subscript {
+  font-size: 1.9em;
+  position: absolute;
+  top: 50px;
+  right: 56px;
+  color: #9c9c9c;
+}
+
+.fa-star {
+  color: #1FA1B5;
+  font-size: 1em;
+  padding-right: 10px;
+}
+
+.rating-icon{
+  text-align: center;
+}
+
+.star{
+  margin-left: -7px;
+  font-size: 1.4em;
+  color: #cccccc;
+
+}
+
+.num-rating{
+  color: #9c9c9c;
+}
+
+.rating-row-1{
+  margin-top: 30px;
+}
+
+.progress-bar {
+  margin-left: -14px;
+  padding-right: -31px;
+  float: left;
+  width: 0;
+  height: 100%;
+  font-size: 12px;
+  line-height: 20px;
+  color: #fff;
+  text-align: center;
+  background-color: #1FA1B5;
+}
+
+.beforeIcon-ratingStar {
+  text-align: center;
+  color: #9c9c9c;
+}
+
+
+@media(max-width: 780px) {
+
+  /*ratingNewDiv*/
+  .ratePoint {
+      text-align: center;
+      color: #1FA1B5;
+      font-size: 5.5em;
+      font-weight: 500;
+  }
+
+  .fa{
+      font-size: 2em;
+      padding-right: 10px;
+  }
+
+
+
+  .beforeIcon-ratingStar {
+      text-align: center;
+      color: #9c9c9c;
+  }
+
+  .subscript {
+      font-size: 1.9em;
+      position: absolute;
+      top: 45px;
+      right: 109px;
+      color: #9c9c9c;
+  }
+
+  .star {
+      margin-left: -7px;
+      font-size: 1.4em;
+      color: #cccccc;
+  }
+
+  .num-rat{
+      margin-left: -10px;
+  }
+
+  .progressBar{
+      display: none;
+  }
+
+  /*ratingNewDiv*/
 }
