@@ -84,7 +84,7 @@ class Jumbotron extends React.Component{
 
                                         <button type="button" class="btn btn-lightBlue" data-toggle="modal" data-target="#myModal">
                                             <i class="fa fa-envelope fa-1x"></i>
-                                            CONTINUE WITH EMIAL</button>
+                                            CONTINUE WITH EMAIL</button>
 
                                     </div> 
                                 : null }

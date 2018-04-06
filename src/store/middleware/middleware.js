@@ -109,15 +109,33 @@ export default class MiddleWare{
         return dispatch => {
           console.log("login user")
           DB.auth.signInWithPopup(DB.provider).then((result, error) => {
+            
+            var user = result.user;
+
+
             if (error) {
                 var errorMessage ="Unable to Signin with Facebook";
                 toast.error(errorMessage, {
                     position: toast.POSITION.TOP_CENTER
                   });
             } else {
-            console.log('result', result);
-            console.log('provider', DB.provider);
-            localStorage.setItem('user', result.additionalUserInfo.profile.name
+                const ref = DB.database.ref("/User/Profiles/").orderByChild("unique_id").equalTo(result.additionalUserInfo.profile.id).on('value', (snapshot) => {
+                    console.log('result_user', snapshot.val());
+                    if (!snapshot.val()){
+                        DB.database.ref("/User/Profiles/").push(
+                        {
+                            uid : user.uid,
+                            unique_id: result.additionalUserInfo.profile.id,
+                            name: result.additionalUserInfo.profile.name,
+                            image : result.additionalUserInfo.profile.picture.data.url,
+                            role: "User",
+                            // contactNum: data.contactNum,
+                        });
+                    }
+                });
+                console.log('result', result);
+                console.log('provider', DB.provider);
+                localStorage.setItem('user', result.additionalUserInfo.profile.name
         )
             dispatch(handleAction.facebookLogin());   
             toast.success("successfully Login !", {
@@ -138,7 +156,22 @@ export default class MiddleWare{
             var token = result.credential.accessToken;
             var secret = result.credential.secret;
             var user = result.user;
-            console.log('result',result.additionalUserInfo.username)
+            
+            const ref = DB.database.ref("/User/Profiles/").orderByChild("unique_id").equalTo(result.additionalUserInfo.profile.id).on('value', (snapshot) => {
+                console.log('result_user', snapshot.val());
+                if (!snapshot.val()){
+                    DB.database.ref("/User/Profiles/").push(
+                    {   
+                        uid : user.uid,
+                        unique_id: result.additionalUserInfo.profile.id,
+                        name: result.additionalUserInfo.profile.name,
+                        image : result.additionalUserInfo.profile.profile_image_url,
+                        role: "User",
+                        // contactNum: data.contactNum,
+                    });
+                }
+            });
+            console.log('result',result.additionalUserInfo)
             localStorage.setItem('user', result.additionalUserInfo.username)
             toast.success("successfully Login !", {
                 position: toast.POSITION.TOP_CENTER
@@ -173,6 +206,21 @@ export default class MiddleWare{
             
             var user = result.user;
             console.log('result',result)
+
+            const ref = DB.database.ref("/User/Profiles/").orderByChild("email").equalTo(result.additionalUserInfo.profile.email).on('value', (snapshot) => {
+                console.log('result_user', snapshot.val());
+                if (!snapshot.val()){
+                    DB.database.ref("/User/Profiles/").push(
+                    {
+                        unique_id: result.additionalUserInfo.profile.id,
+                        name: result.additionalUserInfo.profile.name,
+                        image : result.additionalUserInfo.profile.picture,
+                        email: result.additionalUserInfo.profile.email,
+                        role: "User",
+                    });
+                }
+            });
+
             localStorage.setItem('user', result.additionalUserInfo.profile.name)
             toast.success("successfully Login !", {
                 position: toast.POSITION.TOP_CENTER
@@ -232,12 +280,14 @@ export default class MiddleWare{
           let database = DB.database.ref("User/Rating")
           database.push(
             {
+                // unique_id : 
                 uid: user.uid,
                 comment: data.comment,
                 Team: data.Team,
                 Concept: data.Concept,
                 Whitepaper: data.Whitepaper,
-                icoName: data.icoName
+                icoName: data.icoName,
+                approved: 0
             },
             success => {
               dispatch(
@@ -313,9 +363,9 @@ export default class MiddleWare{
             console.log("send data", data);
             return dispatch => {
                 let database = DB.database.ref("ICO/All ICO")
-                if(data.allico !== data.allico){
+                // if(data.allico !== data.allico){
     
-                database.update(
+                database.set(
                   {
                     allico: data.allico 
                   }
@@ -332,11 +382,11 @@ export default class MiddleWare{
                     console.log('succesfully updated data');
                    }
                 );
-            }
-            else {
-                alert('exist')
-                    console.log('already exist');
-                }
+            // }
+            // else {
+            //     alert('exist')
+            //         console.log('already exist');
+            //     }
             }};
     
     static fetchIcoData() {
@@ -460,49 +510,52 @@ export default class MiddleWare{
         };
     }
 
-    static fetchEndedICO() {
-        console.log("fetching data");
-        return dispatch => {
-            let arrdata = [];
-            let dataabase = DB.database.ref('ICO/Ended ICO');
-            dataabase.on("value", snapshot => {
-                snapshot.forEach((endSnapshot) => {
-                    let array = [];
-                    let obj = endSnapshot.val();
-                    console.log('data ===' ,obj)
-                    for (var a in obj) {
-                        array.push(obj[a]);
-                        // console.log('array ended_ico ===' ,array)
-                        dispatch(handleAction.get_end_ICO(array))
-                    }
-                })
-            });
-        };
-    }
-
+    
     static sendPublishICO(data){
         console.log("send data", data);
         return dispatch => {
-            let database = DB.database.ref("ICO/Publish ICO")
+            let database = DB.database.ref("/ICO/All ICO/allico")
             database.push(
                 {   
                     email: data.email,
-                    confirm_email: data.confirm_email,
-                    name: data.name,
-                    contact_num: data.contact_num,
-                    ph_num: data.ph_num,
-                    ico_name: data.ico_name
+                    ico_name: data.ico_name,        
+                    website_url: data.website_url,
+                    social: data.social,
+                    about: data.about,
+                    country: data.country,
+                    ico_start_date: data.ico_start_date,
+                    ico_end_date: data.ico_end_date,
+                    link_to_white: data.link_to_white,  
+                    link_to_bounty: data.link_to_bounty,
+                    token_ticker: data.token_ticker,
+                    paltform: data.paltform,
+                    white_kyc: data.white_kyc,
+                    restriction: data.restriction,
+                    approved: 0,
+                    goal: 999,
+                    featured: 0
                 },
                 success => {
                 dispatch(
                     handleAction.send_publish(
                     {
-                    email: data.email,
-                    confirm_email: data.confirm_email,
-                    name: data.name,
-                    contact_num: data.contact_num,
-                    ph_num: data.ph_num,
-                    ico_name: data.ico_name
+                        email: data.email,
+                        ico_name: data.ico_name,        
+                        website_url: data.website_url,
+                        social: data.social,
+                        about: data.about,
+                        country: data.country,
+                        ico_start_date: data.ico_start_date,
+                        ico_end_date: data.ico_end_date,
+                        link_to_white: data.link_to_white,  
+                        link_to_bounty: data.link_to_bounty,
+                        token_ticker: data.token_ticker,
+                        paltform: data.paltform,
+                        white_kyc: data.white_kyc,
+                        restriction: data.restriction,
+                        approved: 0,
+                        goal: 999,
+                        featured: 0
                     }
                     )
                 ),

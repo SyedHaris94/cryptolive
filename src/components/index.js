@@ -29,20 +29,12 @@ import Market from './Market/market'
 import Exchange from './Exchanges/exchanges'
 import Auth from './auth/auth'
 import Rating from './Rating/rating'
+import RatePanel from './Rating/ratepanel'
 
 import Admin from './Admin/admin'
 
 // graph tables
 import TableData from './GraphTable/graphtable'
-import Table2 from './GraphTable/table2'
-import Table3 from './GraphTable/table3'
-import Table4 from './GraphTable/table4'
-import Table5 from './GraphTable/table5'
-import Table6 from './GraphTable/table6'
-import Table7 from './GraphTable/table7'
-import Table8 from './GraphTable/table8'
-import Table9 from './GraphTable/table9'
-import Table10 from './GraphTable/table10'
 
 export{
     Admin,
@@ -76,7 +68,7 @@ export{
     Market,
     Auth,
     Rating,
-    Table2, Table3, Table4, Table5, Table6, Table7, Table8, Table9, Table10
+    RatePanel,
 
 }
 

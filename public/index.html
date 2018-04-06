@@ -53,8 +53,7 @@
     -->
 
 
-
-
+   
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -65,24 +64,7 @@
 <script>
     $(function () {
         $(document).ready(function () {
-        // $('.table').stacktable();
-            $(".navbar").show();
-            // (function ($j) {
-            //     switch_style = {
-            //         onReady: function () {
-            //             this.switch_style_click();
-            //         },
-            //         switch_style_click: function(){
-            //             $(".style-changer").click(function(){
-            //                 var id = $(this).attr("id");
-            //                 $("#switch_style").attr("href", "css/" + id + ".css");
-            //             });
-            //         },
-            //     };
-            //     $j().ready(function () {
-            //         switch_style.onReady();
-            //     });
-            // })(jQuery);
+          $(".navbar").show();
             $(function () {
                 $(window).scroll(function () {
                     if ($(this).scrollTop() > 250) {
@@ -95,5 +77,29 @@
         });
     }(jQuery));
 </script>
+
+<!-- AM Charts -->
+<!-- Resources -->
+
+<!-- <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script src="https://www.amcharts.com/lib/3/serial.js"></script>
+<script src="https://www.amcharts.com/lib/3/amstock.js"></script>
+<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+<script src="https://www.amcharts.com/lib/3/themes/light.js"></script> -->
+    <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script src="https://www.amcharts.com/lib/3/serial.js"></script>
+    <script src="https://www.amcharts.com/lib/3/amstock.js"></script>
+    <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+    <script src="../amcharts3-react.js"></script>
+    <script src="../amstockchart_3.21.12.free/amcharts/amcharts.js" type="text/javascript"></script>
+    <script src="../amstockchart_3.21.12.free/amcharts/serial.js" type="text/javascript"></script>
+
+    <script src="node_modules/react/dist/react.min.js"></script>
+<script src="node_modules/react-dom/dist/react-dom.min.js"></script>
+<script src="node_modules/@amcharts/amcharts3-react/amcharts3-react.js"></script>
+ <!-- <script src="../amstockchart_3.21.12.free/amcharts/amstock.js" type="text/javascript"></script> -->
+<!-- AM Charts -->
+
 </body>
 </html>

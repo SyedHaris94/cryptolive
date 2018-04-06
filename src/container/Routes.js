@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
-// import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 
-import {Home, IcoPage, Bitcoin, BrowseICO, Exchange, Market, IcoView, About, Publish,Auth} from '../components';
-
-// for tables temporary
-import {GraphTable, Table2, Table3, Table4, Table5, Table6, Table7,Table8, Table9, Table10} from '../components';
-
+import {Home, IcoPage,GraphTable, Bitcoin, BrowseICO, Exchange, Market, IcoView, About, Publish,Auth} from '../components';
 
 const ScrollToTop = () => {
     window.scrollTo(0, 0);
@@ -32,20 +27,6 @@ class Routes extends React.Component{
             <Route path="/market" component={Market} />
             <Route path="/exchanges" component={Exchange}/>
             <Route path="/auth" component={Auth}/>
-
-
-            {/* tables routes */}
-
-            <Route path="/table2" component={Table2} />
-            <Route path="/table3" component={Table3} />
-            <Route path="/table4" component={Table4} />
-            <Route path="/table5" component={Table5} />
-            <Route path="/table6" component={Table6} />
-            <Route path="/table7" component={Table7} />
-            <Route path="/table8" component={Table8} />
-            <Route path="/table9" component={Table9} />
-            <Route path="/table10" component={Table10} />
-          
         </div>
       </Router>
         );

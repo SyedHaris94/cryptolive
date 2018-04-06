@@ -17,72 +17,130 @@ class Publish extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            email: '',
-            confirm_email: '',
-            firstName: '',
-            lastName: '',
-            contact_num: 0,
-            ph_num: 0,   
             ico_name: '',        
+            website_url: '',
+            about: '',
+            social: '',
+            country: '',
+            ico_start_date: '',
+            ico_end_date: '',
+            link_to_white: '',  
+            link_to_bounty: '',
+            token_ticker: '',
+            paltform: '',
+            white_kyc: '',
+            restriction: '', 
+            email: '',
         };
-        this.FirstNameChange = this.FirstNameChange.bind(this);
-        this.LastNameChange = this.LastNameChange.bind(this);
-        this.EmailChange = this.EmailChange.bind(this);
-        this.ConfirmEmailChange = this.ConfirmEmailChange.bind(this);
-        this.ContactChange = this.ContactChange.bind(this);
-        this.PhoneChange = this.PhoneChange.bind(this);
+        this.webChange = this.webChange.bind(this);
+        this.socialChange = this.socialChange.bind(this);
+        this.aboutChange = this.aboutChange.bind(this);
+        this.countryChange = this.countryChange.bind(this);
+        this.ico_startChange = this.ico_startChange.bind(this);
+        this.ico_endChange = this.ico_endChange.bind(this);
+        this.link_whiteChange = this.link_whiteChange.bind(this);
+        this.link_bountyChange = this.link_bountyChange.bind(this);
+        this.token_tickerChange = this.token_tickerChange.bind(this);
+        this.paltformChange = this.paltformChange.bind(this);
+        this.white_kycChange = this.white_kycChange.bind(this);
+        this.restrictionChange = this.restrictionChange.bind(this);
+        this.emailChange = this.emailChange.bind(this);
         this.IcoNameChange = this.IcoNameChange.bind(this);
         this.sendPublish = this.sendPublish.bind(this);
     }
 
-    FirstNameChange(e) {
-        this.setState({ firstName : e.target.value });
+    webChange(e) {
+        this.setState({ website_url : e.target.value });
         }
 
-    LastNameChange(e) {
-        this.setState({ lastName : e.target.value });
+    aboutChange(e) {
+        this.setState({ about : e.target.value });
+    }
+
+    socialChange(e) {
+        this.setState({ social : e.target.value });
+    }
+
+    countryChange(e) {
+        this.setState({ country : e.target.value });
         }
 
-    EmailChange(e) {
-        this.setState({ email : e.target.value });
+    ico_startChange(e) {
+        this.setState({ ico_start_date : e.target.value });
         }
 
-    ConfirmEmailChange(e) {
-        this.setState({ confirm_email : e.target.value });
+    ico_endChange(e) {
+        this.setState({ ico_end_date : e.target.value });
         }
 
-    ContactChange(e) {
-        this.setState({ contact_num : e.target.value });
+    link_whiteChange(e) {
+        this.setState({ link_to_white : e.target.value });
         }
 
-    PhoneChange(e) {
-        this.setState({ ph_num : e.target.value });
+    link_bountyChange(e) {
+        this.setState({ link_to_bounty : e.target.value });
+        }
+
+    token_tickerChange(e) {
+        this.setState({ token_ticker : e.target.value });
+        }
+
+    paltformChange(e) {
+        this.setState({ paltform : e.target.value });
+        }
+
+    white_kycChange(e){
+        this.setState({ white_kyc : e.target.value });
         }
 
     IcoNameChange(e) {
         this.setState({ ico_name : e.target.value });
         }
         
+    restrictionChange(e){
+        this.setState({ restriction : e.target.value });
+        }
+
+    emailChange(e) {
+        this.setState({ email : e.target.value });
+        }
+
+        
     sendPublish = (e) => {
         e.preventDefault();
 
         let publishico = {
             email: this.state.email,
-            confirm_email: this.state.confirm_email,
-            name: this.state.firstName + this.state.lastName,
-            contact_num: this.state.contact_num,
-            ph_num: this.state.ph_num,
-            ico_name: this.state.ico_name
-
+            ico_name: this.state.ico_name,        
+            website_url: this.state.website_url,
+            social: this.state.social,
+            about: this.state.about,
+            country: this.state.country,
+            ico_start_date: this.state.ico_start_date,
+            ico_end_date: this.state.ico_end_date,
+            link_to_white: this.state.link_to_white,  
+            link_to_bounty: this.state.link_to_bounty,
+            token_ticker: this.state.token_ticker,
+            paltform: this.state.paltform,
+            white_kyc: this.state.white_kyc,
+            restriction: this.state.restriction, 
         };
         
         this.setState({email: ""});
-        this.setState({confirm_email: ""});
-        this.setState({firstName: ""});
-        this.setState({lastName: ""});
-        this.setState({contact_num: ""});
-        this.setState({ph_num: ""});
         this.setState({ico_name: ""});
+        this.setState({about: ""});
+        this.setState({website_url: ""});
+        this.setState({social: ""});
+        this.setState({country: ""});
+        this.setState({ico_start_date: ""});
+        this.setState({ico_end_date: ""});
+        this.setState({link_to_white: ""});
+        this.setState({link_to_bounty: ""});
+        this.setState({token_ticker: ""});
+        this.setState({paltform: ""});
+        this.setState({white_kyc: ""});
+        this.setState({restriction: ""});
+       
     
         console.log('published', publishico)
         this.props.publishData(publishico)
@@ -178,13 +236,13 @@ class Publish extends React.Component{
                                         <div className="col-md-12">
                                             <ul className="nav nav-tabs" role="tablist">
                                                 <li role="presentation" className="active">
-                                                    <a href="#home" aria-controls="home" role="tab" id="homeLink" data-toggle="tab">PERSONAL DETAIL</a>
+                                                    <a href="#home" aria-controls="home" role="tab" id="homeLink" data-toggle="tab">ICO APPLICATION DETAIL</a>
                                                 </li>
                                                 <li role="presentation">
-                                                    <a href="#profile" aria-controls="profile" id="profileLink" role="tab" data-toggle="tab">ICO APPLICATIO DETAIL</a>
+                                                    <a href="#profile" aria-controls="profile" id="profileLink" role="tab" data-toggle="tab">ICO DETAIL</a>
                                                 </li>
                                                 <li role="presentation">
-                                                    <a href="#messages" aria-controls="messages" id="messagesLink" role="tab" data-toggle="tab">ICO DETAIL</a>
+                                                    <a href="#messages" aria-controls="messages" id="messagesLink" role="tab" data-toggle="tab">ICO CATEGORY</a>
                                                 </li>
                                             </ul>
                                     
@@ -193,70 +251,76 @@ class Publish extends React.Component{
                                                 <div role="tabpanel" className="tab-pane active" id="home">
                                                     <div className="form-data">
                                                         <div className="col-md-6 form">
-                                                            <label htmlFor="name">FIRST NAME</label>
+                                                            <label htmlFor="name">WEBSITE URL</label>
                                                             <input 
                                                                 type="name" 
                                                                 className="form-control"
-                                                                value={this.state.firstName}
-                                                                onChange={this.FirstNameChange}
+                                                                value={this.state.website_url}
+                                                                onChange={this.webChange}
                                                             />
                                                         </div>
                                                         <div className="col-md-6 form">
-                                                            <label htmlFor="lastname">LAST NAME</label>
+                                                            <label htmlFor="lastname">ABOUT</label>
                                                             <input 
                                                                 type="name" 
                                                                 className="form-control"
-                                                                value={this.state.lastName}
-                                                                onChange={this.LastNameChange}
+                                                                value={this.state.about}
+                                                                onChange={this.aboutChange}
                                                             />
                                                         </div>
                                                         <div className="col-md-6 form">
-                                                            <label htmlFor="inputEmail">EMAIL</label>
+                                                            <label htmlFor="inputEmail">SOCIAL MEDIA LINKS</label>
                                                             <input 
-                                                                type="email" 
+                                                                type="name" 
                                                                 className="form-control"
-                                                                value={this.state.email}
-                                                                onChange={this.EmailChange}
+                                                                value={this.state.social}
+                                                                onChange={this.socialChange}
                                                                 required
                                                             />
                                                         </div>
                                                         <div className="col-md-6 form">
-                                                            <label htmlFor="inputEmail">CONFIRM
-                                                                EMAIL</label>
+                                                            <label htmlFor="inputEmail">COUNTRY OF OPERATION</label>
                                                             <input 
-                                                                type="email" 
+                                                                type="name" 
                                                                 className="form-control"
-                                                                value={this.state.confirm_email}
-                                                                onChange={this.ConfirmEmailChange}
+                                                                value={this.state.country}
+                                                                onChange={this.countryChange}
                                                                 required
                                                             />
                                                         </div>
                                                         <div className="col-md-6 form">
-                                                            <label htmlFor="inputEmail"> PHONE
-                                                                NUMBER</label>
+                                                            <label htmlFor="inputEmail">(pre)ICO START DATE</label>
                                                             <input 
-                                                                type="number" 
+                                                                type="name" 
                                                                 className="form-control"
-                                                                value={this.state.ph_num}
-                                                                onChange={this.PhoneChange}
+                                                                value={this.state.ico_start_date}
+                                                                onChange={this.ico_startChange}
                                                             />
                                                         </div>
                                                         <div className="col-md-6 form">
-                                                            <label htmlFor="inputEmail">MOBILE
-                                                                NUMBER</label>
+                                                            <label htmlFor="inputEmail">ICO END DATE</label>
                                                             <input 
-                                                                type="number" 
+                                                                type="name" 
                                                                 className="form-control"
-                                                                value={this.state.contact_num}
-                                                                onChange={this.ContactChange}
+                                                                value={this.state.ico_end_date}
+                                                                onChange={this.ico_endChange}
                                                             />
                                                         </div>
-                                                        <div className="col-md-12 ">
+                                                        <div className="col-md-6 form">
+                                                            <label htmlFor="inputEmail">LINK TO WHITEPAPER</label>
+                                                            <input 
+                                                                type="name" 
+                                                                className="form-control"
+                                                                value={this.state.link_to_white}
+                                                                onChange={this.link_whiteChange}
+                                                            />
+                                                        </div>
+                                                        {/* <div className="col-md-12 ">
                                                             <input type="checkbox"
                                                                     style={{width: '30px', height: '20px'}}/>
                                                             <label>I PREFER EMAIL OVER PHONE CALLS</label>
 
-                                                        </div>
+                                                        </div> */}
                                                         <div className="col-md-12">
                                                             <p>By clicking "Next" I agree to be contaicted
                                                                 at the number provided with more information
@@ -296,31 +360,54 @@ class Publish extends React.Component{
                                                 <div role="tabpanel" className="tab-pane" id="profile">
                                                     <div className="form-data">
                                                         <div className="col-md-6 form">
-                                                            <label htmlFor="name">FIRST NAME</label>
-                                                            <input type="name" className="form-control"/>
+                                                            <label htmlFor="name">LINK TO BOUNTY</label>
+                                                            <input 
+                                                                type="name" 
+                                                                className="form-control"
+                                                                value={this.state.link_to_bounty}
+                                                                onChange={this.link_bountyChange}
+                                                                />
                                                         </div>
                                                         <div className="col-md-6 form">
-                                                            <label htmlFor="lastname">LAST NAME</label>
-                                                            <input type="name" className="form-control"/>
+                                                            <label htmlFor="lastname">TOKEN NAME/TICKER</label>
+                                                            <input 
+                                                                type="name" 
+                                                                className="form-control"
+                                                                value={this.state.token_ticker}
+                                                                onChange={this.token_tickerChange}
+                                                                />
                                                         </div>
                                                         <div className="col-md-6 form">
-                                                            <label htmlFor="inputEmail">EMAIL</label>
-                                                            <input type="email" className="form-control"/>
+                                                            <label htmlFor="inputEmail">PLATFORM AND TOKEN TYPE (e.g. Ethereum, ERC20)</label>
+                                                            <input 
+                                                                type="name" 
+                                                                className="form-control"
+                                                                value={this.state.paltform}
+                                                                onChange={this.paltformChange}/>
                                                         </div>
                                                         <div className="col-md-6 form">
-                                                            <label htmlFor="inputEmail">CONFIRM
-                                                                EMAIL</label>
-                                                            <input type="email" className="form-control"/>
+                                                            <label htmlFor="inputEmail">Whitelist/KYC?</label>
+                                                            <input 
+                                                                type="name" 
+                                                                className="form-control"
+                                                                value={this.state.white_kyc}
+                                                                onChange={this.white_kycChange}/>
                                                         </div>
                                                         <div className="col-md-6 form">
-                                                            <label htmlFor="inputEmail"> PHONE
-                                                                NUMBER</label>
-                                                            <input type="number" className="form-control"/>
+                                                            <label htmlFor="inputEmail"> ANY RESTRICTIONS IN WHO CAN PARTICIPATE?</label>
+                                                            <input 
+                                                                type="name" 
+                                                                className="form-control"
+                                                                value={this.state.restriction}
+                                                                onChange={this.restrictionChange}/>
                                                         </div>
                                                         <div className="col-md-6 form">
-                                                            <label htmlFor="inputEmail">MOBILE
-                                                                NUMBER</label>
-                                                            <input type="number" className="form-control"/>
+                                                            <label htmlFor="inputEmail">Contact e-mail</label>
+                                                            <input 
+                                                                type="email" 
+                                                                className="form-control"
+                                                                value={this.state.email}
+                                                                onChange={this.emailChange}/>
                                                         </div>
                                                         <div className="col-md-12 ">
                                                             <input type="checkbox"
@@ -370,24 +457,106 @@ class Publish extends React.Component{
                                                 <div role="tabpanel" className="tab-pane" id="messages">
 
                                                     <div className="form-data">
-                                                        <div className="col-md-6 form">
-                                                            <label htmlFor="name">FIRST NAME</label>
+                                                        <div className="col-md-4 form">
+                                                             <div class="checkbox">
+                                                                <label><input type="checkbox" value=""/>Art</label>
+                                                                </div>
+                                                                <div class="checkbox">
+                                                                <label><input type="checkbox" value=""/>Artificial Intelligence</label>
+                                                                </div>
+                                                                <div class="checkbox ">
+                                                                <label><input type="checkbox" value=""/>Banking</label>
+                                                                </div>
+                                                                <div class="checkbox">
+                                                                <label><input type="checkbox" value=""/>Big Data</label>
+                                                                </div>
+                                                                <div class="checkbox">
+                                                                <label><input type="checkbox" value=""/>Business services</label>
+                                                                </div>
+                                                                <div class="checkbox">
+                                                                <label><input type="checkbox" value=""/>Casino & Gambling</label>
+                                                                </div>
+                                                                <div class="checkbox">
+                                                                    <label><input type="checkbox" value=""/>Manufacturing</label>
+                                                                    </div>
+                                                                    <div class="checkbox">
+                                                                    <label><input type="checkbox" value=""/>Media</label>
+                                                                </div>
+                                                                <div class="checkbox">
+                                                                    <label><input type="checkbox" value=""/>Sports</label>
+                                                                </div>
+                                                        </div>
+                                                        <div className="col-md-4 form">
+                                                            <div class="checkbox">
+                                                                <label><input type="checkbox" value=""/>Charity</label>
+                                                                </div>
+                                                                <div class="checkbox">
+                                                                <label><input type="checkbox" value=""/>Communication</label>
+                                                                </div>
+                                                                <div class="checkbox">
+                                                                <label><input type="checkbox" value=""/>Cryptocurrency</label>
+                                                            </div>
+                                                            <div class="checkbox">
+                                                                <label><input type="checkbox" value=""/>Education</label>
+                                                                </div>
+                                                                <div class="checkbox">
+                                                                <label><input type="checkbox" value=""/>Electronics</label>
+                                                                </div>
+                                                                <div class="checkbox">
+                                                                <label><input type="checkbox" value=""/>Energy</label>
+                                                                </div>
+                                                            <div class="checkbox">
+                                                                    <label><input type="checkbox" value=""/>Platform</label>
+                                                                    </div>
+                                                                    <div class="checkbox">
+                                                                    <label><input type="checkbox" value=""/>Real estate</label>
+                                                                </div>
+                                                                <div class="checkbox">
+                                                                    <label><input type="checkbox" value=""/>Tourism</label>
+                                                                </div>
+                                                        </div>
+                                                        <div className="col-md-4 form">
+                                                            <div class="checkbox">
+                                                                    <label><input type="checkbox" value=""/>Entertainment</label>
+                                                                    </div>
+                                                                    <div class="checkbox">
+                                                                    <label><input type="checkbox" value=""/>Health</label>
+                                                                    </div>
+                                                                    <div class="checkbox">
+                                                                    <label><input type="checkbox" value=""/>Infrastructure</label>
+                                                                </div>
+                                                                <div class="checkbox">
+                                                                    <label><input type="checkbox" value=""/>Internet</label>
+                                                                    </div>
+                                                                    <div class="checkbox">
+                                                                    <label><input type="checkbox" value=""/>Investment</label>
+                                                                    </div>
+                                                                    <div class="checkbox">
+                                                                    <label><input type="checkbox" value=""/>Legal</label>
+                                                                </div>
+                                                                <div class="checkbox">
+                                                                    <label><input type="checkbox" value=""/>Smart Contract</label>
+                                                                    </div>
+                                                                    <div class="checkbox">
+                                                                    <label><input type="checkbox" value=""/>Software</label>
+                                                                </div>
+                                                                <div class="checkbox">
+                                                                    <label><input type="checkbox" value=""/>Virtual Reality</label>
+                                                                </div>
+                                                        </div>
+                                                        {/* <div className="col-md-6 form">
+                                                            <label htmlFor="lastname">COUNTRY</label>
                                                             <input type="name" className="form-control"/>
                                                         </div>
                                                         <div className="col-md-6 form">
-                                                            <label htmlFor="lastname">LAST NAME</label>
-                                                            <input type="name" className="form-control"/>
-                                                        </div>
-                                                        <div className="col-md-6 form">
-                                                            <label htmlFor="inputEmail">EMAIL</label>
+                                                            <label htmlFor="inputEmail">WHITELIST/KYC</label>
                                                             <input type="email" className="form-control"/>
                                                         </div>
                                                         <div className="col-md-6 form">
-                                                            <label htmlFor="inputEmail">CONFIRM
-                                                                EMAIL</label>
+                                                            <label htmlFor="inputEmail">RESTRICTED AREA</label>
                                                             <input type="email" className="form-control"/>
-                                                        </div>
-                                                        <div className="col-md-6 form">
+                                                        </div> */}
+                                                        {/* <div className="col-md-6 form">
                                                             <label htmlFor="inputEmail"> PHONE
                                                                 NUMBER</label>
                                                             <input type="number" className="form-control"/>
@@ -402,7 +571,7 @@ class Publish extends React.Component{
                                                                     style={{width: '30px', height: '20px'}}/>
                                                             <label>I PREFER EMAIL OVER PHONE CALLS</label>
 
-                                                        </div>
+                                                        </div> */}
                                                         <div className="col-md-12">
                                                             <p>By clicking "Next" I agree to be contaicted
                                                                 at the number provided with more information
@@ -425,7 +594,7 @@ class Publish extends React.Component{
                                                                         align="right">
                                                                     <p>By Submitting this application you
                                                                         agree to
-                                                                        <a style={{color: '#4db6ac'}}>cryptolive
+                                                                        <a style={{color: '#4db6ac', marginLeft: '1px'}}>cryptolive
                                                                             T&C</a>
                                                                     </p>
                                                                 </div>

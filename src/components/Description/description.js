@@ -66,14 +66,38 @@ class Description extends React.Component{
 
     render(){
         let icoparam = this.props.icoNameParam
-        {console.log('asdasdger',icoparam)}        
+        // {console.log('asdasdger',icoparam)}        
        
         const list = this.props.listState
-        {console.log("list", list)}
+        // {console.log("list", list)}
 
         const user = this.props.userState
-        {console.log("user list", user)}
+        // {console.log("user list", user)}
         
+        const  User = DB.auth.currentUser;
+        
+        DB.auth.onAuthStateChanged(firebaseUser => {
+            if (firebaseUser) {
+                // console.log('signed in');
+            } else {
+                // console.log('user not signed in');
+            }
+          });
+          
+          console.log('user..', User)
+
+          let name, email, photoUrl, uid, emailVerified;
+          
+          if (User != null) {
+            name = User.displayName;
+            email = User.email;
+            emailVerified = User.emailVerified;
+            uid = User.uid;  
+            photoUrl = User.photoURL;
+          }
+
+          console.log('photoUrl', photoUrl)
+
         function rateUrl(api, url) {
             let test = [];
 
@@ -90,32 +114,29 @@ class Description extends React.Component{
             });
             return test;
         }
-        // console.log('test', test)
 
         let pageParam = rateUrl(list, icoparam);
+        // console.log('ico_id',pageParam.uid)
+
+        let ico_id = pageParam.uid;
 
 
-        console.log('pagePram',pageParam)
         const concept = pageParam.Concept
         const team = pageParam.Team
         const white = pageParam.Whitepaper
         const rate_percent = (team + concept + white) / 100 * 15
         let out_of_five = rate_percent/100*5
         out_of_five = Math.round( out_of_five * 10 ) / 10
-        {console.log("login", this.props.userLogin)}
+        // {console.log("login", this.props.userLogin)}
 
-       const  User = DB.auth.currentUser;
-        
-        console.log('sds', User)
-
-          return(
+        return(
             <div>
                 <ToastContainer />
                 {/* <!-- DESCRIPTION STARTS --> */}
                 <section id="description" > 
                     <div className="container" >
                         <div className="row">
-                            <div className="col-md-8 desc-card" >
+                            <div className="col-md-8 desc-card">
                                 <div className="nav-border">
                                     {/* <!-- Nav tabs --> */}
                                     <ul className="nav nav-tabs" role="tablist" style={{textDecoration: 'none'}}>
@@ -216,10 +237,12 @@ class Description extends React.Component{
                                     </div>
                                 </div>
                                 {User != null ?  <div className="col-md-12 content" >
-                                {/* <!-- Nav tabs --> */}
-                                <NavTabs user ={user} list={list} icoparam={icoparam} /> 
+                                 {/* <!-- Nav tabs --> */}
+                                <NavTabs user ={user} list={list} icoparam={icoparam} img_url={photoUrl}/> 
+
                                 <div className="col-md-12 col-sm-12 col-xs-12">
-                                    <button id="singlebutton" name="singlebutton" className="btn btn-order" data-toggle="modal" data-target="#rateModal">Rate Here..</button>  
+                                    {ico_id !== uid || ico_id == undefined ? <button id="singlebutton" name="singlebutton" className="btn btn-order" data-toggle="modal" data-target="#rateModal">Rate Here..</button> : 
+                                    <button id="singlebutton" name="singlebutton" className="btn btn-order" disabled>Rate Here..</button>}
                                 </div> 
                                     <Modal modalParam = {icoparam}/>
                                 </div> : 
@@ -234,10 +257,10 @@ class Description extends React.Component{
                                             CONTINUE WITH GOOGLE</button>
                                         <button type="button" class="btn btn-twitter" onClick={this.twitter}>
                                             <i class="fa fa-twitter fa-1x"></i>
-                                            CONTINUE WITH EMIAL</button>
+                                            CONTINUE WITH TWITTER</button>
                                         <button type="button" class="btn btn-lightBlue" data-toggle="modal" data-target="#myModal">
                                             <i class="fa fa-envelope fa-1x"></i>
-                                            CONTINUE WITH EMIAL</button>
+                                            CONTINUE WITH EMAIL</button>
                                     </div>
                                 </div> }
                             </div>                     
@@ -252,9 +275,9 @@ class Description extends React.Component{
 
 const mapStateToProps = (state) => {
     return {
-    listState: state.RateReducer.getrate,
-    userState: state.AuthReducer.profile,
-    userLogin: state.AuthReducer.loggedIn
+        listState: state.RateReducer.getrate,
+        userState: state.AuthReducer.profile,
+        userLogin: state.AuthReducer.loggedIn
 
 
       };
@@ -296,125 +319,139 @@ class NavTabs extends React.Component{
         let icoparam = this.props.icoparam;
         let user = this.props.user;
         let list = this.props.list
+        let photoUrl = this.props.img_url
         return(
             <div>
-                    <Tabs className="nav-tab"
-                        value={this.state.value}
-                        onChange={this.handleChange}
-                    >
-                        <Tab label="Positive" value="a" >
-                               {list.map((x,y)=> {
-                                    const concept = x.Concept
-                                    const team = x.Team
-                                    const white = x.Whitepaper
-                                    const rate_percent = (team + concept + white) / 100 * 15
-                                    let out_of_five = rate_percent/100*5
-                                    out_of_five = Math.round( out_of_five * 10 ) / 10
-                                
-                                    return user.map((m,v) => {
-                                        if (x.uid === m.uid && x.icoName === icoparam){                                              
-                                            return(
-                                                <div key={v} style={{marginTop: '20px'}}>
-                                                    {out_of_five <= 5  && out_of_five  >= 4 ? 
-                                                    <div>
-                                                        <div className="col-md-7 col-sm-8 jasmine-color">
-                                                        <div className="col-md-2 col-sm-2" >
-                                                            <img src={jasmine} alt="logo" />
-                                                            </div>
-                                                            {/* POSITIVE */}
-                                                            <p style={{marginTop: '20px',marginLeft: '80px'}} >{m.name}</p>
-                                                            <p style={{marginLeft: '80px'}} >{x.comment}</p>
-                                                        </div>
-                                                        <div className="col-md-2 col-sm-2 right" >
-                                                            <span className="label label-default" style={{marginLeft: '-14px', marginTop: '20px'}}>
-                                                                {out_of_five}
-                                                            </span> 
-                                                            <i className="fa fa-caret-up" aria-hidden="true" style={{ marginTop: '-30px',paddingLeft: "15px", color:'#37A1B4'}} />                                                                  
-                                                        </div>
-                                                    </div> : null}
-                                                </div>
-                                            )   
-                                    
-                                        }})
-                                })}
+                <Tabs className="nav-tab" value={this.state.value} onChange={this.handleChange}>
+                    <Tab label="Positive" value="a" >
+                            {list.map((x,y)=> {
+                                const concept = x.Concept
+                                const team = x.Team
+                                const white = x.Whitepaper
+                                const approved = x.approved
+                                const rate_percent = (team + concept + white) / 100 * 15
+                                let out_of_five = rate_percent/100*5
+                                out_of_five = Math.round( out_of_five * 10 ) / 10
                             
-                        </Tab>
-                        <Tab label="Neutral" value="b">
-                            <div>
-                                {list.map((x,y)=> {
-                                    const concept = x.Concept
-                                    const team = x.Team
-                                    const white = x.Whitepaper
-                                    const rate_percent = (team + concept + white) / 100 * 15
-                                    let out_of_five = rate_percent/100*5
-                                    out_of_five = Math.round( out_of_five * 10 ) / 10
-                                
-                                    return user.map((m,v) => {
-                                        if (x.uid === m.uid && x.icoName === icoparam){                                              
-                                            return(
-                                                <div key={v} style={{marginTop: '20px'}}>
-                                                         {out_of_five < 4 && out_of_five >= 2 ?  <div >
-                                                        <div className="col-md-2 col-sm-2" >
-                                                            <img src={jasmine} alt="logo" />
+                                return user.map((m,v) => {
+                                    let image = m.image
+                                    console.log('image', image)
+                                    if (x.uid === m.uid && x.icoName === icoparam && approved == 1){                                              
+                                        return(
+                                            <div key={v} style={{marginTop: '20px'}}>
+                                                {out_of_five <= 5  && out_of_five  >= 4 ? 
+                                                <div>
+                                                    <div className="col-md-7 col-sm-8 jasmine-color">
+                                                    <div className="col-md-2 col-sm-2" >
+                                                        <img src={image} alt="logo" />
                                                         </div>
-                                                        <div className="col-md-8 col-sm-8 jasmine-color">
-                                                            {/* NEUTRAL */}
-                                                            <p style={{marginTop: '20px',marginLeft: '80px'}} >{m.name}</p>
-                                                            <p style={{marginLeft: '80px'}} >{x.comment}</p>
-                                                        </div>
-                                                        <div className="col-md-2 col-sm-2 right" >
+                                                        {/* POSITIVE */}
+                                                        <p style={{marginTop: '20px',marginLeft: '80px'}} >{m.name}</p>
+                                                        <p style={{marginLeft: '80px'}} >{x.comment}</p>
+                                                    </div>
+                                                    <div className="col-md-2 col-sm-2 right" >
                                                         <span className="label label-default" style={{marginLeft: '-14px', marginTop: '20px'}}>
-                                                                {out_of_five}
-                                                            </span> 
-                                                            <i className="fa fa-caret-up" aria-hidden="true" style={{ marginTop: '-30px',paddingLeft: "15px", color:'#37A1B4'}} />                                                                  
-                                                        </div>
-                                                    </div> : null}
-                                                </div>
-                                            )   
-                                    
-                                        }})
-                                })}
-                            </div>
-                        </Tab>
-                        <Tab label="Negative" value="c">
-                            <div>
-                                {list.map((x,y)=> {
-                                    const concept = x.Concept
-                                    const team = x.Team
-                                    const white = x.Whitepaper
-                                    const rate_percent = (team + concept + white) / 100 * 15
-                                    let out_of_five = rate_percent/100*5
-                                    out_of_five = Math.round( out_of_five * 10 ) / 10
+                                                            {out_of_five}
+                                                        </span> 
+                                                        <i className="fa fa-caret-up" aria-hidden="true" style={{ marginTop: '-30px',paddingLeft: "15px", color:'#37A1B4'}} />                                                                  
+                                                    </div>
+                                                </div> : null}
+                                            </div>
+                                        )   
                                 
-                                    return user.map((m,v) => {
-                                        if (x.uid === m.uid && x.icoName === icoparam){                                              
-                                            return(
-                                                <div key={v} style={{marginTop: '20px'}}>
-                                                         {out_of_five < 2 ?  <div>
-                                                        <div className="col-md-2 col-sm-2" >
-                                                            <img src={jasmine} alt="logo" />
+                                    }})
+                            })}
+                        
+                    </Tab>
+                    <Tab label="Neutral" value="b">
+                        <div>
+                            {list.map((x,y)=> {
+                                const concept = x.Concept
+                                const team = x.Team
+                                const white = x.Whitepaper
+                                const approved = x.approved
+                                const rate_percent = (team + concept + white) / 100 * 15
+                                let out_of_five = rate_percent/100*5
+                                out_of_five = Math.round( out_of_five * 10 ) / 10
+                            
+                                return user.map((m,v) => {
+                                    let image = m.image
+                                    console.log('image', image)
+                                    if (x.uid === m.uid && x.icoName === icoparam && approved == 1){                                              
+                                        return(
+                                            <div key={v} style={{marginTop: '20px'}}>
+                                                {out_of_five < 4 && out_of_five >= 2 ?  
+                                                    <div>
+                                                        <div>
+                                                            <div className="col-md-7 col-sm-8 jasmine-color">
+                                                                <div className="col-md-2 col-sm-2" >
+                                                                    <img src={image} alt="logo" />
+                                                                </div>
+                                                                {/* POSITIVE */}
+                                                                <p style={{marginTop: '20px',marginLeft: '80px'}} >{m.name}</p>
+                                                                <p style={{marginLeft: '80px'}} >{x.comment}</p>
+                                                            </div>
+                                                            <div className="col-md-2 col-sm-2 right" >
+                                                                <span className="label label-default" style={{marginLeft: '-14px', marginTop: '20px'}}>
+                                                                    {out_of_five}
+                                                                </span> 
+                                                                <i className="fa fa-caret-up" aria-hidden="true" style={{ marginTop: '-30px',paddingLeft: "15px", color:'#37A1B4'}} />                                                                  
+                                                            </div>
                                                         </div>
-                                                        <div className="col-md-8 col-sm-8 jasmine-color">
-                                                            {/* NEGATIVE */}
-                                                            <p style={{marginTop: '20px',marginLeft: '80px'}} >{m.name}</p>
-                                                            <p style={{marginLeft: '80px'}} >{x.comment}</p>
+                                                    </div> :
+                                                null}
+                                            </div>
+                                        )   
+                                
+                                    }})
+                            })}
+                        </div>
+                    </Tab>
+                    <Tab label="Negative" value="c">
+                        <div>
+                            {list.map((x,y)=> {
+                                const concept = x.Concept
+                                const team = x.Team
+                                const white = x.Whitepaper
+                                const approved = x.approved
+                                const rate_percent = (team + concept + white) / 100 * 15
+                                let out_of_five = rate_percent/100*5
+                                out_of_five = Math.round( out_of_five * 10 ) / 10
+                            
+                                return user.map((m,v) => {
+                                    let image = m.image
+                                    console.log('image', image)
+                                    if (x.uid === m.uid && x.icoName === icoparam && approved == 1){                                              
+                                        return(
+                                            <div key={v} style={{marginTop: '20px'}}>
+                                                {out_of_five < 2 ?  
+                                                    <div>
+                                                        <div>
+                                                            <div className="col-md-7 col-sm-8 jasmine-color">
+                                                                <div className="col-md-2 col-sm-2" >
+                                                                    <img src={image} alt="logo" />
+                                                                </div>
+                                                                {/* POSITIVE */}
+                                                                <p style={{marginTop: '20px',marginLeft: '80px'}} >{m.name}</p>
+                                                                <p style={{marginLeft: '80px'}} >{x.comment}</p>
+                                                            </div>
+                                                            <div className="col-md-2 col-sm-2 right" >
+                                                                <span className="label label-default" style={{marginLeft: '-14px', marginTop: '20px'}}>
+                                                                    {out_of_five}
+                                                                </span> 
+                                                                <i className="fa fa-caret-up" aria-hidden="true" style={{ marginTop: '-30px',paddingLeft: "15px", color:'#37A1B4'}} />                                                                  
+                                                            </div>
                                                         </div>
-                                                        <div className="col-md-2 col-sm-2 right" >
-                                                            <span className="label label-default" style={{marginLeft: '-14px', marginTop: '20px'}}>
-                                                                {out_of_five}
-                                                            </span> 
-                                                            <i className="fa fa-caret-up" aria-hidden="true" style={{ marginTop: '-30px',paddingLeft: "15px", color:'#37A1B4'}} />                                                                  
-                                                        </div>
-                                                    </div> : null}
-                                                </div>
-                                            )   
-                                    
-                                        }})
-                                })}
-                            </div>
-                        </Tab>
-                        </Tabs>
-                   
+                                                    </div> : 
+                                                null}
+                                            </div>
+                                        )   
+                                
+                                    }})
+                            })}
+                        </div>
+                    </Tab>
+                </Tabs>
             </div>
 
         );

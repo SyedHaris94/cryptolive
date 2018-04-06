@@ -7,6 +7,8 @@ import {Tabs, Tab} from 'material-ui/Tabs';
 
 import { connect } from 'react-redux';
 import MiddleWare from '../../store//middleware/middleware'
+import {RatePanel} from '../index'
+
 
 const styles = {
     headline: {
@@ -123,13 +125,12 @@ class IcoListingItem extends React.Component{
         // console.log('combining data',allico.concat(upcoming));
         
         return(
-            <div>
-               {/* ICO LISTING ITEMS STARTS */}
+        <div>
+            {/* ICO LISTING ITEMS STARTS */}
                
-                <section id="ico-listing-item">
+            <section id="ico-listing-item">
                 <div class="container col-md-9">
-                    <Tabs
-                        value={this.state.value}
+                    <Tabs value={this.state.value}
                         onChange={this.handleChange}
                         className="navi-tab"
                         >
@@ -166,6 +167,7 @@ class IcoListingItem extends React.Component{
                                                     <p className="last-cont">
                                                         {m.description}
                                                     </p>
+                                                    <RatePanel/>
                                                 </div>
                                             </div>
                                         </Link>
@@ -284,11 +286,9 @@ class IcoListingItem extends React.Component{
                         </Tab>
                     </Tabs>
                 </div>
-                   
-
-                </section>
+            </section>
                 {/* ICO LISTING ITEMS ENDS */}
-            </div>
+        </div>
         );
     }
 }

@@ -1,29 +1,23 @@
 import React, { Component } from "react";
 import {Navbar,TableData, HomePagination, BottomCards, Footer} from '../index'
 
-
 import { connect } from 'react-redux';
 import MiddleWare from '../../store//middleware/middleware'
-
 
 // import number format
 import NumberFormat from 'react-number-format';
 
-
 // import moment
 import moment from 'moment';
-
-
-import Chart from 'chart.js';
-
-
 
 // import tooltip
 import ToolTip from '../tooltip/tooltip';
 
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
-// import LineChart from '../linechart/linechart'
+// import '../../..amstockchart_3.21.12.free/amcharts/style.css'
+
+var AmCharts = require("@amcharts/amcharts3-react");
 
 class Bitcoin extends React.Component{
     
@@ -53,10 +47,10 @@ class Bitcoin extends React.Component{
         });
     }
     handleChartHover(hoverLoc, activePoint){
-    this.setState({
-        hoverLoc: hoverLoc,
-        activePoint: activePoint
-    })
+        this.setState({
+            hoverLoc: hoverLoc,
+            activePoint: activePoint
+        })
     }
 
     componentDidMount(){
@@ -74,10 +68,10 @@ class Bitcoin extends React.Component{
                 
                 for (let date in bitcoinData.Data){
                   sortedData.push({
-                    d: moment.unix(bitcoinData.Data[date].time).format('MMM DD'),
+                    date: moment.unix(bitcoinData.Data[date].time).format('MMM DD'),
                     p: bitcoinData.Data[date].close.toLocaleString('us-EN',{ style: 'currency', currency: 'USD' }),
                     x: count, //previous days
-                    y: bitcoinData.Data[date].close, // numerical price
+                    close: bitcoinData.Data[date].close, // numerical price
                     volumeto: bitcoinData.Data[date].volumeto,
                     volumefrom: bitcoinData.Data[date].volumefrom,
                     open : bitcoinData.Data[date].open
@@ -99,7 +93,232 @@ class Bitcoin extends React.Component{
 
     }
 
+    
+
     render(){
+
+              
+        var chartData = [];
+        var chartData_1 = [];
+        generateChartData();
+        
+        // let state_chart = this.state.data;
+
+        // state_chart.map((u,v) => {
+        //     var value = Math.round( Math.random() * ( 30 ) + 100 );
+        //     // chartData[ u.x ] = ( {
+        //     //       "date": u.d,
+        //     //       "open": u.open,
+        //     //       "close": u.close,
+        //     //       "high": u.high,
+        //     //       "low": u.low,
+        //     //       "volume": u.volume,
+        //     //       "value": value
+        //     // } );
+        //     chartData_1.push({
+        //         name: u.date,
+        //         price: u.p,
+        //         volumeto: u.volumeto,
+        //         volumefrom : u.volumefrom,
+        //         open : u.open,
+        //         i: u.count,
+        //         close : u.close
+        //         });
+        //         return chartData_1;
+        //     })
+        //     console.log('chart',chartData_1)
+
+        function generateChartData() {
+          var firstDate = new Date();
+          firstDate.setHours( 0, 0, 0, 0 );
+          firstDate.setDate( firstDate.getDate() - 2000 );
+        
+          for ( var i = 0; i < 100; i++ ) {
+            var newDate = new Date( firstDate );
+        
+            newDate.setDate( newDate.getDate() + i );
+        
+            var open = Math.round( Math.random() * ( 30 ) + 100 );
+            var close = open + Math.round( Math.random() * ( 15 ) - Math.random() * 10 );
+        
+            var low;
+            if ( open < close ) {
+              low = open - Math.round( Math.random() * 5 );
+            } else {
+              low = close - Math.round( Math.random() * 5 );
+            }
+        
+            var high;
+            if ( open < close ) {
+              high = close + Math.round( Math.random() * 5 );
+            } else {
+              high = open + Math.round( Math.random() * 5 );
+            }
+        
+            var volume = Math.round( Math.random() * ( 1000 + i ) ) + 100 + i;
+            var value = Math.round( Math.random() * ( 30 ) + 100 );
+        
+            chartData[ i ] = ( {
+              "date": newDate,
+              "open": open,
+              "close": close,
+              "high": high,
+              "low": low,
+              "volume": volume,
+              "value": value
+            } );
+          }
+    }
+        var chart = AmCharts.makeChart( "chartdiv", 
+        {
+          "type": "stock",
+          "theme": "light",
+          "dataSets": [ {
+            "fieldMappings": [ 
+                {
+              "fromField": "open",
+              "toField": "open"
+            },
+             {
+              "fromField": "close",
+              "toField": "close"
+            }, {
+              "fromField": "high",
+              "toField": "high"
+            }, {
+              "fromField": "low",
+              "toField": "low"
+            }, {
+              "fromField": "volume",
+              "toField": "volume"
+            }, {
+              "fromField": "value",
+              "toField": "value"
+            } ],
+            "color": "#7f8da9",
+            "dataProvider": chartData,
+            "title": "Volume",
+            "categoryField": "date"
+          }, {
+            "fieldMappings": [ {
+              "fromField": "value",
+              "toField": "value"
+            } ],
+            "color": "#fac314",
+            "dataProvider": chartData,
+            "compared": true,
+            "title": "Price",
+            "categoryField": "date"
+          } ],
+        
+        
+          "panels": [ {
+              "title": "Value",
+              "showCategoryAxis": false,
+              "percentHeight": 70,
+              "valueAxes": [ {
+                "id": "v1",
+                "dashLength": 5
+              } ],
+        
+              "categoryAxis": {
+                "dashLength": 5
+              },
+        
+              "stockGraphs": [ {
+                "type": "candlestick",
+                "id": "g1",
+                "openField": "open",
+                "closeField": "close",
+                "highField": "high",
+                "lowField": "low",
+                "valueField": "close",
+                "lineColor": "#7f8da9",
+                "fillColors": "#7f8da9",
+                "negativeLineColor": "#db4c3c",
+                "negativeFillColors": "#db4c3c",
+                "fillAlphas": 1,
+                "useDataSetColors": false,
+                "comparable": true,
+                "compareField": "value",
+                "showBalloon": false,
+                "proCandlesticks": true
+              } ],
+        
+              "stockLegend": {
+                "valueTextRegular": undefined,
+                "periodValueTextComparing": "[[percents.value.close]]%"
+              }
+            },
+        
+            {
+              "title": "Volume",
+              "percentHeight": 30,
+              "marginTop": 1,
+              "showCategoryAxis": true,
+              "valueAxes": [ {
+                "dashLength": 5
+              } ],
+        
+              "categoryAxis": {
+                "dashLength": 5
+              },
+        
+              "stockGraphs": [ {
+                "valueField": "volume",
+                "type": "column",
+                "showBalloon": false,
+                "fillAlphas": 1
+              } ],
+        
+              "stockLegend": {
+                "markerType": "none",
+                "markerSize": 0,
+                "labelText": "",
+                "periodValueTextRegular": "[[value.close]]"
+              }
+            }
+          ],
+        
+          "chartScrollbarSettings": {
+            "graph": "g1",
+            "graphType": "line",
+            "usePeriod": "WW"
+          },
+        
+          "chartCursorSettings": {
+            "valueLineBalloonEnabled": true,
+            "valueLineEnabled": true
+          },
+        
+          "periodSelector": {
+            "position": "bottom",
+            "periods": [ {
+              "period": "DD",
+              "count": 10,
+              "label": "10 days"
+            }, {
+              "period": "MM",
+              "selected": true,
+              "count": 1,
+              "label": "1 month"
+            }, {
+              "period": "YYYY",
+              "count": 1,
+              "label": "1 year"
+            }, {
+              "period": "YTD",
+              "label": "YTD"
+            }, {
+              "period": "MAX",
+              "label": "MAX"
+            } ]
+          },
+          "export": {
+            "enabled": true
+          }
+        } );
+
 
         const { name_show, market_show, volume_show, cicular_show, one_h_show, twenty_4_show, week_show } = this.state;
 
@@ -148,22 +367,6 @@ class Bitcoin extends React.Component{
         }
 
         let pageParam = gotoUrl(m, urlParam);
-
-
-      
-        const data1 = [];
-       
-        let chart = this.state.data.map((u,v) => {
-            data1.push({
-                name: u.d,
-                price: u.y,
-                volume: u.volumeto,
-            });
-            // count++;
-            return data1;
-        })
-        
-    console.log('ch',chart)
 
 
     console.log('dataa', this.state.data)
@@ -244,20 +447,9 @@ class Bitcoin extends React.Component{
                         <div className="row">
 
                             <div className="col-md-10 " id="graph-imag">
-                                <LineChart  style={{marginTop: '50px'}}width={800} height={300} data={data1}
-                                    margin={{top: 5, right: 30, left: 20, bottom: 5}}>
-                                    <XAxis dataKey="name"/>
-                                    <YAxis yAxisId="left" />
-                                    <YAxis yAxisId="right" orientation="right" />
-                                    <CartesianGrid strokeDasharray="3 3"/>
-                                    <Tooltip/>
-                                    <Legend />
-                                    <Line yAxisId="left" type="monotone" dataKey="price" stroke="#8884d8" activeDot={{r: 8}}/>
-                                    <Line yAxisId="right" type="monotone" dataKey="volume" stroke="#82ca9d" />
-                                </LineChart>
-                            
+                                <div id="chartdiv" style={{width:'100%', height:'400px'}}>
+                                </div>
                             </div>
-
                             <div className="col-md-2 cp-right-panel">
                                 <div className="row">
                                     <div className="col-md-12 cp-right-card">

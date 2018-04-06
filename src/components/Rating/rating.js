@@ -13,15 +13,12 @@ class Rating extends React.Component{
             selectedOption3: '1',
             comment: '',
             icoName: ''
-        }
+            }
         this.handleTeamChange = this.handleTeamChange.bind(this);
         this.handleConceptChange = this.handleConceptChange.bind(this);
         this.handleWhiteChange = this.handleWhiteChange.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.handleCommentChange = this.handleCommentChange.bind(this);
-        
-
-
     }
 
      
@@ -46,7 +43,7 @@ class Rating extends React.Component{
     handleCommentChange(changeEvent) {
         this.setState({ 
         comment : changeEvent.target.value });
-        }
+    }
 
     handleFormSubmit (ev) {
         ev.preventDefault();
@@ -59,7 +56,7 @@ class Rating extends React.Component{
             Whitepaper: this.state.selectedOption3,
             icoName: rateICo
 
-        }
+    }
         console.log("rating info", rating);
 
         this.props.sendingData(rating);

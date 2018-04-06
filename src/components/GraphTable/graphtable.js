@@ -13,7 +13,7 @@ import MiddleWare from '../../store//middleware/middleware'
 
 import Pagination from '../Pagination/pagination';
 
-// import Pagination from 'react-paginating';
+import { AreaChart, Area } from 'recharts';
 
 
 class TableData extends React.Component{
@@ -202,18 +202,18 @@ class GraphTable extends React.Component{
                         </td> : null }
                         {week_param ?
                           m.percent_change_7d < 0 ? <td className="graph-td-red-1 weekly">
-                        <ImageChart 
-                          imgNumbers={m.symbol}
-                          page={pageData}
-                          percent_change = {m.percent_change_7d}
-                        />
+                          <ImageChart 
+                            imgNumbers={m.symbol}
+                            page={pageData}
+                            percent_change = {m.percent_change_7d}
+                          />
                           {m.percent_change_7d}%
                           <i className="fa fa-caret-down" aria-hidden="true" style={{ paddingLeft: "5px", color:'#c11b55'}} />                                                                  
                         </td> : <td className="graph-td-green weekly">
-                        <ImageChart 
-                          imgNumbers={m.symbol}
-                          page={pageData}
-                        />
+                          <ImageChart 
+                              imgNumbers={m.symbol}
+                              page={pageData}
+                          />
                           {m.percent_change_7d}%
                           <i className="fa fa-caret-up" aria-hidden="true" style={{ paddingLeft: "5px", color:'#2e7d32'}} />                                                                  
                         </td> : null }
@@ -254,7 +254,7 @@ class ImageChart extends React.Component{
                   d: moment.unix(bitcoinData.Data[index].time).format('MMM DD'),
                   p: bitcoinData.Data[index].close.toLocaleString('us-EN',{ style: 'currency', currency: 'USD' }),
                   x: count, //previous days
-                  y: bitcoinData.Data[index].close, // numerical price
+                  close: bitcoinData.Data[index].close, // numerical price
                   high: bitcoinData.Data[index].high,
                   low: bitcoinData.Data[index].low,
                   open: bitcoinData.Data[index].open,
@@ -276,6 +276,31 @@ class ImageChart extends React.Component{
           
       
       render(){
+              const data =[]
+              console.log('data image', this.state.mainCurData)
+              // const data = [
+              //     {name: 'Page A', uv: 7280, pv: 6595,},
+              //     {name: 'Page B', uv: 7228, pv: 6806,},
+              //     {name: 'Page C', uv: 7056, pv: 6463,},
+              //     {name: 'Page D', uv: 8218, pv: 6835,},
+              //     {name: 'Page E', uv: 7528, pv: 7039,},
+              //     {name: 'Page F', uv: 7442, pv: 7434,},
+              //     {name: 'Page G', uv: 6929, pv: 6602,},
+              // ];
+
+              let chart = this.state.mainCurData.map((u,v) => {
+                data.push({
+                    name: u.d,
+                    high: u.high,
+                    low: u.low,
+                    avrg : Math.round((u.high + u.low)/2),
+                    close: u.close
+                });
+                return data;
+            })
+
+            console.log('sd',data)
+  
                 const percent_change = this.props.percent_change
                 const x = [];
                 return(
@@ -285,8 +310,19 @@ class ImageChart extends React.Component{
                         item.high , item.low
                       );
                     })}
-                  {percent_change < 0 ? <img className="table-chart" src={"https://chart.googleapis.com/chart?&cht=ls&chd=t:"+x[0]+","+x[1]+","+x[2]+","+x[3]+","+x[4]+","+x[5]+","+x[6]+"&chco=BD0056&chs=180x50&chds="+Math.min(...x)+","+Math.max(...x)+""} /> :
-                <img className="table-chart" src={"https://chart.googleapis.com/chart?&cht=ls&chd=t:"+x[0]+","+x[1]+","+x[2]+","+x[3]+","+x[4]+","+x[5]+","+x[6]+"&chco=328035&chs=180x50&chds="+Math.min(...x)+","+Math.max(...x)+""} />}
+                    
+                  {percent_change < 0 ? 
+                      <div><AreaChart width={120} height={40} data={data}>
+                        <Area type='monotone' dataKey='avrg' stroke='#bf2433' fill='#f7a3bb' />
+                      </AreaChart>
+                 {/* <img className="table-chart" src={"https://chart.googleapis.com/chart?&cht=ls&chd=t:"+x[0]+","+x[1]+","+x[2]+","+x[3]+","+x[4]+","+x[5]+","+x[6]+"&chco=BD0056&chs=180x50&chds="+Math.min(...x)+","+Math.max(...x)+""} /> */}
+                </div> 
+                :
+                    <AreaChart width={120} height={40} data={data}>
+                      <Area type='monotone' dataKey='avrg' stroke='#2a702c' fill='#d5e5d5' />
+                    </AreaChart>
+                // <img className="table-chart" src={"https://chart.googleapis.com/chart?&cht=ls&chd=t:"+x[0]+","+x[1]+","+x[2]+","+x[3]+","+x[4]+","+x[5]+","+x[6]+"&chco=328035&chs=180x50&chds="+Math.min(...x)+","+Math.max(...x)+""} />
+              }
                   </div>
                 );
       }

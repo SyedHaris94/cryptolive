@@ -1035,9 +1035,15 @@ input:checked + .slider:before {
     background-color: #FFFFFF;
     box-shadow: 0 5px 32px 0 rgba(0,0,0,.1);
     color: #000;
-    margin-left: 32px;
-    width: 845px;
+    /* margin-left: 32px;
+    width: 845px; */
 
+  }
+
+  #ico-listing-item .btn-block-1 {  
+    background-color: #FFFFFF;
+    box-shadow: 0 5px 32px 0 rgba(0,0,0,.1);
+    color: #000;
   }
 
   #ico-listing-item {
@@ -1048,8 +1054,18 @@ input:checked + .slider:before {
     margin-top: 20px;
     padding-top: 10px;
     margin-left: 32px;
-    width: 845px;
+    width: 160%;
     padding-bottom: 10px;
+    box-shadow: 0 5px 32px 0 rgba(0,0,0,.1);
+  }
+
+  #ico-listing-item .ico-card-1 {
+    margin-top: 0px;
+    padding-top: 10px;
+    margin-left: 32px;
+    width: 160%;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
     box-shadow: 0 5px 32px 0 rgba(0,0,0,.1);
   }
   
@@ -1060,7 +1076,20 @@ input:checked + .slider:before {
     height: 100%;
   }
   
+  #ico-listing-item .ico-card-1 img {
+    padding-top: 15px;
+    padding-left: 15px;
+    width: 100%;
+    height: 100%;
+  }
+
   #ico-listing-item .ico-card h3 {
+    color: #000;
+    font-weight: 200;
+    letter-spacing: 2px;
+  }
+
+  #ico-listing-item .ico-card-1 h3 {
     color: #000;
     font-weight: 200;
     letter-spacing: 2px;
@@ -1670,6 +1699,7 @@ input:checked + .slider:before {
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
   
   }
+  
     
   #publish .right-content .col-md-12 .progress-bar {
     float: left;
@@ -1945,7 +1975,7 @@ input:checked + .slider:before {
   
   
   #browse-ico .container .row .search-form input{
-    width: 190px; 
+    width: 100%; 
     height:35px; 
     background-color: #f5f5f5
   
@@ -2293,9 +2323,35 @@ input:checked + .slider:before {
   color: black;
 }
 
-.navi-tab:nth-child(2) > div {
+/* .navi-tab :nth-child(2) {
   background-color: rgb(40, 151, 166);
 
+}
+
+.navi-tab :nth-child(2) > div {
+  background-color: rgb(40, 151, 166);
+
+} */
+
+
+/* AM charts */
+.amcharts-export-menu{
+  display: none
+}
+amChartsPeriodSelector {
+  display: none;
+}
+
+
+
+.progress {
+  height: 20px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  /* background-color: #f5f5f5; */
+  border-radius: 1px;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
 }
 /*CONTAINER CSS END */
 
@@ -2620,6 +2676,8 @@ input:checked + .slider:before {
   
     #table-bottom-stats-cards {
         margin-bottom: 30px;
+        padding-top: 30px;
+
     }
   
     #table-bottom-stats-cards .card-item {
@@ -2979,8 +3037,8 @@ input:checked + .slider:before {
 
   }
   .recharts-surface{
-    margin-top: -40px;
-    width: 250px;
+    /* margin-top: -40px; */
+    width: 154px;
   }
   .recharts-default-legend{
     display: none
@@ -2998,6 +3056,10 @@ input:checked + .slider:before {
 
   .table-chart{
     width: 70px
+  }
+
+  .rank{
+    display: none;
   }
 
   .volume{
@@ -3145,8 +3207,8 @@ input:checked + .slider:before {
   }
 
    .recharts-surface{
-    margin-top: -40px;
-    width: 250px;
+    /* margin-top: -40px; */
+    width: 154px;
   }
 
   #ico-listing-item .btn-block {
@@ -3263,11 +3325,20 @@ input:checked + .slider:before {
 
 #ico-listing-item .ico-card{
   margin-left: 0px !important;
-  width: 100% !important;
+  width: 100% ;
+}
+
+#ico-listing-item .ico-card-1{
+  margin-left: 0px !important;
+  width: 160% ;
 }
 
 #ico-listing-item .btn-block{
   width: 100%;
+}
+
+#ico-listing-item .btn-block-1{
+  width: 160%;
 }
 
 /* .logo{

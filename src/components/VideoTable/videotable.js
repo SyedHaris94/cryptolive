@@ -74,6 +74,7 @@ class VideoTable extends React.Component{
 
         let pageParam = gotoUrl(m, nameParam);
         // let date = pageParam.end_time
+        console.log('pageParam',pageParam)
         return(
             <div>
                <section id="video">
@@ -91,46 +92,46 @@ class VideoTable extends React.Component{
                                         <thead>
                                         <tr>
                                             <th>Token</th>
-                                            <th class="table-color">WPR</th>
+                                            {!pageParam ? <th class="table-color">WPR</th> : <th class="table-color">penging</th>}
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr>
                                             <td>Price</td>
-                                            <td class="table-color">1 ETH-4000-4600 WPR</td>
+                                            {!pageParam ? <td class="table-color">1 ETH-4000-4600 WPR</td> : <td class="table-color">pending</td>}
                                         </tr>
                                         <tr>
                                             <td>Bounty</td>
-                                            <td class="table-color">Available</td>
+                                            {!pageParam ? <td class="table-color">Available</td>: <td class="table-color">pending</td>}
                                         </tr>
                                         <tr>
                                             <td>Platform</td>
-                                            <td class="table-color">Ethereum</td>
+                                            {!pageParam ? <td class="table-color">Ethereum</td> : <td class="table-color">pending</td>}
                                         </tr>
 
                                         <tr>
                                             <td>Accepting</td>
-                                            <td class="table-color">ETH</td>
+                                            {!pageParam ? <td class="table-color">ETH</td> : <td class="table-color">pending</td>}
                                         </tr>
                                         <tr>
                                             <td>Soft Cap</td>
-                                            <td class="table-color">5,000,000 USD</td>
+                                            {!pageParam ? <td class="table-color">5,000,000 USD</td>: <td class="table-color">pending</td>}
                                         </tr>
                                         <tr>
                                             <td>Raised</td>
-                                            <td class="table-color">$3,000,000</td>
+                                            {!pageParam ? <td class="table-color">$3,000,000</td>: <td class="table-color">pending</td>}
                                         </tr>
                                         <tr>
                                             <td>Country</td>
-                                            <td class="table-color">Gibraltar</td>
+                                            {!pageParam ?<td class="table-color">Gibraltar</td>: <td class="table-color">pending</td>}
                                         </tr>
                                         <tr>
                                             <td>Whitelist/KYC</td>
-                                            <td class="table-color">KYC & Whitelist</td>
+                                            {!pageParam ? <td class="table-color">KYC & Whitelist</td>: <td class="table-color">pending</td>}
                                         </tr>
                                         <tr>
                                             <td>Restriced Area</td>
-                                            <td class="table-color">USA</td>
+                                            {!pageParam ? <td class="table-color">USA</td>: <td class="table-color">pending</td>}
                                         </tr>
                                         </tbody>
                                     </table>

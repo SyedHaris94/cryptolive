@@ -121,7 +121,7 @@ class IcoTopPanel extends React.Component{
         // this.activeData();
         // this.upcomingData();
         // this.FinishedData();
-        // this.activeData();
+        this.activeData();
         this.props.getList();
         this.props.getupcoming();
         this.props.getended();
@@ -189,25 +189,14 @@ class IcoTopPanel extends React.Component{
         let upcomingico = this.props.upcomingIcoState.length;
         let endedico = this.props.EndedIcoState.length;
             
-    
-        // {console.log("api_list_0", this.state.icoData1)}
-        // {console.log("api_list_1", this.state.icoData2)}
-        // {console.log("api_list_2", this.state.icoData3)}
-
-        {console.log("list0", this.props.AllIcoState.length)}
+        {console.log("list0", this.state.icoData1)}
         {console.log("list1", this.props.upcomingIcoState.length)}
         {console.log("list2", this.props.EndedIcoState.length)}
   
-        //    let allico = this.props.AllIcoState[0].length;
-        //    let upcomingico = this.props.upcomingIcoState[0].length;
-        //    let endedico = this.props.EndedIcoState[0].length;
-
         return(
 
         // <!--ICO-GREY  -->
             <section id="ico-top-panel">
-                {/* {console.log('dsdsd',this.state.icoData1.length)} */}
-                {/* {console.log('asasc',this.state.icoData2)} */}
                 <div className="container" >
                     <div className="row" >
                         <div className="col-md-9 ico-stats-panel" align="center" >
@@ -239,8 +228,8 @@ class IcoTopPanel extends React.Component{
                                 <div className="input-group">
                                     <input type="text"  onChange={this.showHideContent} className="form-control" placeholder="Search" name="srch-term" id="srch-term"/>
                                     <div className="input-group-btn">
-                                        <button className="btn btn-default" type="submit" >
-                                            <i style={{color: '#1DA0B4'}} className="glyphicon glyphicon-search" onClick={this.SendAllICo}></i>
+                                        <button className="btn btn-default" type="submit" onClick={this.SendAllICo}>
+                                            <i style={{color: '#1DA0B4'}} className="glyphicon glyphicon-search" ></i>
                                         </button>
                                     </div>
                                 </div>
