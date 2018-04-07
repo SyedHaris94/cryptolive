@@ -388,24 +388,22 @@ export default class MiddleWare{
             //         console.log('already exist');
             //     }
             }};
-    
+
     static fetchIcoData() {
         console.log("fetching data");
         return dispatch => {
             let arrdata = [];
-            let dataabase = DB.database.ref('ICO/All ICO');
+            let dataabase = DB.database.ref('ICO/All ICO/allico');
             dataabase.on("value", snapshot => {
-                snapshot.forEach((icoSnapshot) => {
                     let array = [];
-                    let obj = icoSnapshot.val();
-                    console.log('data ===' ,obj)
-                    for (var a in obj) {
-                        array.push(obj[a]);
-                        // console.log('array all_ico ===' ,array)
+                    for (var key in snapshot.val()) {
+                        DB.database.ref('/ICO/All ICO/allico/'+key).on('value', snapshot2 => {
+                            array.push(snapshot2.val());
+                            console.log('data',array);
+                          });
                         dispatch(handleAction.get_ICO(array))
                     }
                 })
-            });
         };
     }
 
@@ -515,32 +513,11 @@ export default class MiddleWare{
         console.log("send data", data);
         return dispatch => {
             let database = DB.database.ref("/ICO/All ICO/allico")
-            database.push(
-                {   
-                    email: data.email,
-                    ico_name: data.ico_name,        
-                    website_url: data.website_url,
-                    social: data.social,
-                    about: data.about,
-                    country: data.country,
-                    ico_start_date: data.ico_start_date,
-                    ico_end_date: data.ico_end_date,
-                    link_to_white: data.link_to_white,  
-                    link_to_bounty: data.link_to_bounty,
-                    token_ticker: data.token_ticker,
-                    paltform: data.paltform,
-                    white_kyc: data.white_kyc,
-                    restriction: data.restriction,
-                    approved: 0,
-                    goal: 999,
-                    featured: 0
-                },
-                success => {
-                dispatch(
-                    handleAction.send_publish(
-                    {
+                database.push(
+                    {   
                         email: data.email,
-                        ico_name: data.ico_name,        
+                        name: data.name,    
+                        description: data.description,    
                         website_url: data.website_url,
                         social: data.social,
                         about: data.about,
@@ -549,19 +526,71 @@ export default class MiddleWare{
                         ico_end_date: data.ico_end_date,
                         link_to_white: data.link_to_white,  
                         link_to_bounty: data.link_to_bounty,
+                        link_to_ico: data.link_to_ico,
                         token_ticker: data.token_ticker,
                         paltform: data.paltform,
                         white_kyc: data.white_kyc,
                         restriction: data.restriction,
-                        approved: 0,
-                        goal: 999,
-                        featured: 0
+                        isArt: data.isArt,
+                        isArtificial: data.isArtificial,
+                        isBanking: data.isBanking,
+                        isBig: data.isBig,
+                        isBusiness: data.isBusiness,
+                        isCasino: data.isCasino,
+                        isCharity: data.isCharity,
+                        isCommunication: data.isCommunication,
+                        isCryptocurrency: data.isCryptocurrency,
+                        isEducation: data.isEducation,
+                        isElectronics: data.isElectronics,
+                        isEnergy: data.isEnergy,
+                        isEntertainment: data.isEntertainment,
+                        isHealth: data.isHealth,
+                        isInfrastructure: data.isInfrastructure,
+                        isInternet: data.isInternet,
+                        isInvestment: data.isInvestment,
+                        isManufacturing: data.isManufacturing,
+                        isMedia: data.isMedia,
+                        isPlatform: data.isPlatform,
+                        isReal: data.isReal,
+                        isTourism: data.isTourism,
+                        isLegal: data.isLegal,
+                        isSmart: data.isSmart,
+                        isSport: data.isSport,
+                        isSoftware: data.isSoftware,
+                        isVirtual: data.isVirtual,
+                        approved: "0",
+                        goal: "999",
+                        featured: "0"
+                    },
+                    success => {
+                    dispatch(
+                        handleAction.send_publish(
+                        {
+                            email: data.email,
+                            ico_name: data.ico_name,        
+                            website_url: data.website_url,
+                            social: data.social,
+                            about: data.about,
+                            country: data.country,
+                            ico_start_date: data.ico_start_date,
+                            ico_end_date: data.ico_end_date,
+                            link_to_white: data.link_to_white,  
+                            link_to_bounty: data.link_to_bounty,
+                            token_ticker: data.token_ticker,
+                            paltform: data.paltform,
+                            white_kyc: data.white_kyc,
+                            restriction: data.restriction,
+                            approved: 0,
+                            goal: 999,
+                            featured: 0
+                        }
+                        )
+                    ),
+                    toast.success("ICO Published Successfully!", {
+                        position: toast.POSITION.TOP_CENTER
+                      });
                     }
-                    )
-                ),
-                alert('successfully sent');
-                }
-            );
+                );
     }};
 
     static GetRating() {

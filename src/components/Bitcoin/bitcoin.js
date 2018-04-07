@@ -53,13 +53,13 @@ class Bitcoin extends React.Component{
         })
     }
 
-    componentDidMount(){
+    componentWillMount(){
         this.props.getList();
 
         const getData = () => {
 
             const pageID = this.props.match.params.symbol;
-            const url = 'https://min-api.cryptocompare.com/data/histoday?fsym='+pageID+'&tsym=USD&limit=30&aggregate=1&e=CCCAGG';
+            const url = 'https://min-api.cryptocompare.com/data/histoday?fsym='+pageID+'&tsym=USD&limit=365&aggregate=1&e=CCCAGG';
       
             fetch(url).then( r => r.json())
               .then((bitcoinData) => {
@@ -68,12 +68,14 @@ class Bitcoin extends React.Component{
                 
                 for (let date in bitcoinData.Data){
                   sortedData.push({
-                    date: moment.unix(bitcoinData.Data[date].time).format('MMM DD'),
-                    p: bitcoinData.Data[date].close.toLocaleString('us-EN',{ style: 'currency', currency: 'USD' }),
+                    date: moment.unix(bitcoinData.Data[date].time).format('YYYY-MM-DD HH:MM:SS'),
+                    p: bitcoinData.Data[date].close,
                     x: count, //previous days
                     close: bitcoinData.Data[date].close, // numerical price
                     volumeto: bitcoinData.Data[date].volumeto,
                     volumefrom: bitcoinData.Data[date].volumefrom,
+                    high: bitcoinData.Data[date].high,
+                    low: bitcoinData.Data[date].low,
                     open : bitcoinData.Data[date].open
 
                   });
@@ -93,6 +95,9 @@ class Bitcoin extends React.Component{
 
     }
 
+    // componentDidMount(){
+        
+    // }
     
 
     render(){
@@ -100,10 +105,13 @@ class Bitcoin extends React.Component{
               
         var chartData = [];
         var chartData_1 = [];
-        generateChartData();
+        let state_chart = this.state.data;
+        generateChartData(this.state.data);
         
-        // let state_chart = this.state.data;
+        
 
+
+        console.log('start',state_chart)
         // state_chart.map((u,v) => {
         //     var value = Math.round( Math.random() * ( 30 ) + 100 );
         //     // chartData[ u.x ] = ( {
@@ -128,46 +136,98 @@ class Bitcoin extends React.Component{
         //     })
         //     console.log('chart',chartData_1)
 
-        function generateChartData() {
-          var firstDate = new Date();
-          firstDate.setHours( 0, 0, 0, 0 );
-          firstDate.setDate( firstDate.getDate() - 2000 );
+        function generateChartData(state_chart) {
+           
+        //   var firstDate = new Date();
+        //   firstDate.setHours( 0, 0, 0, 0 );
+        //   firstDate.setDate( firstDate.getDate() - 2000 );
         
-          for ( var i = 0; i < 100; i++ ) {
-            var newDate = new Date( firstDate );
+        //   for ( var i = 0; i < 100; i++ ) {
+        //     var newDate = new Date( firstDate );
         
-            newDate.setDate( newDate.getDate() + i );
+        //     newDate.setDate( newDate.getDate() + i );
         
-            var open = Math.round( Math.random() * ( 30 ) + 100 );
-            var close = open + Math.round( Math.random() * ( 15 ) - Math.random() * 10 );
+        //     var open = Math.round( Math.random() * ( 30 ) + 100 );
+        //     var close = open + Math.round( Math.random() * ( 15 ) - Math.random() * 10 );
         
-            var low;
-            if ( open < close ) {
-              low = open - Math.round( Math.random() * 5 );
-            } else {
-              low = close - Math.round( Math.random() * 5 );
+        //     var low;
+        //     if ( open < close ) {
+        //       low = open - Math.round( Math.random() * 5 );
+        //     } else {
+        //       low = close - Math.round( Math.random() * 5 );
+        //     }
+        
+        //     var high;
+        //     if ( open < close ) {
+        //       high = close + Math.round( Math.random() * 5 );
+        //     } else {
+        //       high = open + Math.round( Math.random() * 5 );
+        //     }
+        
+        //     var volume = Math.round( Math.random() * ( 1000 + i ) ) + 100 + i;
+        //     var value = Math.round( Math.random() * ( 30 ) + 100 );
+        
+        //     chartData[ i ] = ( {
+        //       "date": newDate,
+        //       "open": open,
+        //       "close": close,
+        //       "high": high,
+        //       "low": low,
+        //       "volume": volume,
+        //       "value": value
+        //     } );
+        //   }
+
+            let state_length = state_chart.length;
+            console.log("state length",state_length)
+            let temp = "";
+            temp += "[";
+        {state_chart.map((m,v)=> {
+            if (state_length == v+1){
+                temp += '{"date": "'+m.date+'","open": "'+m.open+'","close": "'+m.close+'","high": "'+m.high+'","low": "'+m.low+'","volume": "'+m.volumefrom+'","value": "'+m.p+'"}'
             }
-        
-            var high;
-            if ( open < close ) {
-              high = close + Math.round( Math.random() * 5 );
-            } else {
-              high = open + Math.round( Math.random() * 5 );
+            else{
+                temp += '{"date": "'+m.date+'","open": "'+m.open+'","close": "'+m.close+'","high": "'+m.high+'","low": "'+m.low+'","volume": "'+m.volumefrom+'","value": "'+m.p+'"},'
             }
+            return(
+             temp  
+            )
+        })}
+        temp += "]";
+        var obj = JSON.parse(temp);
+        console.log('temp',obj);
+        chartData = obj;
         
-            var volume = Math.round( Math.random() * ( 1000 + i ) ) + 100 + i;
-            var value = Math.round( Math.random() * ( 30 ) + 100 );
-        
-            chartData[ i ] = ( {
-              "date": newDate,
-              "open": open,
-              "close": close,
-              "high": high,
-              "low": low,
-              "volume": volume,
-              "value": value
-            } );
-          }
+        //   chartData = [ {
+        //     "date": "04-04-2018",
+        //     "open": 1000,
+        //     "close": 1000,
+        //     "high": 10,
+        //     "low": 20,
+        //     "volume": 200,
+        //     "value": 100
+        //   },
+        //   {
+        //     "date": "04-05-2018",
+        //     "open": 2000,
+        //     "close": 3000,
+        //     "high": 20,
+        //     "low": 40,
+        //     "volume": 500,
+        //     "value": 200
+        //   },
+        //   {
+        //     "date": "04-06-2018",
+        //     "open": 3000,
+        //     "close": 5000,
+        //     "high": 70,
+        //     "low": 80,
+        //     "volume":100,
+        //     "value": 800
+        //   }];
+
+
+
     }
         var chart = AmCharts.makeChart( "chartdiv", 
         {

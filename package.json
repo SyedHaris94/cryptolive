@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@amcharts/amcharts3-react": "^3.0.0",
     "amcharts3": "^3.21.12",
     "axios": "^0.18.0",
     "chart.js": "^2.7.2",
@@ -17,7 +18,9 @@
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.1",
+    "react-chartkick": "^0.2.0",
     "react-circular-progressbar": "^0.8.0",
+    "react-d3-basic": "^1.6.11",
     "react-dom": "^16.2.0",
     "react-firebase-file-uploader": "^2.4.1",
     "react-js-pagination": "^3.0.1",
@@ -33,8 +36,7 @@
     "recharts": "^1.0.0-beta.10",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
-    "underscore": "^1.8.3",
-    "@amcharts/amcharts3-react": "^3.0.0"
+    "underscore": "^1.8.3"
   },
   "scripts": {
     "start": "react-scripts start",

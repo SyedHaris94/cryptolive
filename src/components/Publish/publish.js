@@ -9,6 +9,9 @@ import ProfilePage from './profile'
 import needhelp from '../../icons/need-help-icon.png'
 import ganja from '../../icons/ganja.png'
 
+import * as DB from "../../firebase/firebase";
+import { toast } from 'react-toastify';
+
 import { connect } from 'react-redux';
 import MiddleWare from '../../store//middleware/middleware'
 
@@ -17,8 +20,38 @@ class Publish extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            ico_name: '',        
+            // ischeck: true,
+            isArt: false,
+            isArtificial: false,
+            isBanking: false,
+            isBig: false,
+            isBusiness: false,
+            isCasino: false,
+            isCharity: false,
+            isCommunication: false,
+            isCryptocurrency: false,
+            isEducation: false,
+            isElectronics: false,
+            isEnergy: false,
+            isEntertainment: false,
+            isHealth: false,
+            isInfrastructure: false,
+            isInternet: false,
+            isInvestment: false,
+            isManufacturing: false,
+            isMedia: false,
+            isPlatform: false,
+            isReal: false,
+            isTourism: false,
+            isLegal: false,
+            isSmart: false,
+            isSport: false,
+            isSoftware: false,
+            isVirtual: false,
+
+            name: '',        
             website_url: '',
+            description: '',
             about: '',
             social: '',
             country: '',
@@ -34,12 +67,14 @@ class Publish extends React.Component{
         };
         this.webChange = this.webChange.bind(this);
         this.socialChange = this.socialChange.bind(this);
+        this.descriptionChange = this.descriptionChange.bind(this);
         this.aboutChange = this.aboutChange.bind(this);
         this.countryChange = this.countryChange.bind(this);
         this.ico_startChange = this.ico_startChange.bind(this);
         this.ico_endChange = this.ico_endChange.bind(this);
         this.link_whiteChange = this.link_whiteChange.bind(this);
         this.link_bountyChange = this.link_bountyChange.bind(this);
+        this.link_to_icoChange = this.link_to_icoChange.bind(this);
         this.token_tickerChange = this.token_tickerChange.bind(this);
         this.paltformChange = this.paltformChange.bind(this);
         this.white_kycChange = this.white_kycChange.bind(this);
@@ -47,6 +82,8 @@ class Publish extends React.Component{
         this.emailChange = this.emailChange.bind(this);
         this.IcoNameChange = this.IcoNameChange.bind(this);
         this.sendPublish = this.sendPublish.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
+
     }
 
     webChange(e) {
@@ -59,6 +96,10 @@ class Publish extends React.Component{
 
     socialChange(e) {
         this.setState({ social : e.target.value });
+    }
+
+    descriptionChange(e) {
+        this.setState({ description : e.target.value });
     }
 
     countryChange(e) {
@@ -81,6 +122,11 @@ class Publish extends React.Component{
         this.setState({ link_to_bounty : e.target.value });
         }
 
+        
+    link_to_icoChange(e) {
+        this.setState({ link_to_ico : e.target.value });
+        }
+
     token_tickerChange(e) {
         this.setState({ token_ticker : e.target.value });
         }
@@ -94,7 +140,7 @@ class Publish extends React.Component{
         }
 
     IcoNameChange(e) {
-        this.setState({ ico_name : e.target.value });
+        this.setState({ name : e.target.value });
         }
         
     restrictionChange(e){
@@ -105,13 +151,23 @@ class Publish extends React.Component{
         this.setState({ email : e.target.value });
         }
 
+        handleInputChange(event) {
+            const target = event.target;
+            const value = target.type === 'checkbox' ? target.checked : target.value;
+            const name = target.name;
+        
+            this.setState({
+              [name]: value
+            });
+          }
         
     sendPublish = (e) => {
         e.preventDefault();
 
         let publishico = {
             email: this.state.email,
-            ico_name: this.state.ico_name,        
+            name: this.state.name,     
+            description: this.state.description,   
             website_url: this.state.website_url,
             social: this.state.social,
             about: this.state.about,
@@ -119,27 +175,87 @@ class Publish extends React.Component{
             ico_start_date: this.state.ico_start_date,
             ico_end_date: this.state.ico_end_date,
             link_to_white: this.state.link_to_white,  
+            link_to_ico: this.link_to_ico,
             link_to_bounty: this.state.link_to_bounty,
             token_ticker: this.state.token_ticker,
             paltform: this.state.paltform,
             white_kyc: this.state.white_kyc,
             restriction: this.state.restriction, 
+            
+            isArt: this.state.isArt,
+            isArtificial: this.state.isArtificial,
+            isBanking: this.state.isBanking,
+            isBig: this.state.isBig,
+            isBusiness: this.state.isBusiness,
+            isCasino: this.state.isCasino,
+            isCharity: this.state.isCharity,
+            isCommunication: this.state.isCommunication,
+            isCryptocurrency: this.state.isCryptocurrency,
+            isEducation: this.state.isEducation,
+            isElectronics: this.state.isElectronics,
+            isEnergy: this.state.isEnergy,
+            isEntertainment: this.state.isEntertainment,
+            isHealth: this.state.isHealth,
+            isInfrastructure: this.state.isInfrastructure,
+            isInternet: this.state.isInternet,
+            isInvestment: this.state.isInvestment,
+            isManufacturing: this.state.isManufacturing,
+            isMedia: this.state.isMedia,
+            isPlatform: this.state.isPlatform,
+            isReal: this.state.isReal,
+            isTourism: this.state.isTourism,
+            isLegal: this.state.isLegal,
+            isSmart: this.state.isSmart,
+            isSport: this.state.isSport,
+            isSoftware: this.state.isSoftware,
+            isVirtual: this.state.isVirtual,
         };
         
         this.setState({email: ""});
-        this.setState({ico_name: ""});
+        this.setState({name: ""});
         this.setState({about: ""});
+        this.setState({description: ""});
         this.setState({website_url: ""});
         this.setState({social: ""});
         this.setState({country: ""});
         this.setState({ico_start_date: ""});
         this.setState({ico_end_date: ""});
         this.setState({link_to_white: ""});
+        this.setState({link_to_ico: ""});
         this.setState({link_to_bounty: ""});
         this.setState({token_ticker: ""});
         this.setState({paltform: ""});
         this.setState({white_kyc: ""});
         this.setState({restriction: ""});
+
+
+        this.setState({isArt: false});
+        this.setState({isArtificial: false});
+        this.setState({isBanking: false});
+        this.setState({isBig: false});
+        this.setState({isBusiness: false});
+        this.setState({isCasino: false});
+        this.setState({isCharity: false});
+        this.setState({isCommunication: false});
+        this.setState({isCryptocurrency: false});
+        this.setState({isEducation: false});
+        this.setState({isElectronics: false});
+        this.setState({isEnergy: false});
+        this.setState({isEntertainment: false});
+        this.setState({isHealth: false});
+        this.setState({isInfrastructure: false});
+        this.setState({isInternet: false});
+        this.setState({isInvestment: false});
+        this.setState({isManufacturing: false});
+        this.setState({isMedia: false});
+        this.setState({isPlatform: false});
+        this.setState({isReal: false});
+        this.setState({isTourism: false});
+        this.setState({isLegal: false});
+        this.setState({isSmart: false});
+        this.setState({isSport: false});
+        this.setState({isSoftware: false});
+        this.setState({isVirtual: false});
        
     
         console.log('published', publishico)
@@ -149,13 +265,22 @@ class Publish extends React.Component{
 
     nextPanel(pageNumber){
         console.log(pageNumber);
-        if(pageNumber == 1){
-            $('#profileLink')[0].click();
-            $("#progress-bar").css("width", "66.66%");
+        const  User = DB.auth.currentUser;
+        if (User != null) {
+            if(pageNumber == 1){
+                $('#profileLink')[0].click();
+                $("#progress-bar").css("width", "66.66%");
+            }
+            else if(pageNumber == 2){
+                $('#messagesLink')[0].click();
+                $("#progress-bar").css("width", "100%");
+            }
         }
-        else if(pageNumber == 2){
-            $('#messagesLink')[0].click();
-            $("#progress-bar").css("width", "100%");
+        else{
+            var errorMessage = "You Are not Logged In";
+              toast.error(errorMessage, {
+                position: toast.POSITION.TOP_CENTER
+              });
         }
     }
 
@@ -189,7 +314,7 @@ class Publish extends React.Component{
                                         <input 
                                             type="name" 
                                             className="form-control input"
-                                            value={this.state.ico_name}
+                                            value={this.state.name}
                                             onChange={this.IcoNameChange}
                                             required
                                         />
@@ -315,6 +440,15 @@ class Publish extends React.Component{
                                                                 onChange={this.link_whiteChange}
                                                             />
                                                         </div>
+                                                        <div className="col-md-6 form">
+                                                            <label htmlFor="inputEmail">LINK TO ICO WATCHLIST</label>
+                                                            <input 
+                                                                type="name" 
+                                                                className="form-control"
+                                                                value={this.state.link_to_ico}
+                                                                onChange={this.link_to_icoChange}
+                                                            />
+                                                        </div>
                                                         {/* <div className="col-md-12 ">
                                                             <input type="checkbox"
                                                                     style={{width: '30px', height: '20px'}}/>
@@ -409,6 +543,14 @@ class Publish extends React.Component{
                                                                 value={this.state.email}
                                                                 onChange={this.emailChange}/>
                                                         </div>
+                                                        <div className="col-md-6 form">
+                                                            <label htmlFor="inputEmail">DESCRIPTION</label>
+                                                            <input 
+                                                                type="email" 
+                                                                className="form-control"
+                                                                value={this.state.description}
+                                                                onChange={this.descriptionChange}/>
+                                                        </div>
                                                         <div className="col-md-12 ">
                                                             <input type="checkbox"
                                                                     style={{width: '30px', height: '20px'}}/>
@@ -422,7 +564,6 @@ class Publish extends React.Component{
                                                                 I understand these calls or texts may use
                                                                 computer-assisted dailing or
                                                                 pre-recorded</p>
-
                                                         </div>
 
                                                         <div className="col-md-12">
@@ -457,157 +598,251 @@ class Publish extends React.Component{
                                                 <div role="tabpanel" className="tab-pane" id="messages">
 
                                                     <div className="form-data">
-                                                        <div className="col-md-4 form">
-                                                             <div class="checkbox">
-                                                                <label><input type="checkbox" value=""/>Art</label>
-                                                                </div>
-                                                                <div class="checkbox">
-                                                                <label><input type="checkbox" value=""/>Artificial Intelligence</label>
-                                                                </div>
-                                                                <div class="checkbox ">
-                                                                <label><input type="checkbox" value=""/>Banking</label>
-                                                                </div>
-                                                                <div class="checkbox">
-                                                                <label><input type="checkbox" value=""/>Big Data</label>
-                                                                </div>
-                                                                <div class="checkbox">
-                                                                <label><input type="checkbox" value=""/>Business services</label>
-                                                                </div>
-                                                                <div class="checkbox">
-                                                                <label><input type="checkbox" value=""/>Casino & Gambling</label>
-                                                                </div>
-                                                                <div class="checkbox">
-                                                                    <label><input type="checkbox" value=""/>Manufacturing</label>
+                                                        <form>
+                                                            <div className="col-md-4 form">
+                                                                    <div class="checkbox">
+                                                                    <label><input 
+                                                                            name="isArt"
+                                                                            type="checkbox" 
+                                                                            checked={this.state.isArt}
+                                                                            onChange={this.handleInputChange}
+                                                                            value={this.state.isArt}/>Art</label>
                                                                     </div>
                                                                     <div class="checkbox">
-                                                                    <label><input type="checkbox" value=""/>Media</label>
-                                                                </div>
-                                                                <div class="checkbox">
-                                                                    <label><input type="checkbox" value=""/>Sports</label>
-                                                                </div>
-                                                        </div>
-                                                        <div className="col-md-4 form">
-                                                            <div class="checkbox">
-                                                                <label><input type="checkbox" value=""/>Charity</label>
-                                                                </div>
-                                                                <div class="checkbox">
-                                                                <label><input type="checkbox" value=""/>Communication</label>
-                                                                </div>
-                                                                <div class="checkbox">
-                                                                <label><input type="checkbox" value=""/>Cryptocurrency</label>
+                                                                    <label><input 
+                                                                            type="checkbox" 
+                                                                            name="isArtificial"
+                                                                            type="checkbox" 
+                                                                            checked={this.state.isArtificial}
+                                                                            onChange={this.handleInputChange}
+                                                                            />Artificial Intelligence
+                                                                    </label>
+                                                                    </div>
+                                                                    <div class="checkbox ">
+                                                                    <label><input 
+                                                                            type="checkbox" 
+                                                                            name="isBanking"
+                                                                            type="checkbox" 
+                                                                            checked={this.state.isBanking}
+                                                                            onChange={this.handleInputChange}/>Banking</label>
+                                                                    </div>
+                                                                    <div class="checkbox">
+                                                                    <label><input 
+                                                                            type="checkbox" 
+                                                                            name="isBig"
+                                                                            type="checkbox" 
+                                                                            checked={this.state.isBig}
+                                                                            onChange={this.handleInputChange}/>Big Data</label>
+                                                                    </div>
+                                                                    <div class="checkbox">
+                                                                    <label><input 
+                                                                            type="checkbox" 
+                                                                            name="isBusiness"
+                                                                            type="checkbox" 
+                                                                            checked={this.state.isBusiness}
+                                                                            onChange={this.handleInputChange}/>Business services</label>
+                                                                    </div>
+                                                                    <div class="checkbox">
+                                                                    <label><input 
+                                                                            type="checkbox" 
+                                                                            name="isCasinog"
+                                                                            type="checkbox" 
+                                                                            checked={this.state.isCasino}
+                                                                            onChange={this.handleInputChange}/>Casino & Gambling</label>
+                                                                    </div>
+                                                                    <div class="checkbox">
+                                                                        <label><input 
+                                                                            type="checkbox" 
+                                                                            name="isManufacturing"
+                                                                            type="checkbox" 
+                                                                            checked={this.state.isManufacturing}
+                                                                            onChange={this.handleInputChange}/>Manufacturing</label>
+                                                                        </div>
+                                                                    <div class="checkbox">
+                                                                        <label><input 
+                                                                            type="checkbox" 
+                                                                            name="isMedia"
+                                                                            type="checkbox" 
+                                                                            checked={this.state.isMedia}
+                                                                            onChange={this.handleInputChange}/>Media</label>
+                                                                    </div>
+                                                                    <div class="checkbox">
+                                                                        <label><input 
+                                                                            type="checkbox" 
+                                                                            name="isSport"
+                                                                            type="checkbox" 
+                                                                            checked={this.state.isSport}
+                                                                            onChange={this.handleInputChange}
+                                                                        />Sports</label>
+                                                                    </div>
                                                             </div>
-                                                            <div class="checkbox">
-                                                                <label><input type="checkbox" value=""/>Education</label>
-                                                                </div>
+                                                            <div className="col-md-4 form">
                                                                 <div class="checkbox">
-                                                                <label><input type="checkbox" value=""/>Electronics</label>
-                                                                </div>
-                                                                <div class="checkbox">
-                                                                <label><input type="checkbox" value=""/>Energy</label>
-                                                                </div>
-                                                            <div class="checkbox">
-                                                                    <label><input type="checkbox" value=""/>Platform</label>
+                                                                    <label><input 
+                                                                            type="checkbox" 
+                                                                            name="isCharity"
+                                                                            type="checkbox" 
+                                                                            checked={this.state.isCharity}
+                                                                            onChange={this.handleInputChange}/>Charity</label>
                                                                     </div>
                                                                     <div class="checkbox">
-                                                                    <label><input type="checkbox" value=""/>Real estate</label>
+                                                                    <label><input 
+                                                                            type="checkbox" 
+                                                                            name="isCommunication"
+                                                                            type="checkbox" 
+                                                                            checked={this.state.isCommunication}
+                                                                            onChange={this.handleInputChange}/>Communication</label>
+                                                                    </div>
+                                                                    <div class="checkbox">
+                                                                    <label><input type="checkbox" 
+                                                                            name="isCryptocurrency"
+                                                                            type="checkbox" 
+                                                                            checked={this.state.isCryptocurrency}
+                                                                            onChange={this.handleInputChange}/>Cryptocurrency</label>
                                                                 </div>
                                                                 <div class="checkbox">
-                                                                    <label><input type="checkbox" value=""/>Tourism</label>
-                                                                </div>
-                                                        </div>
-                                                        <div className="col-md-4 form">
-                                                            <div class="checkbox">
-                                                                    <label><input type="checkbox" value=""/>Entertainment</label>
+                                                                    <label><input type="checkbox" 
+                                                                            name="isEducation"
+                                                                            type="checkbox" 
+                                                                            checked={this.state.isEducation}
+                                                                            onChange={this.handleInputChange}/>Education</label>
                                                                     </div>
                                                                     <div class="checkbox">
-                                                                    <label><input type="checkbox" value=""/>Health</label>
+                                                                    <label><input type="checkbox" 
+                                                                            name="isElectronics"
+                                                                            type="checkbox" 
+                                                                            checked={this.state.isElectronics}
+                                                                            onChange={this.handleInputChange}/>Electronics</label>
                                                                     </div>
                                                                     <div class="checkbox">
-                                                                    <label><input type="checkbox" value=""/>Infrastructure</label>
-                                                                </div>
+                                                                    <label><input type="checkbox" 
+                                                                            name="isEnergy"
+                                                                            type="checkbox" 
+                                                                            checked={this.state.isEnergy}
+                                                                            onChange={this.handleInputChange}/>Energy</label>
+                                                                    </div>
                                                                 <div class="checkbox">
-                                                                    <label><input type="checkbox" value=""/>Internet</label>
+                                                                        <label><input type="checkbox" 
+                                                                            name="isPlatform"
+                                                                            type="checkbox" 
+                                                                            checked={this.state.isPlatform}
+                                                                            onChange={this.handleInputChange}/>Platform</label>
+                                                                        </div>
+                                                                        <div class="checkbox">
+                                                                        <label><input type="checkbox" 
+                                                                            name="isReal"
+                                                                            type="checkbox" 
+                                                                            checked={this.state.isReal}
+                                                                            onChange={this.handleInputChange}/>Real estate</label>
                                                                     </div>
                                                                     <div class="checkbox">
-                                                                    <label><input type="checkbox" value=""/>Investment</label>
+                                                                        <label><input type="checkbox" 
+                                                                            name="isTourism"
+                                                                            type="checkbox" 
+                                                                            checked={this.state.isTourism}
+                                                                            onChange={this.handleInputChange}/>Tourism</label>
                                                                     </div>
-                                                                    <div class="checkbox">
-                                                                    <label><input type="checkbox" value=""/>Legal</label>
-                                                                </div>
+                                                            </div>
+                                                            <div className="col-md-4 form">
                                                                 <div class="checkbox">
-                                                                    <label><input type="checkbox" value=""/>Smart Contract</label>
+                                                                        <label><input type="checkbox" 
+                                                                            name="isEntertainment"
+                                                                            type="checkbox" 
+                                                                            checked={this.state.isEntertainment}
+                                                                            onChange={this.handleInputChange}/>Entertainment</label>
+                                                                        </div>
+                                                                        <div class="checkbox">
+                                                                        <label><input type="checkbox" 
+                                                                            name="isHealth"
+                                                                            type="checkbox" 
+                                                                            checked={this.state.isHealth}
+                                                                            onChange={this.handleInputChange}/>Health</label>
+                                                                        </div>
+                                                                        <div class="checkbox">
+                                                                        <label><input type="checkbox" 
+                                                                            name="isInfrastructure"
+                                                                            type="checkbox" 
+                                                                            checked={this.state.isInfrastructure}
+                                                                            onChange={this.handleInputChange}/>Infrastructure</label>
                                                                     </div>
                                                                     <div class="checkbox">
-                                                                    <label><input type="checkbox" value=""/>Software</label>
-                                                                </div>
-                                                                <div class="checkbox">
-                                                                    <label><input type="checkbox" value=""/>Virtual Reality</label>
-                                                                </div>
-                                                        </div>
-                                                        {/* <div className="col-md-6 form">
-                                                            <label htmlFor="lastname">COUNTRY</label>
-                                                            <input type="name" className="form-control"/>
-                                                        </div>
-                                                        <div className="col-md-6 form">
-                                                            <label htmlFor="inputEmail">WHITELIST/KYC</label>
-                                                            <input type="email" className="form-control"/>
-                                                        </div>
-                                                        <div className="col-md-6 form">
-                                                            <label htmlFor="inputEmail">RESTRICTED AREA</label>
-                                                            <input type="email" className="form-control"/>
-                                                        </div> */}
-                                                        {/* <div className="col-md-6 form">
-                                                            <label htmlFor="inputEmail"> PHONE
-                                                                NUMBER</label>
-                                                            <input type="number" className="form-control"/>
-                                                        </div>
-                                                        <div className="col-md-6 form">
-                                                            <label htmlFor="inputEmail">MOBILE
-                                                                NUMBER</label>
-                                                            <input type="number" className="form-control"/>
-                                                        </div>
-                                                        <div className="col-md-12 ">
-                                                            <input type="checkbox"
-                                                                    style={{width: '30px', height: '20px'}}/>
-                                                            <label>I PREFER EMAIL OVER PHONE CALLS</label>
-
-                                                        </div> */}
-                                                        <div className="col-md-12">
-                                                            <p>By clicking "Next" I agree to be contaicted
-                                                                at the number provided with more information
-                                                                or offers about cryptolive.
-                                                                I understand these calls or texts may use
-                                                                computer-assisted dailing or
-                                                                pre-recorded</p>
-
-                                                        </div>
-
-                                                        <div className="col-md-12">
-                                                            <div className="row">
-
-                                                                <div className="col-md-2 col-xs-6">
-                                                                    <button type="button"
-                                                                            className="btn btn-default" onClick={()=>this.previousPanel(3)}>PREVIOUS
-                                                                    </button>
-                                                                </div>
-                                                                <div className="col-md-7 disclaimer-form"
-                                                                        align="right">
-                                                                    <p>By Submitting this application you
-                                                                        agree to
-                                                                        <a style={{color: '#4db6ac', marginLeft: '1px'}}>cryptolive
-                                                                            T&C</a>
-                                                                    </p>
-                                                                </div>
-                                                                <div className="col-md-2 col-xs-6"
-                                                                        align="right">
-                                                                    <button type="button"
-                                                                            className="btn btn-primary" onClick={this.sendPublish}>FINISH
-                                                                    </button>
-                                                                </div>
+                                                                        <label><input type="checkbox" 
+                                                                            name="isInternet"
+                                                                            type="checkbox" 
+                                                                            checked={this.state.isInternet}
+                                                                            onChange={this.handleInputChange}/>Internet</label>
+                                                                        </div>
+                                                                        <div class="checkbox">
+                                                                        <label><input type="checkbox" 
+                                                                            name="isInvestment"
+                                                                            type="checkbox" 
+                                                                            checked={this.state.isInvestment}
+                                                                            onChange={this.handleInputChange}/>Investment</label>
+                                                                        </div>
+                                                                        <div class="checkbox">
+                                                                        <label><input type="checkbox" 
+                                                                            name="isLegal"
+                                                                            type="checkbox" 
+                                                                            checked={this.state.isLegal}
+                                                                            onChange={this.handleInputChange}/>Legal</label>
+                                                                    </div>
+                                                                    <div class="checkbox">
+                                                                        <label><input type="checkbox" 
+                                                                            name="isSmart"
+                                                                            type="checkbox" 
+                                                                            checked={this.state.isSmart}
+                                                                            onChange={this.handleInputChange}/>Smart Contract</label>
+                                                                        </div>
+                                                                        <div class="checkbox">
+                                                                        <label><input type="checkbox" 
+                                                                            name="isSoftware"
+                                                                            type="checkbox" 
+                                                                            checked={this.state.isSoftware}
+                                                                            onChange={this.handleInputChange}/>Software</label>
+                                                                    </div>
+                                                                    <div class="checkbox">
+                                                                        <label><input type="checkbox" 
+                                                                            name="isVirtual"
+                                                                            type="checkbox" 
+                                                                            checked={this.state.isVirtual}
+                                                                            onChange={this.handleInputChange}/>Virtual Reality</label>
+                                                                    </div>
+                                                            </div>
+                                                            <div className="col-md-12">
+                                                                <p>By clicking "Next" I agree to be contaicted
+                                                                    at the number provided with more information
+                                                                    or offers about cryptolive.
+                                                                    I understand these calls or texts may use
+                                                                    computer-assisted dailing or
+                                                                    pre-recorded</p>
 
                                                             </div>
-                                                        </div>
+                                                            <div className="col-md-12">
+                                                                <div className="row">
 
+                                                                    <div className="col-md-2 col-xs-6">
+                                                                        <button type="button"
+                                                                                className="btn btn-default" onClick={()=>this.previousPanel(3)}>PREVIOUS
+                                                                        </button>
+                                                                    </div>
+                                                                    <div className="col-md-7 disclaimer-form"
+                                                                            align="right">
+                                                                        <p>By Submitting this application you
+                                                                            agree to
+                                                                            <a style={{color: '#4db6ac', marginLeft: '1px'}}>cryptolive
+                                                                                T&C</a>
+                                                                        </p>
+                                                                    </div>
+                                                                    <div className="col-md-2 col-xs-6"
+                                                                            align="right">
+                                                                        <button type="button"
+                                                                                className="btn btn-primary" onClick={this.sendPublish}>FINISH
+                                                                        </button>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </form>
                                                     </div>
 
                                                 </div>                                   

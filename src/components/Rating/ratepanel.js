@@ -10,74 +10,50 @@ class RatePanel extends React.Component{
         let overall = this.props.overall_rate;
 
         return(
-            <div className='row'>
-                <div className="col-md-6 col-xs-12">
-                    <h1 className="ratePoint"></h1>{overall} <sub className="subscript">/5</sub>
-                    <p className="rating-icon">
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                    </p>
-                    <p className="beforeIcon-ratingStar">
-                        Based on 247 reviews over the past year
-                    </p>
-                </div>
-                <div className="col-md-5 col-xs-12 progressBar">
-                    <div className="row rating-row-1">
-                        <div className="col-md-1 col-xs-1 num-rating">5</div>
-                        <div className="col-md-1 col-xs-1"><i className="fa fa-star star" aria-hidden="true"></i></div>
-                        <div className="col-md-7 col-xs-7 progress">
-                            <div className="progress-bar" role="progressbar" aria-valuenow="70"
-                                aria-valuemin="0" aria-valuemax="100" style={{width:'90%'}}>
+                <div class="col-md-10 col-xs-9">
+                    <div class="col-md-3 col-xs-12">
+                        <p class="bitMap-1stDiv"> Medicalchain is a decentralized platform that enables secure, fast platform</p>
+                    </div>
+                    <div class="col-md-3 col-xs-12">
+                        <div class="row col-xs-12">
+                            <p class="end-time">END IN</p>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-xs-6 endDate">
+                                <div class="col-md-4 col-xs-4">
+                                    <h3 class="end-date">21</h3>
+                                    <p class="end-days">Days</p>
+                                </div>
+                                <div class="col-md-4 col-xs-4">
+                                    <h3 class="end-date">17</h3>
+                                    <p class="end-hours">Hours</p>
+                                </div>
+                                <div class="col-md-4 col-xs-4">
+                                    <h3 class="end-date">17</h3>
+                                    <p class="end-minut">Minutes</p>
+                                </div>
                             </div>
                         </div>
-                        <div className="col-md-1 col-xs-1 num-rating num-rat">245</div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-6 col-xs-6 rateDiv">
+                                <h1 class="rating-number">4.8</h1> <sub class="subscript-rating">/5</sub>
+                                <p class="rating-icon-fa">
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                </p>
+                                <p class="beforeIcon-ratingStar-text">
+                                    Based on 247 reviews over the past year
+                                </p>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
 
-                    <div className="row rating-row-2">
-                        <div className="col-md-1 col-xs-1 num-rating">4</div>
-                        <div className="col-md-1 col-xs-1"><i className="fa fa-star star" aria-hidden="true"></i></div>
-                        <div className="col-md-7 col-xs-7 progress">
-                            <div className="progress-bar" role="progressbar" aria-valuenow="0"
-                                aria-valuemin="0" aria-valuemax="100" style={{width:"20%"}}>
-                            </div>
-                        </div>
-                        <div className="col-md-1 col-xs-1 num-rating">17</div>
-                    </div>
-                    <div className="row rating-row-3">
-                        <div className="col-md-1 col-xs-1 col-xs-1 num-rating">3</div>
-                        <div className="col-md-1 col-xs-1 col-xs-1"><i className="fa fa-star star" aria-hidden="true"></i></div>
-                        <div className="col-md-7 col-xs-7 col-xs-7 progress">
-                            <div className="progress-bar" role="progressbar" aria-valuenow="70"
-                                aria-valuemin="0" aria-valuemax="100" style={{width:"5%"}}>
-                            </div>
-                        </div>
-                        <div className="col-md-1 col-xs-1 num-rating">2</div>
-                    </div>
-                    <div className="row rating-row-4">
-                        <div className="col-md-1 col-xs-1 num-rating">2</div>
-                        <div className="col-md-1 col-xs-1"><i className="fa fa-star star" aria-hidden="true"></i></div>
-                        <div className="col-md-7 col-xs-7 progress">
-                            <div className="progress-bar" role="progressbar" aria-valuenow="70"
-                                aria-valuemin="0" aria-valuemax="100" style={{width:"5%"}}>
-                            </div>
-                        </div>
-                        <div className="col-md-1 col-xs-1 num-rating">2</div>
-                    </div>
-                    <div className="row rating-row-5">
-                        <div className="col-md-1 col-xs-1 num-rating">1</div>
-                        <div className="col-md-1 col-xs-1"><i className="fa fa-star star" aria-hidden="true"></i></div>
-                        <div className="col-md-7 col-xs-7 progress">
-                            <div className="progress-bar" role="progressbar" aria-valuenow="70"
-                                aria-valuemin="0" aria-valuemax="100" style={{width:"10%"}}>
-                            </div>
-                        </div>
-                        <div className="col-md-1 col-xs-1 num-rating">8</div>
-                    </div>
-                </div>
-            </div>
         );
     }
 }

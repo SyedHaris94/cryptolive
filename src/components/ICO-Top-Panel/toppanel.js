@@ -118,8 +118,8 @@ class IcoTopPanel extends React.Component{
     componentDidMount(){
         // console.log('did mount run')
         // this.SendAllICo();
-        // this.activeData();
-        // this.upcomingData();
+        this.activeData();
+        this.upcomingData();
         // this.FinishedData();
         this.activeData();
         this.props.getList();
@@ -149,7 +149,7 @@ class IcoTopPanel extends React.Component{
     }
 
     SendAllICo(ev){
-        ev.preventDefault();
+        // ev.preventDefault();
         let all_ico = this.state.icoData1;
         console.log('rate', all_ico)
         let AllIco = {
@@ -162,7 +162,7 @@ class IcoTopPanel extends React.Component{
 
 
     SendUpcomingICo(ev){
-        ev.preventDefault();
+        // ev.preventDefault();
         let upcoming_ico = this.state.icoData2;
         // console.log('rate', upcoming_ico)
         let UpcomingIco = {

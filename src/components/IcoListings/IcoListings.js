@@ -149,25 +149,57 @@ class IcoListingItem extends React.Component{
                                             <div className="row">
                                                 <div className="col-md-2 col-xs-3">
                                                     <img src={m.image}
-                                                    style={{marginTop: '20px',width: '80%', height: '30%'}}/>
+                                                    style={{marginTop: '40px',width: '80%', height: '30%'}}/>
                                                 </div>
                                                 <div className="col-md-10 col-xs-9">
                                                     <h3>
                                                         {m.name}        
                                                         {/* <span className="trending-icon">TRENDING</span> <span className="premium-icon">PRIMARY</span> */}
-                                                        </h3>
-                                                    <p className="rating-feedback">
-                                                        <i className="fa fa-star" aria-hidden="true"></i>
-                                                        <i className="fa fa-star" aria-hidden="true"></i>
-                                                        <i className="fa fa-star-half-o" aria-hidden="true"></i>
-                                                        <i className="fa fa-star-o" aria-hidden="true"></i>
-                                                        <i className="fa fa-star-o" aria-hidden="true"></i>
-                                                        2.7 average based on 82 experts rating
-                                                    </p>
-                                                    <p className="last-cont">
-                                                        {m.description}
-                                                    </p>
-                                                    <RatePanel/>
+                                                    </h3>
+                                                    <div class="col-md-4 col-xs-12">
+                                                        <p className="last-cont" style={{marginLeft: '-15px'}}>
+                                                            {m.description}
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-md-4 col-xs-12 timer" style={{marginTop: '-38px'}} >
+                                                        <div class="row col-xs-12">
+                                                            <p class="end-time">END IN</p>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12 col-xs-6 endDate">
+                                                                <div class="col-md-4 col-xs-4">
+                                                                    <h3 class="end-date">21</h3>
+                                                                    <p class="end-days">Days</p>
+                                                                </div>
+                                                                <div class="col-md-4 col-xs-4">
+                                                                    <h3 class="end-date">17</h3>
+                                                                    <p class="end-hours">Hours</p>
+                                                                </div>
+                                                                <div class="col-md-4 col-xs-4">
+                                                                    <h3 class="end-date">17</h3>
+                                                                    <p class="end-minut">Minutes</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="row">
+                                                            <div class="col-md-6 col-xs-6 rateDiv" style={{width: '100%', marginTop: '-60px', color: '#35A0B3'}}>
+                                                                <h1 class="rating-number">4.8 <sub class="subscript-rating" style={{    fontSize: '0.4em'}} >/5</sub></h1>
+                                                                <p class="rating-icon-fa">
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                                </p>
+                                                                <p class="beforeIcon-ratingStar-text">
+                                                                    Based on 247 reviews over the past year
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>  
+                                                    {/* <RatePanel/> */}
                                                 </div>
                                             </div>
                                         </Link>
@@ -196,27 +228,60 @@ class IcoListingItem extends React.Component{
                                     return(
                                     <div className="col-md-9 ico-card " style={{marginRight: '0px !important', marginLeft:'0px !important'}} key={m.count}>
                                         <Link to={gotoUrl(pageSym, live)} style={{ textDecoration: "none" }}>
-                                            <div className="row">
+                                        <div className="row">
                                                 <div className="col-md-2 col-xs-3">
                                                     <img src={m.image}
-                                                    style={{marginTop: '20px',width: '80%', height: '30%'}}/>
+                                                    style={{marginTop: '40px',width: '80%', height: '30%'}}/>
                                                 </div>
                                                 <div className="col-md-10 col-xs-9">
                                                     <h3>
                                                         {m.name}        
                                                         {/* <span className="trending-icon">TRENDING</span> <span className="premium-icon">PRIMARY</span> */}
-                                                        </h3>
-                                                    <p className="rating-feedback">
-                                                        <i className="fa fa-star" aria-hidden="true"></i>
-                                                        <i className="fa fa-star" aria-hidden="true"></i>
-                                                        <i className="fa fa-star-half-o" aria-hidden="true"></i>
-                                                        <i className="fa fa-star-o" aria-hidden="true"></i>
-                                                        <i className="fa fa-star-o" aria-hidden="true"></i>
-                                                        2.7 average based on 82 experts rating
-                                                    </p>
-                                                    <p className="last-cont">
-                                                        {m.description}
-                                                    </p>
+                                                    </h3>
+                                                    <div class="col-md-4 col-xs-12">
+                                                        <p className="last-cont" style={{marginLeft: '-15px'}}>
+                                                            {m.description}
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-md-4 col-xs-12 timer" style={{marginTop: '-38px'}} >
+                                                        <div class="row col-xs-12">
+                                                            <p class="end-time">END IN</p>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12 col-xs-6 endDate">
+                                                                <div class="col-md-4 col-xs-4">
+                                                                    <h3 class="end-date">21</h3>
+                                                                    <p class="end-days">Days</p>
+                                                                </div>
+                                                                <div class="col-md-4 col-xs-4">
+                                                                    <h3 class="end-date">17</h3>
+                                                                    <p class="end-hours">Hours</p>
+                                                                </div>
+                                                                <div class="col-md-4 col-xs-4">
+                                                                    <h3 class="end-date">17</h3>
+                                                                    <p class="end-minut">Minutes</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="row">
+                                                            <div class="col-md-6 col-xs-6 rateDiv" style={{width: '100%', marginTop: '-60px', color: '#35A0B3'}}>
+                                                                <h1 class="rating-number">4.8 <sub class="subscript-rating" style={{    fontSize: '0.4em'}} >/5</sub></h1>
+                                                                <p class="rating-icon-fa">
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                                </p>
+                                                                <p class="beforeIcon-ratingStar-text">
+                                                                    Based on 247 reviews over the past year
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>  
+                                                    {/* <RatePanel/> */}
                                                 </div>
                                             </div>
                                         </Link>
@@ -246,27 +311,60 @@ class IcoListingItem extends React.Component{
                                     return(
                                     <div className="col-md-9 ico-card" style={{marginRight: '0px !important', marginLeft:'0px !important'}} key={m.count}>
                                         <Link to={gotoUrl(pageSym, live)} style={{ textDecoration: "none" }}>
-                                            <div className="row">
+                                        <div className="row">
                                                 <div className="col-md-2 col-xs-3">
                                                     <img src={m.image}
-                                                    style={{marginTop: '20px',width: '80%', height: '30%'}}/>
+                                                    style={{marginTop: '40px',width: '80%', height: '30%'}}/>
                                                 </div>
                                                 <div className="col-md-10 col-xs-9">
                                                     <h3>
                                                         {m.name}        
                                                         {/* <span className="trending-icon">TRENDING</span> <span className="premium-icon">PRIMARY</span> */}
-                                                        </h3>
-                                                    <p className="rating-feedback">
-                                                        <i className="fa fa-star" aria-hidden="true"></i>
-                                                        <i className="fa fa-star" aria-hidden="true"></i>
-                                                        <i className="fa fa-star-half-o" aria-hidden="true"></i>
-                                                        <i className="fa fa-star-o" aria-hidden="true"></i>
-                                                        <i className="fa fa-star-o" aria-hidden="true"></i>
-                                                        2.7 average based on 82 experts rating
-                                                    </p>
-                                                    <p className="last-cont">
-                                                        {m.description}
-                                                    </p>
+                                                    </h3>
+                                                    <div class="col-md-4 col-xs-12">
+                                                        <p className="last-cont" style={{marginLeft: '-15px'}}>
+                                                            {m.description}
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-md-4 col-xs-12 timer" style={{marginTop: '-38px'}} >
+                                                        <div class="row col-xs-12">
+                                                            <p class="end-time">END IN</p>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12 col-xs-6 endDate">
+                                                                <div class="col-md-4 col-xs-4">
+                                                                    <h3 class="end-date">21</h3>
+                                                                    <p class="end-days">Days</p>
+                                                                </div>
+                                                                <div class="col-md-4 col-xs-4">
+                                                                    <h3 class="end-date">17</h3>
+                                                                    <p class="end-hours">Hours</p>
+                                                                </div>
+                                                                <div class="col-md-4 col-xs-4">
+                                                                    <h3 class="end-date">17</h3>
+                                                                    <p class="end-minut">Minutes</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="row">
+                                                            <div class="col-md-6 col-xs-6 rateDiv" style={{width: '100%', marginTop: '-60px', color: '#35A0B3'}}>
+                                                                <h1 class="rating-number">4.8 <sub class="subscript-rating" style={{    fontSize: '0.4em'}} >/5</sub></h1>
+                                                                <p class="rating-icon-fa">
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                                </p>
+                                                                <p class="beforeIcon-ratingStar-text">
+                                                                    Based on 247 reviews over the past year
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>  
+                                                    {/* <RatePanel/> */}
                                                 </div>
                                             </div>
                                         </Link>

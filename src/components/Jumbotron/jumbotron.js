@@ -7,13 +7,14 @@ import { Link } from "react-router-dom";
 import desc from '../../img/divIMg.png'
 import futur from '../../img/futurDiv2.png'
 
-import bitcoin from '../../img/bitcoin-1.jpg'
 // import bitcoin from '../../img/bitcoin.jpeg'
 
 import * as DB from "../../firebase/firebase";
 import { connect } from 'react-redux';
 import MiddleWare from '../../store//middleware/middleware'
 
+
+import {FeatureICO} from '../index'
 class Jumbotron extends React.Component{
     constructor(props){
         super(props);
@@ -23,6 +24,7 @@ class Jumbotron extends React.Component{
         this.google = this.google.bind(this);
     }
 
+    
     facebook(){
         this.props.facebook('adad')
     }
@@ -89,64 +91,7 @@ class Jumbotron extends React.Component{
                                     </div> 
                                 : null }
                             </div>
-                            <div class="row">
-                                <h3 className= "feature">Feature ICOs</h3>
-
-                                <div class="col-md-2 futureIcoDiv">
-                                    <img class="imgdiv" src={bitcoin} alt=""/>
-                                    <div class="list-inline rate-star">
-                                        <li class="rating">4.4</li>
-                                        <li class="icon-star"><i class="fa fa-star"></i></li>
-                                    </div>
-                                    <h4 class="h4Head">StopTheFakes</h4>
-                                    <p class="divPara">To achieve the button styles above, Bootstrap has the following classes:</p>
-                                    <i class="fa fa-clock-o fa-1x clock"> 23 days 0 hour Left </i>
-                                </div>
-
-                                <div class="col-md-2 futureIcoDiv">
-                                    <img class="imgdiv" src={bitcoin}/>
-                                    <div class="list-inline rate-star">
-                                        <li class="rating">4.4</li>
-                                        <li class="icon-star"><i class="fa fa-star"></i></li>
-                                    </div>
-                                    <h4 class="h4Head">StopTheFakes</h4>
-                                    <p class="divPara">To achieve the button styles above, Bootstrap has the following classes:</p>
-                                    <i class="fa fa-clock-o fa-1x clock"> 23 days 0 hour Left </i>
-                                </div>
-
-                                <div class="col-md-2 futureIcoDiv">
-                                    <img class="imgdiv" src={bitcoin} alt=""/>
-                                    <div class="list-inline rate-star">
-                                        <li class="rating">4.4</li>
-                                        <li class="icon-star"><i class="fa fa-star"></i></li>
-                                    </div>
-                                    <h4 class="h4Head">StopTheFakes</h4>
-                                    <p class="divPara">To achieve the button styles above, Bootstrap has the following classes:</p>
-                                    <i class="fa fa-clock-o fa-1x clock"> 23 days 0 hour Left </i>
-                                </div>
-
-                                <div class="col-md-2 futureIcoDiv">
-                                    <img class="imgdiv" src={bitcoin} alt=""/>
-                                    <div class="list-inline rate-star">
-                                        <li class="rating">4.4</li>
-                                        <li class="icon-star"><i class="fa fa-star"></i></li>
-                                    </div>
-                                    <h4 class="h4Head">StopTheFakes</h4>
-                                    <p class="divPara">To achieve the button styles above, Bootstrap has the following classes:</p>
-                                    <i class="fa fa-clock-o fa-1x clock"> 23 days 0 hour Left </i>
-                                </div>
-
-                                <div class="col-md-2 futureIcoDiv">
-                                    <img class="imgdiv" src={bitcoin} alt=""/>
-                                    <div class="list-inline rate-star">
-                                        <li class="rating">4.4</li>
-                                        <li class="icon-star"><i class="fa fa-star"></i></li>
-                                    </div>
-                                    <h4 class="h4Head">StopTheFakes</h4>
-                                    <p class="divPara">To achieve the button styles above, Bootstrap has the following classes:</p>
-                                    <i class="fa fa-clock-o fa-1x clock"> 23 days 0 hour Left </i>
-                                </div>
-                            </div>
+                           <FeatureICO/>
                         </div>
                     </div>              
                 </section>
@@ -161,6 +106,8 @@ const mapDispatchToProps = (dispatch) => {
         facebook: data => {dispatch(MiddleWare.LoginFacebook(data))},
         twitter: data => {dispatch(MiddleWare.LoginTwitter(data))},
         google: data => {dispatch(MiddleWare.LoginGoogle(data))},
+        getList: () => {dispatch(MiddleWare.fetchIcoData());},
+        
     })
 }
 

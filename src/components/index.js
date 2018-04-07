@@ -30,7 +30,7 @@ import Exchange from './Exchanges/exchanges'
 import Auth from './auth/auth'
 import Rating from './Rating/rating'
 import RatePanel from './Rating/ratepanel'
-
+import FeatureICO from './FeatureIco/feature'
 import Admin from './Admin/admin'
 
 // graph tables
@@ -69,6 +69,7 @@ export{
     Auth,
     Rating,
     RatePanel,
+    FeatureICO
 
 }
 

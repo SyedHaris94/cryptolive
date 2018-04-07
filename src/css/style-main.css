@@ -2266,12 +2266,8 @@ input:checked + .slider:before {
   margin-left: 38px;
   color: black;
   background-color: #ffffff;
-}
-
-.futureIcoDiv{
-  margin-left: 38px;
-  color: black;
-  background-color: #ffffff;
+  min-height: 100% !important; /* browser fill */
+  height: auto;
 }
 
 .imgdiv {
@@ -2894,19 +2890,27 @@ amChartsPeriodSelector {
  
   
     #ico-listing-item .ico-card h3{
-        font-size: 1.2em;
+      font-size: 1.2em;
     }
   
   
     #ico-listing-item .ico-card .rating-feedback{
-        font-size: 0.7em;
+      font-size: 0.7em;
     }
   
   
     #ico-listing-item .ico-card .last-cont{
-        font-size: 0.8em;
+      font-size: 0.8em;
+    
     }
-  
+    
+    .last-cont{
+      margin-left: -17px
+    }
+
+    #ico-listing-item .ico-card .last-cont .timer{
+      margin-top: -33px;
+    }
   
     #two-tables .left-table .table thead > tr > th {
         font-size: 0.4em;
@@ -3275,6 +3279,27 @@ amChartsPeriodSelector {
 .icon-star .fa{
     color: #ffffff;
 }
+
+/*bitMap-page Css New start*/
+
+.bitMap-1stDiv{
+  margin-top: 26px;
+
+}
+
+.end-time{
+  margin-left: 16px;
+  margin-bottom: -10px;
+}
+
+.end-date{
+  color: #00BD1B;
+  font-weight: 500;
+}
+
+
+
+/*bitMap-page Css New end*/
 
 /* Azeem Ullah  */
 

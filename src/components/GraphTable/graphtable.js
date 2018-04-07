@@ -15,6 +15,8 @@ import Pagination from '../Pagination/pagination';
 
 import { AreaChart, Area } from 'recharts';
 
+// import ReactChartkick, { AreaChart, LineChart, PieChart } from 'react-chartkick'
+// import Chart from 'chart.js'
 
 class TableData extends React.Component{
 
@@ -243,6 +245,7 @@ class ImageChart extends React.Component{
     
     
       ImageApi = (sym) => {
+        // const url = "https://min-api.cryptocompare.com/data/histohour?fsym="+sym+"&tsym=USD&limit=72"
         const url = 'https://min-api.cryptocompare.com/data/histoday?fsym='+sym+'&tsym=USD&limit=6&aggregate=1&e=CCCAGG';
           fetch(url).then( r => r.json())
           .then((bitcoinData) => {
@@ -275,18 +278,19 @@ class ImageChart extends React.Component{
       }
           
       
+      
       render(){
               const data =[]
               console.log('data image', this.state.mainCurData)
-              // const data = [
-              //     {name: 'Page A', uv: 7280, pv: 6595,},
-              //     {name: 'Page B', uv: 7228, pv: 6806,},
-              //     {name: 'Page C', uv: 7056, pv: 6463,},
-              //     {name: 'Page D', uv: 8218, pv: 6835,},
-              //     {name: 'Page E', uv: 7528, pv: 7039,},
-              //     {name: 'Page F', uv: 7442, pv: 7434,},
-              //     {name: 'Page G', uv: 6929, pv: 6602,},
-              // ];
+          //     const data = [
+          //       {name: 'Page A', uv: 1000*100, pv: 2400, amt: 2400},
+          //       {name: 'Page B', uv: 1100*100, pv: 1398, amt: 2210},
+          //       {name: 'Page C', uv: 1200*100, pv: 9800, amt: 2290},
+          //       {name: 'Page D', uv: 2780*100, pv: 3908, amt: 2000},
+          //       {name: 'Page E', uv: 1890*100, pv: 4800, amt: 2181},
+          //       {name: 'Page F', uv: 2390*100, pv: 3800, amt: 2500},
+          //       {name: 'Page G', uv: 3490*100, pv: 4300, amt: 2100},
+          // ];
 
               let chart = this.state.mainCurData.map((u,v) => {
                 data.push({
@@ -297,29 +301,37 @@ class ImageChart extends React.Component{
                     close: u.close
                 });
                 return data;
+                
             })
 
-            console.log('sd',data)
+            console.log('chart_',chart)
+            
   
                 const percent_change = this.props.percent_change
-                const x = [];
+                // const x = [];
+
+
+
                 return(
                   <div>
-                    {this.state.mainCurData.map((item) => {
+                    {/* {this.state.mainCurData.map((item) => {
                       x.push(
                         item.high , item.low
                       );
-                    })}
+                    })} */}
                     
                   {percent_change < 0 ? 
-                      <div><AreaChart width={120} height={40} data={data}>
-                        <Area type='monotone' dataKey='avrg' stroke='#bf2433' fill='#f7a3bb' />
+                      <div>
+                        {/* <AreaChart data={data} /> */}
+
+                        <AreaChart width={120} height={40} data={data}>
+                        <Area type='monotone' dataKey='high' stroke='#bf2433' fill='#f7a3bb' />
                       </AreaChart>
                  {/* <img className="table-chart" src={"https://chart.googleapis.com/chart?&cht=ls&chd=t:"+x[0]+","+x[1]+","+x[2]+","+x[3]+","+x[4]+","+x[5]+","+x[6]+"&chco=BD0056&chs=180x50&chds="+Math.min(...x)+","+Math.max(...x)+""} /> */}
                 </div> 
                 :
                     <AreaChart width={120} height={40} data={data}>
-                      <Area type='monotone' dataKey='avrg' stroke='#2a702c' fill='#d5e5d5' />
+                      <Area type='monotone' dataKey='high' stroke='#2a702c' fill='#d5e5d5' />
                     </AreaChart>
                 // <img className="table-chart" src={"https://chart.googleapis.com/chart?&cht=ls&chd=t:"+x[0]+","+x[1]+","+x[2]+","+x[3]+","+x[4]+","+x[5]+","+x[6]+"&chco=328035&chs=180x50&chds="+Math.min(...x)+","+Math.max(...x)+""} />
               }

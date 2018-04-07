@@ -23,57 +23,57 @@ class IcoBrief extends React.Component{
             seconds: 0,
             deadline: '',
             fetchingData: true,
-            data: [],
         };
       }
 
-      rateData = () => {
+    //   rateData = () => {
 
-        // const pageID = this.props.match.params.name;
-        const url = 'https://api.icowatchlist.com/public/v1/';
-        let count = 0;
+    //     // const pageID = this.props.match.params.name;
+    //     const url = 'https://api.icowatchlist.com/public/v1/';
+    //     let count = 0;
 
-        fetch(url).then( r => r.json())
-          .then((marketData) => {
-            const icodata = [];
-            let marketData2 = this.props.livePram == 1 ? marketData.ico.live : marketData.ico.upcoming;
+    //     fetch(url).then( r => r.json())
+    //       .then((marketData) => {
+    //         const icodata = [];
+    //         let marketData2 = this.props.livePram == 1 ? marketData.ico.live : marketData.ico.upcoming;
       
-            for (let index in marketData2){
-                icodata.push({
-                  name: marketData2[index].name,
-                  image: marketData2[index].image,
-                  description: marketData2[index].description,
-                  website_link: marketData2[index].website_link,
-                  icowatchlist_url: marketData2[index].icowatchlist_url,
-                  start_time: marketData2[index].start_time,
-                  end_time: marketData2[index].end_time,
+    //         for (let index in marketData2){
+    //             icodata.push({
+    //               name: marketData2[index].name,
+    //               image: marketData2[index].image,
+    //               description: marketData2[index].description,
+    //               website_link: marketData2[index].website_link,
+    //               icowatchlist_url: marketData2[index].icowatchlist_url,
+    //               start_time: marketData2[index].start_time,
+    //               end_time: marketData2[index].end_time,
 
-                  count: count
-                });
-                count++
-            }
+    //               count: count
+    //             });
+    //             count++
+    //         }
             
-            this.setState({
-                icoData: icodata,
-            })
-          })
-          .catch((e) => {
-            console.log(e);
-          });
-      }
+    //         this.setState({
+    //             icoData: icodata,
+    //         })
+    //       })
+    //       .catch((e) => {
+    //         console.log(e);
+    //       });
+    //   }
 
 
-    componentWillMount() {
+   componentWillMount() {
         this.getTimeUntil(this.state.deadline);
         this.props.getList();
+        this.props.allList();
     }
      
     componentDidMount() {
-        this.rateData();
+        // this.rateData();
         setInterval(() => this.getTimeUntil(this.state.deadline), 1000);
         // {console.log('deadline',this.state.deadline)}
         console.log("didmount running");       
-}
+    }
 
     
 
@@ -81,29 +81,33 @@ class IcoBrief extends React.Component{
         return num < 10 ? '0' + num : num;
     }                                                                                                                                                                             
         
-        getTimeUntil(deadline) {
-            const time = Date.parse(deadline) - Date.parse(new Date());
-    
-            if(time < 0) {
-                this.setState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-    
-            } else {
-                const seconds = Math.floor((time/1000)%60);
-                const minutes = Math.floor((time/1000/60)%60);
-                const hours = Math.floor((time/(1000*60*60))%24);
-                const days = Math.floor(time/(1000*60*60*24));
-    
-                this.setState({ days, hours, minutes, seconds });
-            }
+    getTimeUntil(deadline) {
+        const time = Date.parse(deadline) - Date.parse(new Date());
 
-            let m = this.state.icoData;
+        if(time < 0) {
+            this.setState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+
+        } else {
+            const seconds = Math.floor((time/1000)%60);
+            const minutes = Math.floor((time/1000/60)%60);
+            const hours = Math.floor((time/(1000*60*60))%24);
+            const days = Math.floor(time/(1000*60*60*24));
+
+            this.setState({ days, hours, minutes, seconds });
+        }
+
+            // let m = this.state.icoData;
+
+            let ico = this.props.AllIcoState
+
+
             const nameParam = this.props.namePram;
             const liveParam = this.props.livePram;      
             // {console.log('name icobrief', nameParam)}
             const gotoUrl = (api, url) => {
                 let test = {};
               
-                m.map((m, v) => {    
+                api.map((m, v) => {    
                     
                     if (nameParam == m.name) {
                         test.name = m.name;
@@ -121,7 +125,7 @@ class IcoBrief extends React.Component{
                 return test;
             }
 
-            let pageParam = gotoUrl(m, nameParam);
+            let pageParam = gotoUrl(ico, nameParam);
             this.setState({
                 deadline: pageParam.end_time
             })
@@ -129,11 +133,15 @@ class IcoBrief extends React.Component{
     }
 
     render(){
-        let m = this.state.icoData;
+        // let m = this.state.icoData;
         const nameParam = this.props.namePram;
         const liveParam = this.props.livePram;
         const rateParam = this.props.listState;
         console.log("ico_name", this.props.listState)
+
+        console.log('ico_param', this.props.AllIcoState)
+
+        let ico = this.props.AllIcoState
 
 
         function rateUrl(api, url) {
@@ -160,7 +168,7 @@ class IcoBrief extends React.Component{
 
         function gotoUrl(api, url) {
             let test = {};
-            m.map((m, v) => {                  
+            api.map((m, v) => {                  
                 if (nameParam == m.name) {
                     test.name = m.name;
                     test.image = m.image;
@@ -175,10 +183,10 @@ class IcoBrief extends React.Component{
             return test;
         }
 
-        let icoParam = gotoUrl(m, nameParam);
+        let icoParam = gotoUrl(ico, nameParam);
         console.log('icoParam', icoParam)
 
-        let date = pageParam.end_time
+        // let date = pageParam.end_time
 
         let Count = pageParam.map(a => a.count);
         let count = Count.length;
@@ -324,6 +332,7 @@ class IcoBrief extends React.Component{
 const mapStateToProps = (state) => {
     return {
         listState: state.RateReducer.getrate,
+        AllIcoState: state.ICOReducer.ico_data,
       };
     }
   
@@ -332,6 +341,7 @@ const  mapDispatchToProps = (dispatch) => {
             getList: () => {
             dispatch(MiddleWare.GetRating());
         },
+        allList: () => {dispatch(MiddleWare.fetchIcoData());},
     }
 };
     
